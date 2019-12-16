@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { NgbdDatepickerBasic } from './datepicker-basic/datepicker-basic';
 import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup';
+import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-range-popup';
 
 
 @NgModule({
@@ -15,18 +15,14 @@ import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup';
   ],
   declarations: [
     AppComponent,
-    NgbdDatepickerBasic,
-    NgbdDatepickerPopup
+    NgbdDatepickerPopup,
+    NgbdDatepickerRangePopup
   ],
   exports: [
-    NgbdDatepickerBasic,
-    NgbdDatepickerPopup
   ],
   providers: [],
   bootstrap: [
     AppComponent,
-    NgbdDatepickerBasic,
-    NgbdDatepickerPopup
   ]
 })
 export class AppModule { }
