@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+
 import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 const now = new Date();
@@ -47,8 +48,7 @@ export class NgbdDatepickerRangePopup {
     
   }
   
- 
-  
+
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -77,5 +77,4 @@ export class NgbdDatepickerRangePopup {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
-  
 }

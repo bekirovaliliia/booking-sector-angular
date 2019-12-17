@@ -36,5 +36,4 @@ export class AppComponent implements AfterViewInit {
     this.map = new google.maps.Map(this.gmap.nativeElement, 
     this.mapOptions);
     this.marker.setMap(this.map);
-  }
-}
+  }}

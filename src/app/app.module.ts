@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,13 +9,12 @@ import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup';
 import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-range-popup';
 
 
-
 @NgModule({
   imports: [
     FormsModule,
     NgbModule,
     BrowserModule,
-  ],
+ ],
   declarations: [
     AppComponent,
     NgbdDatepickerPopup,
