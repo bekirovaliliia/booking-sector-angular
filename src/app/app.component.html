@@ -5,11 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Booking</title>
-    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-    <link rel="stylesheet" href="../assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 </head>
 
 <body>
@@ -29,16 +24,17 @@
                 <div class="heading">
                         <h2>Select Date</h2>
                         <ngbd-datepicker-popup></ngbd-datepicker-popup>
-                </div>  
+                        <div #mapContainer id="map"></div>
+                </div>
         </section>
     </main>
     <section class="home-block website gradient">
         <div class="container">
             <form>
                 <div class="form-group"><label for="sectors">Selected sectors</label><input class="form-control" type="text" id="sectors"></div>
-                <div class="form-group"><label for="datetimes">Daterange</label><ngbd-datepicker-rangepopup></ngbd-datepicker-rangepopup></div>
+                <div class="form-group"><label for="datetimes">Daterange</label><ngbd-datepicker-range-popup></ngbd-datepicker-range-popup></div>
                 <div class="form-group"><label for="password">Name and Surname</label><input class="form-control" type="text"></div>
-                <div class="form-group"><label for="phone">Phone</label><input class="form-control" type="tel" id="phone" placeholder="+380-93-111-11-11"></div>
+                <div class="form-group"><label for="phone">Phone</label><input class="form-control" type="tel" id="phone" placeholder="+380-93-000-00-00" ></div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
             </form>
         </div>
