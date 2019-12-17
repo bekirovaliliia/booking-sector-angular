@@ -22,7 +22,7 @@ import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-ra
   ],
   providers: [],
   bootstrap: [
-    AppComponent
+    AppComponent,
   ]
 })
 export class AppModule { }
