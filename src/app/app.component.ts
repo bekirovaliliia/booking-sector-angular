@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-
+import { SectorListComponent } from './sector-list/sector-list';
+import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';  
 declare var google: any;
 
 @Component({
@@ -8,19 +9,18 @@ declare var google: any;
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit {
- 
+export class AppComponent implements AfterViewInit{
   title = 'my-app';
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
-  lat = 40.73061;
-  lng = -73.935242;
+  lat = [49.893429, 49.333333];
+  lng = [23.484971, 23.454342];
 
-  coordinates = new google.maps.LatLng(this.lat, this.lng);
+  coordinates = new google.maps.LatLng(this.lat[0], this.lng[0]);
 
   mapOptions: google.maps.MapOptions = {
    center: this.coordinates,
-   zoom: 8
+   zoom: 12
   };
 
   marker = new google.maps.Marker({
@@ -37,4 +37,6 @@ export class AppComponent implements AfterViewInit {
     this.map = new google.maps.Map(this.gmap.nativeElement, 
     this.mapOptions);
     this.marker.setMap(this.map);
-  }}
+  }
+  constructor(private httpService: HttpClient) { }
+}
