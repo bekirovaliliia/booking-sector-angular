@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+
+import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+const now = new Date();
 
 @Component({
   selector: 'ngbd-datepicker-range-popup',
@@ -32,20 +35,20 @@ import {NgbDate, NgbCalendar, NgbDateParserFormatter, NgbDatepickerConfig} from 
 })
 export class NgbdDatepickerRangePopup {
 
-  hoveredDate: NgbDate;
 
+  hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;
 
-  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private config: NgbDatepickerConfig) {
-    const current = new Date();
-    config.minDate = { year: current.getFullYear(), month: 
-    current.getMonth() + 1, day: current.getDate() };
-      //config.maxDate = { year: 2099, month: 12, day: 31 };
-    config.outsideDays = 'hidden'
+  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, config: NgbDatepickerConfig) {
+    config.minDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+    config.maxDate = {year: 2099, month: 12, day: 31};
     this.fromDate = calendar.getToday();
-    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 3);
+    
   }
+  
+
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {

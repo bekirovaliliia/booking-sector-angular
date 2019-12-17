@@ -2,6 +2,8 @@
 <html>
 
 <head>
+
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Booking</title>
 </head>
@@ -22,8 +24,8 @@
         <section class="home-block block-intro">
                 <div class="heading">
                         <h2>Select Date</h2>
-                <ngbd-datepicker-popup ></ngbd-datepicker-popup>
-                
+                        <ngbd-datepicker-popup></ngbd-datepicker-popup>
+                        <div #mapContainer id="map"></div>
                 </div>
         </section>
     </main>
@@ -31,13 +33,14 @@
         <div class="container">
             <form>
                 <div class="form-group"><label for="sectors">Selected sectors</label><input class="form-control" type="text" id="sectors"></div>
-                <div class="form-group"><label for="datetimes">Daterange</label><input class="form-control" type="text" id="datetimes" name="datetimes"></div>
+                <div class="form-group"><label for="datetimes">Daterange</label><ngbd-datepicker-range-popup></ngbd-datepicker-range-popup></div>
                 <div class="form-group"><label for="password">Name and Surname</label><input class="form-control" type="text"></div>
-                <div class="form-group"><label for="phone">Phone</label><input class="form-control" type="tel" id="phone" placeholder="+380-93-111-11-11"></div>
+                <div class="form-group"><label for="phone">Phone</label><input class="form-control" type="tel" id="phone" placeholder="+380-93-000-00-00" ></div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
             </form>
         </div>
-    </section> 
+    </section>
+
     <footer class="page-footer">
         <div class="container">
             <div class="links"><a href="#">About</a><a href="#">Contact</a></div>
