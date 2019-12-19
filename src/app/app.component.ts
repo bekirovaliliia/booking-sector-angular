@@ -1,7 +1,5 @@
-import { SectorListComponent } from './sector-list/sector-list';
-import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';  
-declare var google: any;
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';  
 
 @Component({
   selector: 'app-root',
@@ -9,34 +7,19 @@ declare var google: any;
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit{
-  title = 'my-app';
-  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
-  map: google.maps.Map;
-  lat = [49.893429, 49.333333];
-  lng = [23.484971, 23.454342];
+export class AppComponent implements OnInit{
 
-  coordinates = new google.maps.LatLng(this.lat[0], this.lng[0]);
-
-  mapOptions: google.maps.MapOptions = {
-   center: this.coordinates,
-   zoom: 12
-  };
-
-  marker = new google.maps.Marker({
-    position: this.coordinates,
-    map: this.map,
-    title: 'Hello World!'
-  });
-
-  ngAfterViewInit() {
-    this.mapInitializer();
-  }
-
-  mapInitializer() {
-    this.map = new google.maps.Map(this.gmap.nativeElement, 
-    this.mapOptions);
-    this.marker.setMap(this.map);
-  }
+  latitude = 49.886416;
+  longitude = 23.493211;
+  mapType = 'satellite';
+  markers: object [];
+  
   constructor(private httpService: HttpClient) { }
+  ngOnInit() {  
+    this.httpService.get('https://localhost:44393/api/sectors').subscribe(  
+      data => {  
+       this.markers = data as object [];  
+      } 
+    );  
+  }
 }

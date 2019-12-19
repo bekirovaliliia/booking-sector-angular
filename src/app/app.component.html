@@ -23,9 +23,26 @@
     <main class="page lanidng-page">
         <section class="home-block block-intro">
                 <div class="heading">
-                        <h2>Select Date</h2>
-                        <ngbd-datepicker-popup></ngbd-datepicker-popup>
-                        <div #mapContainer id="map"></div>
+                    <h2>Select Date</h2>
+                    <ngbd-datepicker-popup></ngbd-datepicker-popup>
+                </div>
+                <div>
+                    <agm-map [latitude]='latitude' [longitude]='longitude' [zoom]="14" [mapTypeId]='mapType'>
+                        <agm-marker *ngFor="let marker of markers" [latitude]="marker.gpsLat" [longitude]="marker.gpsLng">
+                            <agm-info-window [disableAutoPan]="true">
+                                <div class="container">
+                                    <h3>Sector name: {{marker.number}}</h3>
+                                        <p> Description: {{marker.description}} <br/>
+                                        GPS: {{marker.gpsLat}}, {{marker.gpsLng}} <br/>
+                                        Status: {{marker.isActive}}
+                                        </p>
+                                        <p>
+                                        <button class="btn btn-primary btn-block" type="submit">Book sector</button>
+                                    </p>
+                                </div>
+                            </agm-info-window>
+                        </agm-marker>
+                    </agm-map>
                 </div>
         </section>
     </main>
@@ -39,7 +56,6 @@
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Submit</button></div>
             </form>
         </div>
-        <sector-list></sector-list>
     </section>
     <footer class="page-footer">
         <div class="container">

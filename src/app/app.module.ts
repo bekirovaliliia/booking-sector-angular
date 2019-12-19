@@ -6,20 +6,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup';
 import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-range-popup';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { SectorListComponent } from './sector-list/sector-list';
+import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   imports: [
     FormsModule,
     NgbModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'})
  ],
   declarations: [
     AppComponent,
     NgbdDatepickerPopup,
-    NgbdDatepickerRangePopup,
-    SectorListComponent
+    NgbdDatepickerRangePopup
   ],
   exports: [
 
