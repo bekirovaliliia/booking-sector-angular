@@ -39,10 +39,12 @@ export class NgbdDatepickerRangePopup {
   hoveredDate: NgbDate;
   fromDate: NgbDate;
   toDate: NgbDate;
+  mindate: NgbDate;
 
   constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, config: NgbDatepickerConfig) {
-    config.minDate = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
-    config.maxDate = {year: 2099, month: 12, day: 31};
+    
+    config.minDate = {year: now.getFullYear(), month: now.getMonth() + 1 , day: now.getDate()};
+    config.maxDate = {year: now.getFullYear(), month: now.getMonth() + 2, day: now.getDate()};
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 3);
     

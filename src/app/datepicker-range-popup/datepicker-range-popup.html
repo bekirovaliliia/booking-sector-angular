@@ -74,7 +74,6 @@
                 [class.faded]="isHovered(date) || isInside(date)"
                 (mouseenter)="hoveredDate = date"
                 (mouseleave)="hoveredDate = null"
-                minDate=""
                 >
             {{ date.day }}
           </span>
@@ -88,6 +87,7 @@
                name="dpFromDate"
                [value]="formatter.format(fromDate)"
                (input)="fromDate = validateInput(fromDate, dpFromDate.value)"
+        
                ngbDatepicker
                #datepicker="ngbDatepicker"
                [dayTemplate]="t"
