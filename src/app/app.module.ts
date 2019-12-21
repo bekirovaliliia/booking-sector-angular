@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup';
-import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-range-popup';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { CustomRangesComponent } from './datepicker/datepicker'
 
 @NgModule({
   imports: [
@@ -16,12 +16,12 @@ import { AgmCoreModule } from '@agm/core';
     BrowserModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'})
+      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'}),
+    NgxDaterangepickerMd.forRoot()
  ],
   declarations: [
     AppComponent,
-    NgbdDatepickerPopup,
-    NgbdDatepickerRangePopup
+    CustomRangesComponent
   ],
   exports: [
 

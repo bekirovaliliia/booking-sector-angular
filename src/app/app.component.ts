@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';  
 
+const now = new Date();
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
 
 export class AppComponent implements OnInit{
 
+  minDate = {year: now.getFullYear(), month: now.getMonth() + 1 , day: now.getDate()};
+  
   latitude = 49.886416;
   longitude = 23.493211;
   mapType = 'satellite';
