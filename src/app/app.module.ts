@@ -8,7 +8,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
-import {BookingManagingComponent} from './pages/admin-management/booking-managing/booking-managing.component';
+import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import {BookingManagingComponent} from './pages/admin-management/booking-managin
   declarations: [
     AppComponent,
     CustomRangesComponent,
-    BookingManagingComponent,
+    BookSectorFormComponent,
+    
   ],
   exports: [
 

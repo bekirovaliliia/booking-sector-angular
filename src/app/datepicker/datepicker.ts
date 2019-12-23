@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import * as moment from 'moment';
 
+
 @Component({
     selector: 'datepicker',
     templateUrl: './datepicker.html'
@@ -27,8 +28,10 @@ export class CustomRangesComponent {
     }
     rangeClicked(range) {
       console.log('[rangeClicked] range is : ', range);
+      return range;
     }
     datesUpdated(range) {
       console.log('[datesUpdated] range is : ', range);
+      return range;
     }
 }
