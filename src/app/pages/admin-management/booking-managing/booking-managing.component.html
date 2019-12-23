@@ -1,4 +1,4 @@
-<table datatable class="table" [svData]="bookings$" #sv="svDataTable">
+<table datatable class="table">
   <thead>
   <tr><th>ID</th>
     <th>User </th>
@@ -8,7 +8,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let booking of sv.data">
+  <tr *ngFor="let booking of bookings$">
     <td>{{booking.id}}</td>
     <td>{{booking.userId}}</td>
     <td>{{booking.sectorId}}</td>

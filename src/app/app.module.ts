@@ -8,7 +8,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
-import {BookingManagingComponent} from './pages/admin-management/booking-managing/booking-managing.component';
+import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 
 @NgModule({
   imports: [
@@ -17,13 +17,14 @@ import {BookingManagingComponent} from './pages/admin-management/booking-managin
     BrowserModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'}),
-    NgxDaterangepickerMd.forRoot()
- ],
+      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
+    }),
+    NgxDaterangepickerMd.forRoot(),
+    AdminManagementModule,
+  ],
   declarations: [
     AppComponent,
     CustomRangesComponent,
-    BookingManagingComponent,
   ],
   exports: [
 
