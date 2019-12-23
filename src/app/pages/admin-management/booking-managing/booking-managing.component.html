@@ -1,0 +1,19 @@
+<table datatable class="table" [svData]="bookings$" #sv="svDataTable">
+  <thead>
+  <tr><th>ID</th>
+    <th>User </th>
+    <th>Sectors</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let booking of sv.data">
+    <td>{{booking.id}}</td>
+    <td>{{booking.userId}}</td>
+    <td>{{booking.sectorId}}</td>
+    <td>{{booking.bookingStart | date}}</td>
+    <td>{{booking.bookingEnd | date}}</td>
+  </tr>
+  </tbody>
+</table>
