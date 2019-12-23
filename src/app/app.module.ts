@@ -1,12 +1,29 @@
 
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbdDatepickerPopup } from './datepicker-popup/datepicker-popup';
 import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-range-popup';
+import { UserProfileTextComponent } from './user-profile-text/user-profile-text.component';
+import { PhotoComponent } from './photo/photo.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
+import { SectorListComponent } from './sector-list/sector-list.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskModule } from 'ngx-mask';
+import { ChangePasswordComponent } from './change-password1/change-password.component';
+import { ChangePasswordNewComponent } from './change-password-new/change-password-new.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -14,12 +31,30 @@ import { NgbdDatepickerRangePopup } from './datepicker-range-popup/datepicker-ra
     FormsModule,
     NgbModule,
     BrowserModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPasswordStrengthModule.forRoot(),
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+
  ],
   declarations: [
     AppComponent,
     NgbdDatepickerPopup,
     NgbdDatepickerRangePopup,
-    
+    UserProfileTextComponent,
+    UserProfileTextComponent,
+    PhotoComponent,
+    SectorListComponent,
+    ProfilePageComponent,
+    UserMenuComponent,
+    ChangePasswordComponent,
+    ChangePasswordNewComponent,
   ],
   exports: [
 

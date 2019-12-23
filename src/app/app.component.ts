@@ -9,7 +9,7 @@ declare var google: any;
 })
 
 export class AppComponent implements AfterViewInit {
- 
+  
   title = 'my-app';
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
