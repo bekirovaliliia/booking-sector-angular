@@ -1,0 +1,23 @@
+  input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    width: 150px;
+    height: 40px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    font: 16px/40px Tahoma;
+    transition: all 0.18s ease-in-out;
+    border: 1px solid #1aa3ff;
+    background: linear-gradient(to top right,  #6666ff, #1aa3ff 20%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0)) top right/500% 500%;
+    color: #1aa3ff;
+}
+
+.custom-file-upload:hover {
+    color: white;
+    background-position: bottom left;
+}
+    
