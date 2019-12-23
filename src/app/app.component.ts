@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-declare var google: any;
+const now = new Date();
 
 @Component({
   selector: 'app-root',
@@ -8,33 +9,19 @@ declare var google: any;
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit {
-  
-  title = 'my-app';
-  @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
-  map: google.maps.Map;
-  lat = 40.73061;
-  lng = -73.935242;
+export class AppComponent implements OnInit {
 
-  coordinates = new google.maps.LatLng(this.lat, this.lng);
-
-  mapOptions: google.maps.MapOptions = {
-   center: this.coordinates,
-   zoom: 8
-  };
-
-  marker = new google.maps.Marker({
-    position: this.coordinates,
-    map: this.map,
-    title: 'Hello World!'
-  });
-
-  ngAfterViewInit() {
-    this.mapInitializer();
+  minDate = {year: now.getFullYear(), month: now.getMonth() + 1 , day: now.getDate()};
+  latitude = 49.886416;
+  longitude = 23.493211;
+  mapType = 'satellite';
+  markers: object [];
+  constructor(private httpService: HttpClient) { }
+  ngOnInit() {
+    this.httpService.get('https://localhost:44393/api/sectors/free?fromDate=2019-12-21&toDate=2019-12-22').subscribe(
+      data => {
+       this.markers = data as object [];
+      }
+    );
   }
-
-  mapInitializer() {
-    this.map = new google.maps.Map(this.gmap.nativeElement, 
-    this.mapOptions);
-    this.marker.setMap(this.map);
-  }}
+}
