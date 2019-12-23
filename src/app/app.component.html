@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Booking</title>
@@ -25,16 +24,14 @@
                 <div class="heading">
                     <h2>Select Date</h2>
                     <datepicker></datepicker>
-
                 </div>
                 <div>
                     <agm-map [latitude]='latitude' [longitude]='longitude' [zoom]="14" [mapTypeId]='mapType'>
-                        <agm-marker *ngFor="let marker of markers" 
-                        [latitude]="marker.gpsLat" 
-                        [longitude]="marker.gpsLng" 
+                        <agm-marker *ngFor="let marker of markers"
+                        [latitude]="marker.gpsLat"
+                        [longitude]="marker.gpsLng"
                         [label]="{color: 'white', fontWeight: 'bold', fontSize: '12px',  text: marker.number.toString()}"
                         [iconUrl]="{url: (marker.isActive == true) ? '../assets/img/greenFish.png' : (marker.isActive == false) ? '../assets/img/redFish.png' : '../assets/img/greyFish.png', labelOrigin: { x: 27, y: 31 }, scaledSize: { width: 55, height: 55 }}"
-                        
                         >
                             <agm-info-window [disableAutoPan]="true">
                                 <div class="container">
