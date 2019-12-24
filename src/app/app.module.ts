@@ -23,29 +23,32 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
-import {AdminManagementModule} from './pages/admin-management/admin-management.module';
+
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  imports: [
-    FormsModule,
-    NgbModule,
-    BrowserModule,
-    HttpClientModule,
-    NgxMaskModule.forRoot(),
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatPasswordStrengthModule.forRoot(),
-    MatFormFieldModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
-    }),
-    NgxDaterangepickerMd.forRoot(),
-    AdminManagementModule,
-  ],
+    imports: [
+        FormsModule,
+        NgbModule,
+        BrowserModule,
+        HttpClientModule,
+        NgxMaskModule.forRoot(),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatPasswordStrengthModule.forRoot(),
+        MatFormFieldModule,
+        MatSlideToggleModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
+        }),
+        NgxDaterangepickerMd.forRoot(),
+
+        RouterModule,
+        AppRoutingModule,
+    ],
   declarations: [
     AppComponent,
     UserProfileTextComponent,
