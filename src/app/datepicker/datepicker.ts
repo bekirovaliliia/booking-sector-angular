@@ -4,7 +4,8 @@ import * as moment from 'moment';
 
 @Component({
     selector: 'datepicker',
-    templateUrl: './datepicker.html'
+    templateUrl: './datepicker.html',
+    styleUrls:['./datepicker.css']
   })
 
 export class CustomRangesComponent {

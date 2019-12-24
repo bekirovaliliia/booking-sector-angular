@@ -19,37 +19,14 @@
             </div>
         </div>
     </nav>
-    <main class="page lanidng-page">
+    
+    <main class="page landing-page">
         <section class="home-block block-intro">
-                <div class="heading">
-                    <h2>Select Date</h2>
-                    <datepicker></datepicker>
-                </div>
-                <div>
-                    <agm-map [latitude]='latitude' [longitude]='longitude' [zoom]="14" [mapTypeId]='mapType'>
-                        <agm-marker *ngFor="let marker of markers"
-                        [latitude]="marker.gpsLat"
-                        [longitude]="marker.gpsLng"
-                        [label]="{color: 'white', fontWeight: 'bold', fontSize: '12px',  text: marker.number.toString()}"
-                        [iconUrl]="{url: (marker.isActive == true) ? '../assets/img/greenFish.png' : (marker.isActive == false) ? '../assets/img/redFish.png' : '../assets/img/greyFish.png', labelOrigin: { x: 27, y: 31 }, scaledSize: { width: 55, height: 55 }}"
-                        >
-                            <agm-info-window [disableAutoPan]="true">
-                                <div class="container">
-                                    <h3>Sector name: {{marker.number}}</h3>
-                                        <p> Description: {{marker.description}} <br/>
-                                        GPS: {{marker.gpsLat}}, {{marker.gpsLng}} <br/>
-                                        Status: {{marker.isActive}}
-                                        </p>
-                                        <p>
-                                        <button class="btn btn-primary btn-block" type="submit">Book sector</button>
-                                    </p>
-                                </div>
-                            </agm-info-window>
-                        </agm-marker>
-                    </agm-map>
-                </div>
+            <datepicker></datepicker>
+            <app-sectors-map></app-sectors-map> 
         </section>
     </main>
+
     <section class="home-block website gradient">
         <div class="container">
             <app-book-sector-form></app-book-sector-form>

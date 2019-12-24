@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
 import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
+import { SectorsMapComponent } from './sectors-map/sectors-map.component';
 
 @NgModule({
   imports: [
@@ -19,12 +20,13 @@ import { BookSectorFormComponent } from './book-sector-form/book-sector-form.com
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'}),
     NgxDaterangepickerMd.forRoot()
+    
  ],
   declarations: [
     AppComponent,
     CustomRangesComponent,
     BookSectorFormComponent,
-    
+    SectorsMapComponent  
   ],
   exports: [
 
