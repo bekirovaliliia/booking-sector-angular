@@ -6,7 +6,7 @@ import {SettingComponent} from './setting/setting.component';
 import {AdminManagementComponent} from './admin-management.component';
 import {AppRoutingModule} from '../../app-routing.module';
 import { DataTablesModule} from 'angular-datatables';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import {FormsModule} from "@angular/forms";
   exports: [
     AdminSidebarComponent,
     AdminManagementComponent,
-    SettingComponent
+    SettingComponent,
+    BookingManagingComponent
   ],
   imports: [
     DataTablesModule,
