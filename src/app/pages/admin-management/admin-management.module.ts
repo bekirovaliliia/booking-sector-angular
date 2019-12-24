@@ -4,9 +4,10 @@ import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import {BookingManagingComponent} from './booking-managing/booking-managing.component';
 import {SettingComponent} from './setting/setting.component';
 import {AdminManagementComponent} from './admin-management.component';
-import {AppRoutingModule} from '../../app-routing.module';
+
 import { DataTablesModule} from 'angular-datatables';
 import {FormsModule} from '@angular/forms';
+import {AdminManagementRoutingModule} from './admin-management-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import {FormsModule} from '@angular/forms';
   imports: [
     DataTablesModule,
     CommonModule,
-    AppRoutingModule,
-    FormsModule
+    AdminManagementRoutingModule,
+    FormsModule,
+
   ]
 })
 export class AdminManagementModule { }
