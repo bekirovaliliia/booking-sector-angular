@@ -23,6 +23,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
+import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
+import { SectorsMapComponent } from './sectors-map/sectors-map.component';
 
 import {RouterModule} from '@angular/router';
 
@@ -60,6 +62,8 @@ import {RouterModule} from '@angular/router';
     ChangePasswordComponent,
     ChangePasswordNewComponent,
     CustomRangesComponent,
+    BookSectorFormComponent,
+    SectorsMapComponent  
   ],
   exports: [
 
