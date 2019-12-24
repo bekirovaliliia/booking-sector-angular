@@ -1,16 +1,15 @@
-<table datatable class="table" [svData]="bookings$" #sv="svDataTable">
+<table datatable class="table row-border hover">
   <thead>
-  <tr><th>ID</th>
-    <th>User </th>
-    <th>Sectors</th>
+  <tr>
+    <th>Id</th>
+    <th>Sector ID</th>
     <th>Start Date</th>
     <th>End Date</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let booking of sv.data">
+  <tr *ngFor="let booking of this.bookings$">
     <td>{{booking.id}}</td>
-    <td>{{booking.userId}}</td>
     <td>{{booking.sectorId}}</td>
     <td>{{booking.bookingStart | date}}</td>
     <td>{{booking.bookingEnd | date}}</td>

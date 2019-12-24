@@ -23,6 +23,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
+import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 
 @NgModule({
   imports: [
@@ -40,9 +41,11 @@ import { CustomRangesComponent } from './datepicker/datepicker';
     MatButtonModule,
     MatIconModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'}),
-    NgxDaterangepickerMd.forRoot()
- ],
+      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
+    }),
+    NgxDaterangepickerMd.forRoot(),
+    AdminManagementModule,
+  ],
   declarations: [
     AppComponent,
     UserProfileTextComponent,

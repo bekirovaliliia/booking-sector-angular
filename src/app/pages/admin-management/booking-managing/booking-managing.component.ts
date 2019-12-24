@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Booking} from '../../../shared/models/booking.model';
 import {BookingService} from '../../../core/services/booking.service';
-import {filter} from 'rxjs/operators';
-import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-booking-managing',
@@ -14,6 +12,7 @@ export class BookingManagingComponent implements OnInit {
   bookings$: Booking[];
   tempBookings: Booking[];
 
+  dtOptions: DataTables.Settings = {};
   getApproved(): Booking[] {
     return  this.tempBookings = this.bookings$.filter(b => b.isApproved);
   }
