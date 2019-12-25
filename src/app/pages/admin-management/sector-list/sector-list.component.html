@@ -1,0 +1,25 @@
+<div class="container py-5">
+    <h3 class="text-center text-uppercase">List of Sectors</h3>
+    <table datatable class="table table-bordered table-striped">
+        <thead>
+            <tr class="text-center text-uppercase">
+                <th>Sector ID</th>
+                <th>Number</th>
+                <th>Description</th>
+                <th>GPS_Lat</th>
+                <th>GPS_Lng</th>
+                <th>Is_active</th>
+              </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sector of sectors$">
+            <td>{{sector.id}}</td>
+            <td>{{sector.number}}</td>
+            <td>{{sector.description}}</td>
+            <td>{{sector.gpsLat}}</td>
+            <td>{{sector.gpsLng}}</td>
+            <td>{{sector?.isActive}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
