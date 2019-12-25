@@ -14,9 +14,13 @@ export class ChangePasswordNewComponent implements OnInit {
     console.log('password strength = ', strength);
   }
   user: User;
-  id = 4;
+  id = 46;
+  old: Boolean = false;
 
-  saveChanges(){
+  check: boolean = false;
+  saveChanges(newPass: string){
+    this.user.password = newPass;
+    this.old = false;
     this.userService.updateUser(this.user).subscribe();
   }
   passMatch(pass: string, passConf: string): boolean
@@ -27,15 +31,13 @@ export class ChangePasswordNewComponent implements OnInit {
      else return false;
   }
 
+  checkOldPassword(pass: string){
+    return this.userService.checkPass(pass, this.id).subscribe(data=>this.old =data);
+  }
+  
   constructor(private userService: UserService){  }
 
-  changePassword(value){
-      if(this.changePasswordForm.valid){
-          console.log("Change password form valid");
-      }
-  }
-
-   ngOnInit() {
+     ngOnInit() {
     return this.userService.getUser(this.id).subscribe(data => this.user = data);
     }
 
