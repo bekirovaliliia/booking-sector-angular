@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import * as moment from 'moment';
 
 
@@ -9,7 +9,6 @@ import * as moment from 'moment';
   })
 
 export class CustomRangesComponent {
-    
     selected: any;
     alwaysShowCalendars: boolean;
     showRangeLabelOnInput: boolean;
@@ -27,6 +26,7 @@ export class CustomRangesComponent {
       this.selected = {startDate: moment().subtract(1, 'days'), endDate: moment().subtract(1, 'days')};
     
     }
+
     rangeClicked(range) {
       console.log('[rangeClicked] range is : ', range);
       return range;

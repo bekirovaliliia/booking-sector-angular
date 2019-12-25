@@ -26,6 +26,7 @@ import { BookSectorFormComponent } from './book-sector-form/book-sector-form.com
 import { SectorsMapComponent } from './sectors-map/sectors-map.component';
 
 import {RouterModule} from '@angular/router';
+import { FilterSectorsComponent } from './filter-sectors/filter-sectors.component';
 
 @NgModule({
     imports: [
@@ -61,7 +62,8 @@ import {RouterModule} from '@angular/router';
     ChangePasswordNewComponent,
     CustomRangesComponent,
     BookSectorFormComponent,
-    SectorsMapComponent  
+    SectorsMapComponent,
+    FilterSectorsComponent  
   ],
   exports: [
 
