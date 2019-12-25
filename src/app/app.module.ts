@@ -10,7 +10,6 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { SectorListComponent } from './sector-list/sector-list.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { ChangePasswordComponent } from './change-password1/change-password.component';
 import { ChangePasswordNewComponent } from './change-password-new/change-password-new.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -60,7 +59,6 @@ import { FilterSectorsComponent } from './filter-sectors/filter-sectors.componen
     SectorListComponent,
     ProfilePageComponent,
     UserMenuComponent,
-    ChangePasswordComponent,
     ChangePasswordNewComponent,
     CustomRangesComponent,
     BookSectorFormComponent,
