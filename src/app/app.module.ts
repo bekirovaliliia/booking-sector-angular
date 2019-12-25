@@ -11,7 +11,6 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
 import { SectorListComponent } from './sector-list/sector-list.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { ChangePasswordComponent } from './change-password1/change-password.component';
 import { ChangePasswordNewComponent } from './change-password-new/change-password-new.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -31,6 +30,8 @@ import { DatePipe } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
 import { UpdateDialogComponent } from './pages/admin-management/tournament/update-dialog/update-dialog.component';
+import { FilterSectorsComponent } from './filter-sectors/filter-sectors.component';
+
 @NgModule({
     imports: [
         FormsModule,
@@ -63,13 +64,13 @@ import { UpdateDialogComponent } from './pages/admin-management/tournament/updat
     SectorListComponent,
     ProfilePageComponent,
     UserMenuComponent,
-    ChangePasswordComponent,
     ChangePasswordNewComponent,
     CustomRangesComponent,
     BookSectorFormComponent,
     SectorsMapComponent,
     DeleteDialogComponent,
     UpdateDialogComponent,
+    FilterSectorsComponent  
   ],
   exports: [
 

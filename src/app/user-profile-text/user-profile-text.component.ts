@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';  
-import {User} from '../models/user-model';
-import {UserService} from '../user.service';
+import {User} from '../shared/models/user-model';
+import {UserService} from '../core/services/user.service';
 
 @Component({
   selector: 'app-user-profile-text',
@@ -27,7 +27,7 @@ export class UserProfileTextComponent implements OnInit {
   }
   constructor(private userService: UserService) { }  
   user: User;  
-  id = 4;
+  id = 46;
   ngOnInit() {
     return this.userService.getUser(this.id).subscribe(data => this.user = data);
   }

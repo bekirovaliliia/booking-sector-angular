@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white home-navbar gradient">
         <div class="container"><a class="navbar-brand logo" href="#">Booking</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
@@ -21,11 +22,19 @@
     </nav>
 
     <main class="page landing-page">
+
         <section class="home-block block-intro">
           <router-outlet></router-outlet>
             <datepicker></datepicker>
             <app-sectors-map></app-sectors-map>
         </section>
+
+        <div class="container">
+            <app-profile-page></app-profile-page>
+            <app-filter-sectors></app-filter-sectors>
+            <app-sectors-map></app-sectors-map>  
+        </div>
+
     </main>
 
     <section class="home-block website gradient">
