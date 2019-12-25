@@ -21,12 +21,17 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
-import { CustomRangesComponent } from './datepicker/datepicker';
+import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
 import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
 import { SectorsMapComponent } from './sectors-map/sectors-map.component';
+import { NavigationBarComponent } from './navbar/navbar.component';
+import { MainSectionComponent } from './pages/home-page/components/main-section/main-section.component';
+import { FormSectionComponent } from './pages/home-page/components/form-section/form-section.component';
+import { FooterComponent } from './pages/home-page/components/footer/footer.component';
 
 import {RouterModule} from '@angular/router';
 import { FilterSectorsComponent } from './filter-sectors/filter-sectors.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
     imports: [
@@ -47,7 +52,6 @@ import { FilterSectorsComponent } from './filter-sectors/filter-sectors.componen
             apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
         }),
         NgxDaterangepickerMd.forRoot(),
-
         RouterModule,
         AppRoutingModule,
     ],
@@ -63,7 +67,12 @@ import { FilterSectorsComponent } from './filter-sectors/filter-sectors.componen
     CustomRangesComponent,
     BookSectorFormComponent,
     SectorsMapComponent,
-    FilterSectorsComponent  
+    FilterSectorsComponent,
+    NavigationBarComponent,
+    MainSectionComponent,
+    FormSectionComponent,
+    FooterComponent,
+    HomePageComponent
   ],
   exports: [
 
