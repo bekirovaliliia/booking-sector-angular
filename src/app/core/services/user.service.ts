@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {User} from './models/user-model';
+import {User} from '../../shared/models/user-model';
 
 
 @Injectable({
@@ -14,6 +14,9 @@ export class UserService {
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
+  checkPass(pass: string, id:number){
+    return this.http.get<Boolean>(`${this.apiURl}/${id}/${pass}`);
+   }
   updateUser(user :User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

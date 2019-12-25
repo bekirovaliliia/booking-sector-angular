@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';  
-import {User} from '../models/user-model';
-import {UserService} from '../user.service';
+import {User} from '../shared/models/user-model';
 import { OldPwdValidators } from './old-pwd.validators';
 
 
