@@ -23,26 +23,34 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
+import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
+import { SectorsMapComponent } from './sectors-map/sectors-map.component';
+
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  imports: [
-    FormsModule,
-    NgbModule,
-    BrowserModule,
-    HttpClientModule,
-    NgxMaskModule.forRoot(),
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatPasswordStrengthModule.forRoot(),
-    MatFormFieldModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'}),
-    NgxDaterangepickerMd.forRoot()
- ],
+    imports: [
+        FormsModule,
+        NgbModule,
+        BrowserModule,
+        HttpClientModule,
+        NgxMaskModule.forRoot(),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatPasswordStrengthModule.forRoot(),
+        MatFormFieldModule,
+        MatSlideToggleModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
+        }),
+        NgxDaterangepickerMd.forRoot(),
+
+        RouterModule,
+        AppRoutingModule,
+    ],
   declarations: [
     AppComponent,
     UserProfileTextComponent,
@@ -54,7 +62,9 @@ import { CustomRangesComponent } from './datepicker/datepicker';
     ChangePasswordComponent,
     ChangePasswordNewComponent,
     CustomRangesComponent,
- ],
+    BookSectorFormComponent,
+    SectorsMapComponent  
+  ],
   exports: [
 
   ],

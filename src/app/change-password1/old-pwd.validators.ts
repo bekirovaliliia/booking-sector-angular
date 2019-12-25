@@ -1,7 +1,7 @@
 
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password.component';
-import { User } from '../models/user-model';
+import { User } from '../shared/models/user-model';
 
 export class OldPwdValidators {
   static shouldBe1234(control: AbstractControl, user: User) : Promise<ValidationErrors | null> {
