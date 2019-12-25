@@ -1,20 +1,37 @@
-
-<table datatable class="table row-border hover">
-  <thead>
+<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table table-striped">
+  <thead class="thead-dark" [contentEditable]="false">
   <tr>
-    <th>Id</th>
-    <th>Sector ID</th>
+    <th>ID</th>
+    <th>Booked Sectors</th>
     <th>Start Date</th>
     <th>End Date</th>
+    <th></th>
   </tr>
   </thead>
-  <tbody>
+  <tbody *ngIf="this.bookings$?.length != 0"  [contentEditable]="false">
   <tr *ngFor="let booking of this.bookings$">
     <td>{{booking.id}}</td>
     <td>{{booking.sectorId}}</td>
     <td>{{booking.bookingStart | date}}</td>
     <td>{{booking.bookingEnd | date}}</td>
+    <td>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-info">
+          <span>Approve</span>
+        </button>
+        <button type="button" class="btn btn-info">
+          <span>Decline</span>
+        </button>
+      </div>
+    </td>
+
   </tr>
   </tbody>
-</table>
 
+  <tbody *ngIf="this.bookings$?.length == 0">
+  <tr>
+    <td colspan="3" class="no-data-available">No data!</td>
+  </tr>
+  <tbody>
+
+</table>

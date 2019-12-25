@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Sector} from '../../../shared/models/sector.model';
 import {SectorService} from '../../../core/services/sector.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-sector-list',
@@ -11,9 +12,23 @@ export class SectorListComponent implements OnInit {
 
   constructor(private httpService: SectorService) { }
   sectors$: Sector[];
+  dtOptions: any = {};
+  dtTrigger: Subject<any> = new Subject();
 
   ngOnInit() {
-    this.httpService.getSectors().subscribe(data => this.sectors$ = data);
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 25,
+      responsive: true
+    };
+    this.httpService.getSectors().subscribe(data => {
+      this.sectors$ = data;
+      this.dtTrigger.next();
+    });
   }
 
+  changeSectorActivity(sector: Sector) {
+    console.log('i`m Alive')
+    this.httpService.changeSectorActivity(sector).subscribe();
+  }
 }

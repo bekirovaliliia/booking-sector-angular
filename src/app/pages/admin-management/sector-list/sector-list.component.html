@@ -1,25 +1,25 @@
-<div class="container py-5">
-    <h3 class="text-center text-uppercase">List of Sectors</h3>
-    <table datatable class="table table-bordered table-striped">
-        <thead>
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table table-striped">
+        <thead class="thead-dark" [contentEditable]="false">
             <tr class="text-center text-uppercase">
-                <th>Sector ID</th>
-                <th>Number</th>
+                <th>ID</th>
                 <th>Description</th>
-                <th>GPS_Lat</th>
-                <th>GPS_Lng</th>
-                <th>Is_active</th>
+                <th>GPS Lat</th>
+                <th>GPS Lng</th>
+                <th>Active</th>
               </tr>
         </thead>
-        <tbody>
+     <tbody *ngIf="this.sectors$?.length != 0"  [contentEditable]="false">
           <tr *ngFor="let sector of sectors$">
             <td>{{sector.id}}</td>
-            <td>{{sector.number}}</td>
             <td>{{sector.description}}</td>
             <td>{{sector.gpsLat}}</td>
             <td>{{sector.gpsLng}}</td>
-            <td>{{sector?.isActive}}</td>
+            <td class="text-center"><input type="checkbox" [(ngModel)]="sector.isActive" (change)="changeSectorActivity(sector)"></td>
           </tr>
         </tbody>
+      <tbody *ngIf="this.sectors$?.length == 0">
+      <tr>
+        <td colspan="3" class="no-data-available">No data!</td>
+      </tr>
+      <tbody>
       </table>
-    </div>
