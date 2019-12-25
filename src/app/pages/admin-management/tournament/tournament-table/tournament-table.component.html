@@ -1,0 +1,32 @@
+
+<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table">
+  <thead class="thead-dark" >
+  <tr>
+    <th>______________</th>
+    <th *ngFor="let h of bookHeaders">
+      {{h}}
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngIf="this.bookedTournaments?.length != 0" >
+  <tr *ngFor="let tournament of this.bookedTournaments; let i = index"
+      (selected)="changeItem($event)" (dblclick)="updateItem($event)"
+      (dblclick)="getSelectedRow(i)" (click)="getSelectedRow(i)" (selected)="getSelectedRow(i)" [class.active]="isSelected(i)"
+
+      app-tournament-table-row
+      [tournament] = "tournament"
+      [headers] = "bookHeaders">
+
+  </tr>
+  </tbody>
+
+  <tbody *ngIf="this.bookedTournaments?.length == 0">
+  <tr>
+    <td colspan="3" class="no-data-available">No data!</td>
+  </tr>
+  <tbody>
+
+</table>
+
+
+

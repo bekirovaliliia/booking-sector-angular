@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { UserProfileTextComponent } from './user-profile-text/user-profile-text.component';
 import { PhotoComponent } from './photo/photo.component';
@@ -18,6 +19,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -28,8 +30,10 @@ import { NavigationBarComponent } from './navbar/navbar.component';
 import { MainSectionComponent } from './pages/home-page/components/main-section/main-section.component';
 import { FormSectionComponent } from './pages/home-page/components/form-section/form-section.component';
 import { FooterComponent } from './pages/home-page/components/footer/footer.component';
-
-import {RouterModule} from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { RouterModule} from '@angular/router';
+import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
+import { UpdateDialogComponent } from './pages/admin-management/tournament/update-dialog/update-dialog.component';
 import { FilterSectorsComponent } from './filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 
@@ -52,8 +56,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
             apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
         }),
         NgxDaterangepickerMd.forRoot(),
+        MatDialogModule,
         RouterModule,
         AppRoutingModule,
+
     ],
   declarations: [
     AppComponent,
@@ -72,14 +78,20 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MainSectionComponent,
     FormSectionComponent,
     FooterComponent,
-    HomePageComponent
+    HomePageComponent,
+    DeleteDialogComponent,
+    UpdateDialogComponent,
+    FilterSectorsComponent  
   ],
   exports: [
 
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [
     AppComponent,
-  ]
+  ],
+  entryComponents: [DeleteDialogComponent, UpdateDialogComponent]
 })
 export class AppModule { }

@@ -1,0 +1,24 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)" >
+<mat-dialog-content align="center">
+  <h5 mat-dialog-title>Updating item</h5>
+
+  <mat-form-field>
+    <input matInput formControlName="tourId" placeholder="ITournament id">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="bookStart" placeholder="Date booking start">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="bookEnd" placeholder="Date booking end">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="sectorId" placeholder="SectorId">
+  </mat-form-field>
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="center">
+  <button mat-button tabindex="1" type="submit">Save</button>
+  <button mat-button mat-dialog-close tabindex="-1"type="button" >Cancel</button>
+</mat-dialog-actions>
+</form>
