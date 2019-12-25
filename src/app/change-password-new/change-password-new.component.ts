@@ -11,27 +11,40 @@ import {UserService} from '../core/services/user.service';
 export class ChangePasswordNewComponent implements OnInit {
   changePasswordForm:FormGroup;
   onStrengthChanged(strength: number) {
+    this.passwordStrength = strength;
     console.log('password strength = ', strength);
   }
   user: User;
   id = 46;
+  passwordStrength: number = 0;
 old: Boolean = false;
 check: boolean = false;
-  saveChanges(newPass: string){
-    this.user.password = newPass;
+newPassword: string = "";
+newPasswordConfirm: string = "";
+oldPassColor:string = "primary";
+checked = false;
+  saveChanges(){
+    if(this.passwordStrength<40){ alert("Your password must meet at least 2 of 5 conditions");}
+    else{
+    this.user.password = this.newPassword;
     this.old = false;
+    this.checked = false;
     this.userService.updateUser(this.user).subscribe();
+    this.newPassword = "";
+    this.newPasswordConfirm = "";
+    alert("Password changed successfully");}
   }
-  passMatch(pass: string, passConf: string): boolean
+  passMatch(): boolean
   {
-     if(pass == passConf){
+     if(this.newPassword == this.newPasswordConfirm && this.old){
        return true;
      }
      else return false;
   }
 
   checkOldPassword(pass: string){
-    return this.userService.checkPass(pass, this.id).subscribe(data=>this.old =data);
+    let res = this.userService.checkPass(pass, this.id).subscribe(data=>this.old =data);
+    return res;
   }
   constructor(private userService: UserService){  }
 
