@@ -20,6 +20,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -28,6 +29,7 @@ import { BookSectorFormComponent } from './book-sector-form/book-sector-form.com
 import { SectorsMapComponent } from './sectors-map/sectors-map.component';
 import { DatePipe } from '@angular/common';
 import {RouterModule} from '@angular/router';
+import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
 
 @NgModule({
     imports: [
@@ -48,7 +50,7 @@ import {RouterModule} from '@angular/router';
             apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
         }),
         NgxDaterangepickerMd.forRoot(),
-
+        MatDialogModule,
         RouterModule,
         AppRoutingModule,
 
@@ -66,6 +68,7 @@ import {RouterModule} from '@angular/router';
     CustomRangesComponent,
     BookSectorFormComponent,
     SectorsMapComponent,
+    DeleteDialogComponent,
 
   ],
   exports: [
@@ -76,6 +79,7 @@ import {RouterModule} from '@angular/router';
   ],
   bootstrap: [
     AppComponent,
-  ]
+  ],
+  entryComponents: [DeleteDialogComponent]
 })
 export class AppModule { }

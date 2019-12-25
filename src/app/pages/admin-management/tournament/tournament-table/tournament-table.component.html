@@ -1,15 +1,18 @@
 
-<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table table-striped">
-<thead class="thead-dark" [contentEditable]="false">
+<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table">
+  <thead class="thead-dark" >
   <tr>
-    <th>Buttons</th>
-  <th *ngFor="let h of bookHeaders ">
-    {{h}}
-  </th>
+    <th>______________</th>
+    <th *ngFor="let h of bookHeaders">
+      {{h}}
+    </th>
   </tr>
-</thead>
-  <tbody *ngIf="this.bookedTournaments?.length != 0"  [contentEditable]="true">
-  <tr *ngFor="let tournament of this.bookedTournaments"
+  </thead>
+  <tbody *ngIf="this.bookedTournaments?.length != 0" >
+  <tr *ngFor="let tournament of this.bookedTournaments; let i = index"
+      (selected)="changeItem($event)" (dblclick)="updateItem($event)"
+      (dblclick)="getSelectedRow(i)" (click)="getSelectedRow(i)" (selected)="getSelectedRow(i)" [class.active]="isSelected(i)"
+
       app-tournament-table-row
       [tournament] = "tournament"
       [headers] = "bookHeaders">

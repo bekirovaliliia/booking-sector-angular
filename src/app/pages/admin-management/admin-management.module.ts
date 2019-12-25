@@ -14,6 +14,7 @@ import { FilterComponent } from './tournament/filter/filter.component';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 
 
+
 @NgModule({
   declarations: [
     AdminSidebarComponent,
@@ -24,7 +25,8 @@ import {FilterPipe} from '../../shared/pipes/filter.pipe';
     TournamentTableComponent,
     TournamentTableRowComponent,
     FilterComponent,
-    FilterPipe
+    FilterPipe,
+
   ],
   exports: [
     AdminSidebarComponent,

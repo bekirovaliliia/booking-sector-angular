@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AdminManagementComponent} from './admin-management.component';
 import {SettingComponent} from './setting/setting.component';
 import {TournamentComponent} from './tournament/tournament.component';
+import {BookingManagingComponent} from "./booking-managing/booking-managing.component";
 
 
 const routes: Routes = [
@@ -14,6 +15,9 @@ const routes: Routes = [
       },
       {
         path: 'tournaments', component: TournamentComponent
+      },
+      {
+        path: 'managing', component: BookingManagingComponent
       },
 
 

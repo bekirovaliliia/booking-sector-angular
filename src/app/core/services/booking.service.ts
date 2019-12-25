@@ -40,8 +40,15 @@ export class BookingService {
               item.sectorId, item.userId,
               )
           )
-
         )
       );
+  }
+
+  deleteBooking(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.delete(`${this.urlAddress}bookings/${id}`);
+
   }
 }

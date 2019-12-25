@@ -4,7 +4,8 @@ import {TournamentService} from '../../../../core/services/tournament.service';
 import {Subject} from 'rxjs';
 import {Booking} from '../../../../shared/models/booking.model';
 import {BookingService} from '../../../../core/services/booking.service';
-
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-tournament-table',
@@ -12,25 +13,33 @@ import {BookingService} from '../../../../core/services/booking.service';
   styleUrls: ['./tournament-table.component.sass']
 })
 export class TournamentTableComponent implements OnInit, OnDestroy {
-
   @Input() searchModel: string;
   @Input() tournaments: Tournament[];
   @Input() tour: Tournament;
-  bookedTournaments: Booking[];
+  @Input() bookedTournaments: Booking[];
+
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
+  selectedRow: number;
 
   tourHeaders: string[];
   bookHeaders: string[];
+
+  fileNameDialogRef: MatDialogRef<DeleteDialogComponent>;
+
   constructor( private tournamentService: TournamentService,
                private bookingService: BookingService,
-               private ref: ChangeDetectorRef) { }
+               private ref: ChangeDetectorRef,
+               private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 25,
-      responsive: true
+      pageLength: 10,
+      responsive: true,
+      retrieve: true,
+      select: true,
     };
 
     this.getTournaments();
@@ -45,7 +54,7 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
       console.log(this.tourHeaders);
     });
   }
-  getBookings(){
+  getBookings() {
     this.bookingService.getBookedTournaments().subscribe(res => {
       this.bookedTournaments = res;
       console.log(this.bookedTournaments);
@@ -55,8 +64,55 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
     });
   }
 
+  changeItem($event) {
+    if ($event.action === 'Delete') {
+      this.openAddFileDialog();
+      this.deleteItem($event.id);
+    }
+    if ($event.action === 'Update') {
+      this.updateItem($event.id);
+    }
+  }
+
+  deleteItem(id) {
+    console.log('del');
+    /*
+     this.bookingService.deleteBooking(id).subscribe(
+       data => {
+         this.getBookings();
+       }
+     );
+
+     for (let i = 0; i < this.bookedTournaments.length; ++i) {
+       if (this.bookedTournaments[i].id === id) {
+         this.bookedTournaments.splice(i, 1 );
+       }
+     }
+
+     */
+  }
+  updateItem(id) {
+    console.log('upd');
+
+
+  }
+
+  openAddFileDialog() {
+    this.fileNameDialogRef = this.dialog.open(DeleteDialogComponent);
+  }
+
+  getSelectedRow(item): void {
+    this.selectedRow = item;
+  }
+
+  isSelected(item): boolean {
+    if (!this.selectedRow) {
+      return false;
+    }
+    return this.selectedRow ===  item ? true : false;
+  }
+
   ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 

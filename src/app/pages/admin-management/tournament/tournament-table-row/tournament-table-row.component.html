@@ -1,17 +1,32 @@
 <td>
+ <div class="btn-group">
+  <button
+    type="button"
+    class="input-group-text"
+    id ="tournament.id"
+    (click)="select(tournament.id, 'Update')"
+  >
+    <img src={{imgEdit}}
+         alt="update"
+         class="img-fluid "
+         width="20px"
+
+    />
+  </button>
 
   <button
     type="button"
     class="input-group-text"
-
+    (click)="select(tournament.id, 'Delete')"
   >
-    <img src={{imgname}}
+   <img src={{imgCancel}}
          alt="delete"
          class="img-fluid "
          width="20px"
     />
-  </button>
 
+  </button>
+</div>
 </td>
 <td *ngFor="let head of headers">
   {{  tournament[head] }}
