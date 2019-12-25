@@ -21,6 +21,7 @@ newPasswordConfirm: string = "";
 checked = false;
 visibilityForm: boolean = false;
 visibilityButton: boolean = true;
+color:string = "primary";
   changeP()
   {
     this.visibilityForm = true;

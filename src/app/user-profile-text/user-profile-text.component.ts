@@ -27,7 +27,7 @@ export class UserProfileTextComponent implements OnInit {
   }
   constructor(private userService: UserService) { }  
   user: User;  
-  id = 4;
+  id = 46;
   ngOnInit() {
     return this.userService.getUser(this.id).subscribe(data => this.user = data);
   }
