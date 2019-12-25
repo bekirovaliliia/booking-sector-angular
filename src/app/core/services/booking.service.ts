@@ -21,11 +21,12 @@ export class BookingService {
     return this.http.get<Booking[]>(this.apiURl);
   }
 
-  updateBooking(setting: Booking): Observable<any> {
+  updateBooking(booking: Booking): Observable<any> {
+    console.log(booking);
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.apiURl}/${setting.id}`, setting, httpOptions);
+    return this.http.put(`${this.urlAddress}bookings/tournaments/${booking.id}`, booking, httpOptions);
   }
 
 
@@ -37,8 +38,20 @@ export class BookingService {
             (item: any) =>
               new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
                 this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
-              item.sectorId, item.userId,
+                item.sectorId, item.userId,
               )
+          )
+        )
+      );
+  }
+
+  getBookingById(id: number): Observable<Booking> {
+    return this.http.get<Booking>(`${this.urlAddress}bookings/${id}`)
+      .pipe(
+        map((item: Booking) =>
+          new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
+            this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
+            item.sectorId, item.userId,
           )
         )
       );

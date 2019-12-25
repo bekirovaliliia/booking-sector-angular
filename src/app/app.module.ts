@@ -30,7 +30,7 @@ import { SectorsMapComponent } from './sectors-map/sectors-map.component';
 import { DatePipe } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
-
+import { UpdateDialogComponent } from './pages/admin-management/tournament/update-dialog/update-dialog.component';
 @NgModule({
     imports: [
         FormsModule,
@@ -69,7 +69,7 @@ import { DeleteDialogComponent } from './pages/admin-management/tournament/delet
     BookSectorFormComponent,
     SectorsMapComponent,
     DeleteDialogComponent,
-
+    UpdateDialogComponent,
   ],
   exports: [
 
@@ -80,6 +80,6 @@ import { DeleteDialogComponent } from './pages/admin-management/tournament/delet
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent]
+  entryComponents: [DeleteDialogComponent, UpdateDialogComponent]
 })
 export class AppModule { }

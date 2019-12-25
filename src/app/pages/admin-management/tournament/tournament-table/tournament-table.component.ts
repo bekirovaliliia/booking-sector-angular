@@ -6,6 +6,8 @@ import {Booking} from '../../../../shared/models/booking.model';
 import {BookingService} from '../../../../core/services/booking.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import {filter} from 'rxjs/operators';
+import {UpdateDialogComponent} from '../update-dialog/update-dialog.component';
 
 @Component({
   selector: 'app-tournament-table',
@@ -15,8 +17,10 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 export class TournamentTableComponent implements OnInit, OnDestroy {
   @Input() searchModel: string;
   @Input() tournaments: Tournament[];
-  @Input() tour: Tournament;
   @Input() bookedTournaments: Booking[];
+  tournament: Tournament;
+  booking: Booking;
+
 
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
@@ -25,7 +29,8 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
   tourHeaders: string[];
   bookHeaders: string[];
 
-  fileNameDialogRef: MatDialogRef<DeleteDialogComponent>;
+  deleteDialogRef: MatDialogRef<DeleteDialogComponent>;
+  updateDialogRef: MatDialogRef<UpdateDialogComponent>;
 
   constructor( private tournamentService: TournamentService,
                private bookingService: BookingService,
@@ -57,48 +62,85 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
   getBookings() {
     this.bookingService.getBookedTournaments().subscribe(res => {
       this.bookedTournaments = res;
-      console.log(this.bookedTournaments);
       this.bookHeaders = (this.bookedTournaments && this.bookedTournaments.length > 0) ? Object.keys(this.bookedTournaments[0]) : [];
-      console.log(this.bookHeaders);
       this.dtTrigger.next();
     });
   }
 
   changeItem($event) {
     if ($event.action === 'Delete') {
-      this.openAddFileDialog();
-      this.deleteItem($event.id);
+      this.openDeleteDialog();
+      this.deleteDialogRef
+        .afterClosed()
+        .pipe(filter(name => name))
+        .subscribe(name => {
+            // this.deleteItem($event.id)
+          }
+        );
     }
     if ($event.action === 'Update') {
-      this.updateItem($event.id);
+      this.bookingService.getBookingById($event.id).subscribe(res => {
+        this.booking = res;
+        this.openUpdateDialog(this.booking);
+        this.updateDialogRef
+          .afterClosed()
+          .pipe(filter(name => name))
+          .subscribe(name => {
+              this.updateItem(this.booking);
+            }
+          );
+      });
     }
   }
 
   deleteItem(id) {
     console.log('del');
-    /*
-     this.bookingService.deleteBooking(id).subscribe(
-       data => {
-         this.getBookings();
-       }
-     );
-
-     for (let i = 0; i < this.bookedTournaments.length; ++i) {
-       if (this.bookedTournaments[i].id === id) {
-         this.bookedTournaments.splice(i, 1 );
-       }
-     }
-
-     */
+    this.bookingService.deleteBooking(id).subscribe(
+      data => {
+        this.getBookings();
+      }
+    );
+    for (let i = 0; i < this.bookedTournaments.length; ++i) {
+      if (this.bookedTournaments[i].id === id) {
+        this.bookedTournaments.splice(i, 1 );
+      }
+    }
   }
-  updateItem(id) {
+
+  updateItem(booking) {
     console.log('upd');
-
-
+    this.bookingService.updateBooking(booking).subscribe(
+      data => {
+        this.getBookings();
+      }
+    );
   }
 
-  openAddFileDialog() {
-    this.fileNameDialogRef = this.dialog.open(DeleteDialogComponent);
+  openDeleteDialog() {
+    this.deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
+
+      hasBackdrop: false,
+      width: '35%',
+    });
+    return this.deleteDialogRef;
+  }
+
+  openUpdateDialog(tour: Booking) {
+    console.log(tour);
+    this.updateDialogRef = this.dialog.open(UpdateDialogComponent, {
+      hasBackdrop: false,
+      width: '35%',
+      data: {
+        tourId: tour ? tour.tournamentId : '',
+        bookStart: tour ? tour.bookingStart : '',
+        bookEnd: tour ? tour.bookingEnd : '',
+        sectorId: tour ? tour.sectorId : '',
+
+      },
+
+    });
+    console.log(tour);
+    return this.updateDialogRef;
   }
 
   getSelectedRow(item): void {

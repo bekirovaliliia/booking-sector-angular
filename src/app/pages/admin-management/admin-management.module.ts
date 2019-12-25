@@ -13,6 +13,8 @@ import { TournamentTableRowComponent } from './tournament/tournament-table-row/t
 import { FilterComponent } from './tournament/filter/filter.component';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -27,6 +29,7 @@ import {FilterPipe} from '../../shared/pipes/filter.pipe';
     FilterComponent,
     FilterPipe,
 
+
   ],
   exports: [
     AdminSidebarComponent,
@@ -39,6 +42,7 @@ import {FilterPipe} from '../../shared/pipes/filter.pipe';
     CommonModule,
     AdminManagementRoutingModule,
     FormsModule,
+    MatDialogModule,
 
 
   ]
