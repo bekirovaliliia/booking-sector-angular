@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { UserProfileTextComponent } from './user-profile-text/user-profile-text.component';
 import { PhotoComponent } from './photo/photo.component';
@@ -25,7 +26,7 @@ import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './datepicker/datepicker';
 import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
 import { SectorsMapComponent } from './sectors-map/sectors-map.component';
-
+import { DatePipe } from '@angular/common';
 import {RouterModule} from '@angular/router';
 
 @NgModule({
@@ -50,6 +51,7 @@ import {RouterModule} from '@angular/router';
 
         RouterModule,
         AppRoutingModule,
+
     ],
   declarations: [
     AppComponent,
@@ -63,12 +65,15 @@ import {RouterModule} from '@angular/router';
     ChangePasswordNewComponent,
     CustomRangesComponent,
     BookSectorFormComponent,
-    SectorsMapComponent  
+    SectorsMapComponent,
+
   ],
   exports: [
 
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [
     AppComponent,
   ]

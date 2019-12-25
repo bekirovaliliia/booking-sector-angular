@@ -1,0 +1,29 @@
+
+<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table table-striped">
+<thead class="thead-dark" [contentEditable]="false">
+  <tr>
+    <th>Buttons</th>
+  <th *ngFor="let h of bookHeaders ">
+    {{h}}
+  </th>
+  </tr>
+</thead>
+  <tbody *ngIf="this.bookedTournaments?.length != 0"  [contentEditable]="true">
+  <tr *ngFor="let tournament of this.bookedTournaments"
+      app-tournament-table-row
+      [tournament] = "tournament"
+      [headers] = "bookHeaders">
+
+  </tr>
+  </tbody>
+
+  <tbody *ngIf="this.bookedTournaments?.length == 0">
+  <tr>
+    <td colspan="3" class="no-data-available">No data!</td>
+  </tr>
+  <tbody>
+
+</table>
+
+
+
