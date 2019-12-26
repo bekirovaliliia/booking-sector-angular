@@ -3,26 +3,14 @@ import {Tournament} from '../../shared/models/tournament';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { environment } from '../../../environments/environment';
-import {filter, map} from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root'
 })
 export class TournamentService {
   constructor(private http: HttpClient) {}
-  public urlAddress: string = environment.urlAddress;
-
+  public tournamentUrl = `${environment.apiUrl}/tournaments`
   getTournaments(): Observable<Tournament[]> {
-    return this.http.get<Tournament[]>(`${this.urlAddress}tournaments/all`)
-      .pipe(
-        map((data: Tournament[]) =>
-          data.map(
-            (item: any) =>
-              new Tournament(item.id, item.name, item.description, item.preparationTerm)
-          )
-
-        )
-      );
+    return this.http.get<Tournament[]>(`${this.tournamentUrl}/all`);
   }
 /*
   getTournaments(): Observable<Tournament[]> {

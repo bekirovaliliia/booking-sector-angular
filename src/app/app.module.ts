@@ -10,6 +10,8 @@ import {PagesModule} from './pages/pages.module';
 import {DatePipe} from '@angular/common';
 import {DeleteDialogComponent} from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
 import {UpdateDialogComponent} from './pages/admin-management/tournament/update-dialog/update-dialog.component';
+import { BookingTableComponent } from './pages/admin-management/booking-managing/booking-table/booking-table.component';
+import { BoookingTableRowComponent } from './pages/admin-management/booking-managing/boooking-table-row/boooking-table-row.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import {UpdateDialogComponent} from './pages/admin-management/tournament/update-
   ],
   declarations: [
     AppComponent,
+    BookingTableComponent,
+    BoookingTableRowComponent,
   ],
   providers: [
     DatePipe,

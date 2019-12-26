@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookSectorFormComponent } from './book-sector-form.component';
+import { BoookingTableRowComponent } from './boooking-table-row.component';
 
-describe('BookSectorFormComponent', () => {
-  let component: BookSectorFormComponent;
-  let fixture: ComponentFixture<BookSectorFormComponent>;
+describe('BoookingTableRowComponent', () => {
+  let component: BoookingTableRowComponent;
+  let fixture: ComponentFixture<BoookingTableRowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BookSectorFormComponent ]
+      declarations: [ BoookingTableRowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookSectorFormComponent);
+    fixture = TestBed.createComponent(BoookingTableRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
