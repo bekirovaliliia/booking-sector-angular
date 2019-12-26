@@ -16,8 +16,8 @@ import { FilterComponent } from './tournament/filter/filter.component';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
 
 import {MatDialogModule} from '@angular/material/dialog';
-import {BookingTableComponent} from "./booking-managing/booking-table/booking-table.component";
-import {BoookingTableRowComponent} from "./booking-managing/boooking-table-row/boooking-table-row.component";
+import {BookingTableComponent} from './booking-managing/booking-table/booking-table.component';
+import {BookingTableRowComponent} from './booking-managing/boooking-table-row/booking-table-row.component';
 
 
 @NgModule({
@@ -33,7 +33,7 @@ import {BoookingTableRowComponent} from "./booking-managing/boooking-table-row/b
     FilterComponent,
     FilterPipe,
     BookingTableComponent,
-    BoookingTableRowComponent,
+    BookingTableRowComponent,
   ],
   exports: [
     AdminSidebarComponent,

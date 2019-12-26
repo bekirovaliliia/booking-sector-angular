@@ -1,0 +1,19 @@
+
+<tr *ngFor="let booking of this.tempBookings">
+  <div *ngIf="booking.isApproved == 0">
+  <td>{{booking.id}}</td>
+  <td>{{booking.sectorId}}</td>
+  <td>{{booking.bookingStart | date}}</td>
+  <td>{{booking.bookingEnd | date}}</td>
+  <td>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-info">
+        <span>Approve</span>
+      </button>
+      <button type="button" class="btn btn-info">
+        <span>Decline</span>
+      </button>
+    </div>
+  </td>
+  </div>
+</tr>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoookingTableRowComponent } from './boooking-table-row.component';
+import { BookingTableRowComponent } from './booking-table-row.component';
 
 describe('BoookingTableRowComponent', () => {
-  let component: BoookingTableRowComponent;
-  let fixture: ComponentFixture<BoookingTableRowComponent>;
+  let component: BookingTableRowComponent;
+  let fixture: ComponentFixture<BookingTableRowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoookingTableRowComponent ]
+      declarations: [ BookingTableRowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoookingTableRowComponent);
+    fixture = TestBed.createComponent(BookingTableRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
