@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { UserProfileTextComponent } from './pages/profile-page/user-profile-text/user-profile-text.component';
 import { PhotoComponent } from './pages/profile-page/photo/photo.component';
 import { UserMenuComponent } from './pages/profile-page/user-menu/user-menu.component';
-import { SectorListComponent } from './sector-list/sector-list.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ChangePasswordNewComponent } from './pages/profile-page/change-password-new/change-password-new.component';
@@ -65,7 +64,6 @@ import { FooterComponent } from './shared/footer/footer.component';
     UserProfileTextComponent,
     UserProfileTextComponent,
     PhotoComponent,
-    SectorListComponent,
     ProfilePageComponent,
     UserMenuComponent,
     ChangePasswordNewComponent,
