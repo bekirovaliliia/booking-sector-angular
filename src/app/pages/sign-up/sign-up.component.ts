@@ -10,20 +10,28 @@ import {User} from '../../shared/models/user-model';
 })
 export class SignUpComponent implements OnInit {
 user: User;
+number: string;
+email: string;
+lastName: string;
+
 
 
   constructor(
     private userService: UserService
-  ) {  }
-
-  ngOnInit() {
-
+  ) {
+    this.user = new User();
   }
-  signUp() {
-    this.user.id = 1;
-    //this.userService.insertUser(this.user).subscribe();
 
-    alert('tut3');
+  ngOnInit() {}
+
+  signUp() {
+    this.user.firstname = 'testFOOT';
+    this.user.lastname = 'testFOOT';
+    this.user.phone = '380111111111';
+    this.user.id = 100;
+
+    this.userService.insertUser(this.user).subscribe();
+
   }
 
 

@@ -26,6 +26,6 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.post(`${this.apiURl}/${user.id}`, user, httpOptions);
+    return this.http.post(`${this.apiURl}/`, user, httpOptions);
   }
 }
