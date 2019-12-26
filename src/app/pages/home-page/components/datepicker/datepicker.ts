@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import { Component } from '@angular/core';
 import * as moment from 'moment';
 
 
@@ -16,23 +16,20 @@ export class CustomRangesComponent {
     maxDate: moment.Moment;
     minDate: moment.Moment;
     
-  
     constructor() {
       this.maxDate = moment().add(1,  'months');
       this.minDate = moment();
       this.alwaysShowCalendars = true;
       this.keepCalendarOpeningWithRange = true;
       this.showRangeLabelOnInput = true;
-      this.selected = {startDate: moment().subtract(1, 'days'), endDate: moment().subtract(1, 'days')};
-    
+      this.selected = {startDate: moment().subtract(1, 'days'), endDate: moment().subtract(1, 'days')};  
+    }
+
+    updateSelected(range){
+      console.log('[rangeClicked] range is : ', range);
     }
 
     rangeClicked(range) {
       console.log('[rangeClicked] range is : ', range);
-      return range;
-    }
-    datesUpdated(range) {
-      console.log('[datesUpdated] range is : ', range);
-      return range;
     }
 }
