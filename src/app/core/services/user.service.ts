@@ -7,7 +7,7 @@ import {User} from '../../shared/models/user-model';
 })
 export class UserService {
 
-  apiURl = 'http://localhost:44393/api/users';
+  apiURl = 'https://localhost:44393/api/users';
   constructor(private http: HttpClient) { }
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
