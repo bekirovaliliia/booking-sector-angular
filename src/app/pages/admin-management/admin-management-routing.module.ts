@@ -5,11 +5,15 @@ import {AdminManagementComponent} from './admin-management.component';
 import {SettingComponent} from './setting/setting.component';
 import {TournamentComponent} from './tournament/tournament.component';
 import {BookingManagingComponent} from './booking-managing/booking-managing.component';
+import {SectorListComponent} from './sector-list/sector-list.component';
 
 
 const routes: Routes = [
   {
     path: 'admin', component: AdminManagementComponent, children: [
+      {
+        path: 'bookings', component: BookingManagingComponent
+      },
       {
         path: 'settings', component: SettingComponent
       },
@@ -17,18 +21,19 @@ const routes: Routes = [
         path: 'tournaments', component: TournamentComponent
       },
       {
-        path: 'managing', component: BookingManagingComponent
+        path: 'sectors', component: SectorListComponent
       },
-
-
     ]
   }
 ];
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forChild(routes),
-  CommonModule
+  imports: [
+    RouterModule.forChild(routes),
+    CommonModule
   ],
-  exports: [RouterModule]
+  exports: [
+    RouterModule
+  ]
 })
 export class AdminManagementRoutingModule { }
