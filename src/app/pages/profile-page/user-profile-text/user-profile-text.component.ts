@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';  
-import {User} from '../shared/models/user-model';
-import {UserService} from '../core/services/user.service';
+import {User} from '../../../shared/models/user-model';
+import {UserService} from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-user-profile-text',

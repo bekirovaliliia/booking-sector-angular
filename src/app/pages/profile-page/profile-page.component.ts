@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';  
-import {UserService} from '../core/services/user.service';
+import {UserService} from '../../core/services/user.service';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
