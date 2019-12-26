@@ -3,7 +3,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
 import { UserProfileTextComponent } from './user-profile-text/user-profile-text.component';
 import { PhotoComponent } from './photo/photo.component';
@@ -24,18 +23,18 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
-import { BookSectorFormComponent } from './book-sector-form/book-sector-form.component';
-import { SectorsMapComponent } from './sectors-map/sectors-map.component';
-import { NavigationBarComponent } from './navbar/navbar.component';
+import { BookSectorFormComponent } from './pages/home-page/components/book-sector-form/book-sector-form.component';
+import { SectorsMapComponent } from './pages/home-page/components/sectors-map/sectors-map.component';
+import { NavigationBarComponent } from './shared/navbar/navbar.component';
 import { MainSectionComponent } from './pages/home-page/components/main-section/main-section.component';
 import { FormSectionComponent } from './pages/home-page/components/form-section/form-section.component';
-import { FooterComponent } from './pages/home-page/components/footer/footer.component';
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
 import { UpdateDialogComponent } from './pages/admin-management/tournament/update-dialog/update-dialog.component';
-import { FilterSectorsComponent } from './filter-sectors/filter-sectors.component';
+import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
     imports: [
@@ -77,11 +76,11 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     NavigationBarComponent,
     MainSectionComponent,
     FormSectionComponent,
-    FooterComponent,
     HomePageComponent,
     DeleteDialogComponent,
     UpdateDialogComponent,
-    FilterSectorsComponent  
+    FilterSectorsComponent,
+    FooterComponent
   ],
   exports: [
 
