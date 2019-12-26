@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password-new',
@@ -19,18 +20,9 @@ oldPassword: string = "";
 newPassword: string = "";
 newPasswordConfirm: string = "";
 checked = false;
-visibilityForm: boolean = false;
-visibilityButton: boolean = true;
 color:string = "primary";
-  changeP()
+   cancelP()
   {
-    this.visibilityForm = true;
-    this.visibilityButton = false;
-  }
-  cancelP()
-  {
-    this.visibilityForm = false;
-    this.visibilityButton = true;
     this.old= false;
     this.check= false;
     this.oldPassword = "";
@@ -85,7 +77,7 @@ color:string = "primary";
     return res;
     }
   }
-  constructor(private userService: UserService){  }
+  constructor(private userService: UserService,){  }
 
      ngOnInit() 
     {
