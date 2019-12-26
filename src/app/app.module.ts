@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { UserProfileTextComponent } from './pages/profile-page/user-profile-text/user-profile-text.component';
 import { PhotoComponent } from './pages/profile-page/photo/photo.component';
 import { UserMenuComponent } from './pages/profile-page/user-menu/user-menu.component';
-import { SectorListComponent } from './sector-list/sector-list.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ChangePasswordNewComponent } from './pages/profile-page/change-password-new/change-password-new.component';
@@ -18,7 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatDialogRef} from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -66,7 +65,6 @@ import { MarkerExplanationComponent } from './pages/home-page/components/marker-
     UserProfileTextComponent,
     UserProfileTextComponent,
     PhotoComponent,
-    SectorListComponent,
     ProfilePageComponent,
     UserMenuComponent,
     ChangePasswordNewComponent,
@@ -93,6 +91,6 @@ import { MarkerExplanationComponent } from './pages/home-page/components/marker-
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent]
+  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
 })
 export class AppModule { }
