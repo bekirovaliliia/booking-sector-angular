@@ -8,7 +8,7 @@ import {ErrorStateMatcher} from "@angular/material/core";
   templateUrl: './update-dialog.component.html',
   styleUrls: ['./update-dialog.component.sass']
 })
-export class UpdateDialogComponent implements OnInit, ErrorStateMatcher {
+export class UpdateDialogComponent implements OnInit {
   form: FormGroup;
   dialogTitle: string;
   isUpdated: boolean;
