@@ -17,7 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatDialogRef} from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -89,6 +89,6 @@ import { FooterComponent } from './shared/footer/footer.component';
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent]
+  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
 })
 export class AppModule { }
