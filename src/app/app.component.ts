@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-const now = new Date();
 
 @Component({
   selector: 'app-root',
@@ -10,18 +7,7 @@ const now = new Date();
 })
 
 export class AppComponent implements OnInit {
+  ngOnInit(){
 
-  minDate = {year: now.getFullYear(), month: now.getMonth() + 1 , day: now.getDate()};
-  latitude = 49.886416;
-  longitude = 23.493211;
-  mapType = 'satellite';
-  markers: object [];
-  constructor(private httpService: HttpClient) { }
-  ngOnInit() {
-    this.httpService.get('https://localhost:44393/api/sectors/free?fromDate=2019-12-21&toDate=2019-12-22').subscribe(
-      data => {
-       this.markers = data as object [];
-      }
-    );
   }
 }

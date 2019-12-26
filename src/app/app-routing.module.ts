@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'sign-in', component: SignInComponent},
   { path: 'admin', component: AdminManagementComponent},
   { path: 'user', component: ProfilePageComponent},
+
 ];
 
 @NgModule({
@@ -22,3 +23,4 @@ const routes: Routes = [
   ]
 })
 export class AppRoutingModule { }
+

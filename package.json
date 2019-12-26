@@ -45,6 +45,7 @@
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
     "@types/datatables.net": "^1.10.18",
+    "@types/datatables.net-select": "^1.2.6",
     "@types/googlemaps": "^3.38.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",

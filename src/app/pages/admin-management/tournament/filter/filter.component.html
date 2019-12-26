@@ -1,0 +1,28 @@
+<div class="input-group mb-3" xmlns="http://www.w3.org/1999/html">
+
+  <input type="text"
+         class="form-control"
+         placeholder="Search tournaments..."
+         aria-describedby="basic-addon2"
+         id="search"
+         [(ngModel)]="searchModel"
+         (ngModelChange)="updateSearchModel($event)"
+
+  >
+  <div class="input-group-append">
+    <button
+      class="input-group-text"
+      mat-flat-button
+      (click)="updateSearchModel(searchModel)"
+      (keypress)="updateSearchModel(searchModel)"
+    >
+
+      <img src={{imgname}}
+           alt="search"
+           class="img-fluid "
+           width="20px"
+      />
+    </button>
+  </div>
+</div>
+

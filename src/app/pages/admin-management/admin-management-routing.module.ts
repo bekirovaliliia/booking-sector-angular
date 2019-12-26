@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminManagementComponent} from './admin-management.component';
 import {SettingComponent} from './setting/setting.component';
+import {TournamentComponent} from './tournament/tournament.component';
 import {BookingManagingComponent} from './booking-managing/booking-managing.component';
-import {SectorListComponent} from './sector-list/sector-list.component';
 
 
 const routes: Routes = [
@@ -14,22 +14,21 @@ const routes: Routes = [
         path: 'settings', component: SettingComponent
       },
       {
-        path: 'bookings', component: BookingManagingComponent
+        path: 'tournaments', component: TournamentComponent
       },
       {
-        path: 'sectors', component: SectorListComponent
-      }
+        path: 'managing', component: BookingManagingComponent
+      },
+
+
     ]
   }
 ];
 @NgModule({
   declarations: [],
-  imports: [
-    RouterModule.forChild(routes),
-    CommonModule,
+  imports: [RouterModule.forChild(routes),
+  CommonModule
   ],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class AdminManagementRoutingModule { }

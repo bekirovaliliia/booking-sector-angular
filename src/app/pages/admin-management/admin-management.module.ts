@@ -8,7 +8,15 @@ import { DataTablesModule} from 'angular-datatables';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
 import {SectorListComponent} from './sector-list/sector-list.component';
-import {AdminRoutingModule} from './admin-routing.module';
+import {AdminManagementRoutingModule} from './admin-management-routing.module';
+import { TournamentComponent } from './tournament/tournament.component';
+import { TournamentTableComponent } from './tournament/tournament-table/tournament-table.component';
+import { TournamentTableRowComponent } from './tournament/tournament-table-row/tournament-table-row.component';
+import { FilterComponent } from './tournament/filter/filter.component';
+import {FilterPipe} from '../../shared/pipes/filter.pipe';
+
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +25,11 @@ import {AdminRoutingModule} from './admin-routing.module';
     SettingComponent,
     AdminManagementComponent,
     SectorListComponent,
+    TournamentComponent,
+    TournamentTableComponent,
+    TournamentTableRowComponent,
+    FilterComponent,
+    FilterPipe,
   ],
   exports: [
     AdminSidebarComponent,
@@ -27,9 +40,10 @@ import {AdminRoutingModule} from './admin-routing.module';
   imports: [
     DataTablesModule,
     CommonModule,
-    FormsModule,
     SharedModule,
-    AdminRoutingModule,
+    AdminManagementRoutingModule,
+    FormsModule,
+    MatDialogModule,
   ]
 })
 export class AdminManagementModule { }
