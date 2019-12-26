@@ -9,7 +9,7 @@ import {catchError, tap} from 'rxjs/operators';
 })
 export class SettingsService {
 
-  apiURl = 'https://localhost:44393/api/settings';
+  apiURl = 'http://localhost:44393/api/settings';
   constructor(private http: HttpClient) { }
 
   getSettings() {

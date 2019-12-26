@@ -13,7 +13,7 @@ import {DatePipe} from '@angular/common';
 })
 export class BookingService {
 
-  apiURl = 'https://localhost:44393/api/bookings';
+  apiURl = 'http://localhost:44393/api/bookings';
   public urlAddress: string = environment.urlAddress;
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 

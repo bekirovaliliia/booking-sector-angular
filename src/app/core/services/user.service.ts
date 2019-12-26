@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../shared/models/user-model';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  apiURl = 'https://localhost:44393/api/users';
+  apiURl = 'http://localhost:44393/api/users';
   constructor(private http: HttpClient) { }
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
@@ -21,5 +20,12 @@ export class UserService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     return this.http.put(`${this.apiURl}/${user.id}`, user, httpOptions);
+  }
+
+  insertUser(user: User) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post(`${this.apiURl}/`, user, httpOptions);
   }
 }

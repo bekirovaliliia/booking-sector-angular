@@ -1,0 +1,27 @@
+<main class="page hire-me-page">
+  <section class="home-block hire-me">
+    <div class="container">
+      <div class="heading">
+        <h2>Sign Up</h2>
+      </div>
+      <form>
+        <div class="form-group"><label>Number</label>
+          <input class="form-control" type="tel" id="phone" [showMaskTyped]="true"
+                                                            prefix="+38"
+                                                            mask="(000)000-00-00"
+
+          >
+        </div>
+        <div class="form-group">
+          <label >Email</label><input class="form-control" type="email" id="email"
+
+        ></div>
+        <div class="form-group"><label >Last Name</label><input class="form-control" type="text" id="lastName" ></div>
+        <div class="form-group"><label >First Name</label><input class="form-control" type="text" id="firstName" ></div>
+        <div class="form-group"><label >Password</label><input class="form-control" type="password" id="password"></div>
+        <div class="form-group"><label >Repeat the password</label><input class="form-control" type="password" id="passwordRepeat"></div>
+        <div class="form-group"><button (click)="signUp()" class="btn btn-primary btn-block" type="submit">Sign up</button></div>
+      </form>
+    </div>
+  </section>
+</main>
