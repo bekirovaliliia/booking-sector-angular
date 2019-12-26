@@ -31,7 +31,7 @@ export class SectorsMapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpService.get(`https://localhost:44393/api/sectors/free?fromDate=${this.today()}&toDate=${this.today()}`)
+    this.httpService.get(`http://localhost:44393/api/sectors/free?fromDate=${this.today()}&toDate=${this.today()}`)
       .subscribe(
         data => {
         this.markers = data as object [];

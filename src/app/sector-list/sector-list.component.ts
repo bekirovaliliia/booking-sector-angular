@@ -11,7 +11,7 @@ export class SectorListComponent implements OnInit {
   constructor(private httpService: HttpClient) { }  
   sectors: object [];  
   ngOnInit() {  
-    this.httpService.get('https://localhost:44393/api/sectors').subscribe(  
+    this.httpService.get('http://localhost:44393/api/sectors').subscribe(
       data => {  
        this.sectors = data as object [];  
       }  
