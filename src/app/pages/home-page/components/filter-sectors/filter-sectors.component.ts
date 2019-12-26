@@ -6,6 +6,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./filter-sectors.component.css']
 })
 export class FilterSectorsComponent implements OnInit {
+  
   constructor() { }
 
   ngOnInit() {

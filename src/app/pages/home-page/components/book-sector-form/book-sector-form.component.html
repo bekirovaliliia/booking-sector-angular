@@ -1,9 +1,8 @@
-<form> 
-    <div class="bootstrap-tagsinput">
-        <label>Selected sectors</label>
-        <input class="form-control" type="text" id="sectors">
-    </div>  
+<form class="p-3 mb-2 bg-dark text-white"> 
     <div class="form-group">
+        <label for="tagPlaces">Selected sectors</label>
+        <input readonly type="text" class="form-control" data-role="tagsinput" id="tagPlaces">
+    </div>
         <div id="fullname-field">
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -16,12 +15,11 @@
                 </div>
             </div>
         </div>
-    </div>
     <div class="form-group">
-        <label for="">Phone</label>
+        <label for="phone">Phone</label>
         <input class="form-control" type="tel" id="phone" placeholder="+380-93-000-00-00" >
     </div>
     <div class="form-group">
-        <button id = "btn-booking" class="btn btn-primary btn-block" type="submit">Submit</button>
+        <button id = "btn-booking" class="btn btn-primary btn-block" type="submit">Book</button>
     </div>   
 </form>
