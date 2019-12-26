@@ -34,6 +34,7 @@
     "moment": "^2.24.0",
     "ngx-daterangepicker-material": "^2.1.11",
     "ngx-mask": "^8.1.6",
+    "ngx-toastr": "^11.2.1",
     "popper.js": "^1.16.0",
     "rxjs": "~6.4.0",
     "serialize-javascript": "^2.1.2",

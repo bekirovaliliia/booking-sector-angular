@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
@@ -10,7 +11,6 @@ import {MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./change-password-new.component.sass'],
 })
 export class ChangePasswordNewComponent implements OnInit {
-  changePasswordForm:FormGroup;
 user: User;
 id = 46;
 passwordStrength: number = 0;
@@ -21,6 +21,12 @@ newPassword: string = "";
 newPasswordConfirm: string = "";
 checked = false;
 color:string = "primary";
+showNotMeetConditions() {
+  this.toastr.error('Your password must meet at least 2 of 5 conditions', 'Try again!');
+}
+showPasswordSaved() {
+  this.toastr.success('Password changed successfully');
+}
    cancelP()
   {
     this.old= false;
@@ -38,7 +44,7 @@ color:string = "primary";
   {
     if(this.passwordStrength<40)
       { 
-        alert("Your password must meet at least 2 of 5 conditions");
+        this.showNotMeetConditions();
       }
     else
       {
@@ -48,7 +54,8 @@ color:string = "primary";
         this.userService.updateUser(this.user).subscribe();
         this.newPassword = "";
         this.newPasswordConfirm = "";
-        alert("Password changed successfully");
+        this.showPasswordSaved();
+        this.dialogRef.close();
       }
   }
   canSave(): boolean
@@ -77,7 +84,9 @@ color:string = "primary";
     return res;
     }
   }
-  constructor(private userService: UserService,){  }
+  constructor(private userService: UserService,
+    private toastr: ToastrService,
+    public dialogRef: MatDialogRef<ChangePasswordNewComponent>){  }
 
      ngOnInit() 
     {

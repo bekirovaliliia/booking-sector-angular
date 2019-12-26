@@ -35,7 +35,8 @@ import { FilterSectorsComponent } from './pages/home-page/components/filter-sect
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 @NgModule({
     imports: [
         FormsModule,
@@ -58,6 +59,8 @@ import { MarkerExplanationComponent } from './pages/home-page/components/marker-
         MatDialogModule,
         RouterModule,
         AppRoutingModule,
+        ToastrModule.forRoot(),
+        CommonModule,
 
     ],
   declarations: [
