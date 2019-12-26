@@ -1,30 +1,37 @@
-<section class=""style="margin-top: 20px;">
+<section style="margin-top: 20px;">
     <div class="form-group d-flex flex-row"> 
         <label style="width: 100px">Name</label> 
-        <input [disabled] = isDisabled() type=text placeholder="Name" [(ngModel)]="user.firstname" class="form-control col-md-7">
+        <input [disabled] = isDisabled() 
+               type=text 
+               placeholder="Name" 
+               [(ngModel)]="user.firstname" 
+               class="form-control col-md-7">
     </div>
     <div class="form-group d-flex flex-row"  > 
         <label style="width: 100px">Surname</label> 
-        <input [disabled] = isDisabled() type=text placeholder="Surname" [(ngModel)]="user.lastname" class="form-control col-md-7">
+        <input [disabled] = isDisabled() 
+               type=text 
+               placeholder="Surname" 
+               [(ngModel)]="user.lastname" 
+               class="form-control col-md-7">
     </div>
     <div class="form-group d-flex flex-row"  >     
         <label style="width: 100px">Phone</label> 
-        <input [disabled] = isDisabled() [showMaskTyped]="true" prefix="+38" mask="(000)000-00-00" type="tel" [(ngModel)]="user.phone" class="form-control col-md-7">
+        <input [disabled] = isDisabled() 
+               [showMaskTyped]="true" 
+               prefix="+38" 
+               mask="(000)000-00-00" 
+               type="tel" 
+               [(ngModel)]="user.phone" 
+               class="form-control col-md-7">
     </div>
-    <div *ngIf="change_password" class="form-group d-flex flex-row" >
-            <label style="width: 100px">Password</label> 
-            <input type="password" placeholder="Enter password" class="form-control  col-md-4" (click)="helpBlock()">  
-            <small id="passwordHelpBlock" class="form-text text-muted col-md-4" *ngIf = "help">
-                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-            </small>      
-    </div>
-    <div *ngIf="change_password" class="form-group d-flex flex-row" >
-        <label style="width: 100px"></label> 
-            <input type="password" placeholder="Repeat password" class="form-control  col-md-4">
-    </div>
-
     <div class="d-flex bd-highlight mb-3 justify-content-center col-md-12">
         <button class="btn btn-primary btn-lg" (click)="editInfo()">Edit information</button>
-        <button class="btn btn-primary btn-lg" *ngIf="!isDisabled()" style="margin-left: 15px;" (click)="saveChanges()">Save changes</button>
+        <button class="btn btn-primary btn-lg" 
+                *ngIf="!isDisabled()" 
+                style="margin-left: 15px;"
+                (click)="saveChanges()">
+                Save changes
+        </button>
     </div>
 </section>
