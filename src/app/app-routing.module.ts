@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AdminManagementComponent} from './pages/admin-management/admin-management.component';
-import {AdminManagementModule} from './pages/admin-management/admin-management.module';
+import { AdminManagementComponent } from './pages/admin-management/admin-management.component';
+import { AdminManagementModule } from './pages/admin-management/admin-management.module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent},
   { path: 'admin', component: AdminManagementComponent},
+  { path: 'profile', component: ProfilePageComponent},
   
   { path: '',
     redirectTo: '/home',
