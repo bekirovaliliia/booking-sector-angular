@@ -19,7 +19,8 @@ import {PagesModule} from './pages/pages.module';
   declarations: [
     AppComponent,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [
     AppComponent,
   ]

@@ -28,6 +28,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
   ],
-  exports: [RouterModule]
+  exports: [
+    RouterModule
+  ]
 })
 export class AdminRoutingModule { }

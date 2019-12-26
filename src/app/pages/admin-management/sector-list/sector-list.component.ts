@@ -28,7 +28,6 @@ export class SectorListComponent implements OnInit {
   }
 
   changeSectorActivity(sector: Sector) {
-    console.log('i`m Alive')
     this.httpService.changeSectorActivity(sector).subscribe();
   }
 }

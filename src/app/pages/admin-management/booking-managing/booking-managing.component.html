@@ -1,3 +1,12 @@
+<nav class="text-center">
+  <ul class="pagination pagination-lg">
+    <li class="page-item" (click)="getNew()"><span class="page-link">New Bookings</span></li>
+    <li class="page-item" (click)="getApproved()"><span class="page-link" >Approved Bookings</span></li>
+    <li class="page-item" (click)="getDeclined()"><span class="page-link" >Declined Bookings</span></li>
+    <li class="page-item" (click)="getAll()"><span class="page-link" >History</span></li>
+  </ul>
+</nav>
+
 <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table table-striped">
   <thead class="thead-dark" [contentEditable]="false">
   <tr>
@@ -8,8 +17,8 @@
     <th></th>
   </tr>
   </thead>
-  <tbody *ngIf="this.bookings$?.length != 0"  [contentEditable]="false">
-  <tr *ngFor="let booking of this.bookings$">
+  <tbody *ngIf="this.tempBookings?.length != 0"  [contentEditable]="false">
+  <tr *ngFor="let booking of this.tempBookings">
     <td>{{booking.id}}</td>
     <td>{{booking.sectorId}}</td>
     <td>{{booking.bookingStart | date}}</td>
@@ -28,9 +37,9 @@
   </tr>
   </tbody>
 
-  <tbody *ngIf="this.bookings$?.length == 0">
-  <tr>
-    <td colspan="3" class="no-data-available">No data!</td>
+  <tbody *ngIf="this.tempBookings?.length == 0">
+  <tr class="text-center">
+    <td colspan="5" class="no-data-available">No data!</td>
   </tr>
   <tbody>
 
