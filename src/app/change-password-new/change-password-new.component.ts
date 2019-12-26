@@ -31,6 +31,12 @@ color:string = "primary";
   {
     this.visibilityForm = false;
     this.visibilityButton = true;
+    this.old= false;
+    this.check= false;
+    this.oldPassword = "";
+    this.newPassword = "";
+    this.newPasswordConfirm = "";
+    this.checked = false;
   }
   onStrengthChanged(strength: number) 
   {
