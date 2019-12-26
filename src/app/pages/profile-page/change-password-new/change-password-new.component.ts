@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { User } from '../shared/models/user-model';
-import {UserService} from '../core/services/user.service';
+import { User } from '../../../shared/models/user-model';
+import {UserService} from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-change-password-new',
@@ -31,6 +31,12 @@ color:string = "primary";
   {
     this.visibilityForm = false;
     this.visibilityButton = true;
+    this.old= false;
+    this.check= false;
+    this.oldPassword = "";
+    this.newPassword = "";
+    this.newPasswordConfirm = "";
+    this.checked = false;
   }
   onStrengthChanged(strength: number) 
   {
