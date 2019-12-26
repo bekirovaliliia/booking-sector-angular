@@ -35,6 +35,7 @@ import { UpdateDialogComponent } from './pages/admin-management/tournament/updat
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 
 @NgModule({
     imports: [
@@ -80,7 +81,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     DeleteDialogComponent,
     UpdateDialogComponent,
     FilterSectorsComponent,
-    FooterComponent
+    FooterComponent,
+    MarkerExplanationComponent
   ],
   exports: [
 
