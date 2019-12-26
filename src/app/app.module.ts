@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material';
+import {TextFieldModule} from '@angular/cdk/text-field';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -57,6 +58,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
         }),
         NgxDaterangepickerMd.forRoot(),
         MatDialogModule,
+        TextFieldModule,
         RouterModule,
         AppRoutingModule,
 
@@ -81,7 +83,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     HomePageComponent,
     DeleteDialogComponent,
     UpdateDialogComponent,
-    FilterSectorsComponent  
+    FilterSectorsComponent
   ],
   exports: [
 

@@ -11,7 +11,6 @@ declare  var  require: any;
 export class TournamentTableRowComponent implements OnInit {
   @Input() tournament: Tournament;
   @Input() headers: string[];
-  @Input() bookedTournaments: Booking;
   imgCancel = require('../../../../shared/images/cancel.png');
   imgEdit = require('../../../../shared/images/edit.png');
 
@@ -23,7 +22,6 @@ export class TournamentTableRowComponent implements OnInit {
   ngOnInit() {
   }
   select(id: number, action: string) {
-
     this.selected.emit({id,  action });
 
 

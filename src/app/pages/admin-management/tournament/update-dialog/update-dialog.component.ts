@@ -1,14 +1,17 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
   selector: 'app-update-dialog',
   templateUrl: './update-dialog.component.html',
   styleUrls: ['./update-dialog.component.sass']
 })
-export class UpdateDialogComponent implements OnInit {
+export class UpdateDialogComponent implements OnInit, ErrorStateMatcher {
   form: FormGroup;
+  dialogTitle: string;
+  isUpdated: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<UpdateDialogComponent>,
@@ -18,18 +21,23 @@ export class UpdateDialogComponent implements OnInit {
   getForm() {
     this.form = this.formBuilder.group(
       {
-        tourId: this.data ? this.data.tourId : '',
-        bookStart: this.data ? this.data.bookStart : '',
-        bookEnd: this.data ? this.data.bookEnd : '',
-        sectorId: this.data ? this.data.sectorId : '',
-      });
+        id: this.data ? this.data.id : '',
+        name: this.data ? this.data.name : '',
+        description: this.data ? this.data.description : '',
+        preparationTerm: this.data ? this.data.preparationTerm : '',
+
+  });
 
   }
   ngOnInit() {
     this.getForm();
-    console.log(this.data);
+    this.dialogTitle = this.data.title;
+    this.isUpdated = this.data.isUpdated;
   }
   submit(form): void {
-    this.dialogRef.close(`${form.value}`);
+    console.log(form.value);
+    this.dialogRef.close(form.value);
   }
+
+
 }
