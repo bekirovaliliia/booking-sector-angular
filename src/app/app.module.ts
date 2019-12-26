@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { UserProfileTextComponent } from './pages/profile-page/user-profile-text/user-profile-text.component';
 import { PhotoComponent } from './pages/profile-page/photo/photo.component';
 import { UserMenuComponent } from './pages/profile-page/user-menu/user-menu.component';
-import { SectorListComponent } from './sector-list/sector-list.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { ChangePasswordNewComponent } from './pages/profile-page/change-password-new/change-password-new.component';
@@ -18,7 +17,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatDialogRef} from '@angular/material';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -37,7 +36,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SignInComponent } from './pages/sing-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-
+import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 @NgModule({
     imports: [
         FormsModule,
@@ -60,6 +61,8 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
         MatDialogModule,
         RouterModule,
         AppRoutingModule,
+        ToastrModule.forRoot(),
+        CommonModule,
 
     ],
   declarations: [
@@ -67,7 +70,6 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     UserProfileTextComponent,
     UserProfileTextComponent,
     PhotoComponent,
-    SectorListComponent,
     ProfilePageComponent,
     UserMenuComponent,
     ChangePasswordNewComponent,
@@ -84,7 +86,8 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     FilterSectorsComponent,
     FooterComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    MarkerExplanationComponent
   ],
   exports: [
 
@@ -95,6 +98,6 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent]
+  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
 })
 export class AppModule { }
