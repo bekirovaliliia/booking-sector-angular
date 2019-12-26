@@ -1,39 +1,37 @@
-import {ChangeDetectorRef, Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
 import {Tournament} from '../../../../shared/models/tournament';
 import {TournamentService} from '../../../../core/services/tournament.service';
 import {Subject} from 'rxjs';
-import {Booking} from '../../../../shared/models/booking.model';
-import {BookingService} from '../../../../core/services/booking.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import {filter} from 'rxjs/operators';
 import {UpdateDialogComponent} from '../update-dialog/update-dialog.component';
 
+declare  var  require: any;
 @Component({
   selector: 'app-tournament-table',
   templateUrl: './tournament-table.component.html',
   styleUrls: ['./tournament-table.component.sass']
 })
 export class TournamentTableComponent implements OnInit, OnDestroy {
+  imgAdd = require('../../../../shared/images/add.png');
   @Input() searchModel: string;
   @Input() tournaments: Tournament[];
-  @Input() bookedTournaments: Booking[];
+  // @Input() bookedTournaments: Booking[];
   tournament: Tournament;
-  booking: Booking;
-
-
+  // booking: Booking;
   dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
   selectedRow: number;
-
+  updateStr = 'Updating tournament';
+  addString = 'New tournament';
   tourHeaders: string[];
-  bookHeaders: string[];
-
+  // bookHeaders: string[];
   deleteDialogRef: MatDialogRef<DeleteDialogComponent>;
-  updateDialogRef: MatDialogRef<UpdateDialogComponent>;
+  addUpdateDialogRef: MatDialogRef<UpdateDialogComponent>;
 
   constructor( private tournamentService: TournamentService,
-               private bookingService: BookingService,
+               //     private bookingService: BookingService,
                private ref: ChangeDetectorRef,
                private dialog: MatDialog
   ) { }
@@ -48,25 +46,25 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
     };
 
     this.getTournaments();
-    this.getBookings();
+//    this.getBookings();
   }
 
   getTournaments() {
     this.tournamentService.getTournaments().subscribe(res => {
       this.tournaments = res;
-      console.log(this.tournaments);
       this.tourHeaders = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
-      console.log(this.tourHeaders);
+      this.dtTrigger.next();
     });
   }
+  /*
   getBookings() {
     this.bookingService.getBookedTournaments().subscribe(res => {
       this.bookedTournaments = res;
       this.bookHeaders = (this.bookedTournaments && this.bookedTournaments.length > 0) ? Object.keys(this.bookedTournaments[0]) : [];
-      this.dtTrigger.next();
+
     });
   }
-
+*/
   changeItem($event) {
     if ($event.action === 'Delete') {
       this.openDeleteDialog();
@@ -74,84 +72,107 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
         .afterClosed()
         .pipe(filter(name => name))
         .subscribe(name => {
-            // this.deleteItem($event.id)
+            this.deleteItem($event.id);
           }
         );
-    }
-    if ($event.action === 'Update') {
-      this.bookingService.getBookingById($event.id).subscribe(res => {
-        this.booking = res;
-        this.openUpdateDialog(this.booking);
-        this.updateDialogRef
+    } else if ($event.action === 'Update') {
+
+      this.tournamentService.getTournamentById($event.id).subscribe(res => {
+        this.tournament = res;
+        this.openAddOrUpdateDialog(this.tournament, this.updateStr, true);
+        this.addUpdateDialogRef
           .afterClosed()
-          .pipe(filter(name => name))
-          .subscribe(name => {
-              this.updateItem(this.booking);
-            }
-          );
+          .pipe(
+            filter(tour => tour)
+          )
+          .subscribe(tour => {
+            console.log(tour);
+            this.updateItem(tour);
+          });
       });
+    } else {
+      const newTournament = new Tournament();
+      this.openAddOrUpdateDialog(newTournament, this.addString, false);
+      this.addUpdateDialogRef
+        .afterClosed()
+        .pipe(
+          filter(tour => tour)
+        )
+        .subscribe(tour => {
+          console.log(tour);
+          this.addItem(tour);
+        });
     }
   }
 
   deleteItem(id) {
     console.log('del');
-    this.bookingService.deleteBooking(id).subscribe(
+    this.tournamentService.deleteTournament(id).subscribe(
       data => {
-        this.getBookings();
+        this.getTournaments();
       }
     );
-    for (let i = 0; i < this.bookedTournaments.length; ++i) {
-      if (this.bookedTournaments[i].id === id) {
-        this.bookedTournaments.splice(i, 1 );
+    for (let i = 0; i < this.tournaments.length; ++i) {
+      if (this.tournaments[i].id === id) {
+        this.tournaments.splice(i, 1 );
       }
     }
   }
 
-  updateItem(booking) {
+  updateItem(tour: Tournament) {
     console.log('upd');
-    this.bookingService.updateBooking(booking).subscribe(
+    this.tournamentService.updateTournament(tour).subscribe(
       data => {
-        this.getBookings();
+        this.getTournaments();
+      }
+    );
+  }
+  addItem(tour: Tournament) {
+    tour.id = 0;
+    console.log('upd');
+    this.tournamentService.addTournament(tour).subscribe(
+      data => {
+        this.getTournaments();
       }
     );
   }
 
   openDeleteDialog() {
     this.deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
-
       hasBackdrop: false,
       width: '35%',
     });
     return this.deleteDialogRef;
   }
 
-  openUpdateDialog(tour: Booking) {
-    console.log(tour);
-    this.updateDialogRef = this.dialog.open(UpdateDialogComponent, {
+  openAddOrUpdateDialog(tour: Tournament, titleStr: string, isupdated: boolean) {
+    this.addUpdateDialogRef = this.dialog.open(UpdateDialogComponent, {
       hasBackdrop: false,
       width: '35%',
       data: {
-        tourId: tour ? tour.tournamentId : '',
-        bookStart: tour ? tour.bookingStart : '',
-        bookEnd: tour ? tour.bookingEnd : '',
-        sectorId: tour ? tour.sectorId : '',
-
+        isUpdated: isupdated,
+        title: titleStr,
+        id: tour ? tour.id : '',
+        name: tour ? tour.name : '',
+        description: tour ? tour.description : '',
+        preparationTerm: tour ? tour.preparationTerm : '',
       },
 
     });
-    console.log(tour);
-    return this.updateDialogRef;
+    return this.addUpdateDialogRef;
   }
 
   getSelectedRow(item): void {
     this.selectedRow = item;
   }
 
-  isSelected(item): boolean {
+  isSelected(item: number): boolean {
     if (!this.selectedRow) {
       return false;
     }
+
     return this.selectedRow ===  item ? true : false;
+
   }
 
   ngOnDestroy(): void {

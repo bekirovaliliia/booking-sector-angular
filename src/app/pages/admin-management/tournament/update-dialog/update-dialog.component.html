@@ -1,18 +1,19 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)" >
 <mat-dialog-content align="center">
-  <h5 mat-dialog-title>Updating item</h5>
+  <h5 mat-dialog-title>{{dialogTitle}}</h5>
 
-  <mat-form-field>
-    <input matInput formControlName="tourId" placeholder="ITournament id">
+  <mat-form-field *ngIf="isUpdated">
+    <input matInput readonly formControlName="id" placeholder="Tournament id" >
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="bookStart" placeholder="Date booking start">
+    <input matInput formControlName="name" placeholder="Tournament name">
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="bookEnd" placeholder="Date booking end">
+    <textarea matInput formControlName="description" placeholder="Tournament Description">
+    </textarea>
   </mat-form-field>
   <mat-form-field>
-    <input matInput formControlName="sectorId" placeholder="SectorId">
+    <input matInput formControlName="preparationTerm" type = "number" placeholder="Preparation Term">
   </mat-form-field>
 </mat-dialog-content>
 

@@ -17,7 +17,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatDialogModule, MatDialogRef} from '@angular/material';
+
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -57,6 +59,7 @@ import { CommonModule } from '@angular/common';
         }),
         NgxDaterangepickerMd.forRoot(),
         MatDialogModule,
+        TextFieldModule,
         RouterModule,
         AppRoutingModule,
         ToastrModule.forRoot(),
