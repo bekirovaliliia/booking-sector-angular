@@ -2,12 +2,18 @@
 <br/>
 <h1>Tournaments</h1>
 <hr/>
-
-
+<!--
+  <nav class="text-center">
+    <ul class="pagination pagination-lg">
+      <li class="page-item" ><span class="page-link">Actual tournaments</span></li>
+      <li class="page-item"> <span class="page-link" >History</span></li>
+    </ul>
+  </nav>
+-->
 <div>
-  <!--
+
   <app-filter [(searchModel)]="searchModel"></app-filter>
-  -->
-  <app-tournament-table [searchModel]="searchModel" ></app-tournament-table>
+
+  <app-tournament-table></app-tournament-table>
 </div>
 </div>

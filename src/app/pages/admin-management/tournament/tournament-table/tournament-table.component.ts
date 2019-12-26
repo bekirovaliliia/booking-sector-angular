@@ -76,7 +76,6 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
           }
         );
     } else if ($event.action === 'Update') {
-
       this.tournamentService.getTournamentById($event.id).subscribe(res => {
         this.tournament = res;
         this.openAddOrUpdateDialog(this.tournament, this.updateStr, true);
@@ -112,11 +111,6 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
         this.getTournaments();
       }
     );
-    for (let i = 0; i < this.tournaments.length; ++i) {
-      if (this.tournaments[i].id === id) {
-        this.tournaments.splice(i, 1 );
-      }
-    }
   }
 
   updateItem(tour: Tournament) {
