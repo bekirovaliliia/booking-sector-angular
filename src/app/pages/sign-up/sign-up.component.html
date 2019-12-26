@@ -6,17 +6,21 @@
       </div>
       <form>
         <div class="form-group"><label>Number</label>
-          <input class="form-control" type="tel" id="phone"
-                                                                        [showMaskTyped]="true"
-                                                                        prefix="+38"
-                                                                        mask="(000)000-00-00"
+          <input class="form-control" type="tel" id="phone" [showMaskTyped]="true"
+                                                            prefix="+38"
+                                                            mask="(000)000-00-00"
+
+          >
+        </div>
+        <div class="form-group">
+          <label >Email</label><input class="form-control" type="email" id="email"
+
         ></div>
-        <div class="form-group"><label for="phone">Email</label><input class="form-control" type="tel" id="email" placeholder="youremail@gmail.com"></div>
-        <div class="form-group"><label for="phone">Last Name</label><input class="form-control" type="tel" id="lastName" ></div>
-        <div class="form-group"><label for="phone">First Name</label><input class="form-control" type="tel" id="firstName" ></div>
-        <div class="form-group"><label for="password">Password</label><input class="form-control" type="password" id="password"></div>
-        <div class="form-group"><label for="password">Repeat the password</label><input class="form-control" type="password" id="passwordRepeat"></div>
-        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Sign up</button></div>
+        <div class="form-group"><label >Last Name</label><input class="form-control" type="text" id="lastName" ></div>
+        <div class="form-group"><label >First Name</label><input class="form-control" type="text" id="firstName" ></div>
+        <div class="form-group"><label >Password</label><input class="form-control" type="password" id="password"></div>
+        <div class="form-group"><label >Repeat the password</label><input class="form-control" type="password" id="passwordRepeat"></div>
+        <div class="form-group"><button   (click)="signUp()" class="btn btn-primary btn-block" type="submit">Sign up</button></div>
       </form>
     </div>
   </section>

@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import {UserService} from '../../core/services/user.service';
+import {User} from '../../shared/models/user-model';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  providers: [UserService]
 })
 export class SignUpComponent implements OnInit {
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
+user: User;
 
 
   constructor(
-    private formBuilder: FormBuilder
-  ) { }
+    private userService: UserService
+  ) {  }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
+
+  }
+  signUp() {
+    this.user.id = 1;
+    //this.userService.insertUser(this.user).subscribe();
+
+    alert('tut3');
   }
 
-  get f() { return this.registerForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-    }
 
 }

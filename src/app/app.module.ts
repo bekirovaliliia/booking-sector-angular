@@ -35,8 +35,8 @@ import { UpdateDialogComponent } from './pages/admin-management/tournament/updat
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import {SignInComponent} from './pages/sing-in/sign-in.component';
-import {SignUpComponent} from './pages/sign-up/sign-up.component';
+import { SignInComponent } from './pages/sing-in/sign-in.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 @NgModule({
     imports: [
