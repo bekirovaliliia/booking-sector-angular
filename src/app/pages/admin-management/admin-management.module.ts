@@ -17,11 +17,17 @@ import { FilterPipe } from '../../shared/pipes/filter.pipe';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {BookingTableComponent} from './booking-managing/booking-table/booking-table.component';
-import {BookingTableRowComponent} from './booking-managing/boooking-table-row/booking-table-row.component';
+import {TableNavbarComponent} from './booking-managing/table-navbar/table-navbar.component';
+import {BookingTableRowComponent} from './booking-managing/booking-table-row/booking-table-row.component';
+import {DeleteDialogComponent} from './tournament/delete-dialog/delete-dialog.component';
+import {UpdateDialogComponent} from './tournament/update-dialog/update-dialog.component';
 
 
 @NgModule({
   declarations: [
+    UpdateDialogComponent,
+    DeleteDialogComponent,
+    TableNavbarComponent,
     AdminSidebarComponent,
     BookingManagingComponent,
     SettingComponent,

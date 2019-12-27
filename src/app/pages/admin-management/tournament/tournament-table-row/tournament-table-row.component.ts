@@ -12,6 +12,7 @@ export class TournamentTableRowComponent implements OnInit {
   @Input() tournament: Tournament;
   @Input() headers: string[];
   @Input() bookedTournaments: Booking;
+
   imgCancel = require('../../../../shared/images/cancel.png');
   imgEdit = require('../../../../shared/images/edit.png');
 

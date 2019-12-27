@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { SharedModule } from './shared/shared.module';
-import {PagesModule} from './pages/pages.module';
 import {DatePipe} from '@angular/common';
 import {DeleteDialogComponent} from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
 import {UpdateDialogComponent} from './pages/admin-management/tournament/update-dialog/update-dialog.component';
+import {PagesModule} from './pages/pages.module';
 
 @NgModule({
   imports: [
@@ -28,6 +28,8 @@ import {UpdateDialogComponent} from './pages/admin-management/tournament/update-
   ],
   bootstrap: [
     AppComponent,
+  ],
+  exports: [
   ],
   entryComponents: [DeleteDialogComponent, UpdateDialogComponent]
 })

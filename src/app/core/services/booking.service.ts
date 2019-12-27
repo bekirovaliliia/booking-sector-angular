@@ -15,7 +15,6 @@ export class BookingService {
   getBookings() {
     return this.http.get<Booking[]>(this.bookingsUrl);
   }
-
   updateBooking(booking: Booking): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -23,7 +22,7 @@ export class BookingService {
     return this.http.put(`${this.bookingsUrl}/${booking.id}`, booking, httpOptions);
   }
   getBookedTournaments(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.bookingsUrl}/tournaments`);
+    return this.http.get<Booking[]>(`${environment.apiUrl}/tournaments`);
   }
 
   getBookingById(id: number): Observable<Booking> {
