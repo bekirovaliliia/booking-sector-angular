@@ -14,11 +14,15 @@ import { FilterComponent } from './tournament/filter/filter.component';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 
 import {MatDialogModule} from '@angular/material/dialog';
+
 import {SidebarModule} from "ng-sidebar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatFormFieldModule} from "@angular/material/form-field";
 
+import { SectorTableComponent } from './sector/sector-table/sector-table.component';
+import { SectorComponent } from './sector/sector.component';
+import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
 
 
 @NgModule({
@@ -32,6 +36,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     TournamentTableRowComponent,
     FilterComponent,
     FilterPipe,
+    SectorTableComponent,
+    SectorComponent,
+    SectorTableRowComponent,
 
 
   ],
