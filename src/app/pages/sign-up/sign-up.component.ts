@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 user: UserEmail;
+userData: User;
 number = '';
 email = '';
 lastName = '';
@@ -29,16 +30,6 @@ passwordRepeat = '';
   }
 
   ngOnInit() {}
-
-  checkNumber() {
-    this.userService.getUserByNumber(this.number).subscribe(
-      res => {
-        this.toastr.error('A user with this number already exists', 'Oops :(');
-        this.number = '';
-      },
-    );
-  }
-
 
   signUp() {
    this.user.lastname = this.lastName;
@@ -58,6 +49,16 @@ passwordRepeat = '';
       });
 
   }
+
+  checkNumber() {
+    if(this.number.length > 9){
+      this.userService.getUserByNumber(this.number).subscribe(res => {
+        this.toastr.error('A user with this number already exists!', 'Error!');
+        this.number = '';
+    });
+  }
+}
+
 
 
 }

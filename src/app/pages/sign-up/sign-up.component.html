@@ -6,9 +6,12 @@
       </div>
       <form>
         <div class="form-group"><label>Number</label>
-          <input class="form-control"  (change)="checkNumber()" type="tel" [(ngModel)] = "number" name="numberInput" id="phone" [showMaskTyped]="true"
-                                                            prefix="+38"
-                                                            mask="(000)000-00-00"
+          <input class="form-control"  (ngModelChange)="checkNumber()"
+                 type="tel" [(ngModel)] = "number"
+                 name="numberInput"
+                 id="phone" [showMaskTyped]="true"
+                 prefix="+38"
+                 mask="(000)000-00-00"
 
           >
         </div>
