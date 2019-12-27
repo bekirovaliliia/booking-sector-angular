@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 declare  var  require: any;
 @Component({
   selector: 'app-filter',
@@ -8,17 +9,31 @@ declare  var  require: any;
 export class FilterComponent implements OnInit {
 
   @Input() searchModel;
+  form: FormGroup;
 
-  imgname = require('../../../../shared/images/search.png');
-  @Output() searchModelChange: EventEmitter<any> = new EventEmitter();
-
-  constructor() { }
+  imgSearch = require('../../../../shared/images/search.png');
+  @Output() groupFilters: EventEmitter<any> = new EventEmitter<any>();
+  searchText = '';
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.buildForm();
   }
 
-  updateSearchModel(value) {
-    this.searchModel = value;
-    this.searchModelChange.emit(this.searchModel);
+  buildForm(): void {
+    this.form = this.fb.group({
+      name: new FormControl(''),
+      preparationTerm: new FormControl(''),
+
+    });
   }
+  search(filters: any): void {
+    Object.keys(filters).forEach(key => filters[key] === '' ? delete filters[key] : key);
+    this.groupFilters.emit(filters);
+    console.log(filters);
+  }
+
+
+
+
 }

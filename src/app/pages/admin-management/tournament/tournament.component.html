@@ -1,13 +1,16 @@
-<div class="container">
-<br/>
-<h1>Tournaments</h1>
-<hr/>
+<mat-sidenav-container class="sidebarContainer">
+  <mat-sidenav #sidenav mode="side" class="sidebar" [(opened)]="opened" position="end">
+    <app-filter (groupFilters)="filters = $event"
+    ></app-filter>
+  </mat-sidenav>
 
-
-<div>
-  <!--
-  <app-filter [(searchModel)]="searchModel"></app-filter>
-  -->
-  <app-tournament-table [searchModel]="searchModel" ></app-tournament-table>
-</div>
-</div>
+  <mat-sidenav-content >
+    <div class = "d-flex p-1 justify-content-center ">
+      <h1 >Tournaments</h1>
+      <button mat-button class = "p-2 ml-auto " (click)="sidenav.toggle()">Advanced filter</button>
+    </div>
+    <hr/>
+        <app-tournament-table [groupFilters]="filters"
+                              [searchByKeyword]="searchText" > </app-tournament-table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

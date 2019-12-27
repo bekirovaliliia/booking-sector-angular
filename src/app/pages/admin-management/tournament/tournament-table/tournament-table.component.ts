@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit, OnDestroy, Output, EventEmitter, OnChanges} from '@angular/core';
 import {Tournament} from '../../../../shared/models/tournament';
 import {TournamentService} from '../../../../core/services/tournament.service';
 import {Subject} from 'rxjs';
@@ -13,10 +13,12 @@ declare  var  require: any;
   templateUrl: './tournament-table.component.html',
   styleUrls: ['./tournament-table.component.sass']
 })
-export class TournamentTableComponent implements OnInit, OnDestroy {
+export class TournamentTableComponent implements OnInit, OnDestroy, OnChanges {
   imgAdd = require('../../../../shared/images/add.png');
-  @Input() searchModel: string;
+  @Input() groupFilters: object;
+  @Input() searchByKeyword: string;
   @Input() tournaments: Tournament[];
+  filteredTours : Tournament[];
   // @Input() bookedTournaments: Booking[];
   tournament: Tournament;
   // booking: Booking;
@@ -45,13 +47,15 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
       select: true,
     };
 
-    this.getTournaments();
+   this.getTournaments();
 //    this.getBookings();
   }
 
   getTournaments() {
     this.tournamentService.getTournaments().subscribe(res => {
       this.tournaments = res;
+
+      this.filteredTours = res;
       this.tourHeaders = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
       this.dtTrigger.next();
     });
@@ -76,7 +80,6 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
           }
         );
     } else if ($event.action === 'Update') {
-
       this.tournamentService.getTournamentById($event.id).subscribe(res => {
         this.tournament = res;
         this.openAddOrUpdateDialog(this.tournament, this.updateStr, true);
@@ -112,11 +115,6 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
         this.getTournaments();
       }
     );
-    for (let i = 0; i < this.tournaments.length; ++i) {
-      if (this.tournaments[i].id === id) {
-        this.tournaments.splice(i, 1 );
-      }
-    }
   }
 
   updateItem(tour: Tournament) {
@@ -179,4 +177,27 @@ export class TournamentTableComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
+  ngOnChanges(): void {
+    if (this.groupFilters) {this.filterTable(this.groupFilters, this.tournaments); }
+  }
+  filterTable(filters: any, users: any): void {
+    this.filteredTours = this.tournaments;
+    const keys = Object.keys(filters);
+    const filterUser = user => {
+      let result = keys.map(key => {
+
+          if(user[key]) {
+            return String(user[key]).toLowerCase().startsWith(String(filters[key]).toLowerCase())
+          } else {
+            return false;
+          }
+
+      });
+
+      result = result.filter(it => it !== undefined);
+
+      return result.reduce((acc, cur: any) => { return acc & cur }, 1)
+    }
+    this.filteredTours = this.tournaments.filter(filterUser);
+  }
 }

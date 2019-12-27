@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , enableProdMode} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +41,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
 @NgModule({
     imports: [
         FormsModule,
@@ -66,7 +69,7 @@ import { CommonModule } from '@angular/common';
         AppRoutingModule,
         ToastrModule.forRoot(),
         CommonModule,
-
+     
     ],
   declarations: [
     AppComponent,
@@ -104,3 +107,5 @@ import { CommonModule } from '@angular/common';
   entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
 })
 export class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

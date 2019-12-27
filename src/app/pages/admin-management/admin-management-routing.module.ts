@@ -1,3 +1,4 @@
+import { SectorComponent } from './sector/sector.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
@@ -19,8 +20,9 @@ const routes: Routes = [
       {
         path: 'managing', component: BookingManagingComponent
       },
-
-
+      {
+        path: 'sectors', component: SectorComponent
+      }
     ]
   }
 ];
