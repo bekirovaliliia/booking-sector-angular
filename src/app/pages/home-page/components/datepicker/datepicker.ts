@@ -25,7 +25,7 @@ export class CustomRangesComponent {
       this.selected = {startDate: moment().subtract(1, 'days'), endDate: moment().subtract(1, 'days')};  
     }
 
-    updateSelected(range){
+    datesUpdated(range){
       console.log('[rangeClicked] range is : ', range);
     }
 
