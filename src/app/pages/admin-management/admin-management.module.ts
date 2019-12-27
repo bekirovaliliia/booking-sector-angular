@@ -14,6 +14,9 @@ import { FilterComponent } from './tournament/filter/filter.component';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 
 import {MatDialogModule} from '@angular/material/dialog';
+import { SectorTableComponent } from './sector/sector-table/sector-table.component';
+import { SectorComponent } from './sector/sector.component';
+import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
 
 
 
@@ -28,6 +31,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     TournamentTableRowComponent,
     FilterComponent,
     FilterPipe,
+    SectorTableComponent,
+    SectorComponent,
+    SectorTableRowComponent,
 
 
   ],
