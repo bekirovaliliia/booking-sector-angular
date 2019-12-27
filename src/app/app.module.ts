@@ -41,6 +41,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+
 @NgModule({
     imports: [
         FormsModule,

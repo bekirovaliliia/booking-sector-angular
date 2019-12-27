@@ -23,14 +23,18 @@ export class CustomRangesComponent {
       this.alwaysShowCalendars = true;
       this.keepCalendarOpeningWithRange = true;
       this.showRangeLabelOnInput = true;
-      this.selected = {startDate: now, endDate: now};  
     }
 
     datesUpdated(range){
-      this.dateService.changeDateRange(range);
+      if(range != null){
+        this.dateService.changeDateRange(range);
+      }
+      else{
+        this.dateService.showAllSectors();
+      }
     }
 
     rangeClicked(range) {
-      console.log('[rangeClicked] range is : ', range);
+      //console.log('[rangeClicked] range is : ', range);
     }
 }

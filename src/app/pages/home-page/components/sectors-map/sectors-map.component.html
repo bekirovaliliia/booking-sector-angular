@@ -1,6 +1,5 @@
 <div class="row justify-content-center">
     <div class="col s6">
-        <button type="submit" (click)="filterByDate()">Check</button>
         <agm-map [latitude]='latitude' [longitude]='longitude' [zoom]="14" [mapTypeId]='mapType' [scrollwheel]='null'>
             <agm-marker *ngFor="let marker of markers"
             (markerClick)="clickedMarker(infoWindow)"

@@ -11,7 +11,7 @@ const now = new Date();
 })
 export class SectorsMapComponent implements OnInit {
 
-  minDate = { year: now.getFullYear(), month: now.getMonth() + 1 , day: now.getDate() };
+  
   latitude = 49.886416;
   longitude = 23.493211;
   mapType = 'satellite';
@@ -23,16 +23,12 @@ export class SectorsMapComponent implements OnInit {
     ) { }
 
   today(): string{
-    return `${now.getFullYear()}-${now.getMonth()}-${now.getDay()}`;
+    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
   }
 
   sectorNumber: any;
   dateRange: any;
   previous: any;
-
-  convertDate(dateRange){
-    return `${dateRange.getFullYear()}-${dateRange.getMonth()}-${dateRange.getDay()}`;
-  }
 
   reverseMarker(marker, infowindow){
     this.dataService.changeNumber(marker.number);
@@ -54,16 +50,10 @@ export class SectorsMapComponent implements OnInit {
       })
   }
 
-
   ngOnInit() {
     this.dataService.currentSectorNumber.subscribe(number => this.sectorNumber = number);
     this.dataService.currentDateRange.subscribe(range => this.dateRange = range);
-    this.httpService.get(`https://localhost:44393/api/sectors/free?fromDate=${this.dateRange.startDate}&toDate=${this.dateRange.endDate}`)
-      .subscribe(
-        data => {
-        this.markers = data as object [];
-      }
-    );
+    this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
+    this.dataService.showAllSectors(); 
   }
-
 }

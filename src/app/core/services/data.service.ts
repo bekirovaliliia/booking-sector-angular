@@ -1,21 +1,39 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
-const now: Date = new Date();
+const now = new Date();
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private sectorNumber = new BehaviorSubject<number>(10);
+  private sectorNumber = new BehaviorSubject<number>(null);
   currentSectorNumber = this.sectorNumber.asObservable();
 
-  private dateRange = new BehaviorSubject<any>({startDate: this.getTodayDate(), endDate: this.getTodayDate()});
+  private dateRange = new BehaviorSubject<any>({startDate: now.toString(), endDate: now.toString()});
   currentDateRange = this.dateRange.asObservable();
 
-  getTodayDate(){
-    return `${now.getFullYear()}-${now.getMonth()}-${now.getDay()}`;
+  private markers = new BehaviorSubject<object []>(null);
+  currentMarkers = this.markers.asObservable();
+
+  constructor(private httpService: HttpClient) { }
+
+  apiSectorsUrl: string = "https://localhost:44393/api/sectors";
+
+  showAllSectors(){
+    this.httpService.get(this.apiSectorsUrl)
+    .subscribe(
+      data => {
+        this.currentMarkers = data as Observable<object []>;
+        this.changeMarkers(this.currentMarkers);
+      }
+    ); 
+  }
+
+  changeMarkers(markers){
+    this.markers.next(markers);
   }
 
   changeNumber(number: number){
@@ -23,8 +41,16 @@ export class DataService {
   }
 
   changeDateRange(dateRange){
-    this.dateRange.next(dateRange);
+    if(dateRange.startDate != null || dateRange.endSate != null){
+      this.dateRange.next(dateRange);
+      this.httpService.get(`${this.apiSectorsUrl}/free?fromDate=${dateRange.startDate.format('YYYY MM DD')}&toDate=${dateRange.endDate.format('YYYY MM DD')}`)
+        .subscribe(
+          data => {
+          this.changeMarkers(data);
+        })
+    }
+    else{
+      this.showAllSectors();
+    }
   }
-
-  constructor() { }
 }

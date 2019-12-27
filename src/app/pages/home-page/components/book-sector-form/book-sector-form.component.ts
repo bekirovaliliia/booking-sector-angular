@@ -15,11 +15,15 @@ export class BookSectorFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private dataService: DataService) { }
 
-  ngOnInit() {
-    this.bookingSectorForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required]
-    });
-    this.dataService.currentSectorNumber.subscribe(number=>this.sectorNumber = number);
-  }
+    clearSectorNumbers(){
+      this.sectorNumber = null;
+    }
+
+    ngOnInit() {
+      this.bookingSectorForm = this.formBuilder.group({
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required]
+      });
+      this.dataService.currentSectorNumber.subscribe(number=>this.sectorNumber = number);
+    }
 }
