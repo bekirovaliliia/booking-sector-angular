@@ -1,5 +1,6 @@
 
-<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table">
+<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+       class ="col-md-6" class="row-border hover" class ="table">
   <thead class="thead-dark" >
   <tr>
     <th>
@@ -24,8 +25,8 @@
     </th>
   </tr>
   </thead>
-  <tbody *ngIf="this.tournaments?.length > 0" >
-  <tr *ngFor="let tournament of this.tournaments; let i = index "
+  <tbody *ngIf="this.filteredTours?.length > 0" >
+  <tr *ngFor="let tournament of this.filteredTours | filter: searchByKeyword: 'name'; let i = index"
       (selected)="changeItem($event)"
       (dblclick)="getSelectedRow(i)" (click)="getSelectedRow(i)" (selected)="getSelectedRow(i)" [class.active]="isSelected(i)"
       app-tournament-table-row
@@ -34,9 +35,9 @@
   </tr>
   </tbody>
 
-  <tbody *ngIf="this.tournaments?.length == 0">
+  <tbody *ngIf="this.filteredTours?.length == 0">
   <tr>
-    <td colspan="3" class="no-data-available">No data!</td>
+    <td colspan="5" class="justify-content-center" class="no-data-available" >No matching records found!</td>
   </tr>
   <tbody>
 
