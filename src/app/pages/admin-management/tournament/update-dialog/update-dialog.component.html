@@ -5,15 +5,15 @@
   <mat-form-field *ngIf="isUpdated">
     <input matInput readonly formControlName="id" placeholder="Tournament id" >
   </mat-form-field>
-  <mat-form-field>
-    <input matInput formControlName="name" placeholder="Tournament name">
+  <mat-form-field >
+    <input matInput required formControlName="name" placeholder="Tournament name">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field >
     <textarea matInput formControlName="description" placeholder="Tournament Description">
     </textarea>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput formControlName="preparationTerm" type = "number" placeholder="Preparation Term">
+  <mat-form-field >
+    <input matInput  required formControlName="preparationTerm" type = "number" placeholder="Preparation Term">
   </mat-form-field>
 </mat-dialog-content>
 

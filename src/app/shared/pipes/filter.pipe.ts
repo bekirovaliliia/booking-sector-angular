@@ -5,8 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class FilterPipe implements PipeTransform {
+  transform(items: any[], value: string, prop: string): any[] {
+    if (!items) { return []; }
+    if (!value) { return items; }
 
-  transform(objects: any[], filterText: string): any {
-    return objects ? objects.filter(item => item.name.search(new RegExp(filterText, 'i')) > -1) : [];
+    return items.filter(singleItem =>
+      singleItem[prop].toLowerCase().startsWith(value.toLowerCase())
+    );
+
   }
 }

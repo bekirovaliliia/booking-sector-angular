@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tournament.component.sass']
 })
 export class TournamentComponent implements OnInit {
-  searchModel: string;
+  searchText: string;
+  opened: boolean;
+
+
   constructor() { }
+
+
 
   ngOnInit() {
   }

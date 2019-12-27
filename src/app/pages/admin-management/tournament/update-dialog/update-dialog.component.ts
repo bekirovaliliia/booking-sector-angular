@@ -25,7 +25,7 @@ export class UpdateDialogComponent implements OnInit {
         description: this.data ? this.data.description : '',
         preparationTerm: this.data ? this.data.preparationTerm : '',
 
-  });
+      });
 
   }
   ngOnInit() {
@@ -35,7 +35,16 @@ export class UpdateDialogComponent implements OnInit {
   }
   submit(form): void {
     console.log(form.value);
-    this.dialogRef.close(form.value);
+    if (form.value.name === null ) {
+      alert('Enter name of tournament.');
+      return;
+    }
+    if (form.value.preparationTerm === null ) {
+      alert('Enter preparation  term for tournament.');
+      return;
+    } else {
+      this.dialogRef.close(form.value);
+    }
   }
 
 
