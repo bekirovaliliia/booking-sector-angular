@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../core/services/user.service';
 import {User} from '../../shared/models/user-model';
+import {UserEmail} from "../../shared/models/user-email-model";
+import {ToastrService} from "ngx-toastr";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,30 +12,53 @@ import {User} from '../../shared/models/user-model';
   providers: [UserService]
 })
 export class SignUpComponent implements OnInit {
-user: User;
-number: string;
-email: string;
-lastName: string;
-
-
+user: UserEmail;
+userData: User;
+number = '';
+email = '';
+lastName = '';
+firstName = '';
+password = '';
+passwordRepeat = '';
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService,
+    public router: Router
   ) {
-    this.user = new User();
+    this.user = new UserEmail();
   }
 
   ngOnInit() {}
 
   signUp() {
-    this.user.firstname = 'testFOOT';
-    this.user.lastname = 'testFOOT';
-    this.user.phone = '380111111111';
-    this.user.id = 100;
+   this.user.lastname = this.lastName;
+    this.user.firstname = this.firstName;
+    this.user.email = this.email;
+    this.user.phone = this.number;
+    this.user.password = this.password;
 
-    this.userService.insertUser(this.user).subscribe();
+
+    this.userService.insertUser(this.user).subscribe(
+      res => {
+        this.toastr.success('Your registration was successful! Please check your email.', 'Congratulations!');
+        this.router.navigate(['sign-in']);
+      },
+      err => {
+        this.toastr.error('Your registration failed!', 'Oops :(');
+      });
 
   }
+
+  checkNumber() {
+    if(this.number.length > 9){
+      this.userService.getUserByNumber(this.number).subscribe(res => {
+        this.toastr.error('A user with this number already exists!', 'Error!');
+        this.number = '';
+    });
+  }
+}
+
 
 
 }
