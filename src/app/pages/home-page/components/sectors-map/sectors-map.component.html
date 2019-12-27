@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center" id="map">
     <div class="col s6">
         <agm-map [latitude]='latitude' [longitude]='longitude' [zoom]="14" [mapTypeId]='mapType' [scrollwheel]='null'>
             <agm-marker *ngFor="let marker of markers"

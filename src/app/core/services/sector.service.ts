@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Sector } from '../../shared/models/sector-model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,6 @@ import { map } from 'rxjs/operators';
 export class SectorService {
 
   constructor(private http: HttpClient) {}
-  public urlAddress: string = environment.urlAddress;
 
   getSectors(): Observable<Sector[]> {
     return this.http.get<Sector[]>('https://localhost:44393/api/sectors')
