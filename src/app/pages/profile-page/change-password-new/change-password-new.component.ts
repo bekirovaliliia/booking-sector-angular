@@ -51,7 +51,7 @@ showPasswordSaved() {
         this.user.password = this.newPassword;
         this.old = false;
         this.checked = false;
-        this.userService.updateUser(this.user).subscribe();
+        this.userService.updateUserPassword(this.user).subscribe();
         this.newPassword = "";
         this.newPasswordConfirm = "";
         this.showPasswordSaved();
