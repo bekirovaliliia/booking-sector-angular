@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data.service';
 
 @Component({
-  selector: 'app-book-sector-form',
-  templateUrl: './book-sector-form.component.html',
-  styleUrls: ['./book-sector-form.component.css']
+  selector: 'app-booking-sector-form',
+  templateUrl: './booking-sector-form.component.html',
+  styleUrls: ['./booking-sector-form.component.css']
 })
-export class BookSectorFormComponent implements OnInit {
+export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
   sectorNumber: any;

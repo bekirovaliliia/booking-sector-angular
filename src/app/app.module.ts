@@ -24,7 +24,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
-import { BookSectorFormComponent } from './pages/home-page/components/book-sector-form/book-sector-form.component';
+import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
 import { SectorsMapComponent } from './pages/home-page/components/sectors-map/sectors-map.component';
 import { NavigationBarComponent } from './shared/navbar/navbar.component';
 import { MainSectionComponent } from './pages/home-page/components/main-section/main-section.component';
@@ -68,8 +68,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
         RouterModule,
         AppRoutingModule,
         ToastrModule.forRoot(),
-        CommonModule,
-     
+        CommonModule   
     ],
   declarations: [
     AppComponent,
@@ -80,7 +79,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     UserMenuComponent,
     ChangePasswordNewComponent,
     CustomRangesComponent,
-    BookSectorFormComponent,
+    BookingSectorFormComponent,
     SectorsMapComponent,
     FilterSectorsComponent,
     NavigationBarComponent,
