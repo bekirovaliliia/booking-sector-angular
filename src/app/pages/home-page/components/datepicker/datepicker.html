@@ -1,5 +1,9 @@
-  <div class='form-group date'>                         
-    <input type="text"
+<div class="input-group">
+  <div class="input-group-prepend">
+      <span class="input-group-text border border-dark">
+          <i class="material-icons">calendar_today</i>
+      </span>
+      <input type="text"
       ngxDaterangepickerMd
       [(ngModel)]="selected"
       [alwaysShowCalendars]="alwaysShowCalendars"
@@ -12,9 +16,14 @@
       (datesUpdated)="datesUpdated($event)"
       [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
       [showRangeLabelOnInput]="showRangeLabelOnInput"
-      class="form-control"
+      class="form-control border border-dark ml-1"
+      style="width: 205px;"
       placeholder="yyyy-mm-dd"
-      [dateLimit]="4">
+      [dateLimit]="4">                           
   </div>
+</div>   
+
+
+
       
 
