@@ -1,11 +1,4 @@
-#fullname-field{
-    margin-top: 25px;
-}
+
 #btn-booking{
     margin-top: 50px;
-}
-
-#tagPlaces:hover{
-    cursor: pointer;
-    border: 3px solid red;
 }

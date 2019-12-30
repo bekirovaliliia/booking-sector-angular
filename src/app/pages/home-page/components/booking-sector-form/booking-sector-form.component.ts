@@ -15,7 +15,7 @@ export class BookingSectorFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private dataService: DataService) { }
 
-    clearSectorNumbers(){
+    clearSelectedSectors(){
       this.sectorNumber = null;
     }
 
