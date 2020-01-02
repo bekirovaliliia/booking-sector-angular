@@ -42,21 +42,36 @@ showPasswordSaved() {
   }
   saveChanges()
   {
-    if(this.passwordStrength<40)
-      { 
-        this.showNotMeetConditions();
-      }
+    if(this.oldPassword == "")
+    {
+      this.toastr.error('Enter your old password', 'Try again!');
+    }
     else
-      {
-        this.user.password = this.newPassword;
-        this.old = false;
-        this.checked = false;
-        this.userService.updateUserPassword(this.user).subscribe();
-        this.newPassword = "";
-        this.newPasswordConfirm = "";
-        this.showPasswordSaved();
-        this.dialogRef.close();
-      }
+    if(this.passwordStrength<40)
+    { 
+      this.showNotMeetConditions();
+    }
+    else
+    { this.userService.checkPass(this.oldPassword, this.id).subscribe(data=>
+        {
+        this.old =data
+        if(this.old)
+        {
+          this.user.password = this.newPassword;
+          this.old = false;
+          this.checked = false;
+          this.userService.updateUserPassword(this.user).subscribe();
+          this.newPassword = "";
+          this.newPasswordConfirm = "";
+          this.showPasswordSaved();
+          this.dialogRef.close();
+        }
+        else
+        {
+          this.toastr.error('It is not your password', 'Try again!');
+        }
+        } ); 
+    }
   }
   canSave(): boolean
   {
@@ -68,7 +83,7 @@ showPasswordSaved() {
   }
   passMatch(): boolean
   {
-     if((this.newPassword == this.newPasswordConfirm && this.old) 
+     if((this.newPassword == this.newPasswordConfirm) 
          || this.newPassword == "")
       {
        return true;
@@ -76,21 +91,13 @@ showPasswordSaved() {
      else return false;
   }
   
-  checkOldPassword()
-  {
-    if(this.oldPassword != "")
-    {
-    let res = this.userService.checkPass(this.oldPassword, this.id).subscribe(data=>this.old =data);
-    return res;
-    }
-  }
   constructor(private userService: UserService,
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<ChangePasswordNewComponent>){  }
 
      ngOnInit() 
     {
-    return this.userService.getUser(this.id).subscribe(data => this.user = data);
+      return this.userService.getUser(this.id).subscribe(data => this.user = data);
     }
 
 }

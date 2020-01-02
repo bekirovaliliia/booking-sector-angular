@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';  
 import {User} from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { ChangePasswordNewComponent } from '../change-password-new/change-password-new.component';
@@ -45,11 +44,4 @@ export class UserProfileTextComponent implements OnInit {
   ngOnInit() {
     return this.userService.getUser(this.id).subscribe(data => this.user = data);
   }
-  
-  help : boolean = false;
-  helpBlock() {
-   this.help = !this.help; 
-  }
-
-
 }
