@@ -43,7 +43,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { SetNewPasswordComponent } from './pages/profile-page/set-new-password/set-new-password.component';
+import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
 @NgModule({
     imports: [
         FormsModule,
@@ -92,7 +93,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     FooterComponent,
     SignInComponent,
     SignUpComponent,
-    MarkerExplanationComponent
+    MarkerExplanationComponent,
+    SetNewPasswordComponent,
+    ResetPasswordComponent,
   ],
   exports: [
 
@@ -103,7 +106,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
+  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
 })
 export class AppModule { }
 
