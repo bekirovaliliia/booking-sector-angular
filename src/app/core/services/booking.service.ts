@@ -20,7 +20,9 @@ export class BookingService {
   getBookings() {
     return this.http.get<Booking[]>(this.apiURl);
   }
-
+  getUserBookings(id:number) {
+    return this.http.get<Booking[]>(`${this.urlAddress}bookings/byUserId/${id}`);
+  }
   updateBooking(booking: Booking): Observable<any> {
     console.log(booking);
     const httpOptions = {

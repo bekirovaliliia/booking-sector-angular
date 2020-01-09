@@ -45,6 +45,9 @@ import { CommonModule } from '@angular/common';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
+import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
+import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
+import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
 @NgModule({
     imports: [
         FormsModule,
@@ -96,6 +99,9 @@ import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-pas
     MarkerExplanationComponent,
     SetNewPasswordComponent,
     ResetPasswordComponent,
+    UserBookingsComponent,
+    ActualBookingsTableComponent,
+    ActualBookingsRowComponent,
   ],
   exports: [
 
