@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TournamentComponent implements OnInit {
   searchText: string;
   opened: boolean;
+  filters: any;
 
 
   constructor() { }

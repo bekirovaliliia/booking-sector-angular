@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TournamentTableRowComponent } from './tournament-table-row.component';
+import { UpdateBtnComponent } from './update-btn.component';
 
-describe('TournamentTableRowComponent', () => {
-  let component: TournamentTableRowComponent;
-  let fixture: ComponentFixture<TournamentTableRowComponent>;
+describe('UpdateBtnComponent', () => {
+  let component: UpdateBtnComponent;
+  let fixture: ComponentFixture<UpdateBtnComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TournamentTableRowComponent ]
+      declarations: [ UpdateBtnComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TournamentTableRowComponent);
+    fixture = TestBed.createComponent(UpdateBtnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

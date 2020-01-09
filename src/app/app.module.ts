@@ -18,8 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {TextFieldModule} from '@angular/cdk/text-field';
-import {MatDialogModule, MatDialogRef} from '@angular/material';
-
+import {MatDialogModule} from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -31,8 +31,8 @@ import { MainSectionComponent } from './pages/home-page/components/main-section/
 import { FormSectionComponent } from './pages/home-page/components/form-section/form-section.component';
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
-import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
-import { UpdateDialogComponent } from './pages/admin-management/tournament/update-dialog/update-dialog.component';
+import { DeleteDialogComponent } from './shared/dialogs/delete-dialog/delete-dialog.component';
+import { AddUpdateDialogComponent } from './pages/admin-management/tournament/add-update-dialog/add-update-dialog.component';
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -44,6 +44,9 @@ import { CommonModule } from '@angular/common';
 
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {FilterPipe} from './shared/pipes/filter.pipe';
+import { SearchPipe } from './shared/pipes/search.pipe';
+
 
 @NgModule({
     imports: [
@@ -70,7 +73,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
         AppRoutingModule,
         ToastrModule.forRoot(),
         CommonModule,
-      SidebarModule.forRoot()
+        SidebarModule.forRoot(),
+      MatSortModule
     ],
   declarations: [
     AppComponent,
@@ -89,23 +93,32 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     FormSectionComponent,
     HomePageComponent,
     DeleteDialogComponent,
-    UpdateDialogComponent,
+    AddUpdateDialogComponent,
     FilterSectorsComponent,
     FooterComponent,
     SignInComponent,
     SignUpComponent,
-    MarkerExplanationComponent
+    MarkerExplanationComponent,
+    SearchPipe,
+
+
+
+
+
   ],
   exports: [
+
+
 
   ],
   providers: [
     DatePipe,
+    FilterPipe
   ],
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
 })
 export class AppModule { }
 
