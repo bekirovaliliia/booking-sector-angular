@@ -12,17 +12,32 @@ import {MatDialogRef} from '@angular/material/dialog';
 export class ResetPasswordComponent implements OnInit {
   user: User;
   id = 106;
-  email: string;
+  email: string="";
   constructor(private userService: UserService,
-    private toastr: ToastrService,
-    public dialogRef: MatDialogRef<ResetPasswordComponent>,
-     ){  }
+              private toastr: ToastrService,
+              public dialogRef: MatDialogRef<ResetPasswordComponent>,
+             ){  }
 
   ngOnInit() {
   }
-  resetPassword(){
+  resetPassword()
+  {
+    if(this.email == "")
+    {
+        this.toastr.error("Enter your email");
+    }
+    else
+    {
     this.userService.resetPass(this.email).subscribe();
     this.toastr.success("Check your email and set a new password");
+    this.email = "";
+    this.dialogRef.close();
+    }
+  }
+
+  cancelP()
+  {
+    this.email="";
     this.dialogRef.close();
   }
 

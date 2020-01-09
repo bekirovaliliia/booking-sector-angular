@@ -43,7 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { SetNewPasswordComponent } from './pages/profile-page/set-new-password/set-new-password.component';
+import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
 @NgModule({
     imports: [
