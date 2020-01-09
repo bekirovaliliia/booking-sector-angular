@@ -1,7 +1,6 @@
 <mat-sidenav-container class="sidebarContainer">
   <mat-sidenav #sidenav mode="side" class="sidebar" [(opened)]="opened" position="end">
-    <app-filter (groupFilters)="filters = $event"
-    ></app-filter>
+    <app-filter (groupFilters)="filters = $event" ></app-filter>
   </mat-sidenav>
 
   <mat-sidenav-content >
@@ -10,7 +9,7 @@
       <button mat-button class = "p-2 ml-auto " (click)="sidenav.toggle()">Advanced filter</button>
     </div>
     <hr/>
-        <app-tournament-table [groupFilters]="filters"
-                              [searchByKeyword]="searchText" > </app-tournament-table>
+    <app-global-search [(searchText)]="searchText"></app-global-search>
+        <app-tournament-table [groupFilters]="filters" [searchText] ="searchText"> </app-tournament-table>
   </mat-sidenav-content>
 </mat-sidenav-container>

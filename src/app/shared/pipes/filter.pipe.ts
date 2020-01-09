@@ -1,17 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filter'
+  name: 'filterPipe'
 })
 
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], value: string, prop: string): any[] {
+  transform(items: any[], filters: object, keys: string[]): any[] {
     if (!items) { return []; }
-    if (!value) { return items; }
+    if (filters === null) { return items; }
+    console.log(items);
 
-    return items.filter(singleItem =>
-      singleItem[prop].toLowerCase().startsWith(value.toLowerCase())
-    );
-
+    const filterTour = (tour) => {
+      let result = keys.map(key => {
+        if (tour[key]) {
+          return String(tour[key]).toLowerCase().startsWith(String(filters[key]).toLowerCase())
+        } else {
+          return false;
+        }
+      });
+      return result.reduce((acc, cur: any) => { return acc & cur }, 1);
+    };
+    return items.filter(filterTour);
   }
 }
