@@ -18,7 +18,7 @@ const routes: Routes = [
         path: 'tournaments', component: TournamentComponent
       },
       {
-        path: 'managing', component: BookingManagingComponent
+        path: 'bookings', component: BookingManagingComponent
       },
       {
         path: 'sectors', component: SectorComponent

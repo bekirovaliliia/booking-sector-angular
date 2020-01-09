@@ -1,18 +1,20 @@
-<table datatable class="table row-border hover"  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" >
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Sector ID</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let booking of this.bookings$">
-    <td>{{booking.id}}</td>
-    <td>{{booking.sectorId}}</td>
-    <td>{{booking.bookingStart | date}}</td>
-    <td>{{booking.bookingEnd | date}}</td>
-  </tr>
-  </tbody>
+
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" style="width: 100%">
+
+  <ng-container matColumnDef='id'>
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let booking"> {{booking.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="sectorId">
+    <th mat-header-cell *matHeaderCellDef> Sectors </th>
+    <td class="sectors-cell" mat-cell *matCellDef="let booking"> {{booking.sectorId}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 </table>
+  <mat-paginator [pageSize]="5"  [pageSizeOptions]="[5, 10]"></mat-paginator>
+</div>

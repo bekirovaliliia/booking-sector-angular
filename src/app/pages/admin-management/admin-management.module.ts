@@ -16,13 +16,15 @@ import {FilterPipe} from '../../shared/pipes/filter.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
 import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -39,8 +41,6 @@ import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-
     SectorTableComponent,
     SectorComponent,
     SectorTableRowComponent,
-
-
   ],
   exports: [
     AdminSidebarComponent,
@@ -58,8 +58,8 @@ import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-
     MatCheckboxModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-
-
+    MatTableModule,
+    MatPaginatorModule,
   ]
 })
 export class AdminManagementModule { }
