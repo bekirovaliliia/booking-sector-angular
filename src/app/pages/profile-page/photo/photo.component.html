@@ -1,6 +1,6 @@
 <div class="media d-flex flex-row justify-content-center" >
-    <img [src]=""
-         class="media-object" 
+    <img [src]="transform()"
+         class="media-object profile-avatar" 
          style="width:150px"
          >  
 </div>
@@ -14,4 +14,3 @@
           (change)="onFileChanged($event)"/>
 </div>
 </form>
-<button (click)="getPhoto()"> getPhoto</button>

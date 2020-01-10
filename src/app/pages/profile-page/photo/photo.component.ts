@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
+import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-photo',
@@ -9,43 +11,43 @@ import {UserService} from '../../../core/services/user.service';
 })
 export class PhotoComponent implements OnInit {
   user: User;
-  //!!!!!!!!!!!!!!!!!!!! testing p as a FormData, not a File
-  p: FormData;
   id = 46;
-  constructor(private userService: UserService,) { }
+  selectedFile: File;
+  constructor(private userService: UserService,
+              private sanitizer:DomSanitizer,
+              private toastr: ToastrService,) { }
   getPhoto(){
-    this.userService.getUserPhoto(this.id).subscribe(data=> this.p = data);
-    console.log(this.p);
-    //this.p.get('file');
-          //return this.user.photo;
+   this.userService.getUser(this.id).subscribe(data => this.user = data);
   }
+
   ngOnInit() {
-    //this.getPhoto();
-    
-    //return this.userService.getUser(this.id).subscribe(data => this.user = data);
-
+    this.getPhoto();
   }
-  selectedFile: File
-  public fileChange(files:any[]) {
+  transform(): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.user.photo);
+}
 
-    if (files && files.length > 0) {
-     let file = files[0];
-     let formData = new FormData();
-     formData.append('file', file);
-    // this.user.photo = formData;
-     this.userService.updateUserPhoto(formData);
-     }  
-
-  }
+ 
   onFileChanged(event) {
     this.selectedFile = event.target.files[0];
-    let formData = new FormData();
-    formData.append('file', this.selectedFile);
-    console.log(formData);
-   // this.user.photo = this.selectedFile;
-    this.userService.updateUserPhoto(formData);
-    console.log(this.selectedFile);
-   // console.log(this.user);
+    if(this.selectedFile.type!="image/jpeg")
+    {
+      this.toastr.error("Choose image");
+    }
+    else
+      if (this.selectedFile.size>2097152) 
+      {
+        this.toastr.error("Size of file must be less than 2Mb");
+      }
+      else
+      {
+        let formData = new FormData();
+        formData.append('file', this.selectedFile);
+        console.log(this.selectedFile);
+        this.userService.updateUserPhoto(formData);
+        this.toastr.success("Your photo changed successfully!","Update page");
+        this.getPhoto();
+      }
   }
 
 }

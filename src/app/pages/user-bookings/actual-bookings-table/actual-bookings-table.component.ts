@@ -48,7 +48,7 @@ export class ActualBookingsTableComponent implements OnInit {
   }
   delete(){
     console.log(this.idToDelete);
-   // this.bookingService.deleteBooking(this.idToDelete).subscribe();
+    this.bookingService.deleteBooking(this.idToDelete).subscribe();
     
   }
 }

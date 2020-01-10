@@ -14,7 +14,11 @@ export class UserService {
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
   getUserPhoto(id:number) {
-    return this.http.get<FormData>(`${this.apiURl}/UserPhoto/${id}`);
+    const httpOptions = {
+      headers: new HttpHeaders({responseType: 'text'})
+   
+    };
+    return this.http.get<string>(`${this.apiURl}/UserPhoto/${id}`, httpOptions);
   }
   checkPass(pass: string, id:number){
    return this.http.get<Boolean>(`${this.apiURl}/${id}/${pass}`);
