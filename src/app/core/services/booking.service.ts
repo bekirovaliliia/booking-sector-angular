@@ -15,16 +15,24 @@ export class BookingService {
   public urlAddress: string = environment.urlAddress;
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
-  getBookings() {
-    return this.http.get<Booking[]>(this.apiURl);
+  getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
+    if (!isExpired) {
+      return this.http.get<Booking[]>(this.apiURl).pipe(
+        map(booking => booking.filter(b => b.isApproved === isApproved)),
+        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > Date.now()))
+      );
+    } else if (isExpired) {
+      return this.http.get<Booking[]>(this.apiURl).pipe(
+        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < Date.now()))
+      );
+    }
   }
 
   updateBooking(booking: Booking): Observable<any> {
-    console.log(booking);
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.urlAddress}bookings/tournaments/${booking.id}`, booking, httpOptions);
+    return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`, httpOptions);
   }
 
 

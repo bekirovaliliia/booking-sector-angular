@@ -46,6 +46,7 @@ import {MatTableModule} from '@angular/material/table';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
+import {SidebarModule} from 'ng-sidebar';
 
 
 @NgModule({

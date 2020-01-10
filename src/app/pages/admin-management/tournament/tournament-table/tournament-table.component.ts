@@ -1,7 +1,6 @@
 import {Component,  Input,  OnInit,  Output,  EventEmitter,  OnChanges, ViewChild} from '@angular/core';
 import {Tournament} from '../../../../shared/models/tournament';
 import {TournamentService} from '../../../../core/services/tournament.service';
-import {Subject} from 'rxjs';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import {AddUpdateDialogComponent} from '../add-update-dialog/add-update-dialog.component';
 import {filter} from 'rxjs/operators';
@@ -108,8 +107,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     if (this.groupFilters) {
       this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
-    }
-    else if (this.searchText) {
+    } else if (this.searchText) {
     this.dataSource.filter  = this.searchText;
     }
   }

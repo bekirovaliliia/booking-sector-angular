@@ -26,6 +26,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { GlobalSearchComponent } from './tournament/global-search/global-search.component';
 import {MatSortModule} from '@angular/material/sort';
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatInputModule,
+    MatButtonModule,
   ]
 })
 export class AdminManagementModule { }
