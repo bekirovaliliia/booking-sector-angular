@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-tournament',
@@ -9,11 +10,8 @@ export class TournamentComponent implements OnInit {
   searchText: string;
   opened: boolean;
   filters: any;
-
-
+  mode = new FormControl('side');
   constructor() { }
-
-
 
   ngOnInit() {
   }

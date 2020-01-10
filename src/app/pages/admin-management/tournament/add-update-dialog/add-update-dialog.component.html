@@ -1,26 +1,24 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)" >
-<mat-dialog-content align="center">
+<mat-dialog-content >
   <h5 mat-dialog-title> {{this.data.dialogTitle}} </h5>
 
-  <mat-form-field *ngIf="this.data.isUpdated">
+  <mat-form-field *ngIf="this.data.isUpdated" class = " d-inline">
     <input matInput readonly formControlName="id" placeholder="Tournament id" >
   </mat-form-field>
 
-  <mat-form-field >
+  <mat-form-field class = " d-inline">
     <input matInput required formControlName="name" placeholder="Tournament name">
   </mat-form-field>
 
-  <mat-form-field >
+  <mat-form-field class = " d-inline">
     <textarea matInput formControlName="description" placeholder="Tournament Description">
     </textarea>
   </mat-form-field>
 
-  <mat-form-field >
+  <mat-form-field class = " d-inline">
     <input matInput  required formControlName="preparationTerm" type = "number" placeholder="Preparation Term">
   </mat-form-field>
-
 </mat-dialog-content>
-
 
 <mat-dialog-actions align="center">
   <button mat-button tabindex="1" type="submit">Save</button>

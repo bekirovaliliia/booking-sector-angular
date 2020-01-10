@@ -1,12 +1,13 @@
 import {Component,  Input,  OnInit,  Output,  EventEmitter,  OnChanges, ViewChild} from '@angular/core';
 import {Tournament} from '../../../../shared/models/tournament';
 import {TournamentService} from '../../../../core/services/tournament.service';
-import {Subject} from 'rxjs';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import {AddUpdateDialogComponent} from '../add-update-dialog/add-update-dialog.component';
 import {filter} from 'rxjs/operators';
 import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
+import {SearchPipe} from '../../../../shared/pipes/search.pipe';
+
 @Component({
   selector: 'app-tournament-table',
   templateUrl: './tournament-table.component.html',
@@ -31,7 +32,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   constructor( private tournamentService: TournamentService,
                private dialog: MatDialog,
-               private  filterPipe: FilterPipe
+               private filterPipe: FilterPipe,
+               private searchPipe: SearchPipe,
   ) { }
 
   ngOnInit() {
@@ -60,7 +62,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   deleteTournament(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
-      width: '35%',
     });
     this.deleteDialog
       .afterClosed()
@@ -77,7 +78,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   openAddUpdateDialog(selectedTournament: Tournament, action: string){
       this.addUpdateDialog = this.dialog.open(AddUpdateDialogComponent, {
         hasBackdrop: false,
-        width: '35%',
+        width: '500px',
+        minWidth: '250px',
         data: {
            dialogTitle: (action === 'Add') ? 'New Tournament' : 'Update Tournament',
            isUpdated: (action === 'Add') ? false : true,
@@ -103,18 +105,18 @@ export class TournamentTableComponent implements OnInit, OnChanges {
         });
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////
-
   ngOnChanges(): void {
+    console.log(this.searchText);
     if (this.groupFilters) {
       this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
+      if (this.searchText) {
+        this.dataSource.data  = this.searchPipe.transform(this.dataSource.data, this.searchText, Object.keys(this.tournaments[0]));
+      }
+    } else if (this.searchText || this.searchText === ''){
+      this.dataSource.data  = this.searchPipe.transform(this.tournaments, this.searchText, Object.keys(this.tournaments[0]));
     }
-    else if (this.searchText) {
-    this.dataSource.filter  = this.searchText;
-    }
-  }
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+  }
 
   getSelectedRow(item): void {
     this.selectedRow = item;

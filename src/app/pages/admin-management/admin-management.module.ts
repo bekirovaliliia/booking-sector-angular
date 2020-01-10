@@ -26,7 +26,8 @@ import { SearchBtnComponent } from '../../shared/buttons/search-btn/search-btn.c
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { GlobalSearchComponent } from './tournament/global-search/global-search.component';
-import {MatSortModule} from "@angular/material/sort";
+import {MatSortModule} from '@angular/material/sort';
+import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {MatSortModule} from "@angular/material/sort";
     UpdateBtnComponent,
     SearchBtnComponent,
     GlobalSearchComponent,
+    ClearBtnComponent,
   ],
   exports: [
     AdminSidebarComponent,
@@ -68,8 +70,6 @@ import {MatSortModule} from "@angular/material/sort";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-
-
   ]
 })
 export class AdminManagementModule { }

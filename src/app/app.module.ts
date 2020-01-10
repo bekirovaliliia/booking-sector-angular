@@ -41,12 +41,10 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
-
 
 @NgModule({
     imports: [
@@ -74,7 +72,7 @@ import { SearchPipe } from './shared/pipes/search.pipe';
         ToastrModule.forRoot(),
         CommonModule,
         SidebarModule.forRoot(),
-      MatSortModule
+        MatSortModule
     ],
   declarations: [
     AppComponent,
@@ -101,11 +99,7 @@ import { SearchPipe } from './shared/pipes/search.pipe';
     MarkerExplanationComponent,
     SearchPipe,
 
-
-
-
-
-  ],
+    ],
   exports: [
 
 
@@ -113,7 +107,8 @@ import { SearchPipe } from './shared/pipes/search.pipe';
   ],
   providers: [
     DatePipe,
-    FilterPipe
+    FilterPipe,
+    SearchPipe,
   ],
   bootstrap: [
     AppComponent,
