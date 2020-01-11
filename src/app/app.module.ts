@@ -45,6 +45,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
+import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 
 @NgModule({
     imports: [
@@ -98,10 +99,10 @@ import { SearchPipe } from './shared/pipes/search.pipe';
     SignUpComponent,
     MarkerExplanationComponent,
     SearchPipe,
-
+    NumberOnlyDirective,
     ],
   exports: [
-
+    NumberOnlyDirective
 
 
   ],

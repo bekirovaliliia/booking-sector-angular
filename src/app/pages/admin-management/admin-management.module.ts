@@ -49,6 +49,7 @@ import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.comp
     SearchBtnComponent,
     GlobalSearchComponent,
     ClearBtnComponent,
+
   ],
   exports: [
     AdminSidebarComponent,
