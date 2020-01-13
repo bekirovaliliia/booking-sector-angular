@@ -11,19 +11,11 @@ import { TournamentTableComponent } from './tournament/tournament-table/tourname
 import { FilterComponent } from './tournament/filter/filter.component';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
-<<<<<<< HEAD
 
-
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatFormFieldModule} from "@angular/material/form-field";
-
-=======
-import {SidebarModule} from 'ng-sidebar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
->>>>>>> tournamentPage
+
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
 import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';

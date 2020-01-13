@@ -41,22 +41,19 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
 import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
-=======
+
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 
->>>>>>> tournamentPage
 @NgModule({
     imports: [
         FormsModule,
@@ -81,13 +78,9 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
         RouterModule,
         AppRoutingModule,
         ToastrModule.forRoot(),
-<<<<<<< HEAD
-        CommonModule   
-=======
         CommonModule,
         SidebarModule.forRoot(),
         MatSortModule
->>>>>>> tournamentPage
     ],
   declarations: [
     AppComponent,
@@ -112,18 +105,16 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
     SignInComponent,
     SignUpComponent,
     MarkerExplanationComponent,
-<<<<<<< HEAD
     SetNewPasswordComponent,
     ResetPasswordComponent,
     UserBookingsComponent,
     ActualBookingsTableComponent,
     ActualBookingsRowComponent,
-  ],
-=======
+  
     SearchPipe,
     NumberOnlyDirective,
     ],
->>>>>>> tournamentPage
+
   exports: [
     NumberOnlyDirective
 
@@ -137,11 +128,9 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
   bootstrap: [
     AppComponent,
   ],
-<<<<<<< HEAD
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
-=======
+
   entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
->>>>>>> tournamentPage
+
 })
 export class AppModule { }
 
