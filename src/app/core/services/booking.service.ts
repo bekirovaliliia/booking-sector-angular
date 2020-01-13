@@ -68,6 +68,17 @@ export class BookingService {
         )
       );
   }
+  getBookingTournamentById(id: number): Observable<Booking> {
+    return this.http.get<Booking>(`${this.urlAddress}bookings/tournaments/${id}`)
+      .pipe(
+        map((item: Booking) =>
+          new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
+            this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
+            item.sectorId, item.userId,
+          )
+        )
+      );
+  }
 
   deleteBooking(id: number) {
     const httpOptions = {

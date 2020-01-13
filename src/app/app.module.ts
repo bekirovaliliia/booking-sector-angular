@@ -86,7 +86,7 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
         MatSortModule,
         MatTableModule,
         MatPaginatorModule,
-        
+
     ],
   declarations: [
     AppComponent,
@@ -116,17 +116,16 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
     UserBookingsComponent,
     ActualBookingsTableComponent,
     ActualBookingsRowComponent,
-  
+    WithoutBookingsComponent,
     SearchPipe,
     NumberOnlyDirective,
+
+    ],
+    exports: [
+        NumberOnlyDirective,
     WithoutBookingsComponent,
     ],
 
-  exports: [
-    NumberOnlyDirective
-
-
-  ],
   providers: [
     DatePipe,
     FilterPipe,
