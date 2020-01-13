@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import {Booking} from '../../../shared/models/booking.model';
 import {BookingService} from '../../../core/services/booking.service';
 import {Subject, from} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
+import {sleep} from 'sleep-ts';
+
 
 declare  var  require: any;
 @Component({
@@ -12,15 +15,23 @@ declare  var  require: any;
 })
 export class ActualBookingsTableComponent implements OnInit {
   imgCancel = require('../../../shared/images/cancel.png');
+  imgApproved = require('../../../shared/images/approved.png');
+  imgDeclined = require('../../../shared/images/declined.png');
+  imgTrash = require('../../../shared/images/trash.png');
+  dataSource = new MatTableDataSource<Booking>([]);
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   booking: Booking;
   userId:number = 1;
+  @Input() isActual:boolean = false;
+  hasBookings: boolean = false;
   bookingHeaders: string[];
   dtOptions: any = {};
   idToDelete: number;
   
   bookings: Booking[];
   filteredBookings: Booking[];
-  dtTrigger: Subject<any> = new Subject();
   constructor(private bookingService: BookingService,) { }
 
   ngOnInit() {
@@ -36,19 +47,29 @@ export class ActualBookingsTableComponent implements OnInit {
 
   getBookings()
   {
-    this.bookingService.getUserBookings(this.userId).subscribe(res => {
+    this.bookingService.getUserBookings(this.userId, this.isActual).subscribe(res => {
       this.bookings = res;
-      this.filteredBookings = res;
-      this.bookingHeaders = (this.bookings && this.bookings.length > 0) ? Object.keys(this.bookings[0]) : [];
-      this.dtTrigger.next();
+      this.bookingHeaders = ['delete', 'id', 'bookingStart', 'bookingEnd', 'sectorId', 'isApproved'];
+      this.updateDataSource();
+      if(this.bookings.length ==0){this.hasBookings = false;}
+     else{this.hasBookings = true;}
+    console.log(this.hasBookings);
     });
   }
+  updateDataSource() {
+    
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.data = this.bookings.reverse();
+}
   saveIdToDelete(id: number){
     this.idToDelete = id;
+    console.log(this.idToDelete);
   }
-  delete(){
+    async delete(){
     console.log(this.idToDelete);
     this.bookingService.deleteBooking(this.idToDelete).subscribe();
-    
+    await sleep(5000);
+    this.getBookings();
   }
 }

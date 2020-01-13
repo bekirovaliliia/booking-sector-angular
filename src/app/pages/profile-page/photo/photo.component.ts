@@ -3,13 +3,16 @@ import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+import {sleep} from 'sleep-ts';
 
+declare  var  require: any;
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent implements OnInit {
+  defaultPhoto = require('../../../shared/images/defaultPhoto.png');
   user: User;
   id = 46;
   selectedFile: File;
@@ -24,11 +27,14 @@ export class PhotoComponent implements OnInit {
     this.getPhoto();
   }
   transform(): SafeUrl {
+    if(this.user.photo){
     return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.user.photo);
-}
+    }
+    else return this.defaultPhoto;
+  }
 
  
-  onFileChanged(event) {
+  async onFileChanged(event) {
     this.selectedFile = event.target.files[0];
     if(this.selectedFile.type!="image/jpeg")
     {
@@ -45,7 +51,8 @@ export class PhotoComponent implements OnInit {
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
         this.userService.updateUserPhoto(formData);
-        this.toastr.success("Your photo changed successfully!","Update page");
+        await sleep(5000);
+        this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }
   }

@@ -53,6 +53,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
 
 @NgModule({
     imports: [
@@ -80,7 +83,10 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
         ToastrModule.forRoot(),
         CommonModule,
         SidebarModule.forRoot(),
-        MatSortModule
+        MatSortModule,
+        MatTableModule,
+        MatPaginatorModule,
+        
     ],
   declarations: [
     AppComponent,
@@ -113,6 +119,7 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
   
     SearchPipe,
     NumberOnlyDirective,
+    WithoutBookingsComponent,
     ],
 
   exports: [

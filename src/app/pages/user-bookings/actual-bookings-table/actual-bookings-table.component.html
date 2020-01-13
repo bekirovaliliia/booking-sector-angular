@@ -1,40 +1,65 @@
-<div class = "">
-<table  datatable 
-        class ="" 
-        class="row-border hover" 
-        class ="table">
-<thead class="thead-dark" >
-    <th></th>
-    <th>ID</th>
-    <th>From</th>
-    <th>To</th>
-    <th>Is approved</th>
-    <th>ID of sector</th>      
-</thead>
-
-<tbody>
-  <tr *ngFor="let booking of this.bookings">
-    <td> <button
+<app-without-bookings *ngIf=!hasBookings></app-without-bookings>
+<table *ngIf=hasBookings mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100 btn-table " >
+ 
+  <ng-container matColumnDef="delete" >
+    <th mat-header-cell *matHeaderCellDef ></th>
+    <td mat-cell *matCellDef="let booking"> <button
       type="button "
       class="input-group-text btn-icon"
       (click)="saveIdToDelete(booking.id)"
       data-toggle="modal" 
       data-target="#modalDialog"
     >
-     <img src={{imgCancel}}
+     <img src={{imgTrash}}
            alt="delete"
            class="img-fluid "
            width="20px"
       />
     </button></td>
-      <td>{{booking.id}} </td>
-      <td>{{booking.bookingStart}}</td>
-      <td>{{booking.bookingEnd}}</td>
-      <td>{{booking.isApproved}}</td>
-      <td>{{booking.sectorId}} </td>
-  </tr>
-</tbody>
+  </ng-container>
+  <ng-container matColumnDef="id" >
+    <th mat-header-cell mat-sort-header *matHeaderCellDef > ID </th>
+    <td mat-cell *matCellDef="let booking"> {{booking.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookingStart">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef > From </th>
+    <td mat-cell *matCellDef="let booking"> {{booking.bookingStart}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bookingEnd">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef > To </th>
+    <td mat-cell *matCellDef="let booking"> {{booking.bookingEnd}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="isApproved">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef > Is approved </th>
+    <td mat-cell *matCellDef="let booking">
+      <img *ngIf= "booking.isApproved"
+      src={{imgApproved}}
+      alt="delete"
+      class="img-fluid "
+      width="20px"
+ /> 
+ <img *ngIf = "!booking.isApproved"
+      src={{imgDeclined}}
+      alt="delete"
+      class="img-fluid "
+      width="20px"
+ />
+</td>
+  </ng-container>
+
+  <ng-container matColumnDef="sectorId">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef > Sector ID</th>
+    <td mat-cell *matCellDef="let booking" > {{booking.sectorId}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="bookingHeaders"></tr>
+  <tr mat-row *matRowDef="let row; columns: bookingHeaders;" ></tr>
+
 </table>
+<mat-paginator *ngIf=hasBookings [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
 <div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -54,5 +79,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>
