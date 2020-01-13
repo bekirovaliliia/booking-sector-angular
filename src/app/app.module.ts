@@ -24,7 +24,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
-import { BookSectorFormComponent } from './pages/home-page/components/book-sector-form/book-sector-form.component';
+import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
 import { SectorsMapComponent } from './pages/home-page/components/sectors-map/sectors-map.component';
 import { NavigationBarComponent } from './shared/navbar/navbar.component';
 import { MainSectionComponent } from './pages/home-page/components/main-section/main-section.component';
@@ -41,11 +41,21 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+
+import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
+import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
+import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
+import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
+import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
+
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
 
 @NgModule({
     imports: [
@@ -73,7 +83,10 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
         ToastrModule.forRoot(),
         CommonModule,
         SidebarModule.forRoot(),
-        MatSortModule
+        MatSortModule,
+        MatTableModule,
+        MatPaginatorModule,
+        
     ],
   declarations: [
     AppComponent,
@@ -84,7 +97,7 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
     UserMenuComponent,
     ChangePasswordNewComponent,
     CustomRangesComponent,
-    BookSectorFormComponent,
+    BookingSectorFormComponent,
     SectorsMapComponent,
     FilterSectorsComponent,
     NavigationBarComponent,
@@ -98,13 +111,21 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
     SignInComponent,
     SignUpComponent,
     MarkerExplanationComponent,
+    SetNewPasswordComponent,
+    ResetPasswordComponent,
+    UserBookingsComponent,
+    ActualBookingsTableComponent,
+    ActualBookingsRowComponent,
+  
     SearchPipe,
     NumberOnlyDirective,
-    ,
+
     ],
     exports: [
         NumberOnlyDirective,
-         ],
+    WithoutBookingsComponent,
+    ],
+
   providers: [
     DatePipe,
     FilterPipe,
@@ -113,7 +134,9 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
   bootstrap: [
     AppComponent,
   ],
+
   entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
+
 })
 export class AppModule { }
 
