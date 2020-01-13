@@ -1,3 +1,6 @@
+<app-without-datas *ngIf="dataSource.data.length === 0" [withoutDatasText]="withoutDatasText"></app-without-datas>
+
+<div  *ngIf="dataSource.data.length!==0">
   <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8 w-100 btn-table" >
     <ng-container matColumnDef="isBooked">
       <th mat-header-cell *matHeaderCellDef  >
@@ -35,7 +38,6 @@
     <tr mat-row *matRowDef="let row; columns: tournamentHeader;  let i=index;" (click) ="getSelectedRow(i)" [class.active]="isSelected(i)"></tr>
 
   </table>
-
-  <app-without-datas *ngIf="dataSource.data.length === 0" [withoutDatasText]="withoutDatasText"></app-without-datas>
-
   <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+

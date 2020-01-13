@@ -30,8 +30,12 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   dataSource = new MatTableDataSource<Tournament>([]);
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
+  this.dataSource.paginator = paginator;
+  }
+  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort){
+    this.dataSource.sort = sort;
+  }
 
   constructor( private tournamentService: TournamentService,
                private bookingService: BookingService,
@@ -44,23 +48,15 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     this.getTournaments();
   }
 
-  updateDataSource() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    if (this.groupFilters) {
-      this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
-    } else  {
-      this.dataSource.data = this.tournaments;
-    }
-}
-
   getTournaments() {
     this.tournamentService.getAll().subscribe(res => {
       this.tournaments = res;
       this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
-      this.updateDataSource();
-      console.log(this.tournamentHeader);
-
+      if (this.groupFilters) {
+        this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
+      } else  {
+        this.dataSource.data = this.tournaments;
+      }
     });
   }
 

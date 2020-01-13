@@ -1,14 +1,16 @@
 <div class="media d-flex flex-row justify-content-center" >
-    <img src="http://simpleicon.com/wp-content/uploads/rocket.png" 
-         class="media-object" 
-         style="width:150px">  
+    <img [src]="transform()"
+         class="media-object profile-avatar" 
+         style="width:150px"
+         >  
 </div>
 <br>
-
+<form>
 <div class="d-flex flex-row justify-content-center">
     <label for="myfile" class="custom-file-upload">Change photo</label>
     <input type="file" 
-           class=""  
            id="myfile" 
-           name="myfile"/>
+           name="myfile"
+          (change)="onFileChanged($event)"/>
 </div>
+</form>
