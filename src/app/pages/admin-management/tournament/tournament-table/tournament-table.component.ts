@@ -7,6 +7,7 @@ import {filter} from 'rxjs/operators';
 import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../../../shared/pipes/search.pipe';
+import {BookingService} from '../../../../core/services/booking.service';
 
 @Component({
   selector: 'app-tournament-table',
@@ -17,6 +18,7 @@ import {SearchPipe} from '../../../../shared/pipes/search.pipe';
 export class TournamentTableComponent implements OnInit, OnChanges {
   @Input() groupFilters: object;
   @Input() searchText: string;
+  @Input() withoutDatasText = 'No records found!';
   selectedRow: number;
 
   tournamentHeader: string[];
@@ -26,11 +28,13 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   deleteDialog: MatDialogRef<DeleteDialogComponent>;
 
   dataSource = new MatTableDataSource<Tournament>([]);
+
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor( private tournamentService: TournamentService,
+               private bookingService: BookingService,
                private dialog: MatDialog,
                private filterPipe: FilterPipe,
                private searchPipe: SearchPipe,
@@ -54,8 +58,9 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     this.tournamentService.getAll().subscribe(res => {
       this.tournaments = res;
       this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
-      this.tournamentHeader.push('action');
       this.updateDataSource();
+      console.log(this.tournamentHeader);
+
     });
   }
 
@@ -106,7 +111,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.searchText);
     if (this.groupFilters) {
       this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
       if (this.searchText) {
@@ -115,7 +119,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     } else if (this.searchText || this.searchText === ''){
       this.dataSource.data  = this.searchPipe.transform(this.tournaments, this.searchText, Object.keys(this.tournaments[0]));
     }
-
   }
 
   getSelectedRow(item): void {

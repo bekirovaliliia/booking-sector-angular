@@ -100,12 +100,11 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
     MarkerExplanationComponent,
     SearchPipe,
     NumberOnlyDirective,
+    ,
     ],
-  exports: [
-    NumberOnlyDirective
-
-
-  ],
+    exports: [
+        NumberOnlyDirective,
+         ],
   providers: [
     DatePipe,
     FilterPipe,

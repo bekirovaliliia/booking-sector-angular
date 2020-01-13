@@ -34,7 +34,7 @@
   </div>
 
 
-  <mat-form-field class = " d-inline">
+  <mat-form-field class = " d-inline" *ngIf="!this.data.selectedTournament.isBooked" >
     <input
       matInput
       appNumberOnly

@@ -28,6 +28,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { GlobalSearchComponent } from './tournament/global-search/global-search.component';
 import {MatSortModule} from '@angular/material/sort';
 import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
+import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.component';
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.comp
     SearchBtnComponent,
     GlobalSearchComponent,
     ClearBtnComponent,
-
+    WithoutDatasComponent,
   ],
   exports: [
     AdminSidebarComponent,
