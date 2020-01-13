@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TournamentTableRowComponent } from './tournament-table-row.component';
+import { ClearBtnComponent } from './clear-btn.component';
 
-describe('TournamentTableRowComponent', () => {
-  let component: TournamentTableRowComponent;
-  let fixture: ComponentFixture<TournamentTableRowComponent>;
+describe('ClearBtnComponent', () => {
+  let component: ClearBtnComponent;
+  let fixture: ComponentFixture<ClearBtnComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TournamentTableRowComponent ]
+      declarations: [ ClearBtnComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TournamentTableRowComponent);
+    fixture = TestBed.createComponent(ClearBtnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

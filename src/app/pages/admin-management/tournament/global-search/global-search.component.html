@@ -1,0 +1,12 @@
+<div class="input-group">
+  <input type="text"
+         class="form-control"
+         placeholder="Search tournaments..."
+         aria-describedby="basic-addon2"
+         id="search"
+         [(ngModel)]="searchText"
+         (ngModelChange)="updateSearchText($event)"
+>
+    <app-search-btn   (click)="updateSearchText(searchText)"
+                      (keypress)="updateSearchText(searchText)"></app-search-btn>
+</div>

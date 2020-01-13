@@ -1,163 +1,121 @@
-import {ChangeDetectorRef, Component, Input, OnInit, OnDestroy, Output, EventEmitter, OnChanges} from '@angular/core';
+import {Component,  Input,  OnInit,  Output,  EventEmitter,  OnChanges, ViewChild} from '@angular/core';
 import {Tournament} from '../../../../shared/models/tournament';
 import {TournamentService} from '../../../../core/services/tournament.service';
-import {Subject} from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
+import {AddUpdateDialogComponent} from '../add-update-dialog/add-update-dialog.component';
 import {filter} from 'rxjs/operators';
-import {UpdateDialogComponent} from '../update-dialog/update-dialog.component';
+import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
+import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
+import {SearchPipe} from '../../../../shared/pipes/search.pipe';
 
-declare  var  require: any;
 @Component({
   selector: 'app-tournament-table',
   templateUrl: './tournament-table.component.html',
   styleUrls: ['./tournament-table.component.sass']
 })
-export class TournamentTableComponent implements OnInit, OnDestroy, OnChanges {
-  imgAdd = require('../../../../shared/images/add.png');
+
+export class TournamentTableComponent implements OnInit, OnChanges {
   @Input() groupFilters: object;
-  @Input() searchByKeyword: string;
-  @Input() tournaments: Tournament[];
-  filteredTours : Tournament[];
-  // @Input() bookedTournaments: Booking[];
-  tournament: Tournament;
-  // booking: Booking;
-  dtOptions: any = {};
-  dtTrigger: Subject<any> = new Subject();
+  @Input() searchText: string;
   selectedRow: number;
-  updateStr = 'Updating tournament';
-  addString = 'New tournament';
-  tourHeaders: string[];
-  // bookHeaders: string[];
-  deleteDialogRef: MatDialogRef<DeleteDialogComponent>;
-  addUpdateDialogRef: MatDialogRef<UpdateDialogComponent>;
+
+  tournamentHeader: string[];
+  tournaments: Tournament[];
+
+  addUpdateDialog: MatDialogRef<AddUpdateDialogComponent>;
+  deleteDialog: MatDialogRef<DeleteDialogComponent>;
+
+  dataSource = new MatTableDataSource<Tournament>([]);
+  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor( private tournamentService: TournamentService,
-               //     private bookingService: BookingService,
-               private ref: ChangeDetectorRef,
-               private dialog: MatDialog
+               private dialog: MatDialog,
+               private filterPipe: FilterPipe,
+               private searchPipe: SearchPipe,
   ) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      responsive: true,
-      retrieve: true,
-      select: true,
-    };
-
-   this.getTournaments();
-//    this.getBookings();
+    this.getTournaments();
   }
+
+  updateDataSource() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    if (this.groupFilters) {
+      this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
+    } else  {
+      this.dataSource.data = this.tournaments;
+    }
+}
 
   getTournaments() {
-    this.tournamentService.getTournaments().subscribe(res => {
+    this.tournamentService.getAll().subscribe(res => {
       this.tournaments = res;
-
-      this.filteredTours = res;
-      this.tourHeaders = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
-      this.dtTrigger.next();
+      this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
+      this.tournamentHeader.push('action');
+      this.updateDataSource();
     });
   }
-  /*
-  getBookings() {
-    this.bookingService.getBookedTournaments().subscribe(res => {
-      this.bookedTournaments = res;
-      this.bookHeaders = (this.bookedTournaments && this.bookedTournaments.length > 0) ? Object.keys(this.bookedTournaments[0]) : [];
 
+  deleteTournament(id: number) {
+    this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
+      hasBackdrop: false,
     });
-  }
-*/
-  changeItem($event) {
-    if ($event.action === 'Delete') {
-      this.openDeleteDialog();
-      this.deleteDialogRef
-        .afterClosed()
-        .pipe(filter(name => name))
-        .subscribe(name => {
-            this.deleteItem($event.id);
+    this.deleteDialog
+      .afterClosed()
+      .pipe(filter(name => name))
+      .subscribe(name => {
+        this.tournamentService.delete(id).subscribe(
+          data => {
+         this.getTournaments();
           }
         );
-    } else if ($event.action === 'Update') {
-      this.tournamentService.getTournamentById($event.id).subscribe(res => {
-        this.tournament = res;
-        this.openAddOrUpdateDialog(this.tournament, this.updateStr, true);
-        this.addUpdateDialogRef
-          .afterClosed()
-          .pipe(
-            filter(tour => tour)
-          )
-          .subscribe(tour => {
-            console.log(tour);
-            this.updateItem(tour);
-          });
       });
-    } else {
-      const newTournament = new Tournament();
-      this.openAddOrUpdateDialog(newTournament, this.addString, false);
-      this.addUpdateDialogRef
+  }
+
+  openAddUpdateDialog(selectedTournament: Tournament, action: string){
+      this.addUpdateDialog = this.dialog.open(AddUpdateDialogComponent, {
+        hasBackdrop: false,
+        width: '500px',
+        minWidth: '250px',
+        data: {
+           dialogTitle: (action === 'Add') ? 'New Tournament' : 'Update Tournament',
+           isUpdated: (action === 'Add') ? false : true,
+           selectedTournament,
+        }
+      });
+      this.addUpdateDialog
         .afterClosed()
         .pipe(
           filter(tour => tour)
         )
         .subscribe(tour => {
-          console.log(tour);
-          this.addItem(tour);
+          if (action === 'Add') {
+            tour.id = 0;
+            this.tournamentService.add(tour).subscribe(data => {
+              this.getTournaments();
+            });
+          } else if (action === 'Update') {
+            this.tournamentService.update(tour).subscribe( data => {
+              this.getTournaments();
+            });
+          }
         });
+  }
+
+  ngOnChanges(): void {
+    console.log(this.searchText);
+    if (this.groupFilters) {
+      this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
+      if (this.searchText) {
+        this.dataSource.data  = this.searchPipe.transform(this.dataSource.data, this.searchText, Object.keys(this.tournaments[0]));
+      }
+    } else if (this.searchText || this.searchText === ''){
+      this.dataSource.data  = this.searchPipe.transform(this.tournaments, this.searchText, Object.keys(this.tournaments[0]));
     }
-  }
 
-  deleteItem(id) {
-    console.log('del');
-    this.tournamentService.deleteTournament(id).subscribe(
-      data => {
-        this.getTournaments();
-      }
-    );
-  }
-
-  updateItem(tour: Tournament) {
-    console.log('upd');
-    this.tournamentService.updateTournament(tour).subscribe(
-      data => {
-        this.getTournaments();
-      }
-    );
-  }
-  addItem(tour: Tournament) {
-    tour.id = 0;
-    console.log('upd');
-    this.tournamentService.addTournament(tour).subscribe(
-      data => {
-        this.getTournaments();
-      }
-    );
-  }
-
-  openDeleteDialog() {
-    this.deleteDialogRef = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
-      width: '35%',
-    });
-    return this.deleteDialogRef;
-  }
-
-  openAddOrUpdateDialog(tour: Tournament, titleStr: string, isupdated: boolean) {
-    this.addUpdateDialogRef = this.dialog.open(UpdateDialogComponent, {
-      hasBackdrop: false,
-      width: '35%',
-      data: {
-        isUpdated: isupdated,
-        title: titleStr,
-        id: tour ? tour.id : '',
-        name: tour ? tour.name : '',
-        description: tour ? tour.description : '',
-        preparationTerm: tour ? tour.preparationTerm : '',
-      },
-
-    });
-    return this.addUpdateDialogRef;
   }
 
   getSelectedRow(item): void {
@@ -165,39 +123,9 @@ export class TournamentTableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   isSelected(item: number): boolean {
-    if (!this.selectedRow) {
+    if (this.selectedRow < 0) {
       return false;
     }
-
-    return this.selectedRow ===  item ? true : false;
-
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
-
-  ngOnChanges(): void {
-    if (this.groupFilters) {this.filterTable(this.groupFilters, this.tournaments); }
-  }
-  filterTable(filters: any, users: any): void {
-    this.filteredTours = this.tournaments;
-    const keys = Object.keys(filters);
-    const filterUser = user => {
-      let result = keys.map(key => {
-
-          if(user[key]) {
-            return String(user[key]).toLowerCase().startsWith(String(filters[key]).toLowerCase())
-          } else {
-            return false;
-          }
-
-      });
-
-      result = result.filter(it => it !== undefined);
-
-      return result.reduce((acc, cur: any) => { return acc & cur }, 1)
-    }
-    this.filteredTours = this.tournaments.filter(filterUser);
+    return this.selectedRow === item;
   }
 }
