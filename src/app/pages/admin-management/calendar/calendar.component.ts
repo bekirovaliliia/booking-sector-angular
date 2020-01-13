@@ -1,8 +1,8 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef
+  TemplateRef,
+  ViewEncapsulation
 } from '@angular/core';
 import {
   startOfDay,
@@ -20,6 +20,7 @@ import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
+  CalendarMonthViewBeforeRenderEvent,
   CalendarView
 } from 'angular-calendar';
 
@@ -41,11 +42,12 @@ const colors: any = {
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
 
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+export class CalendarComponent {
 
   view: CalendarView = CalendarView.Month;
 
@@ -116,8 +118,17 @@ export class CalendarComponent {
         afterEnd: true
       },
       draggable: true
-    }
+    },
   ];
+
+  beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
+    renderEvent.body.forEach(day => {
+      const dayOfMonth = day.date.getDate();
+      if (dayOfMonth > 12 && dayOfMonth < 17 && day.inMonth) {
+        day.cssClass = 'bg-pink';
+      }
+    });
+  }
 
   activeDayIsOpen: boolean = true;
 
@@ -157,7 +168,6 @@ export class CalendarComponent {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   addEvent(): void {
