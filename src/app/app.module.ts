@@ -56,6 +56,9 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
+import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     imports: [
@@ -86,7 +89,8 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
         MatSortModule,
         MatTableModule,
         MatPaginatorModule,
-        
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+
     ],
   declarations: [
     AppComponent,
@@ -116,17 +120,17 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
     UserBookingsComponent,
     ActualBookingsTableComponent,
     ActualBookingsRowComponent,
-  
+    WithoutBookingsComponent,
     SearchPipe,
     NumberOnlyDirective,
+    CalendarComponent,
+
+    ],
+    exports: [
+        NumberOnlyDirective,
     WithoutBookingsComponent,
     ],
 
-  exports: [
-    NumberOnlyDirective
-
-
-  ],
   providers: [
     DatePipe,
     FilterPipe,

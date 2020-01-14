@@ -15,7 +15,6 @@ export class AddUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AddUpdateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data,
     private toastr: ToastrService,
-
   ) { }
 
   getForm() {
