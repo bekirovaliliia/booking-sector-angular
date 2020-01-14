@@ -1,7 +1,7 @@
-
-<button mat-raised-button (click)="getApproved()">Approved</button>
-<button mat-raised-button (click)="getDeclined()"> Declined </button>
-<button mat-raised-button (click)="getExpired()">History</button>
+<button mat-raised-button (click)="getByCondition(null, false)">New</button>
+<button mat-raised-button (click)="getByCondition(true, false)">Approved</button>
+<button mat-raised-button (click)="getByCondition(false, false)"> Declined </button>
+<button mat-raised-button (click)="getByCondition(true, true)">History</button>
 
 <mat-form-field style="width: 100%">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
@@ -30,12 +30,17 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td class="sectors-cell" mat-cell *matCellDef="let booking">
-      <ng-container *ngIf="this.isApproved===false && this.isExpired === false">
-        <button mat-button (click)="approveBooing(booking)">Approve</button>
-        <button mat-button>Decline</button>
+      <ng-container *ngIf="this.isApproved===null && this.isExpired === false">
+        <button mat-button (click)="updateBooking(booking, true)">Approve</button>
+        <button mat-button (click)="updateBooking(booking, felse)")>Decline</button>
       </ng-container>
       <ng-container *ngIf="this.isApproved === true && this.isExpired === false">
-        <button mat-button (click)="approveBooing(booking)">Decline</button>
+        <button mat-button (click)="approveBooking(booking, null)">Discard</button>
+        <button mat-button (click)="deleteBooking(booking)">Delete</button>
+      </ng-container>
+      <ng-container *ngIf="this.isApproved === false && this.isExpired === false">
+        <button mat-button (click)="approveBooking(booking, null)">Discard</button>
+        <button mat-button (click)="deleteBooking(booking)">Delete</button>
       </ng-container>
       <ng-container *ngIf="this.isExpired === true">
         <button mat-button (click)="deleteBooking(booking)">Delete</button>

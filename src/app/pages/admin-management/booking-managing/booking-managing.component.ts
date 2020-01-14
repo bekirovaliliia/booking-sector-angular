@@ -15,7 +15,7 @@ import {filter} from 'rxjs/operators';
 })
 export class BookingManagingComponent implements OnInit {
 
-  isApproved = false;
+  isApproved = null;
   isExpired = false;
 
   updateDialog: MatDialogRef<DeleteDialogComponent>;
@@ -32,11 +32,11 @@ export class BookingManagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadBookings(this.isApproved, this.isExpired);
+    this.loadBookings();
   }
 
-  loadBookings(isApproved: boolean, isExpired: boolean) {
-    this.bookingService.getBookings(isApproved, isExpired).subscribe(
+  loadBookings() {
+    this.bookingService.getBookings(this.isApproved, this.isExpired).subscribe(
       bookings => {
         this.dataSource = new MatTableDataSource<Booking>(bookings);
         this.dataSource.paginator = this.paginator;
@@ -48,11 +48,10 @@ export class BookingManagingComponent implements OnInit {
           default: return item[property];
         }
         };
-        console.log(this.dataSource);
       });
   }
 
-  approveBooing(booking: Booking) {
+  updateBooking(booking: Booking, isApproved: boolean) {
     this.updateDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
       width: '35%',
@@ -61,9 +60,9 @@ export class BookingManagingComponent implements OnInit {
       .afterClosed()
       .pipe(filter(name => name))
       .subscribe(name => {
-        booking.isApproved = !booking.isApproved;
+        booking.isApproved = isApproved;
         this.bookingService.updateBooking(booking).subscribe( data => {
-        this.loadBookings(this.isApproved, this.isExpired);
+        this.loadBookings();
       });
       });
   }
@@ -77,7 +76,7 @@ export class BookingManagingComponent implements OnInit {
       .pipe(filter(name => name))
       .subscribe(name => {
         this.bookingService.deleteBooking(booking.id).subscribe( data => {
-          this.loadBookings(this.isApproved, this.isExpired);
+          this.loadBookings();
         });
       });
   }
@@ -86,20 +85,9 @@ export class BookingManagingComponent implements OnInit {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  getApproved() {
-    this.isApproved = true;
-    this.isExpired = false;
-    this.loadBookings(this.isApproved, this.isExpired);
-  }
-
-  getDeclined() {
-    this.isApproved = false;
-    this.isExpired = false;
-    this.loadBookings(this.isApproved, this.isExpired);
-  }
-
-  getExpired() {
-    this.isExpired = true;
-    this.loadBookings(this.isApproved, this.isExpired);
+  getByCondition(isApproved: boolean, isExpired: boolean){
+    this.isApproved = isApproved;
+    this.isExpired = isExpired;
+    this.loadBookings();
   }
 }
