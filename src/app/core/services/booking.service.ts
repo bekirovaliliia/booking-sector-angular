@@ -20,7 +20,19 @@ export class BookingService {
   getBookings() {
     return this.http.get<Booking[]>(this.apiURl);
   }
-
+  getUserBookings(id:number, isActual: boolean) {
+    return this.http.get<Booking[]>(`${this.urlAddress}bookings/byUserId/${id}/${isActual}`).pipe(
+      map((data: Booking[]) =>
+        data.map(
+          (item: any) =>
+            new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
+              this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
+              item.sectorId, item.userId, item.isApproved,
+            )
+        )
+      )
+    );
+  }
   updateBooking(booking: Booking): Observable<any> {
     console.log(booking);
     const httpOptions = {
@@ -47,6 +59,17 @@ export class BookingService {
 
   getBookingById(id: number): Observable<Booking> {
     return this.http.get<Booking>(`${this.urlAddress}bookings/${id}`)
+      .pipe(
+        map((item: Booking) =>
+          new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
+            this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
+            item.sectorId, item.userId,
+          )
+        )
+      );
+  }
+  getBookingTournamentById(id: number): Observable<Booking> {
+    return this.http.get<Booking>(`${this.urlAddress}bookings/tournaments/${id}`)
       .pipe(
         map((item: Booking) =>
           new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),

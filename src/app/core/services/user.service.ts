@@ -13,10 +13,22 @@ export class UserService {
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
+  getUserPhoto(id:number) {
+    const httpOptions = {
+      headers: new HttpHeaders({responseType: 'text'})
+   
+    };
+    return this.http.get<string>(`${this.apiURl}/UserPhoto/${id}`, httpOptions);
+  }
   checkPass(pass: string, id:number){
    return this.http.get<Boolean>(`${this.apiURl}/${id}/${pass}`);
   }
-
+  resetPass(email: string){
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(`${this.apiURl}/email/${email}`, httpOptions);
+  }
   updateUserPassword(user :User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -24,7 +36,13 @@ export class UserService {
     console.log(user);
    return this.http.put(`${this.apiURl}/pass/${user.id}`, user, httpOptions);
   }
-
+  updateUserPhoto(file : FormData) {
+    const httpOptions = {
+      //headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
+    };
+    console.log(file);   
+   return this.http.put(`${this.apiURl}/photo/${46}`, file, httpOptions).subscribe(res => console.log('File Uploaded ...'));
+  }
   updateUser(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})

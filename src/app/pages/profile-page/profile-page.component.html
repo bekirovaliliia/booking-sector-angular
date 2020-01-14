@@ -1,12 +1,29 @@
 <br>
 <div class="form-group row">
-    <div class="form-group col-md-3 justify-content-center">
-            <app-user-menu></app-user-menu>
+    <div class="form-group col-md-2 justify-content-center">
+          <div class="form-group d-inline-flex flex-row-reverse justify-content-center" style="margin-top: 70px;">
+                    <button class="btn 
+                                   btn-primary 
+                                   btn-lg"
+                                   (click)="profile()"
+                                   >Profile</button> 
+                </div>
+                <div class="form-group d-inline-flex flex-row-reverse justify-content-center">
+                    <button class="btn btn-primary btn-lg disabled" 
+                            style="margin-top: 20px;"
+                            (click)="bookings()">
+                            Bookings
+                    </button>
+                </div>
     </div>
-    <div class="form-group col-md-3">
+    
+        <div class="form-group col-md-3" *ngIf=isProfile>
             <app-photo></app-photo>
-    </div>
-    <div class="form-group col-md-5">
+        </div>
+        <div class="form-group col-md-5" *ngIf=isProfile>
             <app-user-profile-text></app-user-profile-text>
-    </div>
+        </div>
+        <div *ngIf=isBookings class="form-group col-md-9">
+                <app-user-bookings ></app-user-bookings>
+        </div>
 </div>

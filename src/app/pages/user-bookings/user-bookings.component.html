@@ -1,0 +1,17 @@
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#actual">Actual</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#history">History</a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <app-actual-bookings-table [isActual]=true
+             id="actual" 
+             class="tab-pane fade in active"></app-actual-bookings-table>
+             
+    <app-actual-bookings-table [isActual]=false
+             id="history" 
+            class="tab-pane fade in active"></app-actual-bookings-table>
+  </div>

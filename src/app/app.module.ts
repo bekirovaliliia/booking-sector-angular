@@ -18,8 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {TextFieldModule} from '@angular/cdk/text-field';
-import {MatDialogModule, MatDialogRef} from '@angular/material';
-
+import {MatDialogModule} from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -31,8 +31,8 @@ import { MainSectionComponent } from './pages/home-page/components/main-section/
 import { FormSectionComponent } from './pages/home-page/components/form-section/form-section.component';
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
-import { DeleteDialogComponent } from './pages/admin-management/tournament/delete-dialog/delete-dialog.component';
-import { UpdateDialogComponent } from './pages/admin-management/tournament/update-dialog/update-dialog.component';
+import { DeleteDialogComponent } from './shared/dialogs/delete-dialog/delete-dialog.component';
+import { AddUpdateDialogComponent } from './pages/admin-management/tournament/add-update-dialog/add-update-dialog.component';
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -42,7 +42,23 @@ import { MarkerExplanationComponent } from './pages/home-page/components/marker-
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 
+import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
+import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
+import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
+import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
+import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
+
+import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {FilterPipe} from './shared/pipes/filter.pipe';
+import { SearchPipe } from './shared/pipes/search.pipe';
+import { NumberOnlyDirective } from './shared/directives/number-only.directive';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
+import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     imports: [
@@ -68,7 +84,13 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
         RouterModule,
         AppRoutingModule,
         ToastrModule.forRoot(),
-        CommonModule   
+        CommonModule,
+        SidebarModule.forRoot(),
+        MatSortModule,
+        MatTableModule,
+        MatPaginatorModule,
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+
     ],
   declarations: [
     AppComponent,
@@ -87,23 +109,39 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     FormSectionComponent,
     HomePageComponent,
     DeleteDialogComponent,
-    UpdateDialogComponent,
+    AddUpdateDialogComponent,
     FilterSectorsComponent,
     FooterComponent,
     SignInComponent,
     SignUpComponent,
-    MarkerExplanationComponent
-  ],
-  exports: [
+    MarkerExplanationComponent,
+    SetNewPasswordComponent,
+    ResetPasswordComponent,
+    UserBookingsComponent,
+    ActualBookingsTableComponent,
+    ActualBookingsRowComponent,
+    WithoutBookingsComponent,
+    SearchPipe,
+    NumberOnlyDirective,
+    CalendarComponent,
 
-  ],
+    ],
+    exports: [
+        NumberOnlyDirective,
+    WithoutBookingsComponent,
+    ],
+
   providers: [
     DatePipe,
+    FilterPipe,
+    SearchPipe,
   ],
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, UpdateDialogComponent, ChangePasswordNewComponent]
+
+  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
+
 })
 export class AppModule { }
 
