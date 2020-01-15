@@ -43,11 +43,22 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 
+import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
+import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
+import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
+import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
+import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
+
+import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
-import {SidebarModule} from 'ng-sidebar';
-
+import { NumberOnlyDirective } from './shared/directives/number-only.directive';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
+import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     imports: [
@@ -76,7 +87,11 @@ import {SidebarModule} from 'ng-sidebar';
         CommonModule,
         MatTableModule,
         SidebarModule.forRoot(),
-      MatSortModule
+        MatSortModule,
+        MatTableModule,
+        MatPaginatorModule,
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+
     ],
   declarations: [
     AppComponent,
@@ -101,18 +116,33 @@ import {SidebarModule} from 'ng-sidebar';
     SignInComponent,
     SignUpComponent,
     MarkerExplanationComponent,
+    SetNewPasswordComponent,
+    ResetPasswordComponent,
+    UserBookingsComponent,
+    ActualBookingsTableComponent,
+    ActualBookingsRowComponent,
+    WithoutBookingsComponent,
     SearchPipe,
-  ],
-  exports: [
-  ],
+    NumberOnlyDirective,
+    CalendarComponent,
+
+    ],
+    exports: [
+        NumberOnlyDirective,
+    WithoutBookingsComponent,
+    ],
+
   providers: [
     DatePipe,
-    FilterPipe
+    FilterPipe,
+    SearchPipe,
   ],
   bootstrap: [
     AppComponent,
   ],
-  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
+
+  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
+
 })
 export class AppModule { }
 

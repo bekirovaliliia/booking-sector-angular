@@ -18,9 +18,8 @@ export class TournamentService {
         map((data: Tournament[]) =>
           data.map(
             (item: any) =>
-              new Tournament(item.id, item.name, item.description, item.preparationTerm)
+              new Tournament(item.id, item.name, item.description, item.preparationTerm, item.isBooked)
           )
-
         )
       );
   }
@@ -30,7 +29,7 @@ export class TournamentService {
     return this.http.get<Tournament>(`${this.urlAddress}tournaments/${id}`)
       .pipe(
         map((item: Tournament) =>
-            new Tournament(item.id, item.name, item.description, item.preparationTerm)
+            new Tournament(item.id, item.name, item.description, item.preparationTerm, item.isBooked)
         )
       );
   }

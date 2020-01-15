@@ -6,6 +6,9 @@ import {AddUpdateDialogComponent} from '../add-update-dialog/add-update-dialog.c
 import {filter} from 'rxjs/operators';
 import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
+import {SearchPipe} from '../../../../shared/pipes/search.pipe';
+import {BookingService} from '../../../../core/services/booking.service';
+
 @Component({
   selector: 'app-tournament-table',
   templateUrl: './tournament-table.component.html',
@@ -15,6 +18,7 @@ import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 export class TournamentTableComponent implements OnInit, OnChanges {
   @Input() groupFilters: object;
   @Input() searchText: string;
+  @Input() withoutDatasText = 'No records found!';
   selectedRow: number;
 
   tournamentHeader: string[];
@@ -24,42 +28,41 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   deleteDialog: MatDialogRef<DeleteDialogComponent>;
 
   dataSource = new MatTableDataSource<Tournament>([]);
+
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
+  this.dataSource.paginator = paginator;
+  }
+  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort){
+    this.dataSource.sort = sort;
+  }
 
   constructor( private tournamentService: TournamentService,
+               private bookingService: BookingService,
                private dialog: MatDialog,
-               private  filterPipe: FilterPipe
+               private filterPipe: FilterPipe,
+               private searchPipe: SearchPipe,
   ) { }
 
   ngOnInit() {
     this.getTournaments();
   }
 
-  updateDataSource() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    if (this.groupFilters) {
-      this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
-    } else  {
-      this.dataSource.data = this.tournaments;
-    }
-}
-
   getTournaments() {
     this.tournamentService.getAll().subscribe(res => {
       this.tournaments = res;
       this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
-      this.tournamentHeader.push('action');
-      this.updateDataSource();
+      if (this.groupFilters) {
+        this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
+      } else  {
+        this.dataSource.data = this.tournaments;
+      }
     });
   }
 
   deleteTournament(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
-      width: '35%',
     });
     this.deleteDialog
       .afterClosed()
@@ -76,7 +79,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   openAddUpdateDialog(selectedTournament: Tournament, action: string){
       this.addUpdateDialog = this.dialog.open(AddUpdateDialogComponent, {
         hasBackdrop: false,
-        width: '35%',
+        width: '500px',
+        minWidth: '250px',
         data: {
            dialogTitle: (action === 'Add') ? 'New Tournament' : 'Update Tournament',
            isUpdated: (action === 'Add') ? false : true,
@@ -102,17 +106,16 @@ export class TournamentTableComponent implements OnInit, OnChanges {
         });
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////
-
   ngOnChanges(): void {
     if (this.groupFilters) {
       this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
-    } else if (this.searchText) {
-    this.dataSource.filter  = this.searchText;
+      if (this.searchText) {
+        this.dataSource.data  = this.searchPipe.transform(this.dataSource.data, this.searchText, Object.keys(this.tournaments[0]));
+      }
+    } else if (this.searchText || this.searchText === ''){
+      this.dataSource.data  = this.searchPipe.transform(this.tournaments, this.searchText, Object.keys(this.tournaments[0]));
     }
   }
-
-//////////////////////////////////////////////////////////////////////////////////////////////
 
   getSelectedRow(item): void {
     this.selectedRow = item;

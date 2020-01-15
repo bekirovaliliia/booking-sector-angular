@@ -1,14 +1,14 @@
 <form novalidate
       [formGroup]="form">
   <h5>Filter tournaments</h5>
-  <div class="row">
-<div>
+  <div class="d-inline">
+    <div>
       <input matInput type="text"
              formControlName="name"
              class="form-control"
              placeholder="Name"
       />
-</div>
+    </div>
     <div>
       <input matInput type="number"
              formControlName="preparationTerm"
@@ -18,9 +18,8 @@
     </div>
 
     <div>
-
-     <app-search-btn (selectedToSearch)="search(form.value)" [searchBtnText]="searchBtn"></app-search-btn>
-
+      <app-search-btn (selectedToSearch)="search(form.value)" [searchBtnText]="searchBtn"></app-search-btn>
+      <app-clear-btn (selectedToClear)="clear()" class="float-right" ></app-clear-btn>
     </div>
   </div>
 

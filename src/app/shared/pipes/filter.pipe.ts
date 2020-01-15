@@ -10,16 +10,16 @@ export class FilterPipe implements PipeTransform {
     if (filters === null) { return items; }
     console.log(items);
 
-    const filterTour = (tour) => {
-      let result = keys.map(key => {
-        if (tour[key]) {
-          return String(tour[key]).toLowerCase().startsWith(String(filters[key]).toLowerCase())
+    const filterResults = (item) => {
+      const result = keys.map(key => {
+        if (item[key]) {
+          return String(item[key]).toLowerCase().startsWith(String(filters[key]).toLowerCase());
         } else {
           return false;
         }
       });
-      return result.reduce((acc, cur: any) => { return acc & cur }, 1);
+      return result.reduce((acc, cur: any) => acc && cur, 1);
     };
-    return items.filter(filterTour);
+    return items.filter(filterResults);
   }
 }

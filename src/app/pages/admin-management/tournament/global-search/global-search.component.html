@@ -1,5 +1,4 @@
-<div class="input-group mb-3" xmlns="http://www.w3.org/1999/html">
-
+<div class="input-group">
   <input type="text"
          class="form-control"
          placeholder="Search tournaments..."
@@ -8,8 +7,6 @@
          [(ngModel)]="searchText"
          (ngModelChange)="updateSearchText($event)"
 >
-  <div class="input-group-append">
     <app-search-btn   (click)="updateSearchText(searchText)"
-                      (keypress)="updateSearchText(searchText)" ></app-search-btn>
-  </div>
+                      (keypress)="updateSearchText(searchText)"></app-search-btn>
 </div>

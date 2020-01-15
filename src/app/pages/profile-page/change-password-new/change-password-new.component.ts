@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
@@ -93,7 +92,8 @@ showPasswordSaved() {
   
   constructor(private userService: UserService,
     private toastr: ToastrService,
-    public dialogRef: MatDialogRef<ChangePasswordNewComponent>){  }
+    public dialogRef: MatDialogRef<ChangePasswordNewComponent>,
+     ){  }
 
      ngOnInit() 
     {

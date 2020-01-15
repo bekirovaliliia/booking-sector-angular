@@ -32,4 +32,11 @@ export class FilterComponent implements OnInit {
     Object.keys(filters).forEach(key => (filters[key] === ' ' || filters[key] === null) ? delete filters[key] : key);
     this.groupFilters.emit(filters);
   }
+
+  clear(): void {
+    this.form.reset();
+    this.form.value.name = '';
+    this.form.value.preparationTerm = '';
+    this.groupFilters.emit(this.form.value);
+  }
 }

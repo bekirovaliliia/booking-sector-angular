@@ -11,9 +11,11 @@ import { TournamentTableComponent } from './tournament/tournament-table/tourname
 import { FilterComponent } from './tournament/filter/filter.component';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
+
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
 import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
@@ -26,8 +28,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { GlobalSearchComponent } from './tournament/global-search/global-search.component';
 import {MatSortModule} from '@angular/material/sort';
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
+import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
+import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import {MatButtonModule} from "@angular/material/button";
     UpdateBtnComponent,
     SearchBtnComponent,
     GlobalSearchComponent,
+    ClearBtnComponent,
+    WithoutDatasComponent,
   ],
   exports: [
     AdminSidebarComponent,
@@ -70,8 +74,6 @@ import {MatButtonModule} from "@angular/material/button";
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatInputModule,
-    MatButtonModule,
   ]
 })
 export class AdminManagementModule { }
