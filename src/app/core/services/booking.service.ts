@@ -32,7 +32,17 @@ export class BookingService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`, httpOptions);
+    if(booking.isApproved === null){
+      console.log(booking);
+      console.log('perevirka ne taka vzhe i huinia');
+      return this.http.put(`${this.urlAddress}bookings/${booking.id}`, httpOptions);
+    return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+                          , httpOptions);
+    } else {
+      console.log('im here')
+      return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+                          , httpOptions);
+    }
   }
 
 

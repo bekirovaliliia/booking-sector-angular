@@ -30,16 +30,16 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td class="sectors-cell" mat-cell *matCellDef="let booking">
-      <ng-container *ngIf="this.isApproved===null && this.isExpired === false">
+      <ng-container *ngIf="this.isApproved === null && this.isExpired === false">
         <button mat-button (click)="updateBooking(booking, true)">Approve</button>
-        <button mat-button (click)="updateBooking(booking, felse)")>Decline</button>
+        <button mat-button (click)="updateBooking(booking, false)">Decline</button>
       </ng-container>
       <ng-container *ngIf="this.isApproved === true && this.isExpired === false">
-        <button mat-button (click)="approveBooking(booking, null)">Discard</button>
+        <button mat-button (click)="updateBooking(booking, null)">Discard</button>
         <button mat-button (click)="deleteBooking(booking)">Delete</button>
       </ng-container>
       <ng-container *ngIf="this.isApproved === false && this.isExpired === false">
-        <button mat-button (click)="approveBooking(booking, null)">Discard</button>
+        <button mat-button (click)="updateBooking(booking, null)">Discard</button>
         <button mat-button (click)="deleteBooking(booking)">Delete</button>
       </ng-container>
       <ng-container *ngIf="this.isExpired === true">
