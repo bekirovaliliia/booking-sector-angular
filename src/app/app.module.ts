@@ -140,7 +140,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
 
 })
 export class AppModule { }

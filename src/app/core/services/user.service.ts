@@ -27,7 +27,7 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.apiURl}/email/${email}`, httpOptions);
+    return this.http.get<boolean>(`${this.apiURl}/reset/${email}`, httpOptions);
   }
   updateUserPassword(user :User) {
     const httpOptions = {
@@ -36,12 +36,12 @@ export class UserService {
     console.log(user);
    return this.http.put(`${this.apiURl}/pass/${user.id}`, user, httpOptions);
   }
-  updateUserPhoto(file : FormData) {
+  updateUserPhoto(file : FormData, id:number) {
     const httpOptions = {
       //headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
     };
     console.log(file);   
-   return this.http.put(`${this.apiURl}/photo/${46}`, file, httpOptions).subscribe(res => console.log('File Uploaded ...'));
+   return this.http.put(`${this.apiURl}/photo/${id}`, file, httpOptions).subscribe(res => console.log('File Uploaded ...'));
   }
   updateUser(user: User) {
     const httpOptions = {

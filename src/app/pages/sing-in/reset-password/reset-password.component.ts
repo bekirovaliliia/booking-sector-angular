@@ -29,7 +29,7 @@ export class ResetPasswordComponent implements OnInit {
     else
     {
     this.userService.resetPass(this.email).subscribe();
-    this.toastr.success("Check your email and set a new password");
+    this.toastr.success("Check your email");
     this.email = "";
     this.dialogRef.close();
     }
