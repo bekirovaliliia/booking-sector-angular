@@ -39,12 +39,13 @@ const routes: Routes = [
     pathMatch: 'full' 
   },
 
-  {path: 'set-password', 
-  component: SetNewPasswordComponent
+  { path: 'set-password', 
+    component: SetNewPasswordComponent
   },
   
-  {path: 'user-bookings', 
-  component : UserBookingsComponent
+  { path: 'user-bookings', 
+    component : UserBookingsComponent,
+    canActivate: [UserGuard]
   },
 ];
 
