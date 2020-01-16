@@ -9,6 +9,7 @@ import { PhotoComponent } from './pages/profile-page/photo/photo.component';
 import { UserMenuComponent } from './pages/profile-page/user-menu/user-menu.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ChangePasswordNewComponent } from './pages/profile-page/change-password-new/change-password-new.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -21,7 +22,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatDialogModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
 import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
@@ -59,6 +60,9 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
+import { UserGuard } from './core/guards/user.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 @NgModule({
     imports: [
@@ -67,6 +71,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
         BrowserModule,
         HttpClientModule,
         NgxMaskModule.forRoot(),
+        NgxSpinnerModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatPasswordStrengthModule.forRoot(),
@@ -136,6 +141,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     DatePipe,
     FilterPipe,
     SearchPipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
+    UserGuard,
+    AdminGuard
   ],
   bootstrap: [
     AppComponent,
