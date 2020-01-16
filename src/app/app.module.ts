@@ -52,11 +52,6 @@ import { ActualBookingsRowComponent } from './pages/user-bookings/actual-booking
 
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-<<<<<<< HEAD
-import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
-import { UserGuard } from './core/guards/user.guard';
-import { AdminGuard } from './core/guards/admin.guard';
-=======
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
@@ -65,7 +60,9 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
->>>>>>> 88647405aa6dcbc19b655238c45d7bccd44b87ff
+import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
+import { UserGuard } from './core/guards/user.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 @NgModule({
     imports: [
@@ -142,14 +139,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
   providers: [
     DatePipe,
-<<<<<<< HEAD
+    FilterPipe,
+    SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
     UserGuard,
     AdminGuard
-=======
-    FilterPipe,
-    SearchPipe,
->>>>>>> 88647405aa6dcbc19b655238c45d7bccd44b87ff
   ],
   bootstrap: [
     AppComponent,
