@@ -1,26 +1,4 @@
 
-<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table">
-  <thead class="thead-dark" >
-    <tr>
-      <th *ngFor="let s of sectorHeaders">
-        {{s}}
-      </th>
-    </tr>
-  </thead>
-  <tbody *ngIf="this.sectors?.length > 0" >
-    <tr *ngFor="let sector of this.sectors; let i = index"
-      app-sector-table-row
-      [sector] = "sector"
-      [headers] = "sectorHeaders">
-    </tr>
-  </tbody>
-
-  <tbody *ngIf="this.sectors?.length == 0">
-    <tr>
-      <td colspan="3" class="no-data-available">No data!</td>
-    </tr>
-  <tbody>
-</table>
 
 
 
