@@ -107,6 +107,15 @@ export class TokenStore {
     return tokenPayload.login;
   }
 
+  getId(): number{
+    if (this.isTokenExpired()) {
+      return -1;
+    }
+
+    const tokenPayload = this.getTokenPayload(this.getRefreshToken());
+    return Number(tokenPayload.sub);
+  }
+
   getRole(): Role {
     if (this.isTokenExpired()) {
       return Role.Guest;

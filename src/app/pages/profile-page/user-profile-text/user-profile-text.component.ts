@@ -4,6 +4,7 @@ import {UserService} from '../../../core/services/user.service';
 import { ChangePasswordNewComponent } from '../change-password-new/change-password-new.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 @Component({
   selector: 'app-user-profile-text',
   templateUrl: './user-profile-text.component.html',
@@ -36,12 +37,15 @@ export class UserProfileTextComponent implements OnInit {
     this.is_edit = false;
     this.showInfoEdited();
   }
+  get userId(): number {
+    return this.authService.getId();
+  }
   constructor(private userService: UserService,
               private dialog: MatDialog,
-              private toastr: ToastrService) { }  
+              private toastr: ToastrService,
+              private authService: AuthenticationService) { }  
   user: User;  
-  id = 46;
   ngOnInit() {
-    return this.userService.getUser(this.id).subscribe(data => this.user = data);
+    return this.userService.getUser(this.userId).subscribe(data => this.user = data);
   }
 }

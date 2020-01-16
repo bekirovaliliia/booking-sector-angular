@@ -10,7 +10,7 @@ import { stringify } from 'querystring';
   templateUrl: './navbar.component.html'
 })
 export class NavigationBarComponent {
-  constructor(private authService: AuthenticationService, private userService: UserService) {}
+  constructor(private authService: AuthenticationService) {}
 
   logout() {
     this.authService.logout();
