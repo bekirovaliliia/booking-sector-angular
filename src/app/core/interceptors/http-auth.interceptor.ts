@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { catchError, tap, switchMap, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { Token } from 'src/app/shared/models/Token';
+import { Token } from 'src/app/shared/models/token';
 import { TokenStore } from '../helpers/token-store';
 
 @Injectable()
