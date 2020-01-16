@@ -60,9 +60,13 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+<<<<<<< HEAD
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+=======
 import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+>>>>>>> 010cbd2ddd0fd128634c22cb73a5591de49d4e26
 
 @NgModule({
     imports: [
@@ -96,6 +100,7 @@ import { AdminGuard } from './core/guards/admin.guard';
         MatTableModule,
         MatPaginatorModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+        AngularFontAwesomeModule
 
     ],
   declarations: [
