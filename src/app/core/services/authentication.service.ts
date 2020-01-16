@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Token } from 'src/app/shared/models/Token';
+import { Token } from 'src/app/shared/models/token';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize } from 'rxjs/operators';
