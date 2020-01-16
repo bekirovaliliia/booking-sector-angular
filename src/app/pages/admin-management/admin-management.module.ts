@@ -68,6 +68,8 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     MatCheckboxModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
     DataTablesModule,
     MatTableModule,
     MatPaginatorModule,
