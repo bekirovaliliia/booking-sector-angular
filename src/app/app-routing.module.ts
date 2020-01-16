@@ -6,14 +6,33 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import {SignInComponent} from './pages/sing-in/sign-in.component';
 import {SignUpComponent} from './pages/sign-up/sign-up.component';
+import { AdminGuard } from './core/guards/admin.guard';
+import { UserGuard } from './core/guards/user.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomePageComponent},
-  { path: 'admin', component: AdminManagementComponent},
-  { path: 'profile', component: ProfilePageComponent},
-  {path: 'sign-in', component: SignInComponent},
-  {path: 'sign-up', component: SignUpComponent},
-  { path: '',
+  { path: 'home', 
+    component: HomePageComponent
+  },
+
+  { path: 'admin', 
+    component: AdminManagementComponent,
+    canActivate: [AdminGuard]
+  },
+
+  { path: 'profile', 
+    component: ProfilePageComponent,
+    canActivate: [UserGuard]
+  },
+
+  { path: 'sign-in', 
+    component: SignInComponent
+  },
+
+  { path: 'sign-up', 
+    component: SignUpComponent
+  },
+
+  { path: '**',
     redirectTo: '/home',
     pathMatch: 'full' },
 ];
