@@ -23,7 +23,6 @@ export class AuthenticationService {
   ) {}
 
   login(phone: string, password: string): Observable<Token> {
-    this.spinner.show();
       return this.http
       .post<Token>(`${environment.urlAddress}authentication/authenticate`, {
         phone,
@@ -31,8 +30,7 @@ export class AuthenticationService {
       })
       .pipe(
         tap(token => this.handleSuccess(token)),
-        catchError(error => this.handleError(error)),
-        finalize(() => this.spinner.hide())
+        catchError(error => this.handleError(error))
       );
   }
 
@@ -99,5 +97,9 @@ export class AuthenticationService {
 
   getLogin(): string {
     return this.tokenStore.getLogin();
+  }
+  
+  getId(): number{
+    return this.tokenStore.getId();
   }
 }

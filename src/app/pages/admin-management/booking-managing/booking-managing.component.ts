@@ -36,7 +36,7 @@ export class BookingManagingComponent implements OnInit {
   }
 
   loadBookings() {
-    this.bookingService.getBookings(this.isApproved, this.isExpired).subscribe(
+    this.bookingService.getBookings().subscribe(
       bookings => {
         this.dataSource = new MatTableDataSource<Booking>(bookings);
         this.dataSource.paginator = this.paginator;
