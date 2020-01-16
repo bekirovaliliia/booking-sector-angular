@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Booking} from '../../shared/models/booking.model';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
-import {map} from 'rxjs/operators';
-import {DatePipe} from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Booking } from '../../shared/models/booking.model';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { map } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
+import {SectorService} from '../services/sector.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingService {
-
-  apiURl = 'https://localhost:44393/api/bookings';
   public urlAddress: string = environment.urlAddress;
-  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
-  getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
-    if (!isExpired) {
-      return this.http.get<Booking[]>(this.apiURl).pipe(
-        map(booking => booking.filter(b => b.isApproved === isApproved)),
-        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > Date.now()))
-      );
-    } else if (isExpired) {
-      return this.http.get<Booking[]>(this.apiURl).pipe(
-        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < Date.now()))
-      );
-    }
+  booking: Observable<Booking>;
+
+  constructor(
+    private http: HttpClient, 
+    private datePipe: DatePipe
+    ) { }
+
+  getBookings() {
+    return this.http.get<Booking[]>(`${this.urlAddress}bookings`);
   }
   getUserBookings(id:number, isActual: boolean) {
     return this.http.get<Booking[]>(`${this.urlAddress}bookings/byUserId/${id}/${isActual}`).pipe(
@@ -40,6 +36,7 @@ export class BookingService {
       )
     );
   }
+
   updateBooking(booking: Booking): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -96,11 +93,18 @@ export class BookingService {
       );
   }
 
+  bookSector(booking: Booking)
+  {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post<Booking>(`${this.urlAddress}bookings/`, booking, httpOptions);
+  }
+
   deleteBooking(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     return this.http.delete(`${this.urlAddress}bookings/${id}`);
-
   }
 }
