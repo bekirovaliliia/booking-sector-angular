@@ -1,0 +1,1 @@
+export enum Role {Guest = 'Guest', Admin = 'Admin', User = 'User'};

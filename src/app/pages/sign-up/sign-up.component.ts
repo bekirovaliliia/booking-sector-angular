@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../core/services/user.service';
-import {User} from '../../shared/models/user-model';
-import {UserEmail} from "../../shared/models/user-email-model";
-import {ToastrService} from "ngx-toastr";
+import { UserService } from '../../core/services/user.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { UserEmail } from '../../shared/models/user-email-model';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { SignUpValidators } from './sign-up.validators';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -12,16 +19,13 @@ import { Router } from '@angular/router';
   providers: [UserService]
 })
 export class SignUpComponent implements OnInit {
-user: UserEmail;
-userData: User;
-number = '';
-email = '';
-lastName = '';
-firstName = '';
-password = '';
-passwordRepeat = '';
+  registerForm: FormGroup;
+  submitted = false;
+  user: UserEmail;
+  errorHandling = false;
 
   constructor(
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
     public router: Router
@@ -29,14 +33,78 @@ passwordRepeat = '';
     this.user = new UserEmail();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // @ts-ignore
+    this.registerForm = this.formBuilder.group(
+      {
+        firstName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30),
+          Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}'),
+          SignUpValidators.validateName
+        ]),
+        lastName: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30),
+          Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}'),
+          SignUpValidators.validateName
+        ]),
+        number: new FormControl('', [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('[0]{1}[0-9]{9}'),
+          SignUpValidators.validatePhone
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          SignUpValidators.validateEmail
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+          SignUpValidators.validatePassword
+        ]),
+        repeatPassword: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6)
+        ])
+      },
+      {
+        validators: [
+          SignUpValidators.validatePasswords('password', 'repeatPassword')
+        ]
+      }
+    );
+  }
 
-  signUp() {
-   this.user.lastname = this.lastName;
-    this.user.firstname = this.firstName;
-    this.user.email = this.email;
-    this.user.phone = this.number;
-    this.user.password = this.password;
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.registerForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    // stop here if form is invalid
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+    if (this.errorHandling === true) {
+      this.toastr.error('Your number or email already exists! !', 'Oops :(');
+
+      return;
+    }
+
+    this.user.lastname = this.registerForm.get(['lastName']).value;
+    this.user.firstname = this.registerForm.get(['firstName']).value;
+    this.user.email = this.registerForm.get(['email']).value;
+    this.user.phone = this.registerForm.get(['number']).value;
+    this.user.password = this.registerForm.get(['password']).value;
 
 
     this.userService.insertUser(this.user).subscribe(
@@ -47,18 +115,42 @@ passwordRepeat = '';
       err => {
         this.toastr.error('Your registration failed!', 'Oops :(');
       });
-
   }
 
   checkNumber() {
-    if(this.number.length > 9){
-      this.userService.getUserByNumber(this.number).subscribe(res => {
-        this.toastr.error('A user with this number already exists!', 'Error!');
-        this.number = '';
-    });
+    if (this.registerForm.get(['number']).value.length === 10) {
+      this.userService
+        .getUserByNumber(this.registerForm.get(['number']).value)
+        .subscribe(
+          res => {
+              this.toastr.error(
+                'A user with this number already exists!',
+                'Error!'
+              );
+              this.errorHandling = true;
+            },
+      error => {
+              this.errorHandling = false;
+            }
+        );
+    }
   }
-}
 
-
-
+  checkEmail() {
+    if (this.registerForm.controls.email.errors === null) {
+      this.userService
+        .getUserByEmail(this.registerForm.get(['email']).value)
+        .subscribe(res => {
+          this.toastr.error(
+            'A user with this email already exists!',
+            'Error!'
+          );
+            this.errorHandling = true;
+        },
+          error => {
+            this.errorHandling = false;
+          }
+        );
+    }
+  }
 }

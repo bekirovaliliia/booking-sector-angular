@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Booking } from '../../shared/models/booking.model';
 import { Observable } from 'rxjs';
@@ -6,6 +7,14 @@ import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
 import {SectorService} from '../services/sector.service';
+=======
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Booking} from '../../shared/models/booking.model';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
+import {map} from 'rxjs/operators';
+import {DatePipe} from '@angular/common';
+>>>>>>> master
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +29,22 @@ export class BookingService {
     private datePipe: DatePipe
     ) { }
 
+<<<<<<< HEAD
   getBookings() {
     return this.http.get<Booking[]>(`${this.urlAddress}bookings`);
+=======
+  getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
+    if (!isExpired) {
+      return this.http.get<Booking[]>(this.apiURl).pipe(
+        map(booking => booking.filter(b => b.isApproved === isApproved)),
+        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > Date.now()))
+      );
+    } else if (isExpired) {
+      return this.http.get<Booking[]>(this.apiURl).pipe(
+        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < Date.now()))
+      );
+    }
+>>>>>>> master
   }
   getUserBookings(id:number, isActual: boolean) {
     return this.http.get<Booking[]>(`${this.urlAddress}bookings/byUserId/${id}/${isActual}`).pipe(
@@ -38,11 +61,20 @@ export class BookingService {
   }
 
   updateBooking(booking: Booking): Observable<any> {
-    console.log(booking);
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.urlAddress}bookings/tournaments/${booking.id}`, booking, httpOptions);
+    if(booking.isApproved === null){
+      console.log(booking);
+      console.log('perevirka ne taka vzhe i huinia');
+      return this.http.put(`${this.urlAddress}bookings/${booking.id}`, httpOptions);
+    return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+                          , httpOptions);
+    } else {
+      console.log('im here')
+      return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+                          , httpOptions);
+    }
   }
 
 

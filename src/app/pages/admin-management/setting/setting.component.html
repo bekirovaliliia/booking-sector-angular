@@ -2,13 +2,7 @@
   <div  *ngFor="let setting of setting$" class="form-group text-center">
     <label class="h4" [for]="setting.name">{{setting.name}}</label>
     <div class="input-group">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-info" (click)="setting.value = +setting.value - 1">-</button>
-      </div>
-      <input type="text" class="form-control text-center" [name]="setting.value" [(ngModel)]="setting.value" [id]="setting.name">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-info" (click)="setting.value = +setting.value + 1">+</button>
-      </div>
+      <input type="number" min="1" max="5" class="form-control text-center" [name]="setting.value" [(ngModel)]="setting.value" [id]="setting.name">
     </div>
   </div>
   <button type="submit" class="btn btn-info btn-block" (click)="saveChanges()">Submit</button>

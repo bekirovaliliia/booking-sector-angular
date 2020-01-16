@@ -14,7 +14,7 @@ declare  var  require: any;
 export class PhotoComponent implements OnInit {
   defaultPhoto = require('../../../shared/images/defaultPhoto.png');
   user: User;
-  id = 46;
+  id = 106;
   selectedFile: File;
   constructor(private userService: UserService,
               private sanitizer:DomSanitizer,
@@ -50,7 +50,7 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
-        this.userService.updateUserPhoto(formData);
+        this.userService.updateUserPhoto(formData, this.id);
         await sleep(5000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();

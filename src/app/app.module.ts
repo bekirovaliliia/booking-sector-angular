@@ -9,6 +9,7 @@ import { PhotoComponent } from './pages/profile-page/photo/photo.component';
 import { UserMenuComponent } from './pages/profile-page/user-menu/user-menu.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { ChangePasswordNewComponent } from './pages/profile-page/change-password-new/change-password-new.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -21,7 +22,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatDialogModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
 import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
@@ -41,6 +42,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { MarkerExplanationComponent } from './pages/home-page/components/marker-explanation/marker-explanation.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import {MatTableModule} from '@angular/material/table';
 
 import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
@@ -53,12 +55,15 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {FilterPipe} from './shared/pipes/filter.pipe';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
-import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
+import { UserGuard } from './core/guards/user.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 @NgModule({
     imports: [
@@ -67,6 +72,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
         BrowserModule,
         HttpClientModule,
         NgxMaskModule.forRoot(),
+        NgxSpinnerModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatPasswordStrengthModule.forRoot(),
@@ -85,11 +91,13 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
         AppRoutingModule,
         ToastrModule.forRoot(),
         CommonModule,
+        MatTableModule,
         SidebarModule.forRoot(),
         MatSortModule,
         MatTableModule,
         MatPaginatorModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+        AngularFontAwesomeModule
 
     ],
   declarations: [
@@ -135,12 +143,15 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     DatePipe,
     FilterPipe,
     SearchPipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
+    UserGuard,
+    AdminGuard
   ],
   bootstrap: [
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
 
 })
 export class AppModule { }

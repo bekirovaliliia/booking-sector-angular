@@ -20,8 +20,12 @@ export class ActualBookingsTableComponent implements OnInit {
   imgTrash = require('../../../shared/images/trash.png');
   dataSource = new MatTableDataSource<Booking>([]);
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
+  this.dataSource.paginator = paginator;
+  }
+  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort){
+    this.dataSource.sort = sort;
+  }
   booking: Booking;
   userId:number = 1;
   @Input() isActual:boolean = false;
@@ -56,10 +60,7 @@ export class ActualBookingsTableComponent implements OnInit {
     console.log(this.hasBookings);
     });
   }
-  updateDataSource() {
-    
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  updateDataSource() {  
     this.dataSource.data = this.bookings.reverse();
 }
   saveIdToDelete(id: number){
