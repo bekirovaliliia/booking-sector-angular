@@ -18,7 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
-import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
+
 import { AddBtnComponent } from '../../shared/buttons/add-btn/add-btn.component';
 import { DataTablesModule} from 'angular-datatables';
 import { DeleteBtnComponent } from '../../shared/buttons/delete-btn/delete-btn.component';
@@ -44,7 +44,6 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     FilterPipe,
     SectorTableComponent,
     SectorComponent,
-    SectorTableRowComponent,
     AddBtnComponent,
     DeleteBtnComponent,
     UpdateBtnComponent,
