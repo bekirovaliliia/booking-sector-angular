@@ -30,6 +30,7 @@ import { GlobalSearchComponent } from './tournament/global-search/global-search.
 import {MatSortModule} from '@angular/material/sort';
 import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
 import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.component';
+import { DeleteSectorDialogComponent } from './sector/delete-sector-dialog/delete-sector-dialog.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     GlobalSearchComponent,
     ClearBtnComponent,
     WithoutDatasComponent,
+    DeleteSectorDialogComponent,
   ],
   exports: [
     AdminSidebarComponent,
