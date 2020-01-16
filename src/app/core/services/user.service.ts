@@ -61,4 +61,7 @@ export class UserService {
   getUserByNumber(number: string) {
     return this.http.get<User>(`${this.apiURl}/phone/${number}`);
   }
+  getUserByEmail(email: string) {
+    return this.http.get<User>(`${this.apiURl}/email/${email}`);
+  }
 }
