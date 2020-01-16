@@ -21,14 +21,13 @@ export class NavigationBarComponent {
   }
 
   get isLoggedOut(): boolean {
-    console.log("123123");
     return !this.isLoggedIn;
   }
 
   get userLogin(): string {
     return this.authService.getLogin();
   }
-  
+
   get isAdmin(): boolean {
     return (this.authService.getRole() == "Admin");
   }
