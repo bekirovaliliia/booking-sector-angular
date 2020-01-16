@@ -38,7 +38,7 @@
             class="form-control"
             [ngClass]="{
               'is-invalid':
-                f.number.errors && (f.number.touched || f.number.dirty)
+                f.number.errors && ((f.number.touched || f.number.dirty) || submitted)
             }"
             [showMaskTyped]="true"
             prefix="+38"
@@ -46,7 +46,7 @@
             (ngModelChange)="checkNumber()"
           />
           <div
-            *ngIf="f.number.errors && (f.number.touched || f.number.dirty)"
+            *ngIf="f.number.errors && ((f.number.touched || f.number.dirty) || submitted)"
             class="invalid-feedback"
           >
             <div *ngIf="f.number.errors.required">Number is required</div>
@@ -69,10 +69,10 @@
             class="form-control"
             [ngClass]="{
               'is-invalid':
-                f.firstName.errors && (f.firstName.touched || f.firstName.dirty)
+                f.firstName.errors && ((f.firstName.touched || f.firstName.dirty) || submitted)
             }"
           />
-          <div *ngIf=" f.firstName.errors && (f.firstName.touched || f.firstName.dirty)" class="invalid-feedback">
+          <div *ngIf=" f.firstName.errors && ((f.firstName.touched || f.firstName.dirty) || submitted)" class="invalid-feedback">
             <div *ngIf="f.firstName.errors?.required">
               First Name is required
             </div>
@@ -82,7 +82,7 @@
             <div *ngIf="f.firstName.errors?.maxLength">
               Maximum name length 30 characters
             </div>
-            <div *ngIf="f.firstName.errors?.pattern">
+            <div *ngIf="f.firstName.errors?.pattern || f.firstName.errors.validateName">
               Invalid name entry
             </div>
           </div>
@@ -95,14 +95,12 @@
             class="form-control"
             [ngClass]="{
               'is-invalid':
-                (f.lastName.errors &&
-                  (f.lastName.touched || f.lastName.dirty)) ||
-                registerForm.hasError('validateName')
+                f.lastName.errors &&
+                  ((f.lastName.touched || f.lastName.dirty) || submitted)
             }"
           />
           <div *ngIf="
-              (f.lastName.errors && (f.lastName.touched || f.lastName.dirty)) ||
-              registerForm.hasError('validateName')"  class="invalid-feedback">
+              f.lastName.errors && ((f.lastName.touched || f.lastName.dirty) || submitted)"  class="invalid-feedback">
             <div *ngIf="f.lastName.errors?.required">Last Name is required</div>
             <div *ngIf="f.lastName.errors?.minLength">
               Minimum surname length 3 characters
@@ -110,28 +108,27 @@
             <div *ngIf="f.lastName.errors?.maxLength">
               Maximum surname length 3 characters
             </div>
-            <div *ngIf="f.lastName.errors?.pattern">
+            <div *ngIf="f.lastName.errors?.pattern || f.lastName.errors.validateName">
               Invalid surname entry
-            </div>
-            <div *ngIf="registerForm.hasError('validateName')">
-              Name and surname cannot be the same
             </div>
           </div>
         </div>
         <div class="form-group">
           <label>Password</label>
+          <div class="input-group" id="show_hide_password">
           <input
             [type]="show ? 'text' : 'password'"
             formControlName="password"
             class="form-control"
             [ngClass]="{
               'is-invalid':
-                f.password.errors && (f.password.touched || f.password.dirty)
+                f.password.errors && ((f.password.touched || f.password.dirty) || submitted)
             }"
             (click)="show=!show"
           />
 
-          <div *ngIf="f.password.errors && (f.password.touched || f.password.dirty)" class="invalid-feedback">
+          </div>
+          <div *ngIf="f.password.errors && ((f.password.touched || f.password.dirty) || submitted)" class="invalid-feedback">
             <div *ngIf="f.password.errors?.required">Password is required</div>
             <div *ngIf="f.password.errors?.minlength"> Password must be at least 6 characters</div>
             <div *ngIf="f.password.errors?.validatePassword">Password too easy</div>

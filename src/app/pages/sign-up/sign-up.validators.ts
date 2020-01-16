@@ -57,10 +57,20 @@ export class SignUpValidators {
     }
     return null;
   }
+  static validateName(c: FormControl) {
+    const name = c.value;
+    const dublicate = Array(name.length + 1).join(name[0]);
 
+    if (name === dublicate) {
+      return {
+        validateName: true
+      };
+    }
+    return null;
+  }
   static validatePassword(c: FormControl) {
     const password = c.value;
-    if (password.length > 5) {
+    if (password.length > 5 && password.length < 10) {
       if (
         password.includes('111111') ||
         password.includes('123456') ||
@@ -68,12 +78,19 @@ export class SignUpValidators {
         password.includes('000000') ||
         password.includes('password')
       ) {
+
+        return { validatePassword: true };
+      }
+      const dublicate = Array(password.length + 1).join(password[0]);
+      if (dublicate === password) {
         return { validatePassword: true };
       }
     }
 
     return null;
   }
+
+
 
   static validatePasswords(passwordForm: string, confirmForm: string) {
     return (group: FormGroup): { [key: string]: any } => {
@@ -89,21 +106,6 @@ export class SignUpValidators {
         if (password !== confirm) {
           return {
             validatePasswords: true
-          };
-        }
-      }
-    };
-  }
-
-  static validateName(firstNameForm: string, lastNameForm: string) {
-    return (group: FormGroup): { [key: string]: any } => {
-      const firstName = group.controls[firstNameForm].value;
-      const lastName = group.controls[lastNameForm].value;
-
-      if (firstName !== '' && lastName !== '') {
-        if (firstName === lastName) {
-          return {
-            validateName: true
           };
         }
       }

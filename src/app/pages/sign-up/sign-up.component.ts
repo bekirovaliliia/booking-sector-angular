@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -40,13 +41,15 @@ export class SignUpComponent implements OnInit {
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(30),
-          Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')
+          Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}'),
+          SignUpValidators.validateName
         ]),
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(30),
-          Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')
+          Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}'),
+          SignUpValidators.validateName
         ]),
         number: new FormControl('', [
           Validators.required,
@@ -73,7 +76,6 @@ export class SignUpComponent implements OnInit {
       },
       {
         validators: [
-          SignUpValidators.validateName('firstName', 'lastName'),
           SignUpValidators.validatePasswords('password', 'repeatPassword')
         ]
       }
@@ -88,13 +90,31 @@ export class SignUpComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
+
     if (this.registerForm.invalid) {
       return;
     }
     if (this.errorHandling === true) {
+      this.toastr.error('Your number or email already exists! !', 'Oops :(');
+
       return;
     }
-    console.log('succes');
+
+    this.user.lastname = this.registerForm.get(['lastName']).value;
+    this.user.firstname = this.registerForm.get(['firstName']).value;
+    this.user.email = this.registerForm.get(['email']).value;
+    this.user.phone = this.registerForm.get(['number']).value;
+    this.user.password = this.registerForm.get(['password']).value;
+
+
+    this.userService.insertUser(this.user).subscribe(
+      res => {
+        this.toastr.success('Your registration was successful! Please check your email.', 'Congratulations!');
+        this.router.navigate(['sign-in']);
+      },
+      err => {
+        this.toastr.error('Your registration failed!', 'Oops :(');
+      });
   }
 
   checkNumber() {

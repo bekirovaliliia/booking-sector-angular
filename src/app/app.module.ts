@@ -59,6 +59,7 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
     imports: [
@@ -91,6 +92,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
         MatTableModule,
         MatPaginatorModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+        AngularFontAwesomeModule
 
     ],
   declarations: [
