@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Booking} from '../../shared/models/booking.model';
-import {Setting} from '../../shared/models/setting.model';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {Tournament} from '../../shared/models/tournament';
 import {map} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
 
@@ -17,16 +15,46 @@ export class BookingService {
   public urlAddress: string = environment.urlAddress;
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
-  getBookings() {
-    return this.http.get<Booking[]>(this.apiURl);
+  getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
+    if (!isExpired) {
+      return this.http.get<Booking[]>(this.apiURl).pipe(
+        map(booking => booking.filter(b => b.isApproved === isApproved)),
+        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > Date.now()))
+      );
+    } else if (isExpired) {
+      return this.http.get<Booking[]>(this.apiURl).pipe(
+        map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < Date.now()))
+      );
+    }
   }
-
+  getUserBookings(id:number, isActual: boolean) {
+    return this.http.get<Booking[]>(`${this.urlAddress}bookings/byUserId/${id}/${isActual}`).pipe(
+      map((data: Booking[]) =>
+        data.map(
+          (item: any) =>
+            new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
+              this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
+              item.sectorId, item.userId, item.isApproved,
+            )
+        )
+      )
+    );
+  }
   updateBooking(booking: Booking): Observable<any> {
-    console.log(booking);
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.urlAddress}bookings/tournaments/${booking.id}`, booking, httpOptions);
+    if(booking.isApproved === null){
+      console.log(booking);
+      console.log('perevirka ne taka vzhe i huinia');
+      return this.http.put(`${this.urlAddress}bookings/${booking.id}`, httpOptions);
+    return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+                          , httpOptions);
+    } else {
+      console.log('im here')
+      return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+                          , httpOptions);
+    }
   }
 
 
@@ -47,6 +75,17 @@ export class BookingService {
 
   getBookingById(id: number): Observable<Booking> {
     return this.http.get<Booking>(`${this.urlAddress}bookings/${id}`)
+      .pipe(
+        map((item: Booking) =>
+          new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),
+            this.datePipe.transform( item.bookingEnd, 'MMM dd, yyyy'),
+            item.sectorId, item.userId,
+          )
+        )
+      );
+  }
+  getBookingTournamentById(id: number): Observable<Booking> {
+    return this.http.get<Booking>(`${this.urlAddress}bookings/tournaments/${id}`)
       .pipe(
         map((item: Booking) =>
           new Booking(item.id, item.tournamentId, this.datePipe.transform(item.bookingStart, 'MMM dd, yyyy'),

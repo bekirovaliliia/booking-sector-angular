@@ -6,4 +6,5 @@ export class User {
     firstname: string;
     phone: string;
     password: string;
+    photo: File;
 }

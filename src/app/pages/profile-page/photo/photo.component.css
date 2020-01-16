@@ -1,6 +1,9 @@
   input[type="file"] {
     display: none;
 }
+.profile-avatar{
+height: 160px;
+border-radius: 15px;}
 
 .custom-file-upload {
     width: 150px;
