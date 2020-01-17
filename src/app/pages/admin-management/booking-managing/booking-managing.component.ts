@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BookingService} from '../../../core/services/booking.service';
-<<<<<<< HEAD
 import {Subject} from 'rxjs';
-=======
 import {Booking} from '../../../shared/models/booking.model';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -10,7 +8,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DeleteDialogComponent} from '../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {filter} from 'rxjs/operators';
->>>>>>> b4002a6ef0e07440ebc978f302456a02b593835a
 
 @Component({
   selector: 'app-booking-managing',

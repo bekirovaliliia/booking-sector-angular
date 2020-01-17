@@ -3,13 +3,8 @@ import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-<<<<<<< HEAD
-//import {sleep} from 'sleep-ts';
-=======
 import {sleep} from 'sleep-ts';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
->>>>>>> b4002a6ef0e07440ebc978f302456a02b593835a
-
 declare  var  require: any;
 @Component({
   selector: 'app-photo',
@@ -26,7 +21,7 @@ export class PhotoComponent implements OnInit {
   }
 
   constructor(private userService: UserService,
-              private sanitizer:DomSanitizer,
+              private sanitizer: DomSanitizer,
               private toastr: ToastrService,
               private authService: AuthenticationService) { }
   getPhoto(){
@@ -43,7 +38,7 @@ export class PhotoComponent implements OnInit {
     else return this.defaultPhoto;
   }
 
- 
+
   async onFileChanged(event) {
     this.selectedFile = event.target.files[0];
     if(this.selectedFile.type!="image/jpeg")
@@ -51,7 +46,7 @@ export class PhotoComponent implements OnInit {
       this.toastr.error("Choose image");
     }
     else
-      if (this.selectedFile.size>2097152) 
+      if (this.selectedFile.size>2097152)
       {
         this.toastr.error("Size of file must be less than 2Mb");
       }
@@ -60,13 +55,8 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
-<<<<<<< HEAD
         this.userService.updateUserPhoto(formData);
-     //   await sleep(5000);
-=======
-        this.userService.updateUserPhoto(formData, this.userId);
         await sleep(5000);
->>>>>>> b4002a6ef0e07440ebc978f302456a02b593835a
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }
