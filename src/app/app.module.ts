@@ -63,7 +63,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
-
+import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
+import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
 @NgModule({
     imports: [
         FormsModule,
@@ -130,7 +131,8 @@ import { AdminGuard } from './core/guards/admin.guard';
     SearchPipe,
     NumberOnlyDirective,
     CalendarComponent,
-
+    DeleteSectorDialogComponent,
+    AddUpdateSectorDialogComponent
     ],
     exports: [
         NumberOnlyDirective,
@@ -149,7 +151,7 @@ import { AdminGuard } from './core/guards/admin.guard';
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DeleteSectorDialogComponent, AddUpdateSectorDialogComponent]
 
 })
 export class AppModule { }
