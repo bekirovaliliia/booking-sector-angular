@@ -31,7 +31,6 @@ import {MatSortModule} from '@angular/material/sort';
 import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
 import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.component';
 
-
 @NgModule({
   declarations: [
     AdminSidebarComponent,
@@ -52,6 +51,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     GlobalSearchComponent,
     ClearBtnComponent,
     WithoutDatasComponent,
+
   ],
   exports: [
     AdminSidebarComponent,
@@ -74,6 +74,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+
   ]
 })
 export class AdminManagementModule { }

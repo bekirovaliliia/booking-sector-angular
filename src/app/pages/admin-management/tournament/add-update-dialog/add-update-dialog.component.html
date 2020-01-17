@@ -2,24 +2,45 @@
 <mat-dialog-content >
   <h5 mat-dialog-title> {{this.data.dialogTitle}} </h5>
 
-  <mat-form-field *ngIf="this.data.isUpdated" class = " d-inline">
-    <input matInput
-           readonly
-           formControlName="id"
-           placeholder="Id" >
-  </mat-form-field>
-
   <mat-form-field class = " d-inline">
     <input matInput
            required
            formControlName="name"
            placeholder="Name">
   </mat-form-field>
-
   <div *ngIf="form.controls['name'].hasError('maxlength')" class="text-danger">
     Max length of name is 30 symbols!
   </div>
 
+  <mat-form-field class = " d-inline">
+    <input type="text" matInput required
+           ngxDaterangepickerMd
+           autocomplete="off"
+           formControlName="selected"
+           [minDate]="minDate"
+           [maxDate]="maxDate"
+
+           [keepCalendarOpeningWithRange]="true"
+           [showClearButton]="true"
+           [alwaysShowCalendars]="true"
+           [linkedCalendars]="true"
+           [locale]="{applyLabel: 'Done', format: 'MMM DD, YYYY'}"
+           placeholder="Tournament start & end"
+           class =  "border-0 w-100"
+           [showRangeLabelOnInput]="true"
+           [dateLimit]="20" />
+  </mat-form-field>
+
+  <mat-form-field class="d-inline">
+    <input matInput appNumberOnly required
+           type="number"
+           autocomplete="off"
+           formControlName="preparationTerm"
+           placeholder="Preparation Term">
+  </mat-form-field>
+  <div *ngIf="form.controls['preparationTerm'].hasError('max')" class="text-danger">
+    Preparation term can`t be more than 30 days!
+  </div>
 
   <mat-form-field class = " d-inline">
     <textarea
@@ -28,26 +49,9 @@
       placeholder="Description">
     </textarea>
   </mat-form-field>
-
   <div *ngIf="form.controls['description'].hasError('maxlength')" class="text-danger">
-   Max length of description is 100 symbols!
+   Max length of description is 500 symbols!
   </div>
-
-
-  <mat-form-field class = " d-inline" *ngIf="!this.data.selectedTournament.isBooked" >
-    <input
-      matInput
-      appNumberOnly
-      required
-      type="number"
-      formControlName="preparationTerm"
-      placeholder="Preparation Term">
-  </mat-form-field>
-
-  <div *ngIf="form.controls['preparationTerm'].hasError('max')" class="text-danger">
-    Preparation term can`t be more than 30 days!
-  </div>
-
 
 </mat-dialog-content>
 

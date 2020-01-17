@@ -8,7 +8,6 @@ export class FilterPipe implements PipeTransform {
   transform(items: any[], filters: object, keys: string[]): any[] {
     if (!items) { return []; }
     if (filters === null) { return items; }
-    console.log(items);
 
     const filterResults = (item) => {
       const result = keys.map(key => {

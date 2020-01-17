@@ -5,7 +5,6 @@ import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import {sleep} from 'sleep-ts';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-
 declare  var  require: any;
 @Component({
   selector: 'app-photo',
@@ -22,7 +21,7 @@ export class PhotoComponent implements OnInit {
   }
 
   constructor(private userService: UserService,
-              private sanitizer:DomSanitizer,
+              private sanitizer: DomSanitizer,
               private toastr: ToastrService,
               private authService: AuthenticationService) { }
   getPhoto(){
@@ -39,7 +38,7 @@ export class PhotoComponent implements OnInit {
     else return this.defaultPhoto;
   }
 
- 
+
   async onFileChanged(event) {
     this.selectedFile = event.target.files[0];
     if(this.selectedFile.type!="image/jpeg")
@@ -47,7 +46,7 @@ export class PhotoComponent implements OnInit {
       this.toastr.error("Choose image");
     }
     else
-      if (this.selectedFile.size>2097152) 
+      if (this.selectedFile.size>2097152)
       {
         this.toastr.error("Size of file must be less than 2Mb");
       }
@@ -56,7 +55,7 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
-        this.userService.updateUserPhoto(formData, this.userId);
+        this.userService.updateUserPhoto(formData);
         await sleep(5000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
