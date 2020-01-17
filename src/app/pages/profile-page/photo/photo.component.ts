@@ -3,7 +3,7 @@ import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import {sleep} from 'sleep-ts';
+//import {sleep} from 'sleep-ts';
 
 declare  var  require: any;
 @Component({
@@ -51,7 +51,7 @@ export class PhotoComponent implements OnInit {
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
         this.userService.updateUserPhoto(formData);
-        await sleep(5000);
+     //   await sleep(5000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }

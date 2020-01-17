@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Booking} from '../../../shared/models/booking.model';
 import {BookingService} from '../../../core/services/booking.service';
-import {Subject} from "rxjs";
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-booking-managing',

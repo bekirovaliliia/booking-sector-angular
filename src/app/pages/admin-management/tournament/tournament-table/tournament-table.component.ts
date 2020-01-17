@@ -8,6 +8,7 @@ import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/de
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../../../shared/pipes/search.pipe';
 import {BookingService} from '../../../../core/services/booking.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tournament-table',
@@ -24,7 +25,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   tournamentHeader: string[];
   tournaments: Tournament[];
 
-  addUpdateDialog: MatDialogRef<AddUpdateDialogComponent>;
+  addDialog: MatDialogRef<AddUpdateDialogComponent>;
+  updateDialog: MatDialogRef<AddUpdateDialogComponent>;
   deleteDialog: MatDialogRef<DeleteDialogComponent>;
 
   dataSource = new MatTableDataSource<Tournament>([]);
@@ -52,6 +54,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     this.tournamentService.getAll().subscribe(res => {
       this.tournaments = res;
       this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
+      this.tournamentHeader.push('action');
       if (this.groupFilters) {
         this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
       } else  {
@@ -76,33 +79,55 @@ export class TournamentTableComponent implements OnInit, OnChanges {
       });
   }
 
-  openAddUpdateDialog(selectedTournament: Tournament, action: string){
-      this.addUpdateDialog = this.dialog.open(AddUpdateDialogComponent, {
+  openAddDialog(selectedTournament: Tournament) {
+    selectedTournament.tournamentStart = moment().toString();
+    selectedTournament.tournamentEnd = moment().toString();
+
+    this.addDialog = this.dialog.open(AddUpdateDialogComponent, {
         hasBackdrop: false,
-        width: '500px',
+        width: '600px',
         minWidth: '250px',
         data: {
-           dialogTitle: (action === 'Add') ? 'New Tournament' : 'Update Tournament',
-           isUpdated: (action === 'Add') ? false : true,
+           dialogTitle: 'New Tournament',
+           isUpdated: false,
            selectedTournament,
         }
       });
-      this.addUpdateDialog
+    this.addDialog
         .afterClosed()
         .pipe(
           filter(tour => tour)
         )
         .subscribe(tour => {
-          if (action === 'Add') {
             tour.id = 0;
             this.tournamentService.add(tour).subscribe(data => {
               this.getTournaments();
             });
-          } else if (action === 'Update') {
-            this.tournamentService.update(tour).subscribe( data => {
-              this.getTournaments();
-            });
-          }
+          });
+  }
+
+  openUpdateDialog(selectedTournament: Tournament){
+    console.log(selectedTournament.tournamentStart);
+    this.updateDialog = this.dialog.open(AddUpdateDialogComponent, {
+      hasBackdrop: false,
+      width: '600px',
+      minWidth: '250px',
+      data: {
+        dialogTitle: `Update Tournament ${selectedTournament.id}`,
+        isUpdated: true,
+        selectedTournament,
+      }
+    });
+    this.updateDialog
+      .afterClosed()
+      .pipe(
+        filter(tour => tour)
+      )
+      .subscribe(tour => {
+        console.log(tour);
+          this.tournamentService.update(tour).subscribe( data => {
+            this.getTournaments();
+          });
         });
   }
 
