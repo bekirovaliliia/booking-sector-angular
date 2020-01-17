@@ -21,7 +21,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatDialogModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
 import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
@@ -56,6 +56,9 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
+import { AdminPageComponent } from './pages/admin-page/admin-page.component';
+import { SearchSectorsComponent } from './pages/admin-page/search-sectors/search-sectors.component';
+import {HttpErrorInterceptor} from './core/interceptors/http-error-interceptor.service';
 
 @NgModule({
     imports: [
@@ -119,17 +122,21 @@ import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings
     WithoutBookingsComponent,
     SearchPipe,
     NumberOnlyDirective,
+    AdminPageComponent,
+    SearchSectorsComponent,
 
     ],
-    exports: [
-        NumberOnlyDirective,
+  exports: [
+    NumberOnlyDirective,
     WithoutBookingsComponent,
-    ],
+    MainSectionComponent,
+  ],
 
   providers: [
     DatePipe,
     FilterPipe,
     SearchPipe,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
   ],
   bootstrap: [
     AppComponent,

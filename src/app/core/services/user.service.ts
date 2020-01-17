@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../shared/models/user-model';
-import {UserEmail} from "../../shared/models/user-email-model";
+import {UserEmail} from '../../shared/models/user-email-model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class UserService {
   getUserPhoto(id:number) {
     const httpOptions = {
       headers: new HttpHeaders({responseType: 'text'})
-   
+
     };
     return this.http.get<string>(`${this.apiURl}/UserPhoto/${id}`, httpOptions);
   }
@@ -40,7 +40,7 @@ export class UserService {
     const httpOptions = {
       //headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
     };
-    console.log(file);   
+    console.log(file);
    return this.http.put(`${this.apiURl}/photo/${46}`, file, httpOptions).subscribe(res => console.log('File Uploaded ...'));
   }
   updateUser(user: User) {
