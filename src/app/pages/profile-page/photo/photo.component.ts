@@ -3,7 +3,12 @@ import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+<<<<<<< HEAD
 //import {sleep} from 'sleep-ts';
+=======
+import {sleep} from 'sleep-ts';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+>>>>>>> b4002a6ef0e07440ebc978f302456a02b593835a
 
 declare  var  require: any;
 @Component({
@@ -14,13 +19,18 @@ declare  var  require: any;
 export class PhotoComponent implements OnInit {
   defaultPhoto = require('../../../shared/images/defaultPhoto.png');
   user: User;
-  id = 46;
   selectedFile: File;
+
+  get userId(): number {
+    return this.authService.getId();
+  }
+
   constructor(private userService: UserService,
               private sanitizer:DomSanitizer,
-              private toastr: ToastrService,) { }
+              private toastr: ToastrService,
+              private authService: AuthenticationService) { }
   getPhoto(){
-   this.userService.getUser(this.id).subscribe(data => this.user = data);
+   this.userService.getUser(this.userId).subscribe(data => this.user = data);
   }
 
   ngOnInit() {
@@ -50,8 +60,13 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
+<<<<<<< HEAD
         this.userService.updateUserPhoto(formData);
      //   await sleep(5000);
+=======
+        this.userService.updateUserPhoto(formData, this.userId);
+        await sleep(5000);
+>>>>>>> b4002a6ef0e07440ebc978f302456a02b593835a
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }

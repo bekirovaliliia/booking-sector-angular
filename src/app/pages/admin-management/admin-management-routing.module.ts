@@ -7,6 +7,7 @@ import {SettingComponent} from './setting/setting.component';
 import {TournamentComponent} from './tournament/tournament.component';
 import {BookingManagingComponent} from './booking-managing/booking-managing.component';
 import {AdminPageComponent} from '../admin-page/admin-page.component';
+import {CalendarComponent} from './calendar/calendar.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
         path: 'tournaments', component: TournamentComponent
       },
       {
-        path: 'managing', component: BookingManagingComponent
+        path: 'bookings', component: BookingManagingComponent
       },
       {
         path: 'sectors', component: SectorComponent
@@ -26,6 +27,9 @@ const routes: Routes = [
       {
         path: '', component: AdminPageComponent
       },
+      {
+        path: 'calendar', component: CalendarComponent
+      }
     ]
   }
 ];

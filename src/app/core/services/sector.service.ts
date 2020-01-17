@@ -8,10 +8,11 @@ import { map } from 'rxjs/operators';
 })
 export class SectorService {
 
+  private apiURL = 'https://localhost:44393/api/sectors';
   constructor(private http: HttpClient) {}
 
   getSectors(): Observable<Sector[]> {
-    return this.http.get<Sector[]>('https://localhost:44393/api/sectors')
+    return this.http.get<Sector[]>(this.apiURL)
       .pipe(
         map((data: Sector[]) =>
           data.map(
@@ -20,5 +21,9 @@ export class SectorService {
           )
         )
       );
+  }
+
+  getSectorIdBySectorNumber(sectorNumber: number){
+    return this.http.get<number>(`${this.apiURL}/byNumber/${sectorNumber}`);
   }
 }
