@@ -8,7 +8,6 @@ import {TournamentComponent} from './tournament/tournament.component';
 import {BookingManagingComponent} from './booking-managing/booking-managing.component';
 import {CalendarComponent} from './calendar/calendar.component';
 
-
 const routes: Routes = [
   {
     path: 'admin', component: AdminManagementComponent, children: [

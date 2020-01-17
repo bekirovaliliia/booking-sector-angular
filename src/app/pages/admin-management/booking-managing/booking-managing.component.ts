@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BookingService} from '../../../core/services/booking.service';
+import {Subject} from 'rxjs';
 import {Booking} from '../../../shared/models/booking.model';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -36,7 +37,7 @@ export class BookingManagingComponent implements OnInit {
   }
 
   loadBookings() {
-    this.bookingService.getBookings(this.isApproved, this.isExpired).subscribe(
+    this.bookingService.getBookings().subscribe(
       bookings => {
         this.dataSource = new MatTableDataSource<Booking>(bookings);
         this.dataSource.paginator = this.paginator;
