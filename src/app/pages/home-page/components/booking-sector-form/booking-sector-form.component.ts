@@ -4,6 +4,8 @@ import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
 import { SectorService } from '../../../../core/services/sector.service';
+import {of, Observable, BehaviorSubject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -27,14 +29,22 @@ export class BookingSectorFormComponent implements OnInit {
 
     clearSelectedSectors(){
       this.sectorNumber = null;
+
     }
 
+
     onSubmit(){
-      var dateRange = this.dataService.getDateRange();
-      this.sectorService.getSectorIdBySectorNumber(this.sectorNumber).subscribe(x => {
-        this.booking = new Booking(0, null, `${dateRange.startDate}`, `${dateRange.endDate}`, x, 1);
-        this.bookingSectorService.bookSector(this.booking).subscribe(x => console.log(x));
-      });  
+      var startDate = this.dataService.getStartDate();
+      var endDate = this.dataService.getEndDate();
+      this.sectorId = this.dataService.getCurrentSectorId();
+      if(this.sectorNumber != null){
+        this.booking = new Booking(0, null, `${startDate}`, `${endDate}`, this.sectorId, 1);
+        this.bookingSectorService.bookSector(this.booking).subscribe(b => {
+          this.dataService.renderMarkers(b.bookingStart, b.bookingEnd);
+        });
+        this.clearSelectedSectors();
+      }    
+      
     }
 
     ngOnInit() {

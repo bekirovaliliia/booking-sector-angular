@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SectorService } from './sector.service';
+import { BookingService } from './booking.service';
+import * as moment from 'moment';
 
 
 const now = new Date();
@@ -14,19 +16,20 @@ export class DataService{
   private sectorNumber = new BehaviorSubject<number>(null);
   currentSectorNumber = this.sectorNumber.asObservable();
 
-  private dateRange = new BehaviorSubject<any>({startDate: now.toString(), endDate: now.toString()});
-  currentDateRange = this.dateRange.asObservable();
-
   private markers = new BehaviorSubject<object []>(null);
   currentMarkers = this.markers.asObservable();
 
-  private startDate: string;
-  private endDate: string;
+  private startDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentStartDate = this.startDate.asObservable();
+
+  private endDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentEndDate = this.endDate.asObservable();
+
   private sectorId;
 
   constructor(
     private httpService: HttpClient,
-    private sectorService: SectorService
+    private bookingService: BookingService
     ) { }
 
   apiSectorsUrl: string = "https://localhost:44393/api/sectors";
@@ -42,14 +45,27 @@ export class DataService{
     ); 
   }
 
-  getDateRange(){
-    this.startDate = this.dateRange.value.startDate.format('YYYY-MM-DD');
-    this.endDate = this.dateRange.value.endDate.format('YYYY-MM-DD');
-
-    return { startDate: this.startDate, endDate: this.endDate };
+  getStartDate(){
+    return this.startDate.value;
   }
 
-  getCurrentSectorId(){
+  getEndDate(){
+    return this.endDate.value;
+  }
+
+  renderMarkers(startDate, endDate){
+    this.bookingService.filterByDate(startDate, endDate)
+        .subscribe(
+          data => {
+          this.changeMarkers(data);
+        })
+  }
+
+  setCurrentSectorId(sectorId){
+    this.sectorId = sectorId;
+  }
+
+  getCurrentSectorId(){  
     return this.sectorId;
   }
   changeMarkers(markers){
@@ -60,11 +76,11 @@ export class DataService{
     this.sectorNumber.next(number);
   }
 
-  changeDateRange(dateRange){
-
-    if(dateRange.startDate != null || dateRange.endSate != null){
-      this.dateRange.next(dateRange);
-      this.httpService.get(`${this.apiSectorsUrl}/free?fromDate=${dateRange.startDate.format('YYYY-MM-DD')}&toDate=${dateRange.endDate.format('YYYY-MM-DD')}`)
+  changeDateRange(startDate, endDate){
+    if(startDate != null || endDate != null){
+      this.startDate.next(startDate);
+      this.endDate.next(endDate);
+      this.bookingService.filterByDate(startDate, endDate)
         .subscribe(
           data => {
           this.changeMarkers(data);
