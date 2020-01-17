@@ -57,7 +57,8 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     AdminSidebarComponent,
     AdminManagementComponent,
     SettingComponent,
-    BookingManagingComponent
+    BookingManagingComponent,
+    WithoutDatasComponent
   ],
   imports: [
     CommonModule,

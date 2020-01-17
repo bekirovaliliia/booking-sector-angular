@@ -55,7 +55,7 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         console.log(this.selectedFile);
-        this.userService.updateUserPhoto(formData);
+      //  this.userService.updateUserPhoto(formData);
         await sleep(5000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();

@@ -10,42 +10,47 @@ import { AdminGuard } from './core/guards/admin.guard';
 import { UserGuard } from './core/guards/user.guard';
 import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
+import {FutureTournamentPageComponent} from './pages/future-tournament-page/future-tournament-page.component';
 
 const routes: Routes = [
-  { path: 'home', 
+  { path: 'home',
     component: HomePageComponent
   },
 
-  { path: 'admin', 
+  { path: 'admin',
     component: AdminManagementComponent,
     canActivate: [AdminGuard]
   },
 
-  { path: 'profile', 
+  { path: 'profile',
     component: ProfilePageComponent,
     canActivate: [UserGuard]
   },
 
-  { path: 'sign-in', 
+  { path: 'sign-in',
     component: SignInComponent
   },
 
-  { path: 'sign-up', 
+  { path: 'sign-up',
     component: SignUpComponent
   },
 
-  { path: '**',
+  { path: '*',
     redirectTo: '/home',
-    pathMatch: 'full' 
+    pathMatch: 'full'
   },
 
-  { path: 'set-password', 
+  { path: 'set-password',
     component: SetNewPasswordComponent
   },
-  
-  { path: 'user-bookings', 
+
+  { path: 'user-bookings',
     component : UserBookingsComponent,
     canActivate: [UserGuard]
+  },
+
+  { path: 'futuretournaments',
+    component : FutureTournamentPageComponent,
   },
 ];
 
