@@ -23,7 +23,7 @@ const routes: Routes = [
 
   { path: 'profile', 
     component: ProfilePageComponent,
-    canActivate: [UserGuard]
+    canActivate: [UserGuard, AdminGuard]
   },
 
   { path: 'sign-in', 
@@ -45,7 +45,7 @@ const routes: Routes = [
   
   { path: 'user-bookings', 
     component : UserBookingsComponent,
-    canActivate: [UserGuard]
+    canActivate: [UserGuard, AdminGuard]
   },
 ];
 

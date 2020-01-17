@@ -18,7 +18,7 @@ export class UserGuard implements CanActivate {
     if (role == this.expectedRole) {
       return true;
     }
-    this.toast.warning('Access denied');
+    this.toast.warning('Немає прав для доступу');
     this.router.navigate(['home']);
     return false;
   }

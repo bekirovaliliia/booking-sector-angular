@@ -144,8 +144,8 @@ import { AdminGuard } from './core/guards/admin.guard';
     FilterPipe,
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
-    UserGuard,
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ],
   bootstrap: [
     AppComponent,
