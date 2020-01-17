@@ -22,14 +22,14 @@ export class BookingManagingComponent implements OnInit {
   updateDialog: MatDialogRef<DeleteDialogComponent>;
 
   dataSource: MatTableDataSource<Booking>;
-  displayedColumns = [ 'id', 'sectorId', 'startDate', 'endDate', 'actions' ];
+  displayedColumns = ['id', 'sectorId', 'startDate', 'endDate', 'actions'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
   constructor(private bookingService: BookingService,
-              private dialog: MatDialog ) {
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -42,12 +42,15 @@ export class BookingManagingComponent implements OnInit {
         this.dataSource = new MatTableDataSource<Booking>(bookings);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        this.dataSource.sortingDataAccessor = (item, property): string|number => {
+        this.dataSource.sortingDataAccessor = (item, property): string | number => {
           switch (property) {
-          case 'startDate': return new Date(item.bookingStart).getTime();
-          case 'endDate': return new Date(item.bookingEnd).getTime();
-          default: return item[property];
-        }
+            case 'startDate':
+              return new Date(item.bookingStart).getTime();
+            case 'endDate':
+              return new Date(item.bookingEnd).getTime();
+            default:
+              return item[property];
+          }
         };
       });
   }
@@ -62,11 +65,12 @@ export class BookingManagingComponent implements OnInit {
       .pipe(filter(name => name))
       .subscribe(name => {
         booking.isApproved = isApproved;
-        this.bookingService.updateBooking(booking).subscribe( data => {
-        this.loadBookings();
-      });
+        this.bookingService.updateBooking(booking).subscribe(data => {
+          this.loadBookings();
+        });
       });
   }
+
   deleteBooking(booking: Booking) {
     this.updateDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
@@ -76,7 +80,7 @@ export class BookingManagingComponent implements OnInit {
       .afterClosed()
       .pipe(filter(name => name))
       .subscribe(name => {
-        this.bookingService.deleteBooking(booking.id).subscribe( data => {
+        this.bookingService.deleteBooking(booking.id).subscribe(data => {
           this.loadBookings();
         });
       });
@@ -86,7 +90,7 @@ export class BookingManagingComponent implements OnInit {
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  getByCondition(isApproved: boolean, isExpired: boolean){
+  getByCondition(isApproved: boolean, isExpired: boolean) {
     this.isApproved = isApproved;
     this.isExpired = isExpired;
     this.loadBookings();
