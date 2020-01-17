@@ -6,8 +6,8 @@
                 <label for="tagPlaces">Selected sectors</label>
                 <div class="form-row ">
                     <div class="col-4">
-                        <input readonly type="text" class="form-control" value="{{sectorNumber}}" data-role="tagsin  put" id="tagPlaces" required>
-                    </div>
+                        <app-sectors-tags-input></app-sectors-tags-input>
+                    </div>    
                     <div class="col-1">
                         <i class="material-icons btn btn-outline-danger" title="clear selected sectors" (click)="clearSelectedSectors()">clear</i>
                     </div>

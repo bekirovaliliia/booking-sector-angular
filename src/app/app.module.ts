@@ -72,6 +72,7 @@ import {AdminManagementModule} from './pages/admin-management/admin-management.m
 import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
 import { DetailsTournamentDialogComponent } from
     './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
+import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 
 @NgModule({
   imports: [
@@ -144,6 +145,7 @@ import { DetailsTournamentDialogComponent } from
     FutureTournamentPageComponent,
     DetailsBtnComponent,
     DetailsTournamentDialogComponent,
+    SectorsTagsInputComponent,
     ],
   exports: [
     NumberOnlyDirective,

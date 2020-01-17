@@ -12,8 +12,6 @@ const now = new Date();
   styleUrls: ['./sectors-map.component.css']
 })
 export class SectorsMapComponent implements OnInit {
-
-  
   latitude = 49.886416;
   longitude = 23.493211;
   mapType = 'satellite';
@@ -36,7 +34,7 @@ export class SectorsMapComponent implements OnInit {
   previous: any;
 
   reverseMarker(marker, infowindow){
-    this.dataService.setCurrentSectorId(marker.id);
+    this.dataService.changeSectorId(marker.id);
     this.dataService.changeNumber(marker.number);
     infowindow.close();
   }

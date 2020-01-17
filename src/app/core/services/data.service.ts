@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { SectorService } from './sector.service';
 import { BookingService } from './booking.service';
 import * as moment from 'moment';
 
@@ -16,6 +15,9 @@ export class DataService{
   private sectorNumber = new BehaviorSubject<number>(null);
   currentSectorNumber = this.sectorNumber.asObservable();
 
+  private sectorId = new BehaviorSubject<number>(null);
+  currentSectorId = this.sectorId.asObservable();
+
   private markers = new BehaviorSubject<object []>(null);
   currentMarkers = this.markers.asObservable();
 
@@ -24,8 +26,6 @@ export class DataService{
 
   private endDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
   currentEndDate = this.endDate.asObservable();
-
-  private sectorId;
 
   constructor(
     private httpService: HttpClient,
@@ -45,11 +45,11 @@ export class DataService{
     ); 
   }
 
-  getStartDate(){
+  get fromDate(){
     return this.startDate.value;
   }
 
-  getEndDate(){
+  get toDate(){
     return this.endDate.value;
   }
 
@@ -61,13 +61,14 @@ export class DataService{
         })
   }
 
-  setCurrentSectorId(sectorId){
+  changeSectorId(sectorId){
     this.sectorId = sectorId;
   }
 
   getCurrentSectorId(){  
-    return this.sectorId;
+    return this.sectorId.value;
   }
+
   changeMarkers(markers){
     this.markers.next(markers);
   }
