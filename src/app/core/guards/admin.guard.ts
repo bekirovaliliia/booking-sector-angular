@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Role } from 'src/app/shared/models/role';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,6 @@ export class AdminGuard implements CanActivate {
 
   canActivate(): boolean {
     const role = this.service.getRole();
-    console.log(role);
     if (role == this.expectedRole) {
       return true;
     }

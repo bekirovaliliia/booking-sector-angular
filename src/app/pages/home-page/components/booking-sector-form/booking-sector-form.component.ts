@@ -4,6 +4,7 @@ import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
 import { SectorService } from '../../../../core/services/sector.service';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -22,7 +23,8 @@ export class BookingSectorFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private bookingSectorService: BookingService,
-    private sectorService: SectorService
+    private sectorService: SectorService,
+    private authService: AuthenticationService
     ) { }
 
     clearSelectedSectors(){
@@ -32,7 +34,7 @@ export class BookingSectorFormComponent implements OnInit {
     onSubmit(){
       var dateRange = this.dataService.getDateRange();
       this.sectorService.getSectorIdBySectorNumber(this.sectorNumber).subscribe(x => {
-        this.booking = new Booking(0, null, `${dateRange.startDate}`, `${dateRange.endDate}`, x, 1);
+        this.booking = new Booking(0, null, `${dateRange.startDate}`, `${dateRange.endDate}`, x, this.authService.getId());
         this.bookingSectorService.bookSector(this.booking).subscribe(x => console.log(x));
       });  
     }

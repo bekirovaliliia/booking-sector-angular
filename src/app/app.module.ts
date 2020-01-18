@@ -58,9 +58,6 @@ import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
 
-import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { SearchSectorsComponent } from './pages/admin-page/search-sectors/search-sectors.component';
-import {HttpErrorInterceptor} from './core/interceptors/http-error-interceptor.service';
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -135,9 +132,7 @@ import { AdminGuard } from './core/guards/admin.guard';
     WithoutBookingsComponent,
     SearchPipe,
     NumberOnlyDirective,
-    AdminPageComponent,
-    SearchSectorsComponent,
-    CalendarComponent,
+    CalendarComponent
     ],
   exports: [
     NumberOnlyDirective,
@@ -149,7 +144,6 @@ import { AdminGuard } from './core/guards/admin.guard';
     DatePipe,
     FilterPipe,
     SearchPipe,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
     AdminGuard,
     UserGuard

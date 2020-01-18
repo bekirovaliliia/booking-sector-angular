@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Role } from 'src/app/shared/models/role';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { User } from 'src/app/shared/models/user-model';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({

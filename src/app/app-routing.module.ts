@@ -16,14 +16,14 @@ const routes: Routes = [
     component: HomePageComponent
   },
 
-  { path: 'admin', 
+  {
+    path: 'admin',
     component: AdminManagementComponent,
     canActivate: [AdminGuard]
   },
 
   { path: 'profile', 
-    component: ProfilePageComponent,
-    canActivate: [UserGuard, AdminGuard]
+    component: ProfilePageComponent
   },
 
   { path: 'sign-in', 

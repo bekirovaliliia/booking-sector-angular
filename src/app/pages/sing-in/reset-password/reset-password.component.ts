@@ -3,6 +3,7 @@ import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef} from '@angular/material/dialog';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,10 +12,10 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class ResetPasswordComponent implements OnInit {
   user: User;
-  id = 106;
   email: string="";
   constructor(private userService: UserService,
               private toastr: ToastrService,
+              private authService: AuthenticationService,
               public dialogRef: MatDialogRef<ResetPasswordComponent>,
              ){  }
 
