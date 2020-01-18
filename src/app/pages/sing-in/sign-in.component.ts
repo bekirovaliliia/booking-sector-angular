@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { SignUpValidators } from '../sign-up/sign-up.validators';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
  
@@ -28,21 +26,21 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.authService.isLoggedIn()){
+      this.authService.logout();
+    }
     this.SignInForm = new FormGroup({
       login: new FormControl('', [
         Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10),
-        Validators.pattern('[0]{1}[0-9]{9}'),
-        SignUpValidators.validatePhone
+        Validators.minLength(7),
+        Validators.maxLength(10)
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
-        SignUpValidators.validatePassword
+        Validators.minLength(6)
       ])
     });
-  }
+  }    
 
   onSubmit() {
     const {login, password} = this.SignInForm.value;

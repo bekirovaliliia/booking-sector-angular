@@ -4,6 +4,7 @@ import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
 import { SectorService } from '../../../../core/services/sector.service';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -22,7 +23,8 @@ export class BookingSectorFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private bookingSectorService: BookingService,
-    private sectorService: SectorService
+    private sectorService: SectorService,
+    private authService: AuthenticationService
     ) { }
 
     clearSelectedSectors(){

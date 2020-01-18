@@ -155,10 +155,9 @@ import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-
     DatePipe,
     FilterPipe,
     SearchPipe,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
-    UserGuard,
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ],
   bootstrap: [
     AppComponent,

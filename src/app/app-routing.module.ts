@@ -22,9 +22,8 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
 
-  { path: 'profile',
-    component: ProfilePageComponent,
-    canActivate: [UserGuard]
+  { path: 'profile', 
+    component: ProfilePageComponent
   },
 
   { path: 'sign-in',
@@ -42,11 +41,12 @@ const routes: Routes = [
 
   { path: 'set-password',
     component: SetNewPasswordComponent
+
   },
 
   { path: 'user-bookings',
     component : UserBookingsComponent,
-    canActivate: [UserGuard]
+    canActivate: [UserGuard, AdminGuard]
   },
 
   { path: 'futuretournaments',
