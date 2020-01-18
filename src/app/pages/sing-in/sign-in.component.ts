@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
               private dialog: MatDialog,
-              private toastr: ToastrService) {}
+              ) {}
 
   openResetDialog() {
     this.resetDialogRef = this.dialog.open(ResetPasswordComponent, {
