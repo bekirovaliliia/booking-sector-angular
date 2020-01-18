@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
+import {AuthenticationService} from '../../../../core/services/authentication.service';
+import {SectorService} from '../../../../core/services/sector.service';
+
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -17,7 +20,9 @@ export class BookingSectorFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private bookingSectorService: BookingService
+    private bookingSectorService: BookingService,
+    private sectorService: SectorService,
+    private authService: AuthenticationService
     ) { }
 
     onSubmit(formValues) {

@@ -49,7 +49,6 @@ import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-ne
 import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
-import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
 
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -137,7 +136,6 @@ import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-
     ResetPasswordComponent,
     UserBookingsComponent,
     ActualBookingsTableComponent,
-    ActualBookingsRowComponent,
     WithoutBookingsComponent,
     SearchPipe,
     NumberOnlyDirective,
@@ -157,10 +155,9 @@ import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-
     DatePipe,
     FilterPipe,
     SearchPipe,
-    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
-    UserGuard,
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ],
   bootstrap: [
     AppComponent,

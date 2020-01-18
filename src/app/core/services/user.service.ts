@@ -27,7 +27,7 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.get<boolean>(`${this.apiURl}/reset/${email}`, httpOptions);
+    return this.http.get(`${this.apiURl}/reset/${email}`, httpOptions);
   }
   updateUserPassword(user :User) {
     const httpOptions = {

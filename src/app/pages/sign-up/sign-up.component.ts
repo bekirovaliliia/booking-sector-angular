@@ -10,6 +10,7 @@ import { UserEmail } from '../../shared/models/user-email-model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class SignUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private authService: AuthenticationService,
     private toastr: ToastrService,
     public router: Router
   ) {
@@ -34,6 +36,13 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(this.authService.isLoggedIn())
+    {
+      this.router.navigate(['home']);
+      this.toastr.warning("Щоб зареєструватись, спочатку потрібно вийти");
+    }
+
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
@@ -88,6 +97,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.submitted = true;
     // stop here if form is invalid
 
