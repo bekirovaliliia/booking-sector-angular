@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignUpValidators } from '../sign-up/sign-up.validators';
-
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+ 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -11,8 +14,18 @@ import { SignUpValidators } from '../sign-up/sign-up.validators';
 
 export class SignInComponent implements OnInit {
   SignInForm: FormGroup;
+  resetDialogRef: MatDialogRef<ResetPasswordComponent>;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService,
+              private dialog: MatDialog,
+              private toastr: ToastrService) {}
+
+  openResetDialog() {
+    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, {
+     hasBackdrop: false,
+   });
+   return this.resetDialogRef;
+  }
 
   ngOnInit() {
     this.SignInForm = new FormGroup({
