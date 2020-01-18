@@ -24,7 +24,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
-import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
+import { CustomRangesComponent } from './pages/home-page/components/booking-datepicker/booking-datepicker.component';
 import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
 import { SectorsMapComponent } from './pages/home-page/components/sectors-map/sectors-map.component';
 import { NavigationBarComponent } from './shared/navbar/navbar.component';

@@ -12,10 +12,6 @@ const now = new Date();
   styleUrls: ['./sectors-map.component.css']
 })
 export class SectorsMapComponent implements OnInit {
-  latitude = 49.886416;
-  longitude = 23.493211;
-  mapType = 'satellite';
-  markers: object [];
 
   constructor(
     private httpService: HttpClient,
@@ -23,9 +19,10 @@ export class SectorsMapComponent implements OnInit {
     private bookingService: BookingService
     ) { }
 
-  today(): string{
-    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-  }
+  latitude = 49.886416;
+  longitude = 23.493211;
+  mapType = 'satellite';
+  markers: object [];
 
   sectorNumber: any;
   startDate: any;
@@ -33,29 +30,24 @@ export class SectorsMapComponent implements OnInit {
 
   previous: any;
 
-  reverseMarker(marker, infowindow){
-    this.dataService.changeSectorId(marker.id);
+  reverseMarker(marker, infoWindow) {
+    this.dataService.addSectorId = marker.id;
     this.dataService.changeNumber(marker.number);
-    infowindow.close();
+    infoWindow.close();
   }
 
-  clickedMarker(infowindow) {    
+  clickedMarker(infoWindow) {
     if (this.previous) {
       this.previous.close();
     }
-    this.previous = infowindow; 
-  }
-
-  filterByDate(){ 
-    this.bookingService.filterByDate(this.startDate, this.endDate)
-          .subscribe(data => this.markers = data as object[]);
+    this.previous = infoWindow;
   }
 
   ngOnInit() {
-    this.dataService.currentSectorNumber.subscribe(number => this.sectorNumber = number);
+    this.dataService.currentSectorNumber.subscribe(sectorNumber => this.sectorNumber = sectorNumber);
     this.dataService.currentStartDate.subscribe(date => this.startDate = date);
     this.dataService.currentEndDate.subscribe(date => this.endDate = date);
-    this.dataService.currentMarkers.subscribe(markers => this.markers = markers); 
+    this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
     this.startDate = moment().format('YYYY-MM-DD');
     this.endDate = moment().format('YYYY-MM-DD');
     this.bookingService.filterByDate(this.startDate, this.endDate)

@@ -1,6 +1,6 @@
 <div [formGroup]="form">
-    <div class="editor-tag form-control" (click)="focusTagInput()">
-        <span class="tag-item" *ngFor="let tag of tags">      
+    <div class="editor-tag form-control">
+        <span class="tag-item" *ngFor="let tag of tags">
             {{tag}}<span class="remove-tag" (click)="removeTag(tag)">×</span>
         </span>
     </div>

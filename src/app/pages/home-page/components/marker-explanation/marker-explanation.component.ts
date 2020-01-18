@@ -5,6 +5,9 @@ import { Component, OnInit} from '@angular/core';
   templateUrl: './marker-explanation.component.html'
 })
 export class MarkerExplanationComponent implements OnInit {
-  constructor() { }
-  ngOnInit() { }
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
 }
