@@ -1,13 +1,12 @@
-import {Component,  Input,  OnInit,  Output,  EventEmitter,  OnChanges, ViewChild} from '@angular/core';
+import {Component,  Input, OnInit, Output, OnChanges, ViewChild} from '@angular/core';
 import {Tournament} from '../../../../shared/models/tournament';
 import {TournamentService} from '../../../../core/services/tournament.service';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
-import {AddUpdateDialogComponent} from '../add-update-dialog/add-update-dialog.component';
+import {AddUpdateTournamentDialogComponent} from '../add-update-tournament-dialog/add-update-tournament-dialog.component';
 import {filter} from 'rxjs/operators';
 import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../../../shared/pipes/search.pipe';
-import {BookingService} from '../../../../core/services/booking.service';
 import * as moment from 'moment';
 
 @Component({
@@ -25,8 +24,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   tournamentHeader: string[];
   tournaments: Tournament[];
 
-  addDialog: MatDialogRef<AddUpdateDialogComponent>;
-  updateDialog: MatDialogRef<AddUpdateDialogComponent>;
+  addDialog: MatDialogRef<AddUpdateTournamentDialogComponent>;
+  updateDialog: MatDialogRef<AddUpdateTournamentDialogComponent>;
   deleteDialog: MatDialogRef<DeleteDialogComponent>;
 
   dataSource = new MatTableDataSource<Tournament>([]);
@@ -35,12 +34,11 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
   this.dataSource.paginator = paginator;
   }
-  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort){
+  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort) {
     this.dataSource.sort = sort;
   }
 
   constructor( private tournamentService: TournamentService,
-               private bookingService: BookingService,
                private dialog: MatDialog,
                private filterPipe: FilterPipe,
                private searchPipe: SearchPipe,
@@ -83,7 +81,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     selectedTournament.tournamentStart = moment().toString();
     selectedTournament.tournamentEnd = moment().toString();
 
-    this.addDialog = this.dialog.open(AddUpdateDialogComponent, {
+    this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
         hasBackdrop: false,
         width: '600px',
         minWidth: '250px',
@@ -108,7 +106,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   openUpdateDialog(selectedTournament: Tournament){
     console.log(selectedTournament.tournamentStart);
-    this.updateDialog = this.dialog.open(AddUpdateDialogComponent, {
+    this.updateDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
       hasBackdrop: false,
       width: '600px',
       minWidth: '250px',
@@ -124,8 +122,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
         filter(tour => tour)
       )
       .subscribe(tour => {
-        console.log(tour);
-          this.tournamentService.update(tour).subscribe( data => {
+            this.tournamentService.update(tour).subscribe( data => {
             this.getTournaments();
           });
         });

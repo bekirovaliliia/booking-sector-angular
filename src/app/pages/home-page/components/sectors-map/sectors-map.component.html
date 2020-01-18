@@ -13,7 +13,7 @@
                         <p> Description: {{marker.description}} <br/>
                             GPS: {{marker.gpsLat}}, {{marker.gpsLng}} <br/>
                         </p>                   
-                        <button class="btn btn-primary btn-block" [hidden]="marker.isActive===false || marker.isActive===null"(click)="reverseMarker(marker, infoWindow)" type="submit">Select</button>
+                        <button class="btn btn-primary btn-block" [hidden]="marker.isActive===false || marker.isActive===null" (click)="reverseMarker(marker, infoWindow)" type="submit">Select</button>
                     </div>
                 </agm-info-window>
             </agm-marker>

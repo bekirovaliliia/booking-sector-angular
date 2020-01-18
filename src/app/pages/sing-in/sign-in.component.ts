@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
+import { MatDialog, MatDialogRef } from '@angular/material';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+ 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -11,10 +12,18 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 
 export class SignInComponent implements OnInit {
   SignInForm: FormGroup;
-  resetDialogRef: any;
-  dialog: any;
+  resetDialogRef: MatDialogRef<ResetPasswordComponent>;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService,
+              private dialog: MatDialog,
+              ) {}
+
+  openResetDialog() {
+    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, {
+     hasBackdrop: false,
+   });
+   return this.resetDialogRef;
+  }
 
   ngOnInit() {
     if(this.authService.isLoggedIn()){
@@ -36,19 +45,5 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     const {login, password} = this.SignInForm.value;
     this.authService.login(login, password).subscribe();
-  }
-
-  openResetDialog() {
-
-
-    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, {
-  
-  
-     hasBackdrop: false,
-  
-  
-   });
-
-   return this.resetDialogRef;
   }
 }

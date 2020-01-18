@@ -16,8 +16,12 @@ export class CustomRangesComponent {
     keepCalendarOpeningWithRange: boolean;
     maxDate: moment.Moment;
     minDate: moment.Moment;
+    startDate;
+    endDate;
 
     constructor(private dateService: DataService) {
+      
+      this.selected = moment().format('YYYY-MM-DD');
       this.maxDate = moment().add(1,  'months');
       this.minDate = moment();
       this.alwaysShowCalendars = true;
@@ -25,16 +29,16 @@ export class CustomRangesComponent {
       this.showRangeLabelOnInput = true;
     }
 
-    datesUpdated(range){
-      if(range != null){
-        this.dateService.changeDateRange(range);
-      }
-      else{
-        this.dateService.showAllSectors();
-      }
+    datesUpdated(range){ 
+      if(range.startDate != null && range.endDate != null)
+      {
+        this.startDate = range.startDate.format('YYYY-MM-DD');
+        this.endDate = range.endDate.format('YYYY-MM-DD');
+        this.dateService.changeDateRange(this.startDate, this.endDate);  
+      }   
     }
 
     rangeClicked(range) {
-      //console.log('[rangeClicked] range is : ', range);
+      
     }
 }
