@@ -12,12 +12,12 @@ import {SectorService} from '../services/sector.service';
 })
 export class BookingService {
 
-  public urlAddress: string = `${environment.urlAddress}/bookings`;
+  public urlAddress = `${environment.urlAddress}/bookings`;
 
   booking: Observable<Booking>;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private datePipe: DatePipe
     ) { }
 
@@ -33,7 +33,7 @@ export class BookingService {
         );
       }
     }
-  getUserBookings(id:number, isActual: boolean) {
+  getUserBookings(id: number, isActual: boolean) {
     return this.http.get<Booking[]>(`${this.urlAddress}/byUserId/${id}/${isActual}`).pipe(
       map((data: Booking[]) =>
         data.map(
