@@ -4,8 +4,6 @@ import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
 
-const now = new Date();
-
 @Component({
   selector: 'app-sectors-map',
   templateUrl: './sectors-map.component.html',
@@ -31,8 +29,7 @@ export class SectorsMapComponent implements OnInit {
   previous: any;
 
   reverseMarker(marker, infoWindow) {
-    this.dataService.addSectorId = marker.id;
-    this.dataService.changeNumber(marker.number);
+    this.dataService.changeSector(marker);
     infoWindow.close();
   }
 
@@ -44,7 +41,6 @@ export class SectorsMapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.currentSectorNumber.subscribe(sectorNumber => this.sectorNumber = sectorNumber);
     this.dataService.currentStartDate.subscribe(date => this.startDate = date);
     this.dataService.currentEndDate.subscribe(date => this.endDate = date);
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);

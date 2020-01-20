@@ -1,20 +1,26 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
 import * as moment from 'moment';
+import { Sector } from 'src/app/shared/models/sector-model';
 
-
-const now = new Date();
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService{
 
-  private sectorsId : number[] = [];
-  private sectorNumber = new BehaviorSubject<number>(null);
-  currentSectorNumber = this.sectorNumber.asObservable();
+  apiSectorsUrl: string = 'https://localhost:44393/api/sectors';
+  
+  private _sectorsId : number[] = [];
+
+  get sectorsId(){
+    return this._sectorsId;
+  }
+
+  private sector = new BehaviorSubject<Sector>(null);
+  currentSector = this.sector.asObservable();
 
   private markers = new BehaviorSubject<object []>(null);
   currentMarkers = this.markers.asObservable();
@@ -26,12 +32,19 @@ export class DataService{
   currentEndDate = this.endDate.asObservable();
 
   clearSelectedSectors: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(
     private httpService: HttpClient,
     private bookingService: BookingService
-    ) { }
-
-  apiSectorsUrl: string = 'https://localhost:44393/api/sectors';
+    ) { 
+      this.currentSector.subscribe(s => {
+        if(s != null){
+          this.sectorsId.push(s.id);
+          console.log(this.sectorsId);
+        }
+      });
+      this.clearSelectedSectors.subscribe(s => this._sectorsId = []);
+    }
 
   showAllSectors(){
     this.httpService.get(this.apiSectorsUrl)
@@ -59,23 +72,12 @@ export class DataService{
         })
   }
 
-  set addSectorId(sectorId){
-    if(sectorId != null){
-      this.sectorsId.push(sectorId);
-      console.log(this.sectorsId);
-    }
-  }
-
-  get currentSectorsId(){
-    return this.sectorsId;
+  changeSector(marker): void {
+    this.sector.next(marker);
   }
 
   changeMarkers(markers){
     this.markers.next(markers);
-  }
-
-  changeNumber(sectorNumber: number){
-    this.sectorNumber.next(sectorNumber);
   }
 
   changeDateRange(startDate, endDate){

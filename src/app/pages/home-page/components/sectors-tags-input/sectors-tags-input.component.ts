@@ -55,9 +55,9 @@ export class SectorsTagsInputComponent implements OnInit {
     this.form = this.formBuilder.group({
       tag: [undefined],
     });
-    this.dataService.currentSectorNumber.subscribe(sectorNumber => {
-      if (sectorNumber != null) {
-        this.addTag(sectorNumber.toString());
+    this.dataService.currentSector.subscribe(sector => {
+      if (sector != null) {
+        this.addTag(sector.number.toString());
       }
     });
     this.dataService.clearSelectedSectors.subscribe(n => this.tags = []);

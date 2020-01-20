@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
-import {AuthenticationService} from '../../../../core/services/authentication.service';
-import {SectorService} from '../../../../core/services/sector.service';
+import { AuthenticationService } from '../../../../core/services/authentication.service';
+
 
 
 @Component({
@@ -15,27 +15,26 @@ import {SectorService} from '../../../../core/services/sector.service';
 export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
-  sectorNumber: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private bookingSectorService: BookingService,
-    private sectorService: SectorService,
     private authService: AuthenticationService
     ) { }
 
     onSubmit(formValues) {
       const fromDate = this.dataService.fromDate;
       const toDate = this.dataService.toDate;
-      const sectorsId = this.dataService.currentSectorsId;
+      const sectorsId = this.dataService.sectorsId;
       let booking: Booking;
       for (const id of sectorsId) {
         booking = new Booking(0, null, `${fromDate}`, `${toDate}`, id, 1);
         this.bookingSectorService.bookSector(booking).subscribe(b => {
           this.dataService.renderMarkers(fromDate, toDate); //#TODO: Render markers too much. Change logic!
         });
-      }
+      }  
       this.dataService.clearSelectedSectors.emit();
     }
 
@@ -45,9 +44,6 @@ export class BookingSectorFormComponent implements OnInit {
         lastName: ['', Validators.required],
         phone: ['', Validators.required],
         password: ['', Validators.required]
-      });
-      this.dataService.currentSectorNumber.subscribe(sectorNumber => {
-        this.sectorNumber = sectorNumber;
       });
     }
 }
