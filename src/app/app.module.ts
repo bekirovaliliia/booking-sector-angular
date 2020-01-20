@@ -72,6 +72,7 @@ import {AdminManagementModule} from './pages/admin-management/admin-management.m
 import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
 import { DetailsTournamentDialogComponent } from
     './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   imports: [
@@ -106,7 +107,8 @@ import { DetailsTournamentDialogComponent } from
     MatPaginatorModule,
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     AngularFontAwesomeModule,
-    AdminManagementModule
+    AdminManagementModule,
+    MatToolbarModule
 
   ],
   declarations: [
@@ -164,7 +166,7 @@ import { DetailsTournamentDialogComponent } from
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }
