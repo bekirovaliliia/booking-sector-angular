@@ -16,7 +16,6 @@ export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
@@ -27,10 +26,10 @@ export class BookingSectorFormComponent implements OnInit {
     onSubmit(formValues) {
       const fromDate = this.dataService.fromDate;
       const toDate = this.dataService.toDate;
-      const sectorsId = this.dataService.sectorsId;
+      const selectedSectors = this.dataService.selectedSectors;
       let booking: Booking;
-      for (const id of sectorsId) {
-        booking = new Booking(0, null, `${fromDate}`, `${toDate}`, id, 1);
+      for (const sector of selectedSectors) {
+        booking = new Booking(0, null, `${fromDate}`, `${toDate}`, sector.id, 1);
         this.bookingSectorService.bookSector(booking).subscribe(b => {
           this.dataService.renderMarkers(fromDate, toDate); //#TODO: Render markers too much. Change logic!
         });

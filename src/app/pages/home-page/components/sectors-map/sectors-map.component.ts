@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
@@ -12,7 +11,6 @@ import * as moment from 'moment';
 export class SectorsMapComponent implements OnInit {
 
   constructor(
-    private httpService: HttpClient,
     private dataService: DataService,
     private bookingService: BookingService
     ) { }
@@ -29,7 +27,7 @@ export class SectorsMapComponent implements OnInit {
   previous: any;
 
   reverseMarker(marker, infoWindow) {
-    this.dataService.changeSector(marker);
+    this.dataService.selectSector(marker);
     infoWindow.close();
   }
 
@@ -41,8 +39,8 @@ export class SectorsMapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.currentStartDate.subscribe(date => this.startDate = date);
-    this.dataService.currentEndDate.subscribe(date => this.endDate = date);
+    this.dataService.currentFromDate.subscribe(date => this.startDate = date);
+    this.dataService.currentToDate.subscribe(date => this.endDate = date);
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
     this.startDate = moment().format('YYYY-MM-DD');
     this.endDate = moment().format('YYYY-MM-DD');

@@ -46,6 +46,7 @@ export class SectorsTagsInputComponent implements OnInit {
   removeTag(tag?: string): void {
     if (!!tag) {
       pull(this.tags, tag);
+
     } else {
       this.tags.splice(-1);
     }
@@ -55,9 +56,11 @@ export class SectorsTagsInputComponent implements OnInit {
     this.form = this.formBuilder.group({
       tag: [undefined],
     });
-    this.dataService.currentSector.subscribe(sector => {
-      if (sector != null) {
-        this.addTag(sector.number.toString());
+    this.dataService.currentSelectedSectors.subscribe(sectors => {
+      if (sectors != null) {
+        if(sectors[sectors.length - 1] != undefined) {
+          this.addTag(sectors[sectors.length - 1].number.toString());
+        } 
       }
     });
     this.dataService.clearSelectedSectors.subscribe(n => this.tags = []);
