@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import {SectorService} from '../services/sector.service';
 
 @Injectable({
   providedIn: 'root'

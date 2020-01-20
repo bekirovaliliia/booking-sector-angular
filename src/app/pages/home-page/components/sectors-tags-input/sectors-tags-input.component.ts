@@ -21,6 +21,12 @@ export class SectorsTagsInputComponent implements OnInit {
   form: FormGroup;
   maxBookingSectors: number;
 
+  clearSelectedSectors(){
+    this.tags = [];
+    this.dataService.clearSelectedSectors.emit();
+    console.log(this.dataService.selectedSectors);
+  }
+
   onKeyUp(event: KeyboardEvent): void {
     const inputValue: string = this.form.controls.tag.value;
     if (event.code === 'Backspace' && !inputValue) {
@@ -45,8 +51,7 @@ export class SectorsTagsInputComponent implements OnInit {
 
   removeTag(tag?: string): void {
     if (!!tag) {
-      pull(this.tags, tag);
-
+      pull(this.tags, tag);  
     } else {
       this.tags.splice(-1);
     }
@@ -63,6 +68,8 @@ export class SectorsTagsInputComponent implements OnInit {
         } 
       }
     });
-    this.dataService.clearSelectedSectors.subscribe(n => this.tags = []);
+    this.dataService.currentFromDate.subscribe(d => {
+      this.clearSelectedSectors();
+    });
   }
 }

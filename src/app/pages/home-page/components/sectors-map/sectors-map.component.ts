@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-sectors-map',
@@ -12,7 +13,8 @@ export class SectorsMapComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private authenticationService: AuthenticationService
     ) { }
 
   latitude = 49.886416;
@@ -25,6 +27,7 @@ export class SectorsMapComponent implements OnInit {
   endDate: any;
 
   previous: any;
+  isLoggedIn: boolean;
 
   reverseMarker(marker, infoWindow) {
     this.dataService.selectSector(marker);
@@ -39,6 +42,7 @@ export class SectorsMapComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
     this.dataService.currentFromDate.subscribe(date => this.startDate = date);
     this.dataService.currentToDate.subscribe(date => this.endDate = date);
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);

@@ -61,7 +61,7 @@ export class DataService{
         .subscribe(
           data => {
           this.changeMarkers(data);
-        })
+        });
   }
 
   selectSector(marker): void {
@@ -72,15 +72,21 @@ export class DataService{
     this.markers.next(markers);
   }
 
+  changeSelectedSectors(sectors){
+    this._selectedSectors.next(sectors);
+  }
+
   changeDateRange(startDate, endDate) {
     if (startDate != null || endDate != null) {
-      this.fromDate.next(startDate);
-      this.toDate.next(endDate);
+      this._fromDate.next(startDate);
+      this._toDate.next(endDate);
       this.bookingService.filterByDate(startDate, endDate)
         .subscribe(
           data => {
           this.changeMarkers(data);
-        })
+        });
+      this.clearSelectedSectors.emit();
+      console.log(this.selectedSectors);
     }
     else {
       this.showAllSectors();
