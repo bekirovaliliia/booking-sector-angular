@@ -3,6 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../core/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-sign-in',
@@ -13,9 +17,15 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
 export class SignInComponent implements OnInit {
   SignInForm: FormGroup;
   resetDialogRef: MatDialogRef<ResetPasswordComponent>;
+  email: string;
+  hash: string;
 
   constructor(private authService: AuthenticationService,
               private dialog: MatDialog,
+              private route: ActivatedRoute,
+              private userService: UserService,
+              private toastr: ToastrService,
+              public router: Router
               ) {}
 
   openResetDialog() {
@@ -29,6 +39,18 @@ export class SignInComponent implements OnInit {
     if(this.authService.isLoggedIn()){
       this.authService.logout();
     }
+
+    // Email Confirm
+    if (this.route.snapshot.params.email  && this.route.snapshot.params.hash) {
+      this.email = this.route.snapshot.params.email;
+      this.hash = this.route.snapshot.params.hash;
+
+      if(this.email !== '' && this.hash !== '') {
+        this.confirmEmail();
+      }
+    }
+
+
     this.SignInForm = new FormGroup({
       login: new FormControl('', [
         Validators.required,
@@ -45,5 +67,43 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     const {login, password} = this.SignInForm.value;
     this.authService.login(login, password).subscribe();
+  }
+
+
+  confirmEmail() {
+    this.userService
+        .confirmEmail(this.email, this.hash)
+        .subscribe(
+          result => {
+              console.log(result);
+            },
+      error => {
+        if(error.status === 200){
+          let resJSON = JSON.parse(error);
+          console.log('???x???');
+          console.log(resJSON._body);
+
+          this.toastr.success(
+            'You can successfully enter!',
+            'Your email is verified!'
+          );
+        } else if (error.status === 404) {
+           this.toastr.error(
+             'There is no user with this mail',
+             'Error!'
+           );
+        } else if (error.status === 409) {
+          this.toastr.error(
+            'Email is already verified',
+            'Error!'
+          );
+        } else if (error.status === 400) {
+          this.toastr.error(
+            'Verification error',
+            'Error!'
+          );
+        }
+      }
+        );
   }
 }

@@ -65,4 +65,10 @@ export class UserService {
   getUserByEmail(email: string) {
     return this.http.get<User>(`${this.apiURl}/email/${email}`);
   }
+  confirmEmail(email: string, hash: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(`${this.apiURl}/confirm/${email}/${hash}`, httpOptions);
+  }
 }
