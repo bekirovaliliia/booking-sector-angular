@@ -10,6 +10,7 @@ import { UserEmail } from '../../shared/models/user-email-model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 
 @Component({
@@ -29,12 +30,20 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
-    public router: Router
+    public router: Router,
+    private authService: AuthenticationService
   ) {
     this.user = new UserEmail();
   }
 
   ngOnInit() {
+
+    if(this.authService.isLoggedIn())
+    {
+      this.router.navigate(['home']);
+      this.toastr.warning("You must first log out to sign up");
+    }
+
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
