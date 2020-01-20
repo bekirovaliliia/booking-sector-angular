@@ -19,7 +19,7 @@ export class DetailsTournamentDialogComponent implements OnInit {
   ) {
 
   }
-  
+
   ngOnInit() {
   }
 
