@@ -9,6 +9,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import * as moment from 'moment';
+import {DetailsTournamentDialogComponent} from './details-tournament-dialog/details-tournament-dialog.component';
+import {AddUpdateTournamentDialogComponent} from "../admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-future-tournament-page',
@@ -17,17 +20,15 @@ import * as moment from 'moment';
 })
 export class FutureTournamentPageComponent implements OnInit {
 
-  @Input() groupFilters: object;
-  @Input() searchText: string;
-  @Input() withoutDatasText = 'No records found!';
+  @Input() withoutDataText = 'No records found!';
   selectedRow: number;
 
   tournamentHeader: string[];
   tournaments: Tournament[];
 
+  detailsDialog: MatDialogRef<DetailsTournamentDialogComponent>;
 
   dataSource = new MatTableDataSource<Tournament>([]);
-
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
@@ -64,7 +65,6 @@ export class FutureTournamentPageComponent implements OnInit {
           return -1;
         }
       } );
-
     });
   }
 
@@ -79,4 +79,17 @@ export class FutureTournamentPageComponent implements OnInit {
     return this.selectedRow === item;
   }
 
+  openDetailsDialog(selectedTournament: Tournament){
+    console.log(selectedTournament);
+    this.detailsDialog = this.dialog.open(DetailsTournamentDialogComponent, {
+      hasBackdrop: false,
+      width: '400px',
+      minWidth: '250px',
+      panelClass: ['no-padding'],
+      data: {
+        dialogTitle: `Tournament details`,
+        selectedTournament,
+      }
+    });
+  }
 }

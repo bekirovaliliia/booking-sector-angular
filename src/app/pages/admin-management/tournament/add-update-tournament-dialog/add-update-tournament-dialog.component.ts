@@ -57,7 +57,7 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
     }
 
     submit(form): void {
-        const tournament = new Tournament(this.data.selectedTournament.id, this.form.value.name, this.form.value.description, this.form.value.preparationTerm, this.form.value.selected.startDate.format('YYYY-MM-DDTHH:mm:ss'), this.form.value.selected.endDate.format('YYYY-MM-DDTHH:mm:ss') );
+        const tournament = new Tournament(this.form.value.id, this.form.value.name, this.form.value.description, this.form.value.preparationTerm, this.form.value.selected.startDate.format('YYYY-MM-DDTHH:mm:ss'), this.form.value.selected.endDate.format('YYYY-MM-DDTHH:mm:ss') );
         this.dialogRef.close(tournament);
     }
 
