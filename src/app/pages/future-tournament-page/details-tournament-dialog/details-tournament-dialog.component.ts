@@ -19,20 +19,8 @@ export class DetailsTournamentDialogComponent implements OnInit {
   ) {
 
   }
-
-  getForm() {
-    this.form = this.formBuilder.group(
-      {
-        id: this.data.selectedTournament.id,
-        name: this.data.selectedTournament.name,
-        description: this.data.selectedTournament.description,
-        start: this.data.selectedTournament.tournamentStart,
-        end: this.data.selectedTournament.tournamentEnd,
-      });
-  }
-
+  
   ngOnInit() {
-    this.getForm();
   }
 
 }

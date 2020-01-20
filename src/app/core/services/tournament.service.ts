@@ -14,7 +14,7 @@ export class TournamentService {
   public urlAddress: string = environment.urlAddress;
 
   getAll(): Observable<Tournament[]> {
-    return this.http.get<Tournament[]>(`${this.urlAddress}tournaments/all`)
+    return this.http.get<Tournament[]>(`${this.urlAddress}/tournaments/all`)
       .pipe(
         map((data: Tournament[]) =>
           data.map(
@@ -30,7 +30,7 @@ export class TournamentService {
 
 
   getById(id: number): Observable<Tournament> {
-    return this.http.get<Tournament>(`${this.urlAddress}tournaments/${id}`)
+    return this.http.get<Tournament>(`${this.urlAddress}/tournaments/${id}`)
       .pipe(
         map((item: Tournament) =>
             new Tournament(item.id, item.name, item.description, item.preparationTerm,
@@ -45,20 +45,20 @@ export class TournamentService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.delete(`${this.urlAddress}tournaments/${id}`);
+    return this.http.delete(`${this.urlAddress}/tournaments/${id}`);
   }
 
   update(tournament: Tournament): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.put(`${this.urlAddress}tournaments/${tournament.id}`, tournament, httpOptions);
+    return this.http.put(`${this.urlAddress}/tournaments/${tournament.id}`, tournament, httpOptions);
   }
 
   add(tournament: Tournament): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.post(`${this.urlAddress}tournaments`, tournament, httpOptions);
+    return this.http.post(`${this.urlAddress}/tournaments`, tournament, httpOptions);
   }
 }
