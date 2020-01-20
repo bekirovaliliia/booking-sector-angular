@@ -3,6 +3,7 @@ import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SettingsService } from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'app-sectors-map',
@@ -14,7 +15,8 @@ export class SectorsMapComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private bookingService: BookingService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private settingsService: SettingsService
     ) { }
 
   latitude = 49.886416;
@@ -25,13 +27,17 @@ export class SectorsMapComponent implements OnInit {
   sectorNumber: any;
   startDate: any;
   endDate: any;
+  maxBookingSectors: number;
 
   previous: any;
   isLoggedIn: boolean;
 
   reverseMarker(marker, infoWindow) {
-    this.dataService.selectSector(marker);
-    infoWindow.close();
+    if(this.dataService.selectedSectors.length < this.maxBookingSectors)
+    {
+      this.dataService.selectSector(marker);
+      infoWindow.close();
+    }
   }
 
   clickedMarker(infoWindow) {
@@ -50,5 +56,8 @@ export class SectorsMapComponent implements OnInit {
     this.endDate = moment().format('YYYY-MM-DD');
     this.bookingService.filterByDate(this.startDate, this.endDate)
           .subscribe(data => this.markers = data as object[]);
+    this.settingsService.getSettingById(2).subscribe(s =>{
+      this.maxBookingSectors = s.value;
+    });
   }
 }

@@ -2,22 +2,22 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
-import * as moment from 'moment';
 import { Sector } from 'src/app/shared/models/sector-model';
+import * as moment from 'moment';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService{
+export class DataService {
 
   apiSectorsUrl: string = 'https://localhost:44393/api/sectors';
 
   private _selectedSectors = new BehaviorSubject<Sector[]>([]);
   currentSelectedSectors = this._selectedSectors.asObservable();
 
-  private markers = new BehaviorSubject<object []>(null);
-  currentMarkers = this.markers.asObservable();
+  private _markers = new BehaviorSubject<object []>(null);
+  currentMarkers = this._markers.asObservable();
 
   private _fromDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
   currentFromDate = this._fromDate.asObservable();
@@ -32,16 +32,17 @@ export class DataService{
     private bookingService: BookingService
     ) {
       this.clearSelectedSectors.subscribe(s => this._selectedSectors.next([]));
+      this.currentFromDate.subscribe(d => this._selectedSectors.next([]));
     }
 
-  showAllSectors(){
+  showAllSectors() {
     this.httpService.get(this.apiSectorsUrl)
-    .subscribe(
-      data => {
-        this.currentMarkers = data as Observable<object []>;
-        this.changeMarkers(this.currentMarkers);
-      }
-    );
+      .subscribe(
+        data => {
+          this.currentMarkers = data as Observable<object []>;
+          this.changeMarkers(this.currentMarkers);
+        }
+      );
   }
 
   get selectedSectors() {
@@ -58,10 +59,10 @@ export class DataService{
 
   renderMarkers(startDate, endDate) {
     this.bookingService.filterByDate(startDate, endDate)
-        .subscribe(
-          data => {
-          this.changeMarkers(data);
-        });
+      .subscribe(
+        data => {
+        this.changeMarkers(data);
+      });
   }
 
   selectSector(marker): void {
@@ -69,7 +70,7 @@ export class DataService{
   }
 
   changeMarkers(markers) {
-    this.markers.next(markers);
+    this._markers.next(markers);
   }
 
   changeSelectedSectors(sectors){
@@ -86,7 +87,6 @@ export class DataService{
           this.changeMarkers(data);
         });
       this.clearSelectedSectors.emit();
-      console.log(this.selectedSectors);
     }
     else {
       this.showAllSectors();
