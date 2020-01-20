@@ -90,7 +90,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
         hasBackdrop: false,
         panelClass: ['no-padding'],
-        width: '600px',
+        width: '650px',
         minWidth: '250px',
         data: {
            dialogTitle: 'New Tournament',
@@ -116,7 +116,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     this.updateDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
       hasBackdrop: false,
       panelClass: ['no-padding'],
-      width: '600px',
+      width: '650px',
       minWidth: '250px',
       data: {
         dialogTitle: `Update Tournament ${selectedTournament.id}`,

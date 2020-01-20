@@ -48,7 +48,6 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
     ngOnInit() {
         this.getForm();
         this.maxDate = moment().add(6,  'months');
-
         if (this.form.value.selected.startDate === undefined) {
             this.minDate = moment();
         } else {
