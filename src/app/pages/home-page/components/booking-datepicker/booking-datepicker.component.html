@@ -3,23 +3,22 @@
       <span class="input-group-text bg-light border border-dark">
           <i class="material-icons">calendar_today</i>
       </span>
+  </div>
       <input type="text"
-      ngxDaterangepickerMd
+      ngxDaterangepickerMd  
       [(ngModel)]="selected"
       [alwaysShowCalendars]="alwaysShowCalendars"
-      [showClearButton]="true"
       [maxDate]="maxDate"
       [minDate]="minDate"
       [linkedCalendars]="true"
-      [locale]="{applyLabel: 'Change', format: 'YYYY-MM-DD'}"
+      [locale]="{applyLabel: 'Change', format: 'DD/MM/YYYY'}"
       (datesUpdated)="datesUpdated($event)"
       [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
       [showRangeLabelOnInput]="showRangeLabelOnInput"
-      class="form-control border border-dark ml-1"
+      class="form-control border border-dark"
       style="width: 205px;"
-      placeholder="yyyy-mm-dd"
+      placeholder="DD/MM/YYYY"
       [dateLimit]="4">
-  </div>
 </div>
 
 

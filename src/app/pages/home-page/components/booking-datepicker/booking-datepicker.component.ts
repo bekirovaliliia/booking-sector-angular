@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import * as moment from 'moment';
 import { DataService } from '../../../../core/services/data.service';
 
-const now: Date = new Date();
 @Component({
     selector: 'app-booking-datepicker',
     templateUrl: './booking-datepicker.component.html',
