@@ -15,7 +15,7 @@ export class DetailsTournamentDialogComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DetailsTournamentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data,
+    @Inject(MAT_DIALOG_DATA) public data,
   ) {
 
   }
