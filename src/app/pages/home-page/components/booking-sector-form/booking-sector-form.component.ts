@@ -19,7 +19,7 @@ export class BookingSectorFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
+    public dataService: DataService,
     private bookingSectorService: BookingService,
     private authentificationService: AuthenticationService
     ) { }
@@ -32,9 +32,10 @@ export class BookingSectorFormComponent implements OnInit {
       for (const sector of this.selectedSectors) {
         booking = new Booking(0, null, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
         this.bookingSectorService.bookSector(booking).subscribe(b => {
-          this.dataService.renderMarkers(fromDate, toDate); //#TODO: Render markers too much. Change logic!
+          this.dataService.renderMarkers(fromDate, toDate);
+          // #TODO: Render markers too much. Change logic!
         });
-      }  
+      }
       this.dataService.clearSelectedSectors.emit();
     }
 

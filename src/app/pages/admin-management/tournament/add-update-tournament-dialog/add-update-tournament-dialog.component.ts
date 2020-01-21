@@ -17,7 +17,7 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<AddUpdateTournamentDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) private data,
+        @Inject(MAT_DIALOG_DATA) public data,
         private toastr: ToastrService,
     ) {
 

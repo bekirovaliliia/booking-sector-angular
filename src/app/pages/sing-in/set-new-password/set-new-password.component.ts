@@ -18,6 +18,8 @@ export class SetNewPasswordComponent implements OnInit {
   checked = false;
   color:string = "primary";
   user: User;
+  hide: boolean;
+  
   constructor( private toastr: ToastrService,
                private userService: UserService,
                private router: Router,

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectorTableRowComponent } from './sector-table-row.component';
+import { DeleteSectorDialogComponent } from './delete-sector-dialog.component';
 
-describe('SectorTableRowComponent', () => {
-  let component: SectorTableRowComponent;
-  let fixture: ComponentFixture<SectorTableRowComponent>;
+describe('DeleteSectorDialogComponent', () => {
+  let component: DeleteSectorDialogComponent;
+  let fixture: ComponentFixture<DeleteSectorDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectorTableRowComponent ]
+      declarations: [ DeleteSectorDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectorTableRowComponent);
+    fixture = TestBed.createComponent(DeleteSectorDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
