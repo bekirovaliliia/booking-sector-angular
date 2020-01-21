@@ -7,11 +7,11 @@ import {SettingComponent} from './setting/setting.component';
 import {TournamentComponent} from './tournament/tournament.component';
 import {BookingManagingComponent} from './booking-managing/booking-managing.component';
 import {CalendarComponent} from './calendar/calendar.component';
-
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 const routes: Routes = [
   {
-    path: 'admin', component: AdminManagementComponent, children: [
+    path: 'admin', component: AdminManagementComponent, canActivate: [AdminGuard], children: [
       {
         path: 'settings', component: SettingComponent
       },
@@ -28,6 +28,7 @@ const routes: Routes = [
         path: 'calendar', component: CalendarComponent
       }
     ]
+  
   }
 ];
 @NgModule({

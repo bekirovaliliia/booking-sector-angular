@@ -4,7 +4,7 @@ import {BookingService} from '../../../core/services/booking.service';
 import {Subject, from} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
-import {sleep} from 'sleep-ts';
+//import {sleep} from 'sleep-ts';
 
 
 declare  var  require: any;
@@ -70,7 +70,7 @@ export class ActualBookingsTableComponent implements OnInit {
     async delete(){
     console.log(this.idToDelete);
     this.bookingService.deleteBooking(this.idToDelete).subscribe();
-    await sleep(5000);
+  //  await sleep(5000);
     this.getBookings();
   }
 }

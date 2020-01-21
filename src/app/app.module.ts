@@ -9,7 +9,7 @@ import { PhotoComponent } from './pages/profile-page/photo/photo.component';
 import { UserMenuComponent } from './pages/profile-page/user-menu/user-menu.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChangePasswordNewComponent } from './pages/profile-page/change-password-new/change-password-new.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -22,9 +22,9 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatDialogModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
-import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
+import { CustomRangesComponent } from './pages/home-page/components/booking-datepicker/booking-datepicker.component';
 import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
 import { SectorsMapComponent } from './pages/home-page/components/sectors-map/sectors-map.component';
 import { NavigationBarComponent } from './shared/navbar/navbar.component';
@@ -33,7 +33,8 @@ import { FormSectionComponent } from './pages/home-page/components/form-section/
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddUpdateDialogComponent } from './pages/admin-management/tournament/add-update-dialog/add-update-dialog.component';
+import { AddUpdateTournamentDialogComponent } from
+    './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -48,7 +49,6 @@ import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-ne
 import { ResetPasswordComponent } from './pages/sing-in/reset-password/reset-password.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import { ActualBookingsTableComponent } from './pages/user-bookings/actual-bookings-table/actual-bookings-table.component';
-import { ActualBookingsRowComponent } from './pages/user-bookings/actual-bookings-row/actual-bookings-row.component';
 
 import { SidebarModule } from 'ng-sidebar';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -57,12 +57,16 @@ import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
+
+import {HttpErrorInterceptor} from './core/interceptors/http-error-interceptor';
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+<<<<<<< HEAD
 import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
 import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -102,6 +106,53 @@ import { MatSelectModule } from '@angular/material';
         MatCheckboxModule,
         MatSelectModule
     ],
+=======
+import { FutureTournamentPageComponent } from './pages/future-tournament-page/future-tournament-page.component';
+import {AdminManagementModule} from './pages/admin-management/admin-management.module';
+import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
+import { DetailsTournamentDialogComponent } from
+    './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
+import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
+@NgModule({
+  imports: [
+    FormsModule,
+    NgbModule,
+    BrowserModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+    NgxSpinnerModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPasswordStrengthModule.forRoot(),
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
+    }),
+    NgxDaterangepickerMd.forRoot(),
+    MatDialogModule,
+    TextFieldModule,
+    RouterModule,
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    CommonModule,
+    MatTableModule,
+    SidebarModule.forRoot(),
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
+    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
+    AngularFontAwesomeModule,
+    AdminManagementModule,
+    MatToolbarModule
+
+  ],
+>>>>>>> d7ee2b51bedac7b31dab066d1b60044e3ec96347
   declarations: [
     AppComponent,
     UserProfileTextComponent,
@@ -119,7 +170,7 @@ import { MatSelectModule } from '@angular/material';
     FormSectionComponent,
     HomePageComponent,
     DeleteDialogComponent,
-    AddUpdateDialogComponent,
+    AddUpdateTournamentDialogComponent,
     FilterSectorsComponent,
     FooterComponent,
     SignInComponent,
@@ -129,32 +180,43 @@ import { MatSelectModule } from '@angular/material';
     ResetPasswordComponent,
     UserBookingsComponent,
     ActualBookingsTableComponent,
-    ActualBookingsRowComponent,
     WithoutBookingsComponent,
     SearchPipe,
     NumberOnlyDirective,
     CalendarComponent,
+<<<<<<< HEAD
     DeleteSectorDialogComponent,
     AddUpdateSectorDialogComponent
+=======
+    FutureTournamentPageComponent,
+    DetailsBtnComponent,
+    DetailsTournamentDialogComponent,
+    SectorsTagsInputComponent,
+>>>>>>> d7ee2b51bedac7b31dab066d1b60044e3ec96347
     ],
-    exports: [
-        NumberOnlyDirective,
+  exports: [
+    NumberOnlyDirective,
     WithoutBookingsComponent,
-    ],
+    MainSectionComponent,
+  ],
 
   providers: [
     DatePipe,
     FilterPipe,
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
-    UserGuard,
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ],
   bootstrap: [
     AppComponent,
   ],
 
+<<<<<<< HEAD
   entryComponents: [DeleteDialogComponent, AddUpdateDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DeleteSectorDialogComponent, AddUpdateSectorDialogComponent]
+=======
+  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DetailsTournamentDialogComponent]
+>>>>>>> d7ee2b51bedac7b31dab066d1b60044e3ec96347
 
 })
 export class AppModule { }

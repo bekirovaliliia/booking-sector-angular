@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Role } from 'src/app/shared/models/role';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,15 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AdminGuard implements CanActivate {
   protected expectedRole: Role = Role.Admin;
 
-  constructor(private service: AuthenticationService, private router: Router) {}
+  constructor(private service: AuthenticationService, private router: Router, private toast: ToastrService) {}
 
   canActivate(): boolean {
     const role = this.service.getRole();
-    console.log(role);
     if (role == this.expectedRole) {
       return true;
     }
-    this.router.navigate(['admin']);
+    this.toast.warning('Немає прав для доступу');
+    this.router.navigate(['home']);
     return false;
   }
 }

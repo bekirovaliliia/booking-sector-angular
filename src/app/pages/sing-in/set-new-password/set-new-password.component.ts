@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { Router, RouterModule } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-set-new-password',
@@ -17,13 +18,13 @@ export class SetNewPasswordComponent implements OnInit {
   checked = false;
   color:string = "primary";
   user: User;
-  id = 46;
   constructor( private toastr: ToastrService,
                private userService: UserService,
-               private router: Router,) { }
+               private router: Router,
+               private authService: AuthenticationService) { }
 
   ngOnInit() {
-    return this.userService.getUser(this.id).subscribe(data => this.user = data);
+    return this.userService.getUser(this.authService.getId()).subscribe(data => this.user = data);
   }
   showNotMeetConditions() {
     this.toastr.error('Your password must meet at least 2 of 5 conditions', 'Try again!');

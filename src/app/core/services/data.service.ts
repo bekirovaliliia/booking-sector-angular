@@ -1,55 +1,94 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { BookingService } from './booking.service';
+import { Sector } from 'src/app/shared/models/sector-model';
+import * as moment from 'moment';
 
-const now = new Date();
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private sectorNumber = new BehaviorSubject<number>(null);
-  currentSectorNumber = this.sectorNumber.asObservable();
+  apiSectorsUrl: string = 'https://localhost:44393/api/sectors';
 
-  private dateRange = new BehaviorSubject<any>({startDate: now.toString(), endDate: now.toString()});
-  currentDateRange = this.dateRange.asObservable();
+  private _selectedSectors = new BehaviorSubject<Sector[]>([]);
+  currentSelectedSectors = this._selectedSectors.asObservable();
 
-  private markers = new BehaviorSubject<object []>(null);
-  currentMarkers = this.markers.asObservable();
+  private _markers = new BehaviorSubject<object []>(null);
+  currentMarkers = this._markers.asObservable();
 
-  constructor(private httpService: HttpClient) { }
+  private _fromDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentFromDate = this._fromDate.asObservable();
 
-  apiSectorsUrl: string = "https://localhost:44393/api/sectors";
+  private _toDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentToDate = this._toDate.asObservable();
 
-  showAllSectors(){
+  clearSelectedSectors: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(
+    private httpService: HttpClient,
+    private bookingService: BookingService
+    ) {
+      this.clearSelectedSectors.subscribe(s => this._selectedSectors.next([]));
+      this.currentFromDate.subscribe(d => this._selectedSectors.next([]));
+    }
+
+  showAllSectors() {
     this.httpService.get(this.apiSectorsUrl)
-    .subscribe(
-      data => {
-        this.currentMarkers = data as Observable<object []>;
-        this.changeMarkers(this.currentMarkers);
-      }
-    ); 
+      .subscribe(
+        data => {
+          this.currentMarkers = data as Observable<object []>;
+          this.changeMarkers(this.currentMarkers);
+        }
+      );
   }
 
-  changeMarkers(markers){
-    this.markers.next(markers);
+  get selectedSectors() {
+    return this._selectedSectors.getValue();
   }
 
-  changeNumber(number: number){
-    this.sectorNumber.next(number);
+  get fromDate() {
+    return this._fromDate.getValue();
   }
 
-  changeDateRange(dateRange){
-    if(dateRange.startDate != null || dateRange.endSate != null){
-      this.dateRange.next(dateRange);
-      this.httpService.get(`${this.apiSectorsUrl}/free?fromDate=${dateRange.startDate.format('YYYY MM DD')}&toDate=${dateRange.endDate.format('YYYY MM DD')}`)
+  get toDate() {
+    return this._toDate.getValue();
+  }
+
+  renderMarkers(startDate, endDate) {
+    this.bookingService.filterByDate(startDate, endDate)
+      .subscribe(
+        data => {
+        this.changeMarkers(data);
+      });
+  }
+
+  selectSector(marker): void {
+    this._selectedSectors.next(([...this._selectedSectors.getValue(), marker]));
+  }
+
+  changeMarkers(markers) {
+    this._markers.next(markers);
+  }
+
+  changeSelectedSectors(sectors){
+    this._selectedSectors.next(sectors);
+  }
+
+  changeDateRange(startDate, endDate) {
+    if (startDate != null || endDate != null) {
+      this._fromDate.next(startDate);
+      this._toDate.next(endDate);
+      this.bookingService.filterByDate(startDate, endDate)
         .subscribe(
           data => {
           this.changeMarkers(data);
-        })
+        });
+      this.clearSelectedSectors.emit();
     }
-    else{
+    else {
       this.showAllSectors();
     }
   }

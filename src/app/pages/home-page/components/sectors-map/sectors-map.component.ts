@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../../../core/services/data.service';
-
-const now = new Date();
+import { BookingService } from 'src/app/core/services/booking.service';
+import * as moment from 'moment';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SettingsService } from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'app-sectors-map',
@@ -11,49 +12,52 @@ const now = new Date();
 })
 export class SectorsMapComponent implements OnInit {
 
-  
+  constructor(
+    private dataService: DataService,
+    private bookingService: BookingService,
+    private authenticationService: AuthenticationService,
+    private settingsService: SettingsService
+    ) { }
+
   latitude = 49.886416;
   longitude = 23.493211;
   mapType = 'satellite';
   markers: object [];
 
-  constructor(
-    private httpService: HttpClient,
-    private dataService: DataService 
-    ) { }
-
-  today(): string{
-    return `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
-  }
-
   sectorNumber: any;
-  dateRange: any;
-  previous: any;
+  startDate: any;
+  endDate: any;
+  maxBookingSectors: number;
 
-  reverseMarker(marker, infowindow){
-    this.dataService.changeNumber(marker.number);
-    infowindow.close();
+  previous: any;
+  isLoggedIn: boolean;
+
+  reverseMarker(marker, infoWindow) {
+    if(this.dataService.selectedSectors.length < this.maxBookingSectors)
+    {
+      this.dataService.selectSector(marker);
+      infoWindow.close();
+    }
   }
 
-  clickedMarker(infowindow) {
+  clickedMarker(infoWindow) {
     if (this.previous) {
       this.previous.close();
     }
-    this.previous = infowindow;
-  }
-
-  filterByDate(){ 
-    this.httpService.get(`https://localhost:44393/api/sectors/free?fromDate=${this.dateRange.startDate.format('YYYY MM DD')}&toDate=${this.dateRange.endDate.format('YYYY MM DD')}`)
-      .subscribe(
-        data => {
-        this.markers = data as object [];
-      })
+    this.previous = infoWindow;
   }
 
   ngOnInit() {
-    this.dataService.currentSectorNumber.subscribe(number => this.sectorNumber = number);
-    this.dataService.currentDateRange.subscribe(range => this.dateRange = range);
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
+    this.dataService.currentFromDate.subscribe(date => this.startDate = date);
+    this.dataService.currentToDate.subscribe(date => this.endDate = date);
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
-    this.dataService.showAllSectors(); 
+    this.startDate = moment().format('YYYY-MM-DD');
+    this.endDate = moment().format('YYYY-MM-DD');
+    this.bookingService.filterByDate(this.startDate, this.endDate)
+          .subscribe(data => this.markers = data as object[]);
+    this.settingsService.getSettingById(2).subscribe(s =>{
+      this.maxBookingSectors = s.value;
+    });
   }
 }

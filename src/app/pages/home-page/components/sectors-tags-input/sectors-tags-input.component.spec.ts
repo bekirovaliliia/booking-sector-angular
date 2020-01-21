@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActualBookingsRowComponent } from './actual-bookings-row.component';
+import { SectorsTagsInputComponent } from './sectors-tags-input.component';
 
-describe('ActualBookingsRowComponent', () => {
-  let component: ActualBookingsRowComponent;
-  let fixture: ComponentFixture<ActualBookingsRowComponent>;
+describe('SectorsTagsInputComponent', () => {
+  let component: SectorsTagsInputComponent;
+  let fixture: ComponentFixture<SectorsTagsInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActualBookingsRowComponent ]
+      declarations: [ SectorsTagsInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActualBookingsRowComponent);
+    fixture = TestBed.createComponent(SectorsTagsInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

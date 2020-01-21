@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Token } from 'src/app/shared/models/Token';
+import { Token } from 'src/app/shared/models/token';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { tap, catchError, finalize } from 'rxjs/operators';
@@ -23,16 +23,14 @@ export class AuthenticationService {
   ) {}
 
   login(phone: string, password: string): Observable<Token> {
-    this.spinner.show();
       return this.http
-      .post<Token>(`${environment.urlAddress}authentication/authenticate`, {
+      .post<Token>(`${environment.urlAddress}/authentication/authenticate`, {
         phone,
         password
       })
       .pipe(
         tap(token => this.handleSuccess(token)),
-        catchError(error => this.handleError(error)),
-        finalize(() => this.spinner.hide())
+        catchError(error => this.handleError(error))
       );
   }
 
@@ -99,5 +97,9 @@ export class AuthenticationService {
 
   getLogin(): string {
     return this.tokenStore.getLogin();
+  }
+  
+  getId(): number{
+    return this.tokenStore.getId();
   }
 }

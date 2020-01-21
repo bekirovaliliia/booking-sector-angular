@@ -1,4 +1,4 @@
-export class  Booking {
+export class Booking {
   id: number;
   tournamentId: number;
   bookingStart: string;

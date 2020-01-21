@@ -1,0 +1,68 @@
+<div mat-dialog-title >
+     {{ this.data.dialogTitle }}
+    <span class="fx-spacer"></span>
+    <button mat-icon-button  mat-dialog-close class="float-right">
+      <mat-icon mat-list-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+  <mat-form-field class = " d-inline">
+    <input matInput
+           required
+           formControlName="name"
+           placeholder="Name">
+  </mat-form-field>
+  <div *ngIf="form.controls['name'].hasError('maxlength')" class="text-danger">
+    Max length of name is 64 symbols!
+  </div>
+
+  <mat-form-field class = " d-inline">
+    <input type="text" matInput required
+           ngxDaterangepickerMd
+           autocomplete="off"
+           formControlName="selected"
+           [minDate]="minDate"
+           [maxDate]="maxDate"
+           [keepCalendarOpeningWithRange]="true"
+           [showClearButton]="true"
+           [alwaysShowCalendars]="true"
+           [linkedCalendars]="true"
+           [locale]="{applyLabel: 'Done', format: 'MMM DD, YYYY'}"
+           placeholder="Tournament start & end"
+           class =  "border-0 w-100"
+           [showRangeLabelOnInput]="true"
+           [dateLimit]="20" />
+    <mat-icon matSuffix>event</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="d-inline">
+    <input matInput appNumberOnly required
+           type="number"
+           autocomplete="off"
+           formControlName="preparationTerm"
+           placeholder="Preparation Term">
+
+  </mat-form-field>
+  <div *ngIf="form.controls['preparationTerm'].hasError('max')" class="text-danger">
+    Preparation term can`t be more than 30 days!
+  </div>
+
+  <mat-form-field class = " d-inline">
+    <textarea
+      matInput
+      formControlName="description"
+      placeholder="Description">
+    </textarea>
+  </mat-form-field>
+  <div *ngIf="form.controls['description'].hasError('maxlength')" class="text-danger">
+   Max length of description is 200 symbols!
+  </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-button tabindex="1" (click)="submit(form.value)" type="submit" [disabled]="!form.valid">Save</button>
+  <button mat-button mat-dialog-close tabindex="-1"type="button" >Cancel</button>
+</mat-dialog-actions>

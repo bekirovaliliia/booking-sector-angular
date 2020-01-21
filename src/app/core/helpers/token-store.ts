@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Token } from 'src/app/shared/models/Token';
+import { Token } from 'src/app/shared/models/token';
 import { TokenPayload } from 'src/app/shared/models/tokenPayload';
 import { Role } from 'src/app/shared/models/role';
 import { ChannelMessage } from './channel-message';import { UserService } from '../services/user.service';
@@ -105,6 +105,15 @@ export class TokenStore {
 
     const tokenPayload = this.getTokenPayload(this.getRefreshToken());
     return tokenPayload.login;
+  }
+
+  getId(): number{
+    if (this.isTokenExpired()) {
+      return -1;
+    }
+
+    const tokenPayload = this.getTokenPayload(this.getRefreshToken());
+    return Number(tokenPayload.sub);
   }
 
   getRole(): Role {
