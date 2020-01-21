@@ -22,14 +22,18 @@ const routes: Routes = [
     canActivate: [AdminGuard]
   },
 
-  { path: 'profile', 
+  { path: 'profile',
     component: ProfilePageComponent
   },
 
   { path: 'sign-in',
     component: SignInComponent
   },
-
+  
+  { path: 'sign-in/:email/:hash',
+    component: SignInComponent
+  },
+  
   { path: 'sign-up',
     component: SignUpComponent
   },

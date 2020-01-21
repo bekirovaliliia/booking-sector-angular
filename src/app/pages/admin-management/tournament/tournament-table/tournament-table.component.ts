@@ -19,6 +19,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   @Input() groupFilters: object;
   @Input() searchText: string;
   @Input() withoutDatasText = 'No records found!';
+  @Input() deleteHeader: string;
   selectedRow: number;
 
   tournamentHeader: string[];
@@ -64,6 +65,11 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   deleteTournament(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
+      panelClass: ['no-padding'],
+      width: '350px',
+      data: {
+        dialogTitle: `Delete tournament ${id}`,
+      },
     });
     this.deleteDialog
       .afterClosed()
@@ -83,7 +89,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
     this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
         hasBackdrop: false,
-        width: '600px',
+        panelClass: ['no-padding'],
+        width: '650px',
         minWidth: '250px',
         data: {
            dialogTitle: 'New Tournament',
@@ -108,7 +115,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     console.log(selectedTournament.tournamentStart);
     this.updateDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
       hasBackdrop: false,
-      width: '600px',
+      panelClass: ['no-padding'],
+      width: '650px',
       minWidth: '250px',
       data: {
         dialogTitle: `Update Tournament ${selectedTournament.id}`,

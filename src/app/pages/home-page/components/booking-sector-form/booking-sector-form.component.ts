@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
-import { SectorService } from '../../../../core/services/sector.service';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { AuthenticationService } from '../../../../core/services/authentication.service';
+
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -14,44 +14,38 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
-  sectorId: number;
-  sectorNumber: any;
-  booking: Booking;
-
+  isLoggedIn: boolean;
+  selectedSectors;
 
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private bookingSectorService: BookingService,
-    private sectorService: SectorService,
-    private authService: AuthenticationService
+    private authentificationService: AuthenticationService
     ) { }
 
-    clearSelectedSectors(){
-      this.sectorNumber = null;
-
-    }
-
-    onSubmit(){
-      var fromDate = this.dataService.fromDate;
-      var toDate = this.dataService.toDate;
-      this.sectorId = this.dataService.getCurrentSectorId();
-      if(this.sectorNumber != null){
-        this.booking = new Booking(0, null, `${fromDate}`, `${toDate}`, this.sectorId, 1);
-        this.bookingSectorService.bookSector(this.booking).subscribe(b => {
-          this.dataService.renderMarkers(b.bookingStart, b.bookingEnd);
-        });  
-        this.clearSelectedSectors();
-      }    
+    onSubmit(formValues) {
+      const fromDate = this.dataService.fromDate;
+      const toDate = this.dataService.toDate;
+      this.selectedSectors = this.dataService.selectedSectors;
+      let booking: Booking;
+      for (const sector of this.selectedSectors) {
+        booking = new Booking(0, null, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
+        this.bookingSectorService.bookSector(booking).subscribe(b => {
+          this.dataService.renderMarkers(fromDate, toDate); //#TODO: Render markers too much. Change logic!
+        });
+      }  
+      this.dataService.clearSelectedSectors.emit();
     }
 
     ngOnInit() {
+      console.log(this.dataService.selectedSectors);
       this.bookingSectorForm = this.formBuilder.group({
         firstName: ['', Validators.required],
-        lastName: ['', Validators.required]
+        lastName: ['', Validators.required],
+        phone: ['', Validators.required],
+        password: ['', Validators.required]
       });
-      this.dataService.currentSectorNumber.subscribe(number => {
-        this.sectorNumber = number;
-      });      
+      this.isLoggedIn = this.authentificationService.isLoggedIn();
     }
 }

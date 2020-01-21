@@ -24,7 +24,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
-import { CustomRangesComponent } from './pages/home-page/components/datepicker/datepicker';
+import { CustomRangesComponent } from './pages/home-page/components/booking-datepicker/booking-datepicker.component';
 import { BookingSectorFormComponent } from './pages/home-page/components/booking-sector-form/booking-sector-form.component';
 import { SectorsMapComponent } from './pages/home-page/components/sectors-map/sectors-map.component';
 import { NavigationBarComponent } from './shared/navbar/navbar.component';
@@ -72,6 +72,7 @@ import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.co
 import { DetailsTournamentDialogComponent } from
     './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   imports: [
@@ -106,7 +107,8 @@ import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-
     MatPaginatorModule,
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     AngularFontAwesomeModule,
-    AdminManagementModule
+    AdminManagementModule,
+    MatToolbarModule
 
   ],
   declarations: [
@@ -163,7 +165,7 @@ import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }

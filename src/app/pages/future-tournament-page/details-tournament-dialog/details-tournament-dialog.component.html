@@ -1,1 +1,37 @@
-<p>details-tournament-dialog works!</p>
+<div mat-dialog-title >
+  {{ this.data.dialogTitle }}
+  <span class="fx-spacer"></span>
+  <button mat-icon-button  mat-dialog-close class="float-right">
+    <mat-icon mat-list-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <div >
+    <h6  class="font-weight-bold p-0">
+      {{this.data.selectedTournament.name}}
+    </h6>
+    <hr>
+    <p> Start:
+    <span class="float-right"> {{this.data.selectedTournament.tournamentStart| date}}</span>
+    </p>
+    <p> End:
+      <span class="float-right"> {{this.data.selectedTournament.tournamentEnd| date}}</span>
+    </p>
+    <p> Praparation term:
+      <span class="float-right"> {{this.data.selectedTournament.preparationTerm}} days </span>
+    </p>
+  </div>
+
+  <div>
+    <h6  class="font-weight-bold p-0">
+     Description
+    </h6>
+    <hr>
+    <p class="text-justify">{{this.data.selectedTournament.description}}</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions class="float-right">
+  <button mat-button mat-dialog-close tabindex="-1"type="button" >Close</button>
+</mat-dialog-actions>

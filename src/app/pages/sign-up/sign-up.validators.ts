@@ -68,15 +68,16 @@ export class SignUpValidators {
     }
     return null;
   }
+
   static validatePassword(c: FormControl) {
     const password = c.value;
-    if (password.length > 5 && password.length < 10) {
+    if (password.length > 5 ) {
       if (
-        password.includes('111111') ||
+        password.length < 10 && (
         password.includes('123456') ||
+        password.includes('654321') ||
         password.includes('qwerty') ||
-        password.includes('000000') ||
-        password.includes('password')
+        password.includes('password'))
       ) {
 
         return { validatePassword: true };

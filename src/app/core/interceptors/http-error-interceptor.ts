@@ -33,7 +33,7 @@ export class HttpErrorInterceptor  implements  HttpInterceptor {
               break;
 
             case HttpError.BadRequest:
-              message = `Server cannot process the client request. Check your datas.`;
+              message = `Server cannot process the client request. Check your data.`;
               title = `Error ${exception.status}. Bad request`;
               break;
 
