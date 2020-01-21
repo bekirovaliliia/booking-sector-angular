@@ -33,8 +33,8 @@ import { FormSectionComponent } from './pages/home-page/components/form-section/
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddUpdateTournamentDialogComponent } from
-    './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { AddUpdateTournamentDialogComponent } from './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -69,8 +69,8 @@ import { AdminGuard } from './core/guards/admin.guard';
 import { FutureTournamentPageComponent } from './pages/future-tournament-page/future-tournament-page.component';
 import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
-import { DetailsTournamentDialogComponent } from
-    './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { DetailsTournamentDialogComponent } from './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -165,9 +165,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AppComponent,
   ],
 
+  // tslint:disable-next-line:max-line-length
   entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+//platformBrowserDynamic().bootstrapModule(AppModule);

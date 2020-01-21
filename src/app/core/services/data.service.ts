@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
 import { Sector } from 'src/app/shared/models/sector-model';
 import * as moment from 'moment';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import * as moment from 'moment';
 })
 export class DataService {
 
-  apiSectorsUrl: string = 'https://localhost:44393/api/sectors';
+  apiSectorsUrl: string = environment.urlAddress + '/sectors';
 
   private _selectedSectors = new BehaviorSubject<Sector[]>([]);
   currentSelectedSectors = this._selectedSectors.asObservable();

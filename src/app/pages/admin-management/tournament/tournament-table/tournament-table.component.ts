@@ -112,7 +112,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
           });
   }
 
-  openUpdateDialog(selectedTournament: Tournament){
+  openUpdateDialog(selectedTournament: Tournament) {
     console.log(selectedTournament.tournamentStart);
     this.updateDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
       hasBackdrop: false,
@@ -143,7 +143,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
       if (this.searchText) {
         this.dataSource.data  = this.searchPipe.transform(this.dataSource.data, this.searchText, Object.keys(this.tournaments[0]));
       }
-    } else if (this.searchText || this.searchText === ''){
+    } else if (this.searchText || this.searchText === '') {
       this.dataSource.data  = this.searchPipe.transform(this.tournaments, this.searchText, Object.keys(this.tournaments[0]));
     }
   }
