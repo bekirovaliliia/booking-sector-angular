@@ -29,18 +29,13 @@ const routes: Routes = [
   { path: 'sign-in',
     component: SignInComponent
   },
-  
+
   { path: 'sign-in/:email/:hash',
     component: SignInComponent
   },
-  
+
   { path: 'sign-up',
     component: SignUpComponent
-  },
-
-  { path: '**',
-    redirectTo: '/home',
-    pathMatch: 'full'
   },
 
   { path: 'set-password',
@@ -55,6 +50,11 @@ const routes: Routes = [
 
   { path: 'future-tournaments',
     component : FutureTournamentPageComponent,
+  },
+
+  { path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
 ];
 
