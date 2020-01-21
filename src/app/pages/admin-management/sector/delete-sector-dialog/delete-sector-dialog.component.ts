@@ -12,6 +12,7 @@ export class DeleteSectorDialogComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   submit() {
     this.dialogRef.close(true);
   }

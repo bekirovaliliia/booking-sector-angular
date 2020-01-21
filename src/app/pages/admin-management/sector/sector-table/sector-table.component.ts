@@ -4,6 +4,7 @@ import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { Sector } from '../../../../shared/models/sector-model';
 import { SectorService } from '../../../../core/services/sector.service';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
+import {filter} from 'rxjs/operators';
 @Component({
   selector: 'app-sector-table',
   templateUrl: './sector-table.component.html',
@@ -53,10 +54,11 @@ export class SectorTableComponent implements OnInit, OnChanges {
     });
     this.deleteDialog
       .afterClosed()
+      .pipe(filter(number => number))
       .subscribe(name => {
         this.sectorService.delete(id).subscribe(
           data => {
-         this.getSectors();
+            this.getSectors();
           }
         );
       });
@@ -75,15 +77,26 @@ export class SectorTableComponent implements OnInit, OnChanges {
     });
     this.addUpdateDialog
       .afterClosed()
+      .pipe(
+        filter(sect => sect)
+      )
       .subscribe(sector => {
         if (action === 'Add') {
           sector.id = 0;
-          sector.isActive = true;
+          if(sector.isActive === 'true')
+              sector.isActive = true;
+            else{
+              sector.isActive = null;
+            }
           this.sectorService.add(sector).subscribe(data => {
             this.getSectors();
           });
         } else if (action === 'Update') {
-          sector.isActive = false;
+            if(sector.isActive === 'true')
+              sector.isActive = true;
+            else{
+              sector.isActive = null;
+            }
           this.sectorService.update(sector).subscribe(data => {
             this.getSectors();
           });

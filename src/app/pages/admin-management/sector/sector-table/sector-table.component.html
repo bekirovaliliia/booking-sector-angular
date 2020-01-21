@@ -1,7 +1,7 @@
 <app-without-datas *ngIf="dataSource.data.length === 0" [withoutDatasText]="withoutDatasText"></app-without-datas>
 
 <div *ngIf="dataSource.data.length!==0">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100 btn-table" >
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100 btn-table">
 
     <ng-container matColumnDef="id" >
       <th mat-sort-header arrowPosition="before" *matHeaderCellDef>ID
@@ -35,13 +35,13 @@
           <app-add-btn (selectedToAdd)="openAddUpdateDialog({}, 'Add')"></app-add-btn>
         </th>
         <td mat-cell *matCellDef="let sector">
-        <mat-checkbox checked={{sector.isActive}} disabled></mat-checkbox>
+          <mat-checkbox [ngModel]="sector.isActive === null ? false : true" disabled></mat-checkbox>
 
-        <div class="btn-group">
-          <app-update-btn (selectedToUpdate)="openAddUpdateDialog(sector, 'Update')">
-          </app-update-btn>
-          <app-delete-btn (selectedToDelete)="deleteSector(sector.id)"></app-delete-btn>
-        </div> 
+          <div class="btn-group" id="management-buttons">
+            <app-update-btn (selectedToUpdate)="openAddUpdateDialog(sector, 'Update')">
+            </app-update-btn>
+            <app-delete-btn (selectedToDelete)="deleteSector(sector.id)"></app-delete-btn>
+          </div> 
       </td>
     </ng-container>
 

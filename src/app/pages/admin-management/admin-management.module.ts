@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material';
 
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
@@ -72,6 +73,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSelectModule
   ]
 })
 export class AdminManagementModule { }

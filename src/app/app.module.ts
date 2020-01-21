@@ -65,6 +65,8 @@ import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
 import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material';
 @NgModule({
     imports: [
         FormsModule,
@@ -97,7 +99,8 @@ import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/
         MatTableModule,
         MatPaginatorModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-
+        MatCheckboxModule,
+        MatSelectModule
     ],
   declarations: [
     AppComponent,
