@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [UserGuard, AdminGuard]
   },
 
-  { path: 'futuretournaments',
+  { path: 'future-tournaments',
     component : FutureTournamentPageComponent,
   },
 ];

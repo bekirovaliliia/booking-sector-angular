@@ -73,6 +73,10 @@ import { DetailsTournamentDialogComponent } from
     './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRadioModule} from "@angular/material/radio";
+import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
+import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   imports: [
@@ -108,7 +112,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     AngularFontAwesomeModule,
     AdminManagementModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule,
+    MatSelectModule
 
   ],
   declarations: [
@@ -146,6 +152,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     DetailsBtnComponent,
     DetailsTournamentDialogComponent,
     SectorsTagsInputComponent,
+    ForUserComponent,
+    ForTournamentComponent,
     ],
   exports: [
     NumberOnlyDirective,
@@ -158,6 +166,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FilterPipe,
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     AdminGuard,
     UserGuard
   ],

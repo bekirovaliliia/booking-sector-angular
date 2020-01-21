@@ -1,21 +1,32 @@
 <div class="jumbotron">
-    <div class="row justify-content-center">
-        <div class="col s6">
-            <div class="card border-info mb-3">
-                <div class="card-header text-white bg-info mb-3">Search by period</div>
-                <div class="card-body">
-                    <div class="alert alert-info" role="alert">
-                        <i class="material-icons align-middle">info</i>
-                        <i class="align-middle pl-2">Enter date to see free sectors</i>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="label label-info">Period:</label>
-                            <app-booking-datepicker></app-booking-datepicker>
-                        </div>
-                    </div>
-                </div>
+  <div class="row justify-content-center">
+    <div class="col s6">
+      <div class="card border-info mb-3">
+        <div class="card-header text-white bg-info">Search by period</div>
+        <div class="card-body">
+
+          <div *ngIf="isAdmin">
+            <span> Booking for:</span>
+            <mat-radio-group [(ngModel)]="selection" #radioGroup="matRadioGroup">
+              <mat-radio-button class="mx-3" value="user">User</mat-radio-button>
+              <mat-radio-button value="tournament">Tournament</mat-radio-button>
+            </mat-radio-group>
+
+            <div *ngIf="radioGroup.value === 'user'">
+              <app-for-user></app-for-user>
             </div>
+
+            <div *ngIf="radioGroup.value === 'tournament'">
+              <app-for-tournament></app-for-tournament>
+            </div>
+          </div>
+
+          <div *ngIf="isUser || isLoggedOut">
+            <app-for-user></app-for-user>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>

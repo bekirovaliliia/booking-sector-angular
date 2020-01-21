@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
 import { DataService } from '../../../../core/services/data.service';
 
@@ -9,7 +9,7 @@ const now: Date = new Date();
     styleUrls: ['./booking-datepicker.component.css']
   })
 export class CustomRangesComponent {
-    selected: any;
+   @Input() selected: any;
     alwaysShowCalendars: boolean;
     showRangeLabelOnInput: boolean;
     keepCalendarOpeningWithRange: boolean;
