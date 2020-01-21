@@ -75,11 +75,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-<<<<<<< HEAD
     MatSelectModule
-=======
-
->>>>>>> d7ee2b51bedac7b31dab066d1b60044e3ec96347
   ]
 })
 export class AdminManagementModule { }
