@@ -43,8 +43,7 @@ export class AddUpdateSectorDialogComponent implements OnInit {
   setIsActive(){
     if((this.data.selectedSector.isActive === false) || (this.data.selectedSector.isActive === true)) {
       return 'true';
-    }
-    else {
+    } else {
       return 'null';
     }
   }

@@ -82,9 +82,9 @@ export class SectorTableComponent implements OnInit, OnChanges {
       .pipe(filter(sector => sector))
       .subscribe(sector => {
         sector.id = 0;
-        if(sector.isActive === 'true')
+        if(sector.isActive === 'true') {
           sector.isActive = true;
-        else {
+        } else {
           sector.isActive = null;
         }
         this.sectorService.add(sector).subscribe(data => {
@@ -109,9 +109,9 @@ export class SectorTableComponent implements OnInit, OnChanges {
       .afterClosed()
       .pipe(filter(sect => sect))
       .subscribe(sector => {
-        if(sector.isActive === 'true')
+        if(sector.isActive === 'true') {
           sector.isActive = true;
-        else{
+        } else {
           sector.isActive = null;
         }
         this.sectorService.update(sector).subscribe(data => {
