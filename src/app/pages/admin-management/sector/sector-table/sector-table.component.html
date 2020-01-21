@@ -1,26 +1,55 @@
+<app-without-datas *ngIf="dataSource.data.length === 0" [withoutDatasText]="withoutDatasText"></app-without-datas>
 
-<table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="row-border hover" class ="table">
-  <thead class="thead-dark" >
-    <tr>
-      <th *ngFor="let s of sectorHeaders">
-        {{s}}
+<div *ngIf="dataSource.data.length!==0">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100 btn-table">
+
+    <ng-container matColumnDef="id" >
+      <th mat-sort-header arrowPosition="before" *matHeaderCellDef>ID
       </th>
-    </tr>
-  </thead>
-  <tbody *ngIf="this.sectors?.length > 0" >
-    <tr *ngFor="let sector of this.sectors; let i = index"
-      app-sector-table-row
-      [sector] = "sector"
-      [headers] = "sectorHeaders">
-    </tr>
-  </tbody>
+      <td mat-cell *matCellDef="let sector"> {{sector.id}} 
+      </td>
+    </ng-container>
 
-  <tbody *ngIf="this.sectors?.length == 0">
-    <tr>
-      <td colspan="3" class="no-data-available">No data!</td>
-    </tr>
-  <tbody>
-</table>
+    <ng-container matColumnDef="number">
+      <th mat-sort-header arrowPosition="before" *matHeaderCellDef>Number</th>
+      <td mat-cell *matCellDef="let sector"> {{sector.number}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef class="w-25">Description</th>
+      <td mat-cell *matCellDef="let sector"> {{sector.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gpsLat">
+      <th mat-header-cell *matHeaderCellDef class="w-25">GpsLat</th>
+      <td mat-cell *matCellDef="let sector"> {{sector.gpsLat}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gpsLng">
+        <th mat-header-cell *matHeaderCellDef class="w-25"> GpsLng</th>
+        <td mat-cell *matCellDef="let sector"> {{sector.gpsLng}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isActive">
+        <th mat-sort-header arrowPosition="before" *matHeaderCellDef class="w-25"> Is_Active
+          <app-add-btn (selectedToAdd)="openAddDialog({})"></app-add-btn>
+        </th>
+        <td mat-cell *matCellDef="let sector">
+          <mat-checkbox [ngModel]="sector.isActive === null ? false : true" disabled></mat-checkbox>
+
+          <div class="btn-group" id="management-buttons">
+            <app-update-btn (selectedToUpdate)="openUpdateDialog(sector)"></app-update-btn>
+            <app-delete-btn (selectedToDelete)="deleteSector(sector.id)"></app-delete-btn>
+          </div> 
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="sectorHeader"></tr>
+    <tr mat-row *matRowDef="let row; columns: sectorHeader; let i=index;" (click) ="getSelectedRow(i)" [class.active]="isSelected(i)"></tr>
+
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
 
 
 
