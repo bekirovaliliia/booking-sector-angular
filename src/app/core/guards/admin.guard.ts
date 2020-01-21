@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivate {
     if (role == this.expectedRole) {
       return true;
     }
-    this.toast.warning('Немає прав для доступу');
+    this.toast.warning('Access denied');
     this.router.navigate(['home']);
     return false;
   }
