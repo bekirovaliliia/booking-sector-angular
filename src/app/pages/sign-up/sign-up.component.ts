@@ -24,13 +24,14 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   user: UserEmail;
   errorHandling = false;
+  buttonError = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthenticationService,
     private toastr: ToastrService,
-    public router: Router
+    public router: Router,
+    private authService: AuthenticationService
   ) {
     this.user = new UserEmail();
   }
@@ -40,7 +41,7 @@ export class SignUpComponent implements OnInit {
     if(this.authService.isLoggedIn())
     {
       this.router.navigate(['home']);
-      this.toastr.warning("Щоб зареєструватись, спочатку потрібно вийти");
+      this.toastr.warning("You must first log out to sign up");
     }
 
     // @ts-ignore
@@ -97,7 +98,6 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.submitted = true;
     // stop here if form is invalid
 
@@ -106,7 +106,6 @@ export class SignUpComponent implements OnInit {
     }
     if (this.errorHandling === true) {
       this.toastr.error('Your number or email already exists! !', 'Oops :(');
-
       return;
     }
 
@@ -141,6 +140,7 @@ export class SignUpComponent implements OnInit {
             },
       error => {
               this.errorHandling = false;
+
             }
         );
     }
@@ -163,4 +163,9 @@ export class SignUpComponent implements OnInit {
         );
     }
   }
+
+  buttonEnable() {
+    this.buttonError = this.registerForm.invalid;
+  }
+
 }
