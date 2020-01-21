@@ -1,0 +1,37 @@
+<div class="alert alert-info my-3 " role="alert">
+  <i class="material-icons align-middle">info</i>
+  <i class="align-middle pl-2">Select tournament to see free sectors</i>
+</div>
+
+<div class="col-md-6 p-0">
+  <label class="label label-info">Tournament:</label>
+  <div>
+    <form>
+      <mat-select placeholder="Select tournament"  (selectionChange)="onChange($event)">
+        <mat-option [value]=null>--None--</mat-option>
+        <mat-option (click)="openAddDialog()" [value]=null>New...</mat-option>
+        <mat-option *ngFor="let tournament of this.tournaments" [value]="tournament">
+          {{tournament.name}}
+        </mat-option>
+      </mat-select>
+    </form>
+  </div>
+
+  <label class="label label-info">Period:</label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text bg-light border border-dark">
+          <i class="material-icons">calendar_today</i>
+      </span>
+    </div>
+      <input type="text"
+             [(ngModel)]="selected"
+             readonly
+             class="form-control border border-dark"
+             placeholder="yyyy-mm-dd"
+>
+    </div>
+</div>
+
+
+

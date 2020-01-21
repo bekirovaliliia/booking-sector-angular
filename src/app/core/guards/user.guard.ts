@@ -14,10 +14,10 @@ export class UserGuard implements CanActivate {
 
   canActivate(): boolean {
     const role = this.service.getRole();
-    if (role == this.expectedRole) {
+    if (role === this.expectedRole) {
       return true;
     }
-    this.toast.warning('Немає прав для доступу');
+    this.toast.warning('Access denied');
     this.router.navigate(['home']);
     return false;
   }
