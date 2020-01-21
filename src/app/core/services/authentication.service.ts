@@ -44,7 +44,7 @@ export class AuthenticationService {
     else if(this.tokenStore.getRole() == Role.Admin)
     {
       this.toast.success('Hello, Admin!');
-      this.router.navigate(['admin']);
+      this.router.navigate(['admin/bookings']);
     }
   }
 

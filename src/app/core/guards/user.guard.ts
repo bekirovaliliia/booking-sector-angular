@@ -14,7 +14,7 @@ export class UserGuard implements CanActivate {
 
   canActivate(): boolean {
     const role = this.service.getRole();
-    if (role == this.expectedRole) {
+    if (role === this.expectedRole) {
       return true;
     }
     this.toast.warning('Access denied');
