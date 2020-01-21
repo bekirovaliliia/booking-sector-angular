@@ -41,7 +41,7 @@ export class AddUpdateSectorDialogComponent implements OnInit {
   }
 
   setIsActive(){
-    if(this.data.selectedSector.isActive === false || this.data.selectedSector.isActive === true) {
+    if((this.data.selectedSector.isActive === false) || (this.data.selectedSector.isActive === true)) {
       return 'true';
     }
     else {
@@ -51,6 +51,5 @@ export class AddUpdateSectorDialogComponent implements OnInit {
 
   submit(form): void {
     this.dialogRef.close(form.value);
-    console.log(form.value);
   }
 }

@@ -32,14 +32,13 @@
 
     <ng-container matColumnDef="isActive">
         <th mat-sort-header arrowPosition="before" *matHeaderCellDef class="w-25"> Is_Active
-          <app-add-btn (selectedToAdd)="openAddUpdateDialog({}, 'Add')"></app-add-btn>
+          <app-add-btn (selectedToAdd)="openAddDialog({})"></app-add-btn>
         </th>
         <td mat-cell *matCellDef="let sector">
           <mat-checkbox [ngModel]="sector.isActive === null ? false : true" disabled></mat-checkbox>
 
           <div class="btn-group" id="management-buttons">
-            <app-update-btn (selectedToUpdate)="openAddUpdateDialog(sector, 'Update')">
-            </app-update-btn>
+            <app-update-btn (selectedToUpdate)="openUpdateDialog(sector)"></app-update-btn>
             <app-delete-btn (selectedToDelete)="deleteSector(sector.id)"></app-delete-btn>
           </div> 
       </td>

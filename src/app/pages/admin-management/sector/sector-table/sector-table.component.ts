@@ -4,7 +4,7 @@ import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { Sector } from '../../../../shared/models/sector-model';
 import { SectorService } from '../../../../core/services/sector.service';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
-import {filter} from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-sector-table',
   templateUrl: './sector-table.component.html',
@@ -18,22 +18,22 @@ export class SectorTableComponent implements OnInit, OnChanges {
   sectorHeader: string[];
   sectors: Sector[];
 
-  addUpdateDialog: MatDialogRef<AddUpdateSectorDialogComponent>;
+  addDialog: MatDialogRef<AddUpdateSectorDialogComponent>;
+  updateDialog: MatDialogRef<AddUpdateSectorDialogComponent>;
   deleteDialog: MatDialogRef<DeleteSectorDialogComponent>;
 
   dataSource = new MatTableDataSource<Sector>([]);
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
-  this.dataSource.paginator = paginator;
+    this.dataSource.paginator = paginator;
   }
-  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort){
+  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort) {
     this.dataSource.sort = sort;
   }
 
   constructor( private sectorService: SectorService,
-               private dialog: MatDialog
-    ) { }
+               private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getSectors();
@@ -42,8 +42,7 @@ export class SectorTableComponent implements OnInit, OnChanges {
   getSectors() {
     this.sectorService.getSectors().subscribe(res => {
       this.sectors = res;
-      this.sectorHeader = (this.sectors && this.sectors.length > 0) ? Object.keys
-      (this.sectors[0]) : [];
+      this.sectorHeader = (this.sectors && this.sectors.length > 0) ? Object.keys(this.sectors[0]) : [];
       this.dataSource.data = this.sectors;
     });
   }
@@ -51,6 +50,8 @@ export class SectorTableComponent implements OnInit, OnChanges {
   deleteSector(id: number) {
     this.deleteDialog = this.dialog.open(DeleteSectorDialogComponent, {
       hasBackdrop: false,
+      panelClass: ['no-padding'],
+      width: '350px',
     });
     this.deleteDialog
       .afterClosed()
@@ -64,48 +65,63 @@ export class SectorTableComponent implements OnInit, OnChanges {
       });
   }
 
-  openAddUpdateDialog(selectedSector: Sector, action: string){
-    this.addUpdateDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
+  openAddDialog(selectedSector: Sector) {
+    this.addDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
       hasBackdrop: false,
-      width: '500px',
+      panelClass: ['no-padding'],
+      width: '600px',
       minWidth: '250px',
       data: {
-         dialogTitle: (action === 'Add') ? 'New Sector' : 'Update Sector',
-         isUpdated: (action === 'Add') ? false : true,
-         selectedSector,
+        dialogTitle: 'New Sector',
+        isUpdated: false,
+        selectedSector,
       }
     });
-    this.addUpdateDialog
+    this.addDialog
       .afterClosed()
-      .pipe(
-        filter(sect => sect)
-      )
+      .pipe(filter(sector => sector))
       .subscribe(sector => {
-        if (action === 'Add') {
-          sector.id = 0;
-          if(sector.isActive === 'true')
-              sector.isActive = true;
-            else{
-              sector.isActive = null;
-            }
-          this.sectorService.add(sector).subscribe(data => {
-            this.getSectors();
-          });
-        } else if (action === 'Update') {
-            if(sector.isActive === 'true')
-              sector.isActive = true;
-            else{
-              sector.isActive = null;
-            }
-          this.sectorService.update(sector).subscribe(data => {
-            this.getSectors();
-          });
+        sector.id = 0;
+        if(sector.isActive === 'true')
+          sector.isActive = true;
+        else {
+          sector.isActive = null;
         }
+        this.sectorService.add(sector).subscribe(data => {
+          this.getSectors();
+        });
       });
-}
+  }
 
-ngOnChanges(): void {
-      this.dataSource.data  = this.sectors;
+  openUpdateDialog(selectedSector: Sector) {
+    this.updateDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
+      hasBackdrop: false,
+      panelClass: ['no-padding'],
+      width: '600px',
+      minWidth: '250px',
+      data: {
+        dialogTitle: 'Update Sector',
+        isUpdated: true,
+        selectedSector,
+      }
+    });
+    this.updateDialog
+      .afterClosed()
+      .pipe(filter(sect => sect))
+      .subscribe(sector => {
+        if(sector.isActive === 'true')
+          sector.isActive = true;
+        else{
+          sector.isActive = null;
+        }
+        this.sectorService.update(sector).subscribe(data => {
+          this.getSectors();
+        });
+      });
+  }
+
+  ngOnChanges(): void {
+      this.dataSource.data = this.sectors;
   }
 
   getSelectedRow(item): void {

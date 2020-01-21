@@ -14,5 +14,4 @@ export class SectorComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
