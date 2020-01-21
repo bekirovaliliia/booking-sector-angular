@@ -66,6 +66,10 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
+import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material';
 import { FutureTournamentPageComponent } from './pages/future-tournament-page/future-tournament-page.component';
 import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
@@ -73,10 +77,10 @@ import { DetailsTournamentDialogComponent } from
     './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatRadioModule} from "@angular/material/radio";
+import {MatRadioModule} from '@angular/material/radio';
 import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
 import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
-import {MatSelectModule} from "@angular/material/select";
+
 
 @NgModule({
   imports: [
@@ -117,6 +121,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatSelectModule
 
   ],
+
   declarations: [
     AppComponent,
     UserProfileTextComponent,
@@ -148,6 +153,8 @@ import {MatSelectModule} from "@angular/material/select";
     SearchPipe,
     NumberOnlyDirective,
     CalendarComponent,
+    DeleteSectorDialogComponent,
+    AddUpdateSectorDialogComponent,
     FutureTournamentPageComponent,
     DetailsBtnComponent,
     DetailsTournamentDialogComponent,
@@ -174,7 +181,7 @@ import {MatSelectModule} from "@angular/material/select";
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DetailsTournamentDialogComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DeleteSectorDialogComponent, AddUpdateSectorDialogComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }
