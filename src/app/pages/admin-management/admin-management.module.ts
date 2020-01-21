@@ -15,10 +15,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material';
 
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
-import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
+
 import { AddBtnComponent } from '../../shared/buttons/add-btn/add-btn.component';
 import { DataTablesModule} from 'angular-datatables';
 import { DeleteBtnComponent } from '../../shared/buttons/delete-btn/delete-btn.component';
@@ -43,7 +44,6 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     FilterPipe,
     SectorTableComponent,
     SectorComponent,
-    SectorTableRowComponent,
     AddBtnComponent,
     DeleteBtnComponent,
     UpdateBtnComponent,
@@ -75,7 +75,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-
+    MatSelectModule
   ]
 })
 export class AdminManagementModule { }
