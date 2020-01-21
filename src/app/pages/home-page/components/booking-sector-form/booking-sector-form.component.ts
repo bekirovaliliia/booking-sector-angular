@@ -19,7 +19,7 @@ export class BookingSectorFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
+    public dataService: DataService,
     private bookingSectorService: BookingService,
     private authentificationService: AuthenticationService
     ) { }

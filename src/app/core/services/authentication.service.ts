@@ -38,13 +38,13 @@ export class AuthenticationService {
     this.tokenStore.setToken(token);
     if(this.tokenStore.getRole() == Role.User)
     {
-      this.toast.success('Ви увійшли як юзер');
+      this.toast.success('Hello, User!');
       this.router.navigate([`profile`]);
     }
     else if(this.tokenStore.getRole() == Role.Admin)
     {
-      this.toast.success('Ви увійшли як адмін');
-      this.router.navigate(['admin']);
+      this.toast.success('Hello, Admin!');
+      this.router.navigate(['admin/bookings']);
     }
   }
 

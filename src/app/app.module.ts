@@ -33,8 +33,8 @@ import { FormSectionComponent } from './pages/home-page/components/form-section/
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddUpdateTournamentDialogComponent } from
-    './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { AddUpdateTournamentDialogComponent } from './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -67,14 +67,15 @@ import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
 import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
+// tslint:disable-next-line:max-line-length
 import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material';
 import { FutureTournamentPageComponent } from './pages/future-tournament-page/future-tournament-page.component';
 import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
-import { DetailsTournamentDialogComponent } from
-    './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { DetailsTournamentDialogComponent } from './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatRadioModule} from '@angular/material/radio';
@@ -181,9 +182,9 @@ import { ForTournamentComponent } from './pages/home-page/components/filter-sect
     AppComponent,
   ],
 
+  // tslint:disable-next-line:max-line-length
   entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DeleteSectorDialogComponent, AddUpdateSectorDialogComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);

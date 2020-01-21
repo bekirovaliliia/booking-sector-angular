@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Setting} from '../../shared/models/setting.model';
 import {Observable} from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-  apiURl = 'https://localhost:44393/api/settings';
+  apiURl = environment.urlAddress + '/settings';
   constructor(private http: HttpClient) { }
 
   getSettings() {
