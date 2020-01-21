@@ -83,7 +83,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
       });
   }
 
-  openAddDialog(selectedTournament: Tournament) {
+  openAddDialog() {
+    const selectedTournament = new Tournament();
     selectedTournament.tournamentStart = moment().toString();
     selectedTournament.tournamentEnd = moment().toString();
 

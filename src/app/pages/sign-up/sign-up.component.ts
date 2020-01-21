@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
   user: UserEmail;
   errorHandling = false;
   buttonError = true;
-  show: string;
+  show: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
