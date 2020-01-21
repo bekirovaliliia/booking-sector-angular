@@ -36,20 +36,21 @@ export class AddUpdateSectorDialogComponent implements OnInit {
         Validators.max(180),
         Validators.min(-180)
       ]],
-      isActive: [this.data.selectedSector.isActive]
+      isActive: [this.setIsActive()]
     });
   }
 
   setIsActive(){
     if(this.data.selectedSector.isActive === false || this.data.selectedSector.isActive === true) {
-      return true;
+      return 'true';
     }
     else {
-      return null;
+      return 'null';
     }
   }
 
   submit(form): void {
     this.dialogRef.close(form.value);
+    console.log(form.value);
   }
 }
