@@ -25,6 +25,7 @@ export class SignUpComponent implements OnInit {
   user: UserEmail;
   errorHandling = false;
   buttonError = true;
+  show: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +39,9 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.authService.isLoggedIn())
-    {
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['home']);
-      this.toastr.warning("You must first log out to sign up");
+      this.toastr.warning('You must first log out to sign up');
     }
 
     // @ts-ignore
@@ -155,7 +155,7 @@ export class SignUpComponent implements OnInit {
             'A user with this email already exists!',
             'Error!'
           );
-            this.errorHandling = true;
+          this.errorHandling = true;
         },
           error => {
             this.errorHandling = false;

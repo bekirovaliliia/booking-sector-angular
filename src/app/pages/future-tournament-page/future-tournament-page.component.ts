@@ -10,8 +10,6 @@ import {MatSort} from '@angular/material/sort';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import * as moment from 'moment';
 import {DetailsTournamentDialogComponent} from './details-tournament-dialog/details-tournament-dialog.component';
-import {AddUpdateTournamentDialogComponent} from "../admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component";
-import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-future-tournament-page',
