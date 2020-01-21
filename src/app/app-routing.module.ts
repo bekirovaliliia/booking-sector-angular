@@ -38,11 +38,6 @@ const routes: Routes = [
     component: SignUpComponent
   },
 
-  { path: '**',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-
   { path: 'set-password',
     component: SetNewPasswordComponent
 
@@ -56,6 +51,10 @@ const routes: Routes = [
   { path: 'futuretournaments',
     component : FutureTournamentPageComponent,
   },
+  { path: '**',
+  redirectTo: '/home',
+  pathMatch: 'full'
+  }
 ];
 
 
