@@ -146,7 +146,7 @@ export class SignUpComponent implements OnInit {
             },
       error => {
               this.errorHandling = false;
-
+              
             }
         );
     }
