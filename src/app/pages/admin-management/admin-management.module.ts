@@ -30,6 +30,9 @@ import { GlobalSearchComponent } from './tournament/global-search/global-search.
 import {MatSortModule} from '@angular/material/sort';
 import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
 import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.component';
+import { BookingTabsComponent } from './booking-managing/booking-tabs/booking-tabs.component';
+import { BookingTableComponent } from './booking-managing/booking-table/booking-table.component';
+import { BookingActionsComponent } from './booking-managing/booking-actions/booking-actions.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     GlobalSearchComponent,
     ClearBtnComponent,
     WithoutDatasComponent,
+    BookingTabsComponent,
+    BookingTableComponent,
+    BookingActionsComponent,
 
   ],
   exports: [
