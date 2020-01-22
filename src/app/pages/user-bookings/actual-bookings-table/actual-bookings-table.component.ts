@@ -4,6 +4,7 @@ import {BookingService} from '../../../core/services/booking.service';
 import {Subject, from} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 //import {sleep} from 'sleep-ts';
 
 
@@ -27,7 +28,6 @@ export class ActualBookingsTableComponent implements OnInit {
     this.dataSource.sort = sort;
   }
   booking: Booking;
-  userId:number = 1;
   @Input() isActual:boolean = false;
   hasBookings: boolean = false;
   bookingHeaders: string[];
@@ -36,7 +36,7 @@ export class ActualBookingsTableComponent implements OnInit {
   
   bookings: Booking[];
   filteredBookings: Booking[];
-  constructor(private bookingService: BookingService,) { }
+  constructor(private bookingService: BookingService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -51,11 +51,11 @@ export class ActualBookingsTableComponent implements OnInit {
 
   getBookings()
   {
-    this.bookingService.getUserBookings(this.userId, this.isActual).subscribe(res => {
+    this.bookingService.getUserBookings(this.authService.getId(), this.isActual).subscribe(res => {
       this.bookings = res;
       this.bookingHeaders = ['delete', 'id', 'bookingStart', 'bookingEnd', 'sectorId', 'isApproved'];
       this.updateDataSource();
-      if(this.bookings.length ==0){this.hasBookings = false;}
+      if(this.bookings.length == 0){this.hasBookings = false;}
      else{this.hasBookings = true;}
     console.log(this.hasBookings);
     });

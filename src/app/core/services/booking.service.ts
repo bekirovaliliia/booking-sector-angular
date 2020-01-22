@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
-import {SectorService} from '../services/sector.service';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +51,7 @@ export class BookingService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    if(booking.isApproved === null){
+    if (booking.isApproved === null) {
       return this.http.put(`${this.urlAddress}/${booking.id}`, httpOptions);
     } else {
       return this.http.put(`${this.urlAddress}/${booking.id}?isApproved=${booking.isApproved}`
@@ -99,12 +98,11 @@ export class BookingService {
       );
   }
 
-  filterByDate(startDate, endDate){
+  filterByDate(startDate, endDate) {
     return this.http.get(`${environment.urlAddress}/sectors/free?fromDate=${startDate}&toDate=${endDate}`);
   }
 
-  bookSector(booking: Booking) : Observable<Booking>
-  {
+  bookSector(booking: Booking): Observable<Booking>{
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };

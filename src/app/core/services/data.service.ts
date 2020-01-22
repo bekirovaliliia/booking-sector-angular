@@ -1,94 +1,95 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
+import { Sector } from 'src/app/shared/models/sector-model';
 import * as moment from 'moment';
+import { environment } from '../../../environments/environment';
 
-
-const now = new Date();
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService{
+export class DataService {
 
-  private sectorsId : number[] = [];
-  private sectorNumber = new BehaviorSubject<number>(null);
-  currentSectorNumber = this.sectorNumber.asObservable();
+  apiSectorsUrl: string = environment.urlAddress + '/sectors';
 
-  private markers = new BehaviorSubject<object []>(null);
-  currentMarkers = this.markers.asObservable();
+  private _selectedSectors = new BehaviorSubject<Sector[]>([]);
+  currentSelectedSectors = this._selectedSectors.asObservable();
 
-  private startDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
-  currentStartDate = this.startDate.asObservable();
+  private _markers = new BehaviorSubject<object []>(null);
+  currentMarkers = this._markers.asObservable();
 
-  private endDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
-  currentEndDate = this.endDate.asObservable();
+  private _fromDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentFromDate = this._fromDate.asObservable();
+
+  private _toDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentToDate = this._toDate.asObservable();
 
   clearSelectedSectors: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(
     private httpService: HttpClient,
     private bookingService: BookingService
-    ) { }
-
-  apiSectorsUrl: string = 'https://localhost:44393/api/sectors';
-
-  showAllSectors(){
-    this.httpService.get(this.apiSectorsUrl)
-    .subscribe(
-      data => {
-        this.currentMarkers = data as Observable<object []>;
-        this.changeMarkers(this.currentMarkers);
-      }
-    );
-  }
-
-  get fromDate(){
-    return this.startDate.value;
-  }
-
-  get toDate(){
-    return this.endDate.value;
-  }
-
-  renderMarkers(startDate, endDate){
-    this.bookingService.filterByDate(startDate, endDate)
-        .subscribe(
-          data => {
-          this.changeMarkers(data);
-        })
-  }
-
-  set addSectorId(sectorId){
-    if(sectorId != null){
-      this.sectorsId.push(sectorId);
-      console.log(this.sectorsId);
+    ) {
+      this.clearSelectedSectors.subscribe(s => this._selectedSectors.next([]));
+      this.currentFromDate.subscribe(d => this._selectedSectors.next([]));
     }
+
+  showAllSectors() {
+    this.httpService.get(this.apiSectorsUrl)
+      .subscribe(
+        data => {
+          this.currentMarkers = data as Observable<object []>;
+          this.changeMarkers(this.currentMarkers);
+        }
+      );
   }
 
-  get currentSectorsId(){
-    return this.sectorsId;
+  get selectedSectors() {
+    return this._selectedSectors.getValue();
   }
 
-  changeMarkers(markers){
-    this.markers.next(markers);
+  get fromDate() {
+    return this._fromDate.getValue();
   }
 
-  changeNumber(sectorNumber: number){
-    this.sectorNumber.next(sectorNumber);
+  get toDate() {
+    return this._toDate.getValue();
   }
 
-  changeDateRange(startDate, endDate){
-    if(startDate != null || endDate != null){
-      this.startDate.next(startDate);
-      this.endDate.next(endDate);
+  renderMarkers(startDate, endDate) {
+    this.bookingService.filterByDate(startDate, endDate)
+      .subscribe(
+        data => {
+        this.changeMarkers(data);
+      });
+  }
+
+  selectSector(marker): void {
+    this._selectedSectors.next(([...this._selectedSectors.getValue(), marker]));
+  }
+
+  changeMarkers(markers) {
+    this._markers.next(markers);
+  }
+
+  changeSelectedSectors(sectors){
+    this._selectedSectors.next(sectors);
+  }
+
+  changeDateRange(startDate, endDate) {
+    if (startDate != null || endDate != null) {
+      this._fromDate.next(startDate);
+      this._toDate.next(endDate);
       this.bookingService.filterByDate(startDate, endDate)
         .subscribe(
           data => {
           this.changeMarkers(data);
-        })
+        });
+      this.clearSelectedSectors.emit();
     }
-    else{
+    else {
       this.showAllSectors();
     }
   }

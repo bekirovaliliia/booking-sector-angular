@@ -1,5 +1,5 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { find, get, pull } from 'lodash';
 import { DataService } from '../../../../core/services/data.service';
 import { SettingsService } from '../../../../core/services/settings.service';
@@ -14,12 +14,16 @@ export class SectorsTagsInputComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private settingsService: SettingsService
   ) { }
 
   tags: string[] = [];
   form: FormGroup;
   maxBookingSectors: number;
+
+  clearSelectedSectors(){
+    this.tags = [];
+    this.dataService.clearSelectedSectors.emit();
+  }
 
   onKeyUp(event: KeyboardEvent): void {
     const inputValue: string = this.form.controls.tag.value;
@@ -45,7 +49,7 @@ export class SectorsTagsInputComponent implements OnInit {
 
   removeTag(tag?: string): void {
     if (!!tag) {
-      pull(this.tags, tag);
+      pull(this.tags, tag);  
     } else {
       this.tags.splice(-1);
     }
@@ -55,11 +59,15 @@ export class SectorsTagsInputComponent implements OnInit {
     this.form = this.formBuilder.group({
       tag: [undefined],
     });
-    this.dataService.currentSectorNumber.subscribe(sectorNumber => {
-      if (sectorNumber != null) {
-        this.addTag(sectorNumber.toString());
+    this.dataService.currentSelectedSectors.subscribe(sectors => {
+      if (sectors != null) {
+        if(sectors[sectors.length - 1] != undefined) {
+          this.addTag(sectors[sectors.length - 1].number.toString());
+        } 
       }
     });
-    this.dataService.clearSelectedSectors.subscribe(n => this.tags = []);
+    this.dataService.clearSelectedSectors.subscribe(s => {
+      this.tags = [];
+    });
   }
 }

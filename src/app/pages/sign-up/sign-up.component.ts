@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -25,6 +27,11 @@ export class SignUpComponent implements OnInit {
   user: UserEmail;
   errorHandling = false;
   buttonError = true;
+  show: boolean;
+  showRepeat: boolean;
+  faEyeSlash =  faEyeSlash;
+  faEye = faEye;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +45,9 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
 
-    if(this.authService.isLoggedIn())
-    {
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['home']);
-      this.toastr.warning("You must first log out to sign up");
+      this.toastr.warning('You must first log out to sign up');
     }
 
     // @ts-ignore
@@ -155,7 +161,7 @@ export class SignUpComponent implements OnInit {
             'A user with this email already exists!',
             'Error!'
           );
-            this.errorHandling = true;
+          this.errorHandling = true;
         },
           error => {
             this.errorHandling = false;
@@ -163,9 +169,4 @@ export class SignUpComponent implements OnInit {
         );
     }
   }
-
-  buttonEnable() {
-    this.buttonError = this.registerForm.invalid;
-  }
-
 }

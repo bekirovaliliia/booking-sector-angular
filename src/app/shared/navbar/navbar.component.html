@@ -1,19 +1,19 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-white home-navbar gradient">
-    <div class="container"><a class="navbar-brand logo" href="home">TridentLake</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <div class="container"><a class="navbar-brand logo" routerLink="/home">BookingSector</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse"
             id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" routerLink="/home">Home</a>
-                </li>
-              <li *ngIf="isLoggedIn && isUser|| isLoggedOut" class="nav-item" role="presentation">
-                <a class="nav-link active" routerLink="/futuretournaments">Tournaments</a>
+              <li class="nav-item" role="presentation">
+                  <a class="nav-link active" routerLink="/home">Home</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" routerLink="/future-tournaments">Tournaments</a>
               </li>
                 <li *ngIf="isLoggedIn && isUser" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/profile">Profile</a>
                 </li>
                 <li *ngIf="isLoggedIn && isAdmin" class="nav-item" role="presentation">
-                    <a class="nav-link active" routerLink="/admin">Admin Management</a>
+                    <a class="nav-link active" routerLink="/admin/bookings">Admin Management</a>
                 </li>
                 <li *ngIf="isLoggedOut" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/sign-in">Sign in</a>

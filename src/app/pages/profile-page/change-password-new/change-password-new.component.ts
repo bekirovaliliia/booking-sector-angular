@@ -20,6 +20,8 @@ newPassword: string = "";
 newPasswordConfirm: string = "";
 checked = false;
 color:string = "primary";
+hide: boolean;
+
 showNotMeetConditions() {
   this.toastr.error('Your password must meet at least 2 of 5 conditions', 'Try again!');
 }

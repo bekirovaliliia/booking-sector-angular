@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../../../core/services/data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
-
-const now = new Date();
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SettingsService } from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'app-sectors-map',
@@ -14,9 +13,10 @@ const now = new Date();
 export class SectorsMapComponent implements OnInit {
 
   constructor(
-    private httpService: HttpClient,
     private dataService: DataService,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private authenticationService: AuthenticationService,
+    private settingsService: SettingsService
     ) { }
 
   latitude = 49.886416;
@@ -27,13 +27,17 @@ export class SectorsMapComponent implements OnInit {
   sectorNumber: any;
   startDate: any;
   endDate: any;
+  maxBookingSectors: number;
 
   previous: any;
+  isLoggedIn: boolean;
 
   reverseMarker(marker, infoWindow) {
-    this.dataService.addSectorId = marker.id;
-    this.dataService.changeNumber(marker.number);
-    infoWindow.close();
+    if(this.dataService.selectedSectors.length < this.maxBookingSectors)
+    {
+      this.dataService.selectSector(marker);
+      infoWindow.close();
+    }
   }
 
   clickedMarker(infoWindow) {
@@ -44,13 +48,16 @@ export class SectorsMapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.currentSectorNumber.subscribe(sectorNumber => this.sectorNumber = sectorNumber);
-    this.dataService.currentStartDate.subscribe(date => this.startDate = date);
-    this.dataService.currentEndDate.subscribe(date => this.endDate = date);
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
+    this.dataService.currentFromDate.subscribe(date => this.startDate = date);
+    this.dataService.currentToDate.subscribe(date => this.endDate = date);
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
     this.startDate = moment().format('YYYY-MM-DD');
     this.endDate = moment().format('YYYY-MM-DD');
     this.bookingService.filterByDate(this.startDate, this.endDate)
           .subscribe(data => this.markers = data as object[]);
+    this.settingsService.getSettingById(2).subscribe(s =>{
+      this.maxBookingSectors = s.value;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { NgModule , enableProdMode} from '@angular/core';
+import {NgModule, enableProdMode, ErrorHandler} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,8 +33,8 @@ import { FormSectionComponent } from './pages/home-page/components/form-section/
 import { DatePipe } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { DeleteDialogComponent } from './shared/dialogs/delete-dialog/delete-dialog.component';
-import { AddUpdateTournamentDialogComponent } from
-    './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { AddUpdateTournamentDialogComponent } from './pages/admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
 import { FilterSectorsComponent } from './pages/home-page/components/filter-sectors/filter-sectors.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -57,8 +57,6 @@ import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
-
-import {HttpErrorInterceptor} from './core/interceptors/http-error-interceptor';
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -66,13 +64,23 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material';
 import { FutureTournamentPageComponent } from './pages/future-tournament-page/future-tournament-page.component';
 import {AdminManagementModule} from './pages/admin-management/admin-management.module';
 import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.component';
-import { DetailsTournamentDialogComponent } from
-    './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
+// tslint:disable-next-line:max-line-length
+import { DetailsTournamentDialogComponent } from './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
+import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
+import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
 
 @NgModule({
   imports: [
@@ -108,9 +116,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     AngularFontAwesomeModule,
     AdminManagementModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule,
+    MatSelectModule,
+    FontAwesomeModule
 
   ],
+
   declarations: [
     AppComponent,
     UserProfileTextComponent,
@@ -142,10 +154,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     SearchPipe,
     NumberOnlyDirective,
     CalendarComponent,
+    DeleteSectorDialogComponent,
+    AddUpdateSectorDialogComponent,
     FutureTournamentPageComponent,
     DetailsBtnComponent,
     DetailsTournamentDialogComponent,
     SectorsTagsInputComponent,
+    ForUserComponent,
+    ForTournamentComponent,
     ],
   exports: [
     NumberOnlyDirective,
@@ -159,15 +175,16 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
     AdminGuard,
-    UserGuard
+    UserGuard,
+    UserAndAdminGuard
   ],
   bootstrap: [
     AppComponent,
   ],
 
-  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DetailsTournamentDialogComponent]
+  // tslint:disable-next-line:max-line-length
+  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DeleteSectorDialogComponent, AddUpdateSectorDialogComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
