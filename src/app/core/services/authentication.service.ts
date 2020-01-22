@@ -6,7 +6,6 @@ import { tap, catchError, finalize } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { SpinnerService } from './spinner.service';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from 'src/app/shared/models/role';
 
@@ -18,8 +17,7 @@ export class AuthenticationService {
     private router: Router,
     private http: HttpClient,
     private toast: ToastrService,
-    private tokenStore: TokenStore,
-    private spinner: SpinnerService
+    private tokenStore: TokenStore
   ) {}
 
   login(phone: string, password: string): Observable<Token> {
