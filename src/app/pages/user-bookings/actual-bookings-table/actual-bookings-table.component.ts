@@ -28,7 +28,6 @@ export class ActualBookingsTableComponent implements OnInit {
     this.dataSource.sort = sort;
   }
   booking: Booking;
-  userId:number;
   @Input() isActual:boolean = false;
   hasBookings: boolean = false;
   bookingHeaders: string[];
@@ -46,14 +45,13 @@ export class ActualBookingsTableComponent implements OnInit {
       responsive: true,
       retrieve: true,
       select: true,
-      userId: this.authService.getId(),
     };
     this.getBookings();
   }
 
   getBookings()
   {
-    this.bookingService.getUserBookings(this.userId, this.isActual).subscribe(res => {
+    this.bookingService.getUserBookings(this.authService.getId(), this.isActual).subscribe(res => {
       this.bookings = res;
       this.bookingHeaders = ['delete', 'id', 'bookingStart', 'bookingEnd', 'sectorId', 'isApproved'];
       this.updateDataSource();

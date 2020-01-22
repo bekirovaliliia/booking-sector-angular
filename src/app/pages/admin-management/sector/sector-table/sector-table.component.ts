@@ -51,7 +51,7 @@ export class SectorTableComponent implements OnInit, OnChanges {
     this.deleteDialog = this.dialog.open(DeleteSectorDialogComponent, {
       hasBackdrop: false,
       panelClass: ['no-padding'],
-      width: '350px',
+      width: 350 + '%',
     });
     this.deleteDialog
       .afterClosed()
@@ -70,8 +70,7 @@ export class SectorTableComponent implements OnInit, OnChanges {
     this.addDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
       hasBackdrop: false,
       panelClass: ['no-padding'],
-      width: '600px',
-      minWidth: '250px',
+      width: 600 + '%',
       data: {
         dialogTitle: 'New Sector',
         isUpdated: false,
@@ -98,8 +97,7 @@ export class SectorTableComponent implements OnInit, OnChanges {
     this.updateDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
       hasBackdrop: false,
       panelClass: ['no-padding'],
-      width: '600px',
-      minWidth: '250px',
+      width: 600 + '%',
       data: {
         dialogTitle: 'Update Sector',
         isUpdated: true,
