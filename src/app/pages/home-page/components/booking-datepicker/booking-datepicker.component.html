@@ -11,12 +11,12 @@
       [maxDate]="maxDate"
       [minDate]="minDate"
       [linkedCalendars]="true"
-      [locale]="{applyLabel: 'Change', format: 'DD/MM/YYYY'}"
+      [locale]="{applyLabel: 'Change', format: 'YYYY-MM-DD'}"
       (datesUpdated)="datesUpdated($event)"
       [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
       [showRangeLabelOnInput]="showRangeLabelOnInput"
-      class="form-control border border-dark"
-      placeholder="DD/MM/YYYY"
+      class="form-control border border-dark rounded-right"
+      placeholder="YYYY-MM-DD"
       [dateLimit]="4">
 </div>
 
