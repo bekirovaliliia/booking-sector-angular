@@ -50,7 +50,7 @@ export class AuthenticationService {
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {
     if (httpResponse.status !== 0) {
-      this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
+      this.toast.error('Wrong password or phone', 'Logging error');
     }
     return throwError(httpResponse);
   }
