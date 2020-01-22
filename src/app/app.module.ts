@@ -78,44 +78,52 @@ import { DetailsBtnComponent } from './shared/buttons/details-btn/details-btn.co
 import { DetailsTournamentDialogComponent } from './pages/future-tournament-page/details-tournament-dialog/details-tournament-dialog.component';
 import { SectorsTagsInputComponent } from './pages/home-page/components/sectors-tags-input/sectors-tags-input.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
+import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
+import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
-    imports: [
-        FormsModule,
-        NgbModule,
-        BrowserModule,
-        HttpClientModule,
-        NgxMaskModule.forRoot(),
-        NgxSpinnerModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatPasswordStrengthModule.forRoot(),
-        MatFormFieldModule,
-        MatSlideToggleModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
-        }),
-        NgxDaterangepickerMd.forRoot(),
-        MatDialogModule,
-        TextFieldModule,
-        RouterModule,
-        AppRoutingModule,
-        ToastrModule.forRoot(),
-        CommonModule,
-        MatTableModule,
-        SidebarModule.forRoot(),
-        MatSortModule,
-        MatTableModule,
-        MatPaginatorModule,
-        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-        MatCheckboxModule,
-        MatSelectModule,
-        AngularFontAwesomeModule,
-        AdminManagementModule,
-        MatToolbarModule
-    ],
+  imports: [
+    FormsModule,
+    NgbModule,
+    BrowserModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+    NgxSpinnerModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatPasswordStrengthModule.forRoot(),
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBa84Oxrn7z7nvHdRCLjefhguJscTJSqbM'
+    }),
+    NgxDaterangepickerMd.forRoot(),
+    MatDialogModule,
+    TextFieldModule,
+    RouterModule,
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+    CommonModule,
+    MatTableModule,
+    SidebarModule.forRoot(),
+    MatSortModule,
+    MatTableModule,
+    MatPaginatorModule,
+    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
+    AngularFontAwesomeModule,
+    AdminManagementModule,
+    MatToolbarModule,
+    MatRadioModule,
+    MatSelectModule,
+    FontAwesomeModule
+
+  ],
+
   declarations: [
     AppComponent,
     UserProfileTextComponent,
@@ -153,6 +161,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     DetailsBtnComponent,
     DetailsTournamentDialogComponent,
     SectorsTagsInputComponent,
+    ForUserComponent,
+    ForTournamentComponent,
     ],
   exports: [
     NumberOnlyDirective,
@@ -165,6 +175,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FilterPipe,
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     AdminGuard,
     UserGuard
   ],

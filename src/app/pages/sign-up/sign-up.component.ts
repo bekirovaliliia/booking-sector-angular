@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -26,6 +28,10 @@ export class SignUpComponent implements OnInit {
   errorHandling = false;
   buttonError = true;
   show: boolean;
+  showRepeat: boolean;
+  faEyeSlash =  faEyeSlash;
+  faEye = faEye;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -163,9 +169,4 @@ export class SignUpComponent implements OnInit {
         );
     }
   }
-
-  buttonEnable() {
-    this.buttonError = this.registerForm.invalid;
-  }
-
 }

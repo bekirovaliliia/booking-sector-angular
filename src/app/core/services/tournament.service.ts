@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Tournament} from '../../shared/models/tournament';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import { environment } from '../../../environments/environment';
-import {map} from 'rxjs/operators';
+import {catchError, map, retry} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
 
 @Injectable({
@@ -37,7 +37,9 @@ export class TournamentService {
               item.tournamentStart,
               item.tournamentEnd,
               )
-        )
+        ),
+        retry(1),
+        catchError(this.handleError)
       );
   }
 
@@ -60,5 +62,16 @@ export class TournamentService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     return this.http.post(`${this.urlAddress}/tournaments`, tournament, httpOptions);
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.status === 404) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error ${error.status}\nMessage: ${error.message}`;
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 }

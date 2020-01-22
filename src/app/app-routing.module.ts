@@ -29,11 +29,11 @@ const routes: Routes = [
   { path: 'sign-in',
     component: SignInComponent
   },
-  
+
   { path: 'sign-in/:email/:hash',
     component: SignInComponent
   },
-  
+
   { path: 'sign-up',
     component: SignUpComponent
   },
@@ -48,9 +48,10 @@ const routes: Routes = [
     canActivate: [UserGuard, AdminGuard]
   },
 
-  { path: 'futuretournaments',
+  { path: 'future-tournaments',
     component : FutureTournamentPageComponent,
   },
+
   { path: '**',
   redirectTo: '/home',
   pathMatch: 'full'

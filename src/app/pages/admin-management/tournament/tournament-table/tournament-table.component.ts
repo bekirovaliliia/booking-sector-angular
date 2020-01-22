@@ -7,7 +7,6 @@ import {filter} from 'rxjs/operators';
 import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../../../shared/pipes/search.pipe';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-tournament-table',
@@ -24,7 +23,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   tournamentHeader: string[];
   tournaments: Tournament[];
-
   addDialog: MatDialogRef<AddUpdateTournamentDialogComponent>;
   updateDialog: MatDialogRef<AddUpdateTournamentDialogComponent>;
   deleteDialog: MatDialogRef<DeleteDialogComponent>;
@@ -85,8 +83,8 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   openAddDialog() {
     const selectedTournament = new Tournament();
-    selectedTournament.tournamentStart = moment().toString();
-    selectedTournament.tournamentEnd = moment().toString();
+    selectedTournament.tournamentStart = new Date().toString();
+    selectedTournament.tournamentEnd = new Date().toString();
 
     this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
         hasBackdrop: false,
