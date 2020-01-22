@@ -9,7 +9,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let tournament">
-          <app-details-btn (selectedToExpand)="openDetailsDialog(tournament.id)"></app-details-btn>
+          <app-details-btn (selectedToExpand)="openDetailsDialog(tournament)"></app-details-btn>
       </td>
     </ng-container>
 

@@ -28,7 +28,6 @@ const routes: Routes = [
         path: 'calendar', component: CalendarComponent
       }
     ]
-  
   }
 ];
 @NgModule({

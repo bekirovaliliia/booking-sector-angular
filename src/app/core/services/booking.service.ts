@@ -113,6 +113,6 @@ export class BookingService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.delete(`${this.urlAddress}bookings/${id}`, httpOptions);
+    return this.http.delete(`${this.urlAddress}/${id}`, httpOptions);
   }
 }
