@@ -1,7 +1,4 @@
-import {Component, ErrorHandler, OnInit} from '@angular/core';
-import {TournamentService} from '../../../core/services/tournament.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-tournament',

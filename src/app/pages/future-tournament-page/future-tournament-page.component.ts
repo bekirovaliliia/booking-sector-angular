@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Tournament} from '../../shared/models/tournament';
 import {TournamentService} from '../../core/services/tournament.service';
-import {BookingService} from '../../core/services/booking.service';
 import {FilterPipe} from '../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../shared/pipes/search.pipe';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';

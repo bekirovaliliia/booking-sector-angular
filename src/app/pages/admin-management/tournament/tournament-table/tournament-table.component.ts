@@ -8,7 +8,7 @@ import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/de
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../../../shared/pipes/search.pipe';
 import {ToastrService} from 'ngx-toastr';
-import {throwError} from "rxjs";
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-tournament-table',
