@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data.service';
+import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
@@ -19,7 +19,7 @@ export class BookingSectorFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dataService: DataService,
+    public dataService: BookingSectorsDataService,
     private bookingSectorService: BookingService,
     private authentificationService: AuthenticationService
     ) { }

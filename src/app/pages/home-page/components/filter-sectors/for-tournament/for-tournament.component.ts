@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {TournamentService} from '../../../../../core/services/tournament.service';
-import {Tournament} from '../../../../../shared/models/tournament';
+import { Component, OnInit } from '@angular/core';
+import { TournamentService } from '../../../../../core/services/tournament.service';
+import { Tournament } from '../../../../../shared/models/tournament';
 import * as moment from 'moment';
-import {DatePipe} from '@angular/common';
-import {DataService} from '../../../../../core/services/data.service';
-import {AddUpdateTournamentDialogComponent} from
+import { DatePipe } from '@angular/common';
+import { BookingSectorsDataService } from '../../../../../core/services/booking-sectors-data.service';
+import { AddUpdateTournamentDialogComponent } from
     '../../../../admin-management/tournament/add-update-tournament-dialog/add-update-tournament-dialog.component';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {filter} from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-for-tournament',
@@ -21,7 +21,7 @@ export class ForTournamentComponent implements OnInit {
   addDialog: MatDialogRef<AddUpdateTournamentDialogComponent>;
   constructor(
     private tournamentService: TournamentService,
-    private dateService: DataService,
+    private dateService: BookingSectorsDataService,
     private datePipe: DatePipe,
     private dialog: MatDialog,
   ) { }

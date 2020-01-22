@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../../core/services/data.service';
+import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -13,7 +13,7 @@ import { SettingsService } from 'src/app/core/services/settings.service';
 export class SectorsMapComponent implements OnInit {
 
   constructor(
-    private dataService: DataService,
+    private dataService: BookingSectorsDataService,
     private bookingService: BookingService,
     private authenticationService: AuthenticationService,
     private settingsService: SettingsService

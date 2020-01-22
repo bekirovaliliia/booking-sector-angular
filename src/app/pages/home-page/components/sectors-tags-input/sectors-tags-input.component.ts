@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { find, get, pull } from 'lodash';
-import { DataService } from '../../../../core/services/data.service';
+import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { SettingsService } from '../../../../core/services/settings.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class SectorsTagsInputComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
+    private dataService: BookingSectorsDataService,
   ) { }
 
   tags: string[] = [];

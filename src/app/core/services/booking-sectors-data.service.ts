@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class BookingSectorsDataService {
 
   apiSectorsUrl: string = environment.urlAddress + '/sectors';
 
