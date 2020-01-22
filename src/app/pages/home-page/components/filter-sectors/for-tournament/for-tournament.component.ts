@@ -32,11 +32,12 @@ export class ForTournamentComponent implements OnInit {
   getTournaments() {
     this.tournamentService.getAll().subscribe(res => {
       this.tournaments = res;
+      this.tournaments = this.tournaments.filter(item => moment(item.tournamentStart) > moment());
     });
   }
   onChange(ob) {
-    console.log(ob);
     if (ob.value === null) {
+      this.selected = `${moment().format('YYYY/MM/DD') } - ${ moment().format('YYYY/MM/DD')  }`;
       return;
     }
     this.selected = `${this.datePipe.transform(ob.value.tournamentStart, 'yyyy/MM/dd') } - ${  this.datePipe.transform(ob.value.tournamentEnd, 'yyyy/MM/dd') }`;
@@ -71,5 +72,4 @@ export class ForTournamentComponent implements OnInit {
         });
       });
   }
-
 }
