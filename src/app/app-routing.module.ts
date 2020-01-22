@@ -23,7 +23,8 @@ const routes: Routes = [
   },
 
   { path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [UserGuard, AdminGuard]
   },
 
   { path: 'sign-in',
