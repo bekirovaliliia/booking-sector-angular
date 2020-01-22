@@ -1,4 +1,4 @@
-import { NgModule , enableProdMode} from '@angular/core';
+import {NgModule, enableProdMode, ErrorHandler} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -57,8 +57,6 @@ import { SearchPipe } from './shared/pipes/search.pipe';
 import { NumberOnlyDirective } from './shared/directives/number-only.directive';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { WithoutBookingsComponent } from './pages/user-bookings/without-bookings/without-bookings.component';
-
-import {HttpErrorInterceptor} from './core/interceptors/http-error-interceptor';
 import { CalendarComponent } from './pages/admin-management/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -82,6 +80,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
 import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
 
 @NgModule({
   imports: [
@@ -175,9 +174,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FilterPipe,
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     AdminGuard,
-    UserGuard
+    UserGuard,
+    UserAndAdminGuard
   ],
   bootstrap: [
     AppComponent,

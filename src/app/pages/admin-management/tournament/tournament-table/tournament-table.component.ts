@@ -7,6 +7,8 @@ import {filter} from 'rxjs/operators';
 import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
 import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
 import {SearchPipe} from '../../../../shared/pipes/search.pipe';
+import {ToastrService} from 'ngx-toastr';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-tournament-table',
@@ -31,7 +33,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
-  this.dataSource.paginator = paginator;
+    this.dataSource.paginator = paginator;
   }
   @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort) {
     this.dataSource.sort = sort;
@@ -41,6 +43,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
                private dialog: MatDialog,
                private filterPipe: FilterPipe,
                private searchPipe: SearchPipe,
+               private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -49,15 +52,22 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   getTournaments() {
     this.tournamentService.getAll().subscribe(res => {
-      this.tournaments = res;
-      this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
-      this.tournamentHeader.push('action');
-      if (this.groupFilters) {
-        this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
-      } else  {
-        this.dataSource.data = this.tournaments;
+        this.tournaments = res;
+        this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
+        this.tournamentHeader.push('action');
+        if (this.groupFilters) {
+          this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
+        } else  {
+          this.dataSource.data = this.tournaments;
+        }
+      },
+      error => {
+        if (error.status === 404) {
+        } else {
+          this.handleError(error);
+        }
       }
-    });
+    );
   }
 
   deleteTournament(id: number) {
@@ -75,7 +85,10 @@ export class TournamentTableComponent implements OnInit, OnChanges {
       .subscribe(name => {
         this.tournamentService.delete(id).subscribe(
           data => {
-         this.getTournaments();
+            this.getTournaments();
+          },
+          error => {
+            this.handleError(error);
           }
         );
       });
@@ -87,27 +100,31 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     selectedTournament.tournamentEnd = new Date().toString();
 
     this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
-        hasBackdrop: false,
-        panelClass: ['no-padding'],
-        width: '650px',
-        minWidth: '250px',
-        data: {
-           dialogTitle: 'New Tournament',
-           isUpdated: false,
-           selectedTournament,
-        }
-      });
+      hasBackdrop: false,
+      panelClass: ['no-padding'],
+      width: '650px',
+      minWidth: '250px',
+      data: {
+        dialogTitle: 'New Tournament',
+        isUpdated: false,
+        selectedTournament,
+      }
+    });
     this.addDialog
-        .afterClosed()
-        .pipe(
-          filter(tour => tour)
-        )
-        .subscribe(tour => {
-            tour.id = 0;
-            this.tournamentService.add(tour).subscribe(data => {
-              this.getTournaments();
-            });
-          });
+      .afterClosed()
+      .pipe(
+        filter(tour => tour)
+      )
+      .subscribe(tour => {
+        tour.id = 0;
+        this.tournamentService.add(tour).subscribe(data => {
+            this.getTournaments();
+          },
+          error => {
+            this.handleError(error);
+          }
+        );
+      });
   }
 
   openUpdateDialog(selectedTournament: Tournament) {
@@ -129,10 +146,14 @@ export class TournamentTableComponent implements OnInit, OnChanges {
         filter(tour => tour)
       )
       .subscribe(tour => {
-            this.tournamentService.update(tour).subscribe( data => {
+        this.tournamentService.update(tour).subscribe( data => {
             this.getTournaments();
-          });
-        });
+          },
+          error => {
+            this.handleError(error);
+          }
+        );
+      });
   }
 
   ngOnChanges(): void {
@@ -155,5 +176,32 @@ export class TournamentTableComponent implements OnInit, OnChanges {
       return false;
     }
     return this.selectedRow === item;
+  }
+
+  handleError(exc) {
+    let message = '';
+    let title = '';
+    switch (exc.status) {
+      case 0:
+        message = 'Could not connect to server.';
+        title = `Connection error`;
+        break;
+
+      case 400:
+        message = `Server could not understand the request due to invalid syntax.`;
+        title = `Error ${exc.status}. Bad request`;
+        break;
+
+      case 500:
+        message = `${exc.error.ErrorMessage !== '' ? exc.error.ErrorMessage : exc.message}`;
+        title = `Error ${exc.status}. Internal server error`;
+        break;
+
+      default:
+        message = `Something go wrong!`;
+        title = `Oops :(`;
+    }
+    this.toastr.error(message, title);
+    return throwError(exc);
   }
 }
