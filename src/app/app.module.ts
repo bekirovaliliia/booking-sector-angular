@@ -81,7 +81,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatRadioModule} from '@angular/material/radio';
 import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
 import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -119,7 +119,8 @@ import { ForTournamentComponent } from './pages/home-page/components/filter-sect
     AdminManagementModule,
     MatToolbarModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    FontAwesomeModule
 
   ],
 
