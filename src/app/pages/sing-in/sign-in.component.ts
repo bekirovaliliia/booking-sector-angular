@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.authService.logout();
+      this.router.navigate(['home']);
     }
 
     // Email Confirm

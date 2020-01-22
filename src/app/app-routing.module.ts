@@ -11,6 +11,8 @@ import { UserGuard } from './core/guards/user.guard';
 import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import {FutureTournamentPageComponent} from './pages/future-tournament-page/future-tournament-page.component';
+import { User } from './shared/models/user-model';
+import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
 
 const routes: Routes = [
   { path: 'home',
@@ -23,7 +25,8 @@ const routes: Routes = [
   },
 
   { path: 'profile',
-    component: ProfilePageComponent
+    component: ProfilePageComponent,
+    canActivate: [UserAndAdminGuard]
   },
 
   { path: 'sign-in',
@@ -45,7 +48,7 @@ const routes: Routes = [
 
   { path: 'user-bookings',
     component : UserBookingsComponent,
-    canActivate: [UserGuard, AdminGuard]
+    canActivate: [UserAndAdminGuard]
   },
 
   { path: 'future-tournaments',

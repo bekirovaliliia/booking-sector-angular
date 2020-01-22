@@ -80,6 +80,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ForUserComponent } from './pages/home-page/components/filter-sectors/for-user/for-user.component';
 import { ForTournamentComponent } from './pages/home-page/components/filter-sectors/for-tournament/for-tournament.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
 
 @NgModule({
   imports: [
@@ -174,7 +175,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
     AdminGuard,
-    UserGuard
+    UserGuard,
+    UserAndAdminGuard
   ],
   bootstrap: [
     AppComponent,

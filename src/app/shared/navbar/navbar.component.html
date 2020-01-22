@@ -3,10 +3,10 @@
         <div class="collapse navbar-collapse"
             id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" routerLink="/home">Home</a>
-                </li>
-              <li *ngIf="!isAdmin" class="nav-item" role="presentation">
+              <li class="nav-item" role="presentation">
+                  <a class="nav-link active" routerLink="/home">Home</a>
+              </li>
+              <li class="nav-item" role="presentation">
                 <a class="nav-link active" routerLink="/future-tournaments">Tournaments</a>
               </li>
                 <li *ngIf="isLoggedIn && isUser" class="nav-item" role="presentation">
