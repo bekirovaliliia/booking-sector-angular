@@ -65,7 +65,8 @@ export class SectorTableComponent implements OnInit, OnChanges {
       });
   }
 
-  openAddDialog(selectedSector: Sector) {
+  openAddDialog() {
+    const selectedSector = new Sector();
     this.addDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
       hasBackdrop: false,
       panelClass: ['no-padding'],
@@ -82,7 +83,7 @@ export class SectorTableComponent implements OnInit, OnChanges {
       .pipe(filter(sector => sector))
       .subscribe(sector => {
         sector.id = 0;
-        if(sector.isActive === 'true') {
+        if (sector.isActive === 'true') {
           sector.isActive = true;
         } else {
           sector.isActive = null;
@@ -109,7 +110,7 @@ export class SectorTableComponent implements OnInit, OnChanges {
       .afterClosed()
       .pipe(filter(sect => sect))
       .subscribe(sector => {
-        if(sector.isActive === 'true') {
+        if (sector.isActive === 'true') {
           sector.isActive = true;
         } else {
           sector.isActive = null;
