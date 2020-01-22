@@ -24,7 +24,7 @@ export class AuthenticationService {
 
   login(phone: string, password: string): Observable<Token> {
       return this.http
-      .post<Token>(`${environment.urlAddress}authentication/authenticate`, {
+      .post<Token>(`${environment.urlAddress}/authentication/authenticate`, {
         phone,
         password
       })

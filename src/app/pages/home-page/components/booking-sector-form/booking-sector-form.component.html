@@ -1,19 +1,19 @@
 <div class="card border-primary mb-3">
     <div class="card-header text-white bg-primary mb-3">Booking sectors</div>
     <div class="card-body">
-        <form [formGroup]="bookingSectorForm" (ngSubmit)="onSubmit(bookingSectorForm.value)"class="p-3 mb-2 bg-light text-dark border border-primary rounded-lg"> 
+        <form [formGroup]="bookingSectorForm" (ngSubmit)="onSubmit(bookingSectorForm.value)"class="p-3 mb-2 bg-light text-dark border border-primary rounded-lg">
             <div class="form-group">
                 <label for="tagPlaces">Selected sectors</label>
                 <div class="form-row ">
                     <div class="col-4">
-                        <input readonly type="text" class="form-control" value="{{sectorNumber}}" data-role="tagsin  put" id="tagPlaces" required>
+                        <app-sectors-tags-input></app-sectors-tags-input>
                     </div>
                     <div class="col-1">
                         <i class="material-icons btn btn-outline-danger" title="clear selected sectors" (click)="clearSelectedSectors()">clear</i>
                     </div>
-                </div>  
-            </div> 
-            <!--<div class="form-row">
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="col">
                     <label for="firstName">First name</label>
                     <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required>
@@ -22,32 +22,24 @@
                     <label for="lastName">Last name</label>
                     <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required>
                 </div>
-            </div>  
+            </div>
             <div class="form-row">
                 <div class="col">
                     <label for="phone">Phone</label>
                     <input formControlName="phone"class="form-control" type="tel" id="phone" placeholder="+380-93-000-00-00" required>
                 </div>
-                <div class="col">
-                    <label for="email">Email</label>
-                    <input formControlName="email" class="form-control" type="email" id="email" placeholder="someone@example.com" required>
-                </div>
-            </div>  
+            </div>
             <div class="form-row">
                 <div class="col">
                     <label for="password">Password</label>
                     <input formControlName="password" class="form-control" type="password" id="password" required>
                 </div>
-                <div class="col">
-                    <label for="confirmPassword">Confirm password</label>
-                    <input formControlName="confirmPassword" class="form-control" type="password" id="confirmPassword" required>
-                </div>
-            </div>-->
+            </div>
             <div class="form-row">
                 <div class="col-4 mt-5">
                     <button class="btn btn-primary btn-block" type="submit" >Book</button>
-                </div> 
-            </div>   
+                </div>
+            </div>
         </form>
     </div>
 </div>

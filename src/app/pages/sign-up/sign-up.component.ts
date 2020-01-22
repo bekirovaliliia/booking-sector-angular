@@ -10,6 +10,7 @@ import { UserEmail } from '../../shared/models/user-email-model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 
 @Component({
@@ -23,17 +24,26 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   user: UserEmail;
   errorHandling = false;
+  buttonError = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
-    public router: Router
+    public router: Router,
+    private authService: AuthenticationService
   ) {
     this.user = new UserEmail();
   }
 
   ngOnInit() {
+
+    if(this.authService.isLoggedIn())
+    {
+      this.router.navigate(['home']);
+      this.toastr.warning("You must first log out to sign up");
+    }
+
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
@@ -96,7 +106,6 @@ export class SignUpComponent implements OnInit {
     }
     if (this.errorHandling === true) {
       this.toastr.error('Your number or email already exists! !', 'Oops :(');
-
       return;
     }
 
@@ -131,6 +140,7 @@ export class SignUpComponent implements OnInit {
             },
       error => {
               this.errorHandling = false;
+
             }
         );
     }
@@ -153,4 +163,9 @@ export class SignUpComponent implements OnInit {
         );
     }
   }
+
+  buttonEnable() {
+    this.buttonError = this.registerForm.invalid;
+  }
+
 }

@@ -11,20 +11,30 @@ import {SectorService} from '../services/sector.service';
   providedIn: 'root'
 })
 export class BookingService {
-  public urlAddress: string = environment.urlAddress;
+
+  public urlAddress = `${environment.urlAddress}/bookings`;
 
   booking: Observable<Booking>;
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private datePipe: DatePipe
     ) { }
 
-  getBookings() {
-    return this.http.get<Booking[]>(`${this.urlAddress}bookings`);
-  }
-  getUserBookings(id:number, isActual: boolean) {
-    return this.http.get<Booking[]>(`${this.urlAddress}bookings/byUserId/${id}/${isActual}`).pipe(
+    getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
+      if (!isExpired) {
+        return this.http.get<Booking[]>(this.urlAddress).pipe(
+          map(booking => booking.filter(b => b.isApproved === isApproved)),
+          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > Date.now()))
+        );
+      } else if (isExpired) {
+        return this.http.get<Booking[]>(this.urlAddress).pipe(
+          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < Date.now()))
+        );
+      }
+    }
+  getUserBookings(id: number, isActual: boolean) {
+    return this.http.get<Booking[]>(`${this.urlAddress}/byUserId/${id}/${isActual}`).pipe(
       map((data: Booking[]) =>
         data.map(
           (item: any) =>
@@ -37,19 +47,15 @@ export class BookingService {
     );
   }
 
+
   updateBooking(booking: Booking): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
     if(booking.isApproved === null){
-      console.log(booking);
-      console.log('perevirka ne taka vzhe i huinia');
-      return this.http.put(`${this.urlAddress}bookings/${booking.id}`, httpOptions);
-    return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
-                          , httpOptions);
+      return this.http.put(`${this.urlAddress}/${booking.id}`, httpOptions);
     } else {
-      console.log('im here')
-      return this.http.put(`${this.urlAddress}bookings/${booking.id}?isApproved=${booking.isApproved}`
+      return this.http.put(`${this.urlAddress}/${booking.id}?isApproved=${booking.isApproved}`
                           , httpOptions);
     }
   }
@@ -93,18 +99,22 @@ export class BookingService {
       );
   }
 
-  bookSector(booking: Booking)
+  filterByDate(startDate, endDate){
+    return this.http.get(`${environment.urlAddress}/sectors/free?fromDate=${startDate}&toDate=${endDate}`);
+  }
+
+  bookSector(booking: Booking) : Observable<Booking>
   {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.post<Booking>(`${this.urlAddress}bookings/`, booking, httpOptions);
+    return this.http.post<Booking>(`${this.urlAddress}/`, booking, httpOptions);
   }
 
   deleteBooking(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.delete(`${this.urlAddress}bookings/${id}`);
+    return this.http.delete(`${this.urlAddress}bookings/${id}`, httpOptions);
   }
 }

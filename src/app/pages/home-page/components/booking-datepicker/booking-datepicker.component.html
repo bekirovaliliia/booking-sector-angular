@@ -7,23 +7,22 @@
       ngxDaterangepickerMd
       [(ngModel)]="selected"
       [alwaysShowCalendars]="alwaysShowCalendars"
-      [showClearButton]="true"                   
+      [showClearButton]="true"
       [maxDate]="maxDate"
       [minDate]="minDate"
       [linkedCalendars]="true"
-      [locale]="{applyLabel: 'Done'}"
-      (rangeClicked)="rangeClicked($event)"
+      [locale]="{applyLabel: 'Change', format: 'YYYY-MM-DD'}"
       (datesUpdated)="datesUpdated($event)"
       [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
       [showRangeLabelOnInput]="showRangeLabelOnInput"
       class="form-control border border-dark ml-1"
       style="width: 205px;"
       placeholder="yyyy-mm-dd"
-      [dateLimit]="4">                           
+      [dateLimit]="4">
   </div>
-</div>   
+</div>
 
 
 
-      
+
 

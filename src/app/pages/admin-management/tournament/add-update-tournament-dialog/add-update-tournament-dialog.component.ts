@@ -6,17 +6,17 @@ import * as moment from 'moment';
 import {Tournament} from '../../../../shared/models/tournament';
 
 @Component({
-    selector: 'app-update-dialog',
-    templateUrl: './add-update-dialog.component.html',
-    styleUrls: ['./add-update-dialog.component.sass']
+    selector: 'app-update-tournament-dialog',
+    templateUrl: './add-update-tournament-dialog.component.html',
+    styleUrls: ['./add-update-tournament-dialog.component.sass']
 })
-export class AddUpdateDialogComponent implements OnInit {
+export class AddUpdateTournamentDialogComponent implements OnInit {
     form: FormGroup;
     maxDate: moment.Moment;
     minDate: moment.Moment;
     constructor(
         private formBuilder: FormBuilder,
-        private dialogRef: MatDialogRef<AddUpdateDialogComponent>,
+        private dialogRef: MatDialogRef<AddUpdateTournamentDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private data,
         private toastr: ToastrService,
     ) {
@@ -29,11 +29,11 @@ export class AddUpdateDialogComponent implements OnInit {
                 id: this.data.selectedTournament.id,
 
                 name: [this.data.selectedTournament.name, [
-                    Validators.maxLength(30),
+                    Validators.maxLength(64),
                 ]],
 
                 description: [this.data.selectedTournament.description, [
-                    Validators.maxLength(512),
+                    Validators.maxLength(200),
                 ]],
                 selected: {
                     startDate: moment(this.data.selectedTournament.tournamentStart),
@@ -43,13 +43,11 @@ export class AddUpdateDialogComponent implements OnInit {
                     Validators.max(30),
                 ]],
             });
-        console.log(this.form.value.selected.startDate);
     }
 
     ngOnInit() {
         this.getForm();
         this.maxDate = moment().add(6,  'months');
-
         if (this.form.value.selected.startDate === undefined) {
             this.minDate = moment();
         } else {
@@ -58,7 +56,7 @@ export class AddUpdateDialogComponent implements OnInit {
     }
 
     submit(form): void {
-        const tournament = new Tournament(this.data.selectedTournament.id, this.form.value.name, this.form.value.description, this.form.value.preparationTerm, this.form.value.selected.startDate.format('YYYY-MM-DDTHH:mm:ss'), this.form.value.selected.endDate.format('YYYY-MM-DDTHH:mm:ss') );
+        const tournament = new Tournament(this.form.value.id, this.form.value.name, this.form.value.description, this.form.value.preparationTerm, this.form.value.selected.startDate.format('YYYY-MM-DDTHH:mm:ss'), this.form.value.selected.endDate.format('YYYY-MM-DDTHH:mm:ss') );
         this.dialogRef.close(tournament);
     }
 
