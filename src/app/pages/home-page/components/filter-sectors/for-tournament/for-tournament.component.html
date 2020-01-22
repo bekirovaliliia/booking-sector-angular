@@ -8,7 +8,7 @@
   <div>
     <form>
       <mat-select placeholder="Select tournament"  (selectionChange)="onChange($event)">
-        <mat-option [value]=null>--None--</mat-option>
+        <mat-option [value]=null>-- None --</mat-option>
         <mat-option (click)="openAddDialog()" [value]=null>New...</mat-option>
         <mat-option *ngFor="let tournament of this.tournaments" [value]="tournament">
           {{tournament.name}}

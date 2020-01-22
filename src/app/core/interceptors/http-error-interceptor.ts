@@ -30,37 +30,31 @@ export class HttpErrorInterceptor  implements  HttpInterceptor {
             case HttpError.ConnectionError:
               message = 'Could not connect to server.';
               title = `Connection error`;
+              this.toastr.error(message, title);
+              return throwError(exception);
               break;
 
             case HttpError.BadRequest:
               message = `Server cannot process the client request. Check your data.`;
               title = `Error ${exception.status}. Bad request`;
-              break;
-
-            case HttpError.NotFound:
-              message = `${exception.error.ErrorMessage !== '' ? exception.error.ErrorMessage : exception.message}`;
-              title = `Error ${exception.status}. Not found`;
+              this.toastr.error(message, title);
+              return throwError(exception);
               break;
 
             case HttpError.Forbidden:
               message = `Accessing the page or resource you were trying to reach is forbidden.`;
               title = `Error ${exception.status}. Forbidden`;
+              this.toastr.error(message, title);
+              return throwError(exception);
               break;
 
             case HttpError.InternalServerError:
               message = `${exception.error.ErrorMessage !== '' ? exception.error.ErrorMessage : exception.message}`;
               title = `Error ${exception.status}. Internal server error`;
-              break;
-
-            default:
-              message = 'Something happened.';
-              title = `Unknown error`;
+              this.toastr.error(message, title);
+              return throwError(exception);
               break;
           }
-
-          this.toastr.error(message, title);
-          console.error(title, message);
-          return throwError(exception);
         }
       )
     );
