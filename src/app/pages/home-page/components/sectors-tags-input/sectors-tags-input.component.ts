@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { find, get, pull } from 'lodash';
 import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
-import { SettingsService } from '../../../../core/services/settings.service';
+import { Sector } from 'src/app/shared/models/sector-model';
 
 @Component({
   selector: 'app-sectors-tags-input',
@@ -13,39 +13,12 @@ export class SectorsTagsInputComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: BookingSectorsDataService,
+    private dataService: BookingSectorsDataService
   ) { }
 
-  tags: string[] = [];
+  tags: Sector[];
   form: FormGroup;
   maxBookingSectors: number;
-
-  clearSelectedSectors(){
-    this.tags = [];
-    this.dataService.clearSelectedSectors.emit();
-  }
-
-  onKeyUp(event: KeyboardEvent): void {
-    const inputValue: string = this.form.controls.tag.value;
-    if (event.code === 'Backspace' && !inputValue) {
-      this.removeTag();
-      return;
-    } else {
-      if (event.code === 'Comma' || event.code === 'Space') {
-        this.addTag(inputValue);
-        this.form.controls.tag.setValue('');
-      }
-    }
-  }
-
-  addTag(tag: string): void {
-    if (tag[tag.length - 1] === ',' || tag[tag.length - 1] === ' ') {
-      tag = tag.slice(0, -1);
-    }
-    if (tag.length > 0 && !find(this.tags, tag)) {
-      this.tags.push(tag);
-    }
-  }
 
   removeTag(tag?: string): void {
     if (!!tag) {
@@ -53,21 +26,13 @@ export class SectorsTagsInputComponent implements OnInit {
     } else {
       this.tags.splice(-1);
     }
+    console.log(this.dataService.selectedSectors);
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       tag: [undefined],
     });
-    this.dataService.currentSelectedSectors.subscribe(sectors => {
-      if (sectors != null) {
-        if(sectors[sectors.length - 1] != undefined) {
-          this.addTag(sectors[sectors.length - 1].number.toString());
-        } 
-      }
-    });
-    this.dataService.clearSelectedSectors.subscribe(s => {
-      this.tags = [];
-    });
+    this.tags = this.dataService.selectedSectors;
   }
 }

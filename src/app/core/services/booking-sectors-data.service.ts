@@ -14,8 +14,15 @@ export class BookingSectorsDataService {
 
   apiSectorsUrl: string = environment.urlAddress + '/sectors';
 
-  private _selectedSectors = new BehaviorSubject<Sector[]>([]);
-  currentSelectedSectors = this._selectedSectors.asObservable();
+  private _selectedSectors : Sector[] = [];
+
+  get selectedSectors() {
+    return this._selectedSectors;
+  }
+
+  set selectedSectors(sectors: Sector[]) {
+    this._selectedSectors = sectors;
+  }
 
   private _markers = new BehaviorSubject<object []>(null);
   currentMarkers = this._markers.asObservable();
@@ -23,40 +30,20 @@ export class BookingSectorsDataService {
   private _fromDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
   currentFromDate = this._fromDate.asObservable();
 
-  private _toDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
-  currentToDate = this._toDate.asObservable();
-
-  clearSelectedSectors: EventEmitter<any> = new EventEmitter<any>();
-
-  constructor(
-    private httpService: HttpClient,
-    private bookingService: BookingService
-    ) {
-      this.clearSelectedSectors.subscribe(s => this._selectedSectors.next([]));
-      this.currentFromDate.subscribe(d => this._selectedSectors.next([]));
-    }
-
-  showAllSectors() {
-    this.httpService.get(this.apiSectorsUrl)
-      .subscribe(
-        data => {
-          this.currentMarkers = data as Observable<object []>;
-          this.changeMarkers(this.currentMarkers);
-        }
-      );
-  }
-
-  get selectedSectors() {
-    return this._selectedSectors.getValue();
-  }
-
   get fromDate() {
     return this._fromDate.getValue();
   }
 
+  private _toDate = new BehaviorSubject<any>(moment().format('YYYY-MM-DD'));
+  currentToDate = this._toDate.asObservable();
+
   get toDate() {
     return this._toDate.getValue();
   }
+
+  constructor(
+    private bookingService: BookingService
+    ) { }
 
   renderMarkers(startDate, endDate) {
     this.bookingService.filterByDate(startDate, endDate)
@@ -67,15 +54,15 @@ export class BookingSectorsDataService {
   }
 
   selectSector(marker): void {
-    this._selectedSectors.next(([...this._selectedSectors.getValue(), marker]));
+    this.selectedSectors.push(marker as Sector);
+  }
+
+  clearAllSelectedSectors() : void {
+    this.selectedSectors.length = 0;
   }
 
   changeMarkers(markers) {
     this._markers.next(markers);
-  }
-
-  changeSelectedSectors(sectors){
-    this._selectedSectors.next(sectors);
   }
 
   changeDateRange(startDate, endDate) {
@@ -87,10 +74,7 @@ export class BookingSectorsDataService {
           data => {
           this.changeMarkers(data);
         });
-      this.clearSelectedSectors.emit();
-    }
-    else {
-      this.showAllSectors();
+        this.clearAllSelectedSectors();
     }
   }
 }

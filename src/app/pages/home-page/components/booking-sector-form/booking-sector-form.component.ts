@@ -15,7 +15,6 @@ export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
   isLoggedIn: boolean;
-  selectedSectors;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,15 +26,15 @@ export class BookingSectorFormComponent implements OnInit {
     onSubmit(formValues) {
       const fromDate = this.dataService.fromDate;
       const toDate = this.dataService.toDate;
-      this.selectedSectors = this.dataService.selectedSectors;
+      const selectedSectors = this.dataService.selectedSectors;
       let booking: Booking;
-      for (const sector of this.selectedSectors) {
+      for (const sector of selectedSectors) {
         booking = new Booking(0, null, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
         this.bookingSectorService.bookSector(booking).subscribe(b => {
           this.dataService.renderMarkers(fromDate, toDate); // #TODO: Render markers too much. Change logic!
         });
-      }
-      this.dataService.clearSelectedSectors.emit();
+      }      
+      this.dataService.clearAllSelectedSectors();
     }
 
     ngOnInit() {
