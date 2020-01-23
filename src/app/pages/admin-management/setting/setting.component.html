@@ -1,9 +1,11 @@
-<form>
-  <div  *ngFor="let setting of setting$" class="form-group text-center">
-    <label class="h4" [for]="setting.name">{{setting.name}}</label>
-    <div class="input-group">
-      <input type="number" min="1" max="5" class="form-control text-center" [name]="setting.value" [(ngModel)]="setting.value" [id]="setting.name">
+<div class="row d-flex justify-content-center">
+  <div *ngFor="let setting of setting$">
+      <form class="align-content-center range-field text-center my-4 m-4">
+      <label class="h4" [for]="setting.name">{{setting.name}}</label>
+            <input type="range" class="custom-range" min="1" max="5" [name]="setting.value" [(ngModel)]="setting.value" [id]="setting.name">
+          <span class="font-weight-bold mr-2 mt-1">{{setting.value}}</span>
+        <hr>
+      </form>
     </div>
-  </div>
-  <button type="submit" class="btn btn-info btn-block" (click)="saveChanges()">Submit</button>
-</form>
+  <button type="submit" class="btn btn-info btn-block mt-2 w-75" (click)="saveChanges()">Submit</button>
+ </div>
