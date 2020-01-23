@@ -4,12 +4,9 @@
             id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
               <li class="nav-item" role="presentation">
-                  <a class="nav-link active" routerLink="/home">Home</a>
-              </li>
-              <li   *ngIf="!isAdmin" class="nav-item" role="presentation">
                 <a class="nav-link active" routerLink="/future-tournaments">Tournaments</a>
               </li>
-                <li *ngIf="isLoggedIn && isUser" class="nav-item" role="presentation">
+                <li *ngIf="isLoggedIn" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/profile">Profile</a>
                 </li>
                 <li *ngIf="isLoggedIn && isAdmin" class="nav-item" role="presentation">
@@ -28,8 +25,7 @@
                     style="width:50px;
                            height: 50px;
                            border-radius:15px; 
-                           margin-bottom: 0px;"
-                    > 
+                           margin-bottom: 0px;"> 
                 </li>
                 <li *ngIf="isLoggedIn">  
                    <p style="margin-left: 5px; margin-bottom: 0px;">{{dataService.user.firstname}}</p>

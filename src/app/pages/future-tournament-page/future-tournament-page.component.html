@@ -14,18 +14,18 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-sort-header arrowPosition="before" class = "w-50" *matHeaderCellDef> Name </th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" class = "w-50" *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let tournament"> {{tournament.name}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="tournamentStart">
-      <th mat-sort-header arrowPosition="before" *matHeaderCellDef> Start</th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef> Start</th>
       <td mat-cell  *matCellDef="let tournament"> {{tournament.tournamentStart| date }} </td>
     </ng-container>
 
     <ng-container matColumnDef="tournamentEnd">
-      <th mat-sort-header arrowPosition="before" *matHeaderCellDef> End</th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef> End</th>
       <td mat-cell *matCellDef="let tournament"> {{tournament.tournamentEnd| date}} </td>
     </ng-container>
 

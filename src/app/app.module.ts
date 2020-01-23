@@ -64,7 +64,6 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import { HttpAuthInterceptor } from './core/interceptors/http-auth.interceptor';
 import { UserGuard } from './core/guards/user.guard';
 import { AdminGuard } from './core/guards/admin.guard';
-import { DeleteSectorDialogComponent } from './pages/admin-management/sector/delete-sector-dialog/delete-sector-dialog.component';
 // tslint:disable-next-line:max-line-length
 import { AddUpdateSectorDialogComponent } from './pages/admin-management/sector/add-update-sector-dialog/add-update-sector-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -154,7 +153,7 @@ import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
     SearchPipe,
     NumberOnlyDirective,
     CalendarComponent,
-    DeleteSectorDialogComponent,
+
     AddUpdateSectorDialogComponent,
     FutureTournamentPageComponent,
     DetailsBtnComponent,
@@ -183,7 +182,7 @@ import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
   ],
 
   // tslint:disable-next-line:max-line-length
-  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, DeleteSectorDialogComponent, AddUpdateSectorDialogComponent, DetailsTournamentDialogComponent]
+  entryComponents: [DeleteDialogComponent, AddUpdateTournamentDialogComponent, ChangePasswordNewComponent, ResetPasswordComponent, AddUpdateSectorDialogComponent, DetailsTournamentDialogComponent]
 
 })
 export class AppModule { }

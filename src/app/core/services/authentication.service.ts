@@ -1,20 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Token } from 'src/app/shared/models/token';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { tap, catchError, finalize } from 'rxjs/operators';
+import { tap, catchError, finalize, first, delay } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from 'src/app/shared/models/role';
+<<<<<<< HEAD
 import { BookingSectorsDataService } from './booking-sectors-data.service';
+=======
+>>>>>>> a1121fa10aec9c1e7a6214efb83ca1af1a3c44c0
 import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  firstName: string;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -39,13 +43,15 @@ export class AuthenticationService {
   private handleSuccess(token: Token): void {
     this.tokenStore.setToken(token);
     if(this.tokenStore.getRole() == Role.User)
-    {
-      this.toast.success('Hello, User!');
+    { 
+      this.userService.getUser(this.getId()).subscribe(data => 
+      this.toast.success('Nice to see you!', `Hello, ${data.firstname}`));
       this.router.navigate([`profile`]);
     }
     else if(this.tokenStore.getRole() == Role.Admin)
     {
-      this.toast.success('Hello, Admin!');
+      this.userService.getUser(this.getId()).subscribe(data => 
+        this.toast.success('Nice to see you!', `Hello, ${data.firstname}`));
       this.router.navigate(['admin/bookings']);
     }
     this.userService.getUser(this.getId()).subscribe(data=>this.dataService.user=data);

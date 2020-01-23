@@ -21,12 +21,11 @@
                             id="" 
                             value="{{dataService.fromDate}} - {{dataService.toDate}}"
                             readonly>
-                        </div>
-                        
+                        </div>       
                     </div>
                 </div>
             </div>
-            <div *ngIf="!isLoggedIn">
+            <div class="form-group" *ngIf="!isLoggedIn">
                 <div class="form-row">
                     <div class="col">
                         <label for="firstName">First name</label>
@@ -36,22 +35,14 @@
                         <label for="lastName">Last name</label>
                         <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="col">
                         <label for="phone">Phone</label>
-                        <input  type="tel" formControlName="login" class="form-control" 
+                        <input  type="tel" formControlName="phone" class="form-control" 
                             [showMaskTyped]="true"
                             prefix="+38"
                             mask="(000)000-00-00"
                             required
                             id="phone">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <label for="password">Password</label>
-                        <input formControlName="password" class="form-control" type="password" id="password" required>
                     </div>
                 </div>
             </div> 
