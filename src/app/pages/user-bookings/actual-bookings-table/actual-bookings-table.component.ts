@@ -64,12 +64,8 @@ export class ActualBookingsTableComponent implements OnInit {
 }
   saveIdToDelete(id: number){
     this.idToDelete = id;
-    console.log(this.idToDelete);
   }
-    async delete(){
-    console.log(this.idToDelete);
-    this.bookingService.deleteBooking(this.idToDelete).subscribe();
-  //  await sleep(5000);
-    this.getBookings();
+   delete(){
+    this.bookingService.deleteBooking(this.idToDelete).subscribe(data=> this.getBookings());
   }
 }
