@@ -31,7 +31,7 @@ export class PhotoComponent implements OnInit {
    if(this.user.photo!=null)
    {
     this.userService.deleteUserPhoto(this.userId);
-    await sleep(3000);
+    await sleep(1000);
     this.toastr.success("Your photo deleted successfully!");
     this.getPhoto();
     }
@@ -67,7 +67,7 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         this.userService.updateUserPhoto(formData, this.authService.getId());
-        await sleep(4000);
+        await sleep(1000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }

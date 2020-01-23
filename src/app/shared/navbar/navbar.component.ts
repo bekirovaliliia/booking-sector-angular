@@ -1,7 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { Role } from '../models/role';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from '../models/user-model';
+import { stringify } from 'querystring';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
 declare  var  require: any;
@@ -20,6 +22,12 @@ export class NavigationBarComponent implements OnInit{
   user: User;
  
   ngOnInit(){
+    if(this.isLoggedIn)
+    {
+    this.userService.getUser(this.authService.getId()).subscribe(data => {this.dataService.user = data;
+     });
+    
+    }
   }
    
   transform(): SafeUrl {
@@ -29,7 +37,9 @@ export class NavigationBarComponent implements OnInit{
     else return this.defaultPhoto;
   }
   logout() {
+   // this.user = null;
     this.authService.logout();
+    
   }
 
   get isLoggedIn(): boolean {
