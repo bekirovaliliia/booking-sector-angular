@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnChanges} from '@angular/core';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Role } from '../models/role';
 import { UserService } from 'src/app/core/services/user.service';
@@ -12,7 +12,7 @@ declare  var  require: any;
   templateUrl: './navbar.component.html'
 })
 
-export class NavigationBarComponent implements OnInit{
+export class NavigationBarComponent implements OnInit, OnChanges{
   defaultPhoto = require('../images/defaultPhoto.png');
   constructor(private authService: AuthenticationService,
               private userService: UserService,
@@ -20,7 +20,14 @@ export class NavigationBarComponent implements OnInit{
               private dataService: BookingSectorsDataService,
               ) {}
   user: User;
- 
+ ngOnChanges(){
+  if(this.isLoggedIn)
+  {
+  this.userService.getUser(this.authService.getId()).subscribe(data => {this.dataService.user = data;
+   });
+  
+  }
+ }
   ngOnInit(){
     if(this.isLoggedIn)
     {

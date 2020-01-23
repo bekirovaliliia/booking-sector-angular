@@ -5,6 +5,8 @@ import {Subject, from} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { Sector } from 'src/app/shared/models/sector-model';
+import { SectorService } from 'src/app/core/services/sector.service';
 
 
 declare  var  require: any;
@@ -34,8 +36,9 @@ export class ActualBookingsTableComponent implements OnInit {
   idToDelete: number;
 
   bookings: Booking[];
-  filteredBookings: Booking[];
-  constructor(private bookingService: BookingService, private authService: AuthenticationService) { }
+  constructor(private bookingService: BookingService, 
+              private authService: AuthenticationService,
+              private sectorService: SectorService,) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -55,17 +58,23 @@ export class ActualBookingsTableComponent implements OnInit {
       this.bookingHeaders = ['delete', 'id', 'bookingStart', 'bookingEnd', 'sectorId', 'isApproved'];
       this.updateDataSource();
       if(this.bookings.length == 0){this.hasBookings = false;}
-     else{this.hasBookings = true;}
-    console.log(this.hasBookings);
+      else{this.hasBookings = true;}
     });
   }
-  updateDataSource() {
+  updateDataSource() 
+  {
+    this.bookings.forEach(element => {
+       this.sectorService.getById(element.sectorId).subscribe(data=>{element.sectorId = data.number;});      
+    });
     this.dataSource.data = this.bookings.reverse();
-}
-  saveIdToDelete(id: number){
+  }
+  saveIdToDelete(id: number)
+  {
     this.idToDelete = id;
   }
-   delete(){
+
+   delete()
+  {
     this.bookingService.deleteBooking(this.idToDelete).subscribe(data=> this.getBookings());
   }
 }
