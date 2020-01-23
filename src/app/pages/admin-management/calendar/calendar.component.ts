@@ -1,8 +1,12 @@
+import { delay } from 'rxjs/operators';
+import { sleep } from 'sleep-ts';
+import { Booking } from './../../../shared/models/booking.model';
 import {
   Component,
   ChangeDetectionStrategy,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  OnInit
 } from '@angular/core';
 import {
   startOfDay,
@@ -23,6 +27,8 @@ import {
   CalendarMonthViewBeforeRenderEvent,
   CalendarView
 } from 'angular-calendar';
+import { HttpClient } from '@angular/common/http';
+import { BookingService } from 'src/app/core/services/booking.service';
 
 const colors: any = {
   red: {
@@ -43,98 +49,67 @@ const colors: any = {
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./calendar.component.css']
 })
 
 export class CalendarComponent {
 
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
+  booking: Booking[];
+
+  constructor(
+    private modal: NgbModal,
+    private httpService: HttpClient,
+    private bookingService: BookingService) {}
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      }
-    }
-  ];
-
-  refresh: Subject<any> = new Subject();
-
   events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
+      end: addDays(new Date(), 2),
+      title: 'Sector 1',
+      color: colors.blue,
       allDay: true,
       resizable: {
         beforeStart: true,
         afterEnd: true
       },
-      draggable: true
     },
     {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
+      start: subDays(startOfDay(new Date()), 2),
+      end: addDays(new Date(), 2),
+      title: 'Sector 2',
+      color: colors.red,
     },
     {
-      start: subDays(endOfMonth(new Date()), 3),
+      start: subDays(endOfMonth(new Date()), 1),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
+      title: 'Sector 3',
       color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
+      allDay: true
     },
   ];
 
-  beforeMonthViewRender(renderEvent: CalendarMonthViewBeforeRenderEvent): void {
-    renderEvent.body.forEach(day => {
-      const dayOfMonth = day.date.getDate();
-      if (dayOfMonth > 12 && dayOfMonth < 17 && day.inMonth) {
-        day.cssClass = 'bg-pink';
-      }
+  ngOnInit(){
+    this.getBookings();
+  }
+
+  getBookings(){
+    this.bookingService.getAllBookings().then(res => {
+      this.booking = res;
     });
   }
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
-
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log(this.booking);
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -146,56 +121,5 @@ export class CalendarComponent {
       }
       this.viewDate = date;
     }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map(iEvent => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        }
-      }
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter(event => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
   }
 }
