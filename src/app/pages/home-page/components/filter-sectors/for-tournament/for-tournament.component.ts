@@ -44,7 +44,7 @@ export class ForTournamentComponent implements OnInit {
     const dateEnd = this.datePipe.transform(ob.value.tournamentEnd, 'yyyy/MM/dd');
     
     this.selected = `${dateStart } - ${ dateEnd }`;
-    this.dataService.changeDateRange(dateStart, dateEnd);
+    this.dataService.changeDateRange(ob.value.tournamentStart, ob.value.tournamentEnd);
     this.dataService.selectedTournamentId = ob.value.id;
   }
 
