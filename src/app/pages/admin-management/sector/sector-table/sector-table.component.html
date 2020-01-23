@@ -4,14 +4,14 @@
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100 btn-table">
 
     <ng-container matColumnDef="id" >
-      <th mat-sort-header arrowPosition="before" *matHeaderCellDef>ID
+      <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef>ID
       </th>
-      <td mat-cell *matCellDef="let sector"> {{sector.id}} 
+      <td mat-cell *matCellDef="let sector"> {{sector.id}}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="number">
-      <th mat-sort-header arrowPosition="before" *matHeaderCellDef>Number</th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef>Number</th>
       <td mat-cell *matCellDef="let sector"> {{sector.number}} </td>
     </ng-container>
 
@@ -31,7 +31,7 @@
     </ng-container>
 
     <ng-container matColumnDef="isActive">
-        <th mat-sort-header arrowPosition="before" *matHeaderCellDef class="w-25"> Is_Active
+        <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef class="w-25"> Is_Active
           <app-add-btn (selectedToAdd)="openAddDialog()"></app-add-btn>
         </th>
         <td mat-cell *matCellDef="let sector">
@@ -40,7 +40,7 @@
           <div class="btn-group" id="management-buttons">
             <app-update-btn (selectedToUpdate)="openUpdateDialog(sector)"></app-update-btn>
             <app-delete-btn (selectedToDelete)="deleteSector(sector.id)"></app-delete-btn>
-          </div> 
+          </div>
       </td>
     </ng-container>
 

@@ -27,7 +27,19 @@ export class PhotoComponent implements OnInit {
   getPhoto(){
    this.userService.getUser(this.userId).subscribe(data => this.user = data);
   }
-
+ async deletePhoto(){
+   if(this.user.photo!=null)
+   {
+    this.userService.deleteUserPhoto(this.userId);
+    await sleep(3000);
+    this.toastr.success("Your photo deleted successfully!");
+    this.getPhoto();
+    }
+    else
+    {
+      this.toastr.error("Your have not photo!");
+    }
+  }
   ngOnInit() {
     this.getPhoto();
   }
@@ -37,7 +49,7 @@ export class PhotoComponent implements OnInit {
     }
     else return this.defaultPhoto;
   }
-
+  
 
   async onFileChanged(event) {
     this.selectedFile = event.target.files[0];
@@ -55,7 +67,7 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         this.userService.updateUserPhoto(formData, this.authService.getId());
-        await sleep(5000);
+        await sleep(4000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }

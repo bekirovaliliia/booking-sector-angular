@@ -1,21 +1,35 @@
 <ng-container *ngIf="this.isApproved === null && this.isExpired === false">
-  <div class="btn-group btn-group-sm align-items-center" role="group">
-    <button type="button" class="btn btn-light" mat-button (click)="updateBooking( true)">Approve</button>
-    <button type="button" class="btn btn-light" mat-button (click)="updateBooking( false)">Decline</button>
+  <div>
+    <button type="button" class="btn btn-icon" (click)="updateBooking( true)">
+      <img src={{imgApprove}} alt="approve" class="img-fluid" width="20px">
+    </button>
+    <button type="button" class="btn btn-icon" (click)="updateBooking( false)">
+      <img src={{imgDecline}} alt="decline" width="20px">
+    </button>
   </div>
 </ng-container>
 <ng-container *ngIf="this.isApproved === true && this.isExpired === false">
-  <div class="btn-group btn-group-sm align-items-center" role="group">
-    <button type="button" class="btn btn-light" (click)="updateBooking(null)">Discard</button>
-    <button type="button" class="btn btn-light" (click)="deleteBooking()">Delete</button>
+  <div class="align-items-center" role="group">
+    <button type="button" class="btn btn-icon" (click)="updateBooking(null)">
+      <img src={{imgDiscard}} alt="delete" class="img-fluid" width="20px">
+    </button>
+    <button type="button" class="btn btn-icon" (click)="deleteBooking()">
+      <img src={{imgDelete}} alt="delete" class="img-fluid" width="20px">
+    </button>
   </div>
 </ng-container>
 <ng-container *ngIf="this.isApproved === false && this.isExpired === false">
-  <div class="btn-group btn-group-sm align-items-center" role="group">
-    <button type="button" class="btn btn-light" mat-button (click)="updateBooking(null)">Discard</button>
-    <button type="button" class="btn btn-light" mat-button (click)="deleteBooking()">Delete</button>
+  <div class="align-items-center" role="group">
+    <button type="button" class="btn btn-icon" (click)="updateBooking(null)">
+      <img src={{imgDiscard}} alt="delete" class="img-fluid" width="20px">
+    </button>
+    <button type="button" class="btn btn-icon" (click)="deleteBooking()">
+      <img src={{imgDelete}} alt="delete" class="img-fluid" width="20px">
+    </button>
   </div>
 </ng-container>
 <ng-container *ngIf="this.isExpired === true">
-  <button type="button" class="btn btn-light" mat-button (click)="deleteBooking()">Delete</button>
+  <button type="button" class="btn btn-light" (click)="deleteBooking()">
+    <img src={{imgDelete}} alt="delete" class="img-fluid" width="20px">
+  </button>
 </ng-container>

@@ -4,6 +4,7 @@ import { BookingSectorsDataService } from '../../../../core/services/booking-sec
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -15,25 +16,34 @@ export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
   isLoggedIn: boolean;
+  count: number;
 
   constructor(
     private formBuilder: FormBuilder,
     public dataService: BookingSectorsDataService,
     private bookingSectorService: BookingService,
-    private authentificationService: AuthenticationService
+    private authentificationService: AuthenticationService,
+    private toastr: ToastrService
     ) { }
 
     onSubmit(formValues) {
       const fromDate = this.dataService.fromDate;
       const toDate = this.dataService.toDate;
       const selectedSectors = this.dataService.selectedSectors;
+      const selectedTournamentId = this.dataService.selectedTournamentId;
       let booking: Booking;
+      let count = 0;
+      const selectedSectorsCount = selectedSectors.length;
       for (const sector of selectedSectors) {
-        booking = new Booking(0, null, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
+        booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
         this.bookingSectorService.bookSector(booking).subscribe(b => {
           this.dataService.renderMarkers(fromDate, toDate); // #TODO: Render markers too much. Change logic!
+          count++;
+          if (count === selectedSectorsCount) {
+            this.toastr.success('Selected sectors are booked.', 'Success');
+          }
         });
-      }      
+      }
       this.dataService.clearAllSelectedSectors();
     }
 

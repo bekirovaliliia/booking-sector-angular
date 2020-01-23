@@ -15,11 +15,25 @@
                 <li *ngIf="isLoggedIn && isAdmin" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/admin/bookings">Admin Management</a>
                 </li>
+
                 <li *ngIf="isLoggedOut" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/sign-in">Sign in</a>
                 </li>
                 <li *ngIf="isLoggedIn" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/sign-in" (click)="logout()">Sign Out</a>
+                </li>
+                <li *ngIf="isLoggedIn">
+                    <img [src]="transform()"
+                    class="media-object profile-avatar" 
+                    style="width:50px;
+                           height: 50px;
+                           border-radius:15px; 
+                           margin-bottom: 0px;"
+                    > 
+                </li>
+                <li *ngIf="isLoggedIn">  
+                   <p style="margin-left: 5px; margin-bottom: 0px;">{{user.firstname}}</p>
+                   <p style="margin-left: 5px; margin-bottom: 0px;">{{user.lastname}}</p>
                 </li>
             </ul>
         </div>
