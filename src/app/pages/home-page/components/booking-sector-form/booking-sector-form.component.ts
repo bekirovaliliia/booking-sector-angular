@@ -37,10 +37,10 @@ export class BookingSectorFormComponent implements OnInit {
         userEmail.firstname = formValues.firstName;
         userEmail.lastname = formValues.lastName;
         userEmail.phone = formValues.phone;
-        userEmail.email = "guest1@gmail.com"
+        userEmail.email = "guest6@gmail.com"
         userEmail.password = '12345';
-        console.log(userEmail);
-        this.userService.insertUser(userEmail).subscribe( res => {console.log(res);}, err => {console.log(err);} );
+        this.userService.insertUser(userEmail).subscribe(user => userId = (user as UserEmail).id);
+        console.log(userId);
       } else {
         userId = this.authentificationService.getId();
       }
