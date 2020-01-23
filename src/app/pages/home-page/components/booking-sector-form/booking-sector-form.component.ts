@@ -32,26 +32,18 @@ export class BookingSectorFormComponent implements OnInit {
     private userService: UserService
     ) { }
 
-    // getValue<T>(observable: Observable<T>): Promise<T> {
-    //   return observable
-    //     .pipe(
-    //       first()
-    //     )
-    //     .toPromise();
-    // }
-
     async onSubmit(formValues) {
       var userId;
-      if(!this.isLoggedIn) {
+      if (!this.isLoggedIn) {
         var userEmail: UserEmail = new UserEmail();
         userEmail.firstname = formValues.firstName;
         userEmail.lastname = formValues.lastName;
         userEmail.phone = formValues.phone;
-        userEmail.email = "guest13@gmail.com"
-        userEmail.password = '12345';
+        userEmail.email = `guest${Math.floor(Math.random() * 901)}@guest.com`;
+        userEmail.password = 'guest12345';
         var newUser = await this.userService.insertUser(userEmail).pipe(first()).toPromise();
         userId = (newUser as UserEmail).id;
-      } else {
+       } else {
         userId = this.authentificationService.getId();
       }
       const fromDate = this.dataService.fromDate;
