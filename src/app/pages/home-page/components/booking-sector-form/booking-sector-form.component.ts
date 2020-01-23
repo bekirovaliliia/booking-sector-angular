@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../../../core/services/authentication.
 import { UserService } from 'src/app/core/services/user.service';
 import { UserEmail } from 'src/app/shared/models/user-email-model';
 import { Observable, forkJoin } from 'rxjs';
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -18,12 +19,14 @@ export class BookingSectorFormComponent implements OnInit {
 
   bookingSectorForm: FormGroup;
   isLoggedIn: boolean;
+  count: number;
 
   constructor(
     private formBuilder: FormBuilder,
     public dataService: BookingSectorsDataService,
     private bookingSectorService: BookingService,
     private authentificationService: AuthenticationService,
+    private toastr: ToastrService,
     private userService: UserService
     ) { }
 
@@ -41,18 +44,21 @@ export class BookingSectorFormComponent implements OnInit {
       } else {
         userId = this.authentificationService.getId();
       }
-      // const fromDate = this.dataService.fromDate;
-      // const toDate = this.dataService.toDate;
-      // const selectedSectors = this.dataService.selectedSectors;
-      // const selectedTournamentId = this.dataService.selectedTournamentId;
-      // let booking: Booking;
-      // let bookedSectors : Observable<Booking>[] = [];
-      // for (const sector of selectedSectors) {
-      //   booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, userId);
-      //   bookedSectors.push(this.bookingSectorService.bookSector(booking));
-      // }  
-      // forkJoin(bookedSectors).subscribe(() => this.dataService.renderMarkers(fromDate, toDate));       
-      // this.dataService.clearAllSelectedSectors();
+      const fromDate = this.dataService.fromDate;
+      const toDate = this.dataService.toDate;
+      const selectedSectors = this.dataService.selectedSectors;
+      const selectedTournamentId = this.dataService.selectedTournamentId;
+      let booking: Booking;
+      let bookedSectors : Observable<Booking>[] = [];
+      for (const sector of selectedSectors) {
+        booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, userId);
+        bookedSectors.push(this.bookingSectorService.bookSector(booking));
+      }  
+      forkJoin(bookedSectors).subscribe(() => { 
+        this.dataService.renderMarkers(fromDate, toDate);
+        this.toastr.success('Selected sectors are booked.', 'Success');
+      });       
+      this.dataService.clearAllSelectedSectors();
     }
 
     ngOnInit() {
