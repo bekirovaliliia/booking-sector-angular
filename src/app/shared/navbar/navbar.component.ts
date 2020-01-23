@@ -17,7 +17,7 @@ export class NavigationBarComponent implements OnInit, OnChanges{
   constructor(private authService: AuthenticationService,
               private userService: UserService,
               private sanitizer: DomSanitizer,
-              private dataService: BookingSectorsDataService,
+              public dataService: BookingSectorsDataService,
               ) {}
   user: User;
  ngOnChanges(){
