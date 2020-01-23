@@ -58,6 +58,7 @@ export class CalendarComponent {
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   booking: Booking[];
+  
 
   constructor(
     private modal: NgbModal,
