@@ -40,7 +40,7 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
                     endDate: moment(this.data.selectedTournament.tournamentEnd)
                 },
                 preparationTerm: [this.data.selectedTournament.preparationTerm, [
-                    Validators.max(30),
+                    Validators.max(7),
                 ]],
             });
     }

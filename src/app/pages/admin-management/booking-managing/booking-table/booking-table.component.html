@@ -5,23 +5,23 @@
   <table mat-table matSort [dataSource]="dataSource" style="width: 100%">
 
     <ng-container matColumnDef='id'>
-      <th mat-header-cell mat-sort-header *matHeaderCellDef> ID </th>
+      <th mat-header-cell mat-sort-header arrowPosition="before" *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let booking"> {{booking.id}} </td>
     </ng-container>
     <ng-container matColumnDef="sectorId">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef> Sectors </th>
+      <th mat-header-cell mat-sort-header arrowPosition="before" *matHeaderCellDef> Sectors </th>
       <td class="sectors-cell" mat-cell *matCellDef="let booking"> {{booking.sectorId}} </td>
     </ng-container>
     <ng-container matColumnDef="startDate">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef> Start Date </th>
+      <th mat-header-cell mat-sort-header arrowPosition="before" *matHeaderCellDef> Start Date </th>
       <td class="sectors-cell" mat-cell *matCellDef="let booking"> {{booking.bookingStart | date}} </td>
     </ng-container>
     <ng-container matColumnDef="endDate">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef> End Date </th>
+      <th mat-header-cell mat-sort-header arrowPosition="before" *matHeaderCellDef> End Date </th>
       <td class="sectors-cell" mat-cell *matCellDef="let booking"> {{booking.bookingEnd | date}} </td>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <th style="width: 10%" mat-header-cell *matHeaderCellDef></th>
+      <th style="width: 10%" mat-header-cell arrowPosition="before" *matHeaderCellDef></th>
       <td class="sectors-cell" mat-cell *matCellDef="let booking">
         <app-booking-actions (bookingAction)="updateDataSource()" [booking]="booking"></app-booking-actions>
       </td>
