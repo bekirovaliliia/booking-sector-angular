@@ -5,6 +5,8 @@ import { ChangePasswordNewComponent } from '../change-password-new/change-passwo
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
+
 @Component({
   selector: 'app-user-profile-text',
   templateUrl: './user-profile-text.component.html',
@@ -33,7 +35,7 @@ export class UserProfileTextComponent implements OnInit {
     this.is_edit = true;
   }
   saveChanges(){
-    this.userService.updateUser(this.user).subscribe();
+    this.userService.updateUser(this.user).subscribe(data=> this.dataService.user =this.user);
     this.is_edit = false;
     this.showInfoEdited();
   }
@@ -43,7 +45,8 @@ export class UserProfileTextComponent implements OnInit {
   constructor(private userService: UserService,
               private dialog: MatDialog,
               private toastr: ToastrService,
-              private authService: AuthenticationService) { }  
+              private authService: AuthenticationService,
+              private dataService: BookingSectorsDataService) { }  
   user: User;  
   ngOnInit() {
     return this.userService.getUser(this.userId).subscribe(data => this.user = data);

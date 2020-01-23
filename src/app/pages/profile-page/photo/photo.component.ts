@@ -5,6 +5,7 @@ import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import {sleep} from 'sleep-ts';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import {BookingSectorsDataService} from 'src/app/core/services/booking-sectors-data.service';
 declare  var  require: any;
 @Component({
   selector: 'app-photo',
@@ -13,7 +14,6 @@ declare  var  require: any;
 })
 export class PhotoComponent implements OnInit {
   defaultPhoto = require('../../../shared/images/defaultPhoto.png');
-  user: User;
   selectedFile: File;
 
   get userId(): number {
@@ -23,15 +23,16 @@ export class PhotoComponent implements OnInit {
   constructor(private userService: UserService,
               private sanitizer: DomSanitizer,
               private toastr: ToastrService,
-              private authService: AuthenticationService) { }
+              private authService: AuthenticationService,
+              private dataService: BookingSectorsDataService,) { }
   getPhoto(){
-   this.userService.getUser(this.userId).subscribe(data => this.user = data);
+   this.userService.getUser(this.userId).subscribe(data => { this.dataService.user = data;});
   }
  async deletePhoto(){
-   if(this.user.photo!=null)
+   if(this.dataService.user.photo!=null)
    {
     this.userService.deleteUserPhoto(this.userId);
-    await sleep(1000);
+    await sleep(2000);
     this.toastr.success("Your photo deleted successfully!");
     this.getPhoto();
     }
@@ -44,8 +45,8 @@ export class PhotoComponent implements OnInit {
     this.getPhoto();
   }
   transform(): SafeUrl {
-    if(this.user.photo){
-    return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.user.photo);
+    if(this.dataService.user.photo){
+    return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.dataService.user.photo);
     }
     else return this.defaultPhoto;
   }
@@ -67,7 +68,7 @@ export class PhotoComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
         this.userService.updateUserPhoto(formData, this.authService.getId());
-        await sleep(1000);
+        await sleep(2000);
         this.toastr.success("Your photo changed successfully!");
         this.getPhoto();
       }
