@@ -4,28 +4,22 @@
       <div class="card border-info mb-3">
         <div class="card-header text-white bg-info">Search by period</div>
         <div class="card-body">
-
           <div *ngIf="isAdmin">
             <span> Booking for:</span>
             <mat-radio-group [(ngModel)]="selection" #radioGroup="matRadioGroup">
               <mat-radio-button class="mx-3" value="user">User</mat-radio-button>
               <mat-radio-button value="tournament">Tournament</mat-radio-button>
             </mat-radio-group>
-
             <div *ngIf="radioGroup.value === 'user'">
               <app-for-user></app-for-user>
-
             </div>
-
             <div *ngIf="radioGroup.value === 'tournament'">
               <app-for-tournament></app-for-tournament>
             </div>
           </div>
-
           <div *ngIf="isUser || isLoggedOut">
             <app-for-user></app-for-user>
           </div>
-
         </div>
       </div>
     </div>

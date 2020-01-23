@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
 
 @Component({
   selector: 'app-for-user',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: BookingSectorsDataService) { }
 
   ngOnInit() {
+    this.dataService.selectedTournamentId = null;
   }
-
 }

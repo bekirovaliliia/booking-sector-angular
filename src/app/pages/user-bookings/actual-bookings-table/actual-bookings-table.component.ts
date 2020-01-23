@@ -5,7 +5,6 @@ import {Subject, from} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-//import {sleep} from 'sleep-ts';
 
 
 declare  var  require: any;
@@ -33,7 +32,7 @@ export class ActualBookingsTableComponent implements OnInit {
   bookingHeaders: string[];
   dtOptions: any = {};
   idToDelete: number;
-  
+
   bookings: Booking[];
   filteredBookings: Booking[];
   constructor(private bookingService: BookingService, private authService: AuthenticationService) { }
@@ -60,17 +59,13 @@ export class ActualBookingsTableComponent implements OnInit {
     console.log(this.hasBookings);
     });
   }
-  updateDataSource() {  
+  updateDataSource() {
     this.dataSource.data = this.bookings.reverse();
 }
   saveIdToDelete(id: number){
     this.idToDelete = id;
-    console.log(this.idToDelete);
   }
-    async delete(){
-    console.log(this.idToDelete);
-    this.bookingService.deleteBooking(this.idToDelete).subscribe();
-  //  await sleep(5000);
-    this.getBookings();
+   delete(){
+    this.bookingService.deleteBooking(this.idToDelete).subscribe(data=> this.getBookings());
   }
 }

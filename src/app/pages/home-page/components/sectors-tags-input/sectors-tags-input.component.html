@@ -1,12 +1,7 @@
-<div [formGroup]="form">
-    <div class="input-group">        
-        <div class="editor-tag form-control">
-            <span class="tag-item" *ngFor="let tag of tags">
-                {{tag}}<span class="remove-tag" (click)="removeTag(tag)">×</span>
-            </span>
-        </div>
-        <div class="input-group-prepend">
-            <button class="btn btn-outline-danger rounded" type="button" (click)="clearSelectedSectors()">Clear</button>              
-        </div>
-    </div> 
+<div [formGroup]="form">       
+    <div class="editor-tag form-control">
+        <span class="tag-item" *ngFor="let tag of tags">
+            {{tag.number}}<span class="remove-tag" (click)="removeTag(tag)">×</span>
+        </span>
+    </div>
 </div>

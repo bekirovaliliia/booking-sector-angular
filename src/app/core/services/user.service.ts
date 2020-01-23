@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../shared/models/user-model';
 import {UserEmail} from '../../shared/models/user-email-model';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class UserService {
 
   apiURl = environment.urlAddress + '/users';
   constructor(private http: HttpClient) { }
+  
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
@@ -21,8 +24,8 @@ export class UserService {
     };
     return this.http.get<string>(`${this.apiURl}/UserPhoto/${id}`, httpOptions);
   }
-  checkPass(pass: string, id:number){
-   return this.http.get<Boolean>(`${this.apiURl}/${id}/${pass}`);
+  checkPass(password: string, id:number){
+   return this.http.get<Boolean>(`${this.apiURl}/${id}/${password}`);
   }
   resetPass(email: string){
     const httpOptions = {
@@ -30,26 +33,25 @@ export class UserService {
     };
     return this.http.get(`${this.apiURl}/reset/${email}`, httpOptions);
   }
-  updateUserPassword(user :User) {
+  updateUserPassword(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    console.log(user);
-   return this.http.put(`${this.apiURl}/pass/${user.id}`, user, httpOptions);
+   return this.http.put(`${this.apiURl}/password/${user.id}`, user, httpOptions);
   }
   updateUserPhoto(file : FormData, id:number) {
-    const httpOptions = {
-      //headers: new HttpHeaders({'Content-Type': 'multipart/form-data'})
-    };
-    console.log(file);
-     return this.http.put(`${this.apiURl}/photo/${id}`, file, httpOptions).subscribe(res => console.log('File Uploaded ...'));
+     return this.http.put(`${this.apiURl}/photo/${id}`, file).subscribe();
 
   }
+
+  deleteUserPhoto(id:number) {
+    return this.http.put(`${this.apiURl}/deletePhoto/${id}`, id).subscribe();
+
+ }
   updateUser(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    console.log(user);
    return this.http.put(`${this.apiURl}/${user.id}`, user, httpOptions);
   }
 

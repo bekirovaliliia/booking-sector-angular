@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
 
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['home']);
-      this.toastr.warning('You must first log out to sign up');
+      this.toastr.warning('To sign up you first need to sign out');
     }
 
     // @ts-ignore
