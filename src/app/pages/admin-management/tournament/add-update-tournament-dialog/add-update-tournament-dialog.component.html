@@ -33,12 +33,12 @@
            placeholder="Tournament start & end"
            class =  "border-0 w-100"
            [showRangeLabelOnInput]="true"
-           [dateLimit]="20" />
+           [dateLimit]="14" />
     <mat-icon matSuffix>event</mat-icon>
   </mat-form-field>
 
   <mat-form-field class="d-inline">
-    <input matInput appNumberOnly required
+    <input matInput  required
            type="number"
            autocomplete="off"
            formControlName="preparationTerm"

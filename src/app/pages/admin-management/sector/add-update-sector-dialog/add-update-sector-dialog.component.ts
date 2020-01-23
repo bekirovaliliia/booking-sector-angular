@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddUpdateSectorDialogComponent implements OnInit {
   form: FormGroup;
   constructor(private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<AddUpdateSectorDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data) { }
+              private dialogRef: MatDialogRef<AddUpdateSectorDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
     this.getForm();

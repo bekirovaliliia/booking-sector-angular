@@ -4,7 +4,7 @@ import {BookingService} from '../../../core/services/booking.service';
 import {Subject, from} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
-//import {sleep} from 'sleep-ts';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 
 declare  var  require: any;
@@ -27,16 +27,15 @@ export class ActualBookingsTableComponent implements OnInit {
     this.dataSource.sort = sort;
   }
   booking: Booking;
-  userId:number = 1;
   @Input() isActual:boolean = false;
   hasBookings: boolean = false;
   bookingHeaders: string[];
   dtOptions: any = {};
   idToDelete: number;
-  
+
   bookings: Booking[];
   filteredBookings: Booking[];
-  constructor(private bookingService: BookingService,) { }
+  constructor(private bookingService: BookingService, private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -51,16 +50,16 @@ export class ActualBookingsTableComponent implements OnInit {
 
   getBookings()
   {
-    this.bookingService.getUserBookings(this.userId, this.isActual).subscribe(res => {
+    this.bookingService.getUserBookings(this.authService.getId(), this.isActual).subscribe(res => {
       this.bookings = res;
       this.bookingHeaders = ['delete', 'id', 'bookingStart', 'bookingEnd', 'sectorId', 'isApproved'];
       this.updateDataSource();
-      if(this.bookings.length ==0){this.hasBookings = false;}
+      if(this.bookings.length == 0){this.hasBookings = false;}
      else{this.hasBookings = true;}
     console.log(this.hasBookings);
     });
   }
-  updateDataSource() {  
+  updateDataSource() {
     this.dataSource.data = this.bookings.reverse();
 }
   saveIdToDelete(id: number){

@@ -62,7 +62,7 @@ export class BookingService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    if(booking.isApproved === null){
+    if (booking.isApproved === null) {
       return this.http.put(`${this.urlAddress}/${booking.id}`, httpOptions);
     } else {
       return this.http.put(`${this.urlAddress}/${booking.id}?isApproved=${booking.isApproved}`
@@ -109,12 +109,11 @@ export class BookingService {
       );
   }
 
-  filterByDate(startDate, endDate){
+  filterByDate(startDate, endDate) {
     return this.http.get(`${environment.urlAddress}/sectors/free?fromDate=${startDate}&toDate=${endDate}`);
   }
 
-  bookSector(booking: Booking) : Observable<Booking>
-  {
+  bookSector(booking: Booking): Observable<Booking>{
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -125,6 +124,6 @@ export class BookingService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.delete(`${this.urlAddress}bookings/${id}`, httpOptions);
+    return this.http.delete(`${this.urlAddress}/${id}`, httpOptions);
   }
 }

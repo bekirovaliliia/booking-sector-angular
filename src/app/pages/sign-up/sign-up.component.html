@@ -4,7 +4,7 @@
       <div class="heading sign-up-margin-bottom">
         <h2>Sign Up</h2>
       </div>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" (change)="buttonEnable()">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label>Email</label>
           <input
@@ -115,6 +115,7 @@
         </div>
         <div class="form-group">
           <label>Password</label>
+          <div class="input-group">
             <input
               [type]=" show ? 'text' : 'password'"
               formControlName="password"
@@ -123,18 +124,26 @@
               'is-invalid':
                 f.password.errors && ((f.password.touched || f.password.dirty) || submitted)
             }"
-              (click)="show=!show"
-            /> 
+              
+            /> <div class="input-group-addon">
+              <a (click)="show=!show">
+                <fa-icon *ngIf="!show" [icon]="faEyeSlash" ></fa-icon>
+                <fa-icon *ngIf="show" [icon]="faEye" ></fa-icon>
+              </a>
+            
+          </div>
           <div *ngIf="f.password.errors && ((f.password.touched || f.password.dirty) || submitted)" class="invalid-feedback">
             <div *ngIf="f.password.errors?.required">Password is required</div>
             <div *ngIf="f.password.errors?.minlength"> Password must be at least 6 characters</div>
             <div *ngIf="f.password.errors?.validatePassword">Password too easy</div>
           </div>
         </div>
+        </div>
         <div class="form-group">
           <label>Repeat the password</label>
+          <div class="input-group">
           <input
-            type="password"
+          [type]=" showRepeat ? 'text' : 'password'"
             formControlName="repeatPassword"
             class="form-control"
             [ngClass]="{
@@ -143,6 +152,13 @@
                   (f.repeatPassword.touched || f.repeatPassword.dirty)) ||
                 registerForm.hasError('validatePasswords')
             }"/>
+            <div class="input-group-addon">
+              <a (click)="showRepeat=!showRepeat">
+                <fa-icon *ngIf="!showRepeat" [icon]="faEyeSlash" ></fa-icon>
+                <fa-icon *ngIf="showRepeat" [icon]="faEye" ></fa-icon>
+              </a>
+            
+          </div>
           <div *ngIf="
                (f.repeatPassword.errors &&  (f.repeatPassword.touched || f.repeatPassword.dirty)) || registerForm.hasError('validatePasswords')
            "  class="invalid-feedback">
@@ -155,10 +171,11 @@
             <div *ngIf="registerForm.hasError('validatePasswords')">
               Passwords do not match
             </div>
+            </div>
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary btn-block"   type="submit" [disabled]="buttonError">
+          <button class="btn btn-primary btn-block"   type="submit" [disabled]="this.registerForm.invalid">
             Sign Up
           </button>
         </div>

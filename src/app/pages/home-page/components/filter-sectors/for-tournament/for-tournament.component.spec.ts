@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteSectorDialogComponent } from './delete-sector-dialog.component';
+import { ForTournamentComponent } from './for-tournament.component';
 
-describe('DeleteSectorDialogComponent', () => {
-  let component: DeleteSectorDialogComponent;
-  let fixture: ComponentFixture<DeleteSectorDialogComponent>;
+describe('ForTournamentComponent', () => {
+  let component: ForTournamentComponent;
+  let fixture: ComponentFixture<ForTournamentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteSectorDialogComponent ]
+      declarations: [ ForTournamentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteSectorDialogComponent);
+    fixture = TestBed.createComponent(ForTournamentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
