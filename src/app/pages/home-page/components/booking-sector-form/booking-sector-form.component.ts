@@ -27,9 +27,10 @@ export class BookingSectorFormComponent implements OnInit {
       const fromDate = this.dataService.fromDate;
       const toDate = this.dataService.toDate;
       const selectedSectors = this.dataService.selectedSectors;
+      const selectedTournamentId = this.dataService.selectedTournamentId;
       let booking: Booking;
       for (const sector of selectedSectors) {
-        booking = new Booking(0, null, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
+        booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, this.authentificationService.getId());
         this.bookingSectorService.bookSector(booking).subscribe(b => {
           this.dataService.renderMarkers(fromDate, toDate); // #TODO: Render markers too much. Change logic!
         });
