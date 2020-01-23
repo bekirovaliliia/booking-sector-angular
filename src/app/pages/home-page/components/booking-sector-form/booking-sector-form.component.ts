@@ -6,8 +6,10 @@ import { Booking } from 'src/app/shared/models/booking.model';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserEmail } from 'src/app/shared/models/user-email-model';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, BehaviorSubject } from 'rxjs';
 import {ToastrService} from "ngx-toastr";
+import { take, first } from 'rxjs/operators';
+
 
 
 @Component({
@@ -30,17 +32,25 @@ export class BookingSectorFormComponent implements OnInit {
     private userService: UserService
     ) { }
 
-    onSubmit(formValues) {
+    // getValue<T>(observable: Observable<T>): Promise<T> {
+    //   return observable
+    //     .pipe(
+    //       first()
+    //     )
+    //     .toPromise();
+    // }
+
+    async onSubmit(formValues) {
       var userId;
       if(!this.isLoggedIn) {
         var userEmail: UserEmail = new UserEmail();
         userEmail.firstname = formValues.firstName;
         userEmail.lastname = formValues.lastName;
         userEmail.phone = formValues.phone;
-        userEmail.email = "guest6@gmail.com"
+        userEmail.email = "guest13@gmail.com"
         userEmail.password = '12345';
-        this.userService.insertUser(userEmail).subscribe(user => userId = (user as UserEmail).id);
-        console.log(userId);
+        var newUser = await this.userService.insertUser(userEmail).pipe(first()).toPromise();
+        userId = (newUser as UserEmail).id;
       } else {
         userId = this.authentificationService.getId();
       }
