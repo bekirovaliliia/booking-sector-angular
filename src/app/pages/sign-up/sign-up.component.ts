@@ -50,6 +50,7 @@ export class SignUpComponent implements OnInit {
       this.toastr.warning('You must first log out to sign up');
     }
 
+
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
@@ -96,6 +97,9 @@ export class SignUpComponent implements OnInit {
         ]
       }
     );
+    
+   // this.registerForm.controls.number.errors = true;
+
   }
 
   // convenience getter for easy access to form fields
@@ -124,7 +128,13 @@ export class SignUpComponent implements OnInit {
 
     this.userService.insertUser(this.user).subscribe(
       res => {
-        this.toastr.success('Your registration was successful! Please check your email.', 'Congratulations!');
+        const emailDomain = this.user.email.split('@', 2);
+
+        this.toastr.success(
+          // tslint:disable-next-line:max-line-length
+          `Your registration was successful! <br> Please check your email</a> <br> <a href="http://${emailDomain[1]}">Click here to go to the email domain</a>`,
+        'Congratulations!',  { enableHtml: true}
+        );
         this.router.navigate(['sign-in']);
       },
       err => {
@@ -146,7 +156,6 @@ export class SignUpComponent implements OnInit {
             },
       error => {
               this.errorHandling = false;
-              
             }
         );
     }

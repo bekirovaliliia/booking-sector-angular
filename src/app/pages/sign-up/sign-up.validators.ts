@@ -1,6 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
 
 export class SignUpValidators {
+
   static validatePhone(c: FormControl) {
     const operatorsUkraineCode: string[] = [
       '050',
