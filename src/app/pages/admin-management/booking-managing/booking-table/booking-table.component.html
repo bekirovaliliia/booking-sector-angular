@@ -1,4 +1,7 @@
-<div class="mat-elevation-z8">
+
+<app-without-datas *ngIf="dataSource === undefined" [withoutDatasText]="'No data!'"></app-without-datas>
+
+<div class="mat-elevation-z8" *ngIf="dataSource !== null">
   <table mat-table matSort [dataSource]="dataSource" style="width: 100%">
 
     <ng-container matColumnDef='id'>
