@@ -50,7 +50,6 @@ export class SignUpComponent implements OnInit {
       this.toastr.warning('You must first log out to sign up');
     }
 
-
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
@@ -97,15 +96,13 @@ export class SignUpComponent implements OnInit {
         ]
       }
     );
-    
-   // this.registerForm.controls.number.errors = true;
-
   }
 
   // convenience getter for easy access to form fields
   get f() {
     return this.registerForm.controls;
   }
+
 
   onSubmit() {
     this.submitted = true;
@@ -153,9 +150,11 @@ export class SignUpComponent implements OnInit {
                 'Error!'
               );
               this.errorHandling = true;
+              this.registerForm.controls['number'].setErrors({error: true});
             },
       error => {
               this.errorHandling = false;
+              this.registerForm.controls['number'].setErrors(null);
             }
         );
     }
@@ -171,11 +170,14 @@ export class SignUpComponent implements OnInit {
             'Error!'
           );
           this.errorHandling = true;
+          this.registerForm.controls['email'].setErrors({error: true});
         },
           error => {
             this.errorHandling = false;
+            this.registerForm.controls['email'].setErrors(null);
           }
         );
     }
   }
+
 }
