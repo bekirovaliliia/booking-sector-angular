@@ -3,36 +3,35 @@
 }
 .profile-avatar{
 height: 160px;
-border-radius: 15px;}
+border-radius: 15px;
+margin-bottom: 4px;}
 
 
 .custom-file-upload {
     width: 150px;
     height: 40px;
-    border-radius: 30px;
+    border-radius: 6px;
     text-align: center;
     cursor: pointer;
     display: block;
-    font: 16px/40px Tahoma;
+    padding-top: 2%;
     transition: all 0.18s ease-in-out;
-    border: 1px solid #1aa3ff;
+    border: 1px solid #007bff;
     background: white;
-    color: #1aa3ff;
+    color: #007bff;
 }
 
 .custom-file-upload:hover {
     color: white;
-    background: #1aa3ff;
+    background: #007bff;
     background-position: bottom left;
 }
 .delete-photo {
-    width: 120px;
+    width: 150px;
     height: 40px;
-    border-radius: 30px;
+    border-radius: 6px;
     text-align: center;
-    cursor: pointer;
     display: block;
-    font: 16px/40px Tahoma;
     transition: all 0.18s ease-in-out;
     border: 1px solid #c91f3b;
     background: white;
@@ -43,4 +42,3 @@ border-radius: 15px;}
     background: #c91f3b;
     background-position: bottom left;
 }
-    

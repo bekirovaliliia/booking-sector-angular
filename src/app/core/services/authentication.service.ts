@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from 'src/app/shared/models/role';
+import { BookingSectorsDataService } from './booking-sectors-data.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,9 @@ export class AuthenticationService {
     private router: Router,
     private http: HttpClient,
     private toast: ToastrService,
-    private tokenStore: TokenStore
+    private tokenStore: TokenStore,
+    private dataService: BookingSectorsDataService,
+    private userService: UserService,
   ) {}
 
   login(phone: string, password: string): Observable<Token> {
@@ -44,6 +48,7 @@ export class AuthenticationService {
       this.toast.success('Hello, Admin!');
       this.router.navigate(['admin/bookings']);
     }
+    this.userService.getUser(this.getId()).subscribe(data=>this.dataService.user=data);
   }
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {

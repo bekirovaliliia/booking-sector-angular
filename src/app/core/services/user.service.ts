@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../shared/models/user-model';
 import {UserEmail} from '../../shared/models/user-email-model';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,13 @@ export class UserService {
 
   apiURl = environment.urlAddress + '/users';
   constructor(private http: HttpClient) { }
-  getUser(id:number) {
-    return this.http.get<User>(`${this.apiURl}/${id}`);
+  
+  getUser(id:number): Observable<User> {
+    return this.http.get<User>(`${this.apiURl}/${id}`).pipe(
+      map((item: User) =>
+          new User(item.id, item.firstname, item.lastname, item.phone, item.password, item.photo)
+      )
+    );
   }
   getUserPhoto(id:number) {
     const httpOptions = {
