@@ -8,10 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from 'src/app/shared/models/role';
-<<<<<<< HEAD
 import { BookingSectorsDataService } from './booking-sectors-data.service';
-=======
->>>>>>> a1121fa10aec9c1e7a6214efb83ca1af1a3c44c0
 import { UserService } from './user.service';
 
 @Injectable({

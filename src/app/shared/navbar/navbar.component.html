@@ -3,7 +3,7 @@
         <div class="collapse navbar-collapse"
             id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item" role="presentation">
+              <li *ngIf = "!isAdmin"class="nav-item" role="presentation">
                 <a class="nav-link active" routerLink="/future-tournaments">Tournaments</a>
               </li>
                 <li *ngIf="isLoggedIn" class="nav-item" role="presentation">
