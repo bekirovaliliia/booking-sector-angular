@@ -40,6 +40,11 @@ export class UserService {
      return this.http.put(`${this.apiURl}/photo/${id}`, file).subscribe();
 
   }
+
+  deleteUserPhoto(id:number) {
+    return this.http.put(`${this.apiURl}/deletePhoto/${id}`, id).subscribe();
+
+ }
   updateUser(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
