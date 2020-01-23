@@ -18,8 +18,13 @@ export class BookingTableComponent implements OnInit {
   dataSource: MatTableDataSource<Booking>;
   displayedColumns = ['id', 'sectorId', 'startDate', 'endDate', 'actions'];
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator,  {static: false}) set matPaginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
+
+  @ViewChild(MatSort, {static: false}) set MatSort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
 
   constructor(private bookingService: BookingService,
               private conditionSource: BookingManagingDataService) { }
@@ -40,8 +45,6 @@ export class BookingTableComponent implements OnInit {
     this.bookingService.getBookings(this.isApproved, this.isExpired).subscribe(
       bookings => {
         this.dataSource = new MatTableDataSource<Booking>(bookings);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
         this.dataSource.sortingDataAccessor = (item, property): string | number => {
           switch (property) {
             case 'startDate':
