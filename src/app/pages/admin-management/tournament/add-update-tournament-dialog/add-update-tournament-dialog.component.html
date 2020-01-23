@@ -39,6 +39,7 @@
 
   <mat-form-field class="d-inline">
     <input matInput  required
+           appNumberOnly
            type="number"
            autocomplete="off"
            formControlName="preparationTerm"
@@ -46,7 +47,7 @@
 
   </mat-form-field>
   <div *ngIf="form.controls['preparationTerm'].hasError('max')" class="text-danger">
-    Preparation term can`t be more than 30 days!
+    Preparation term can`t be more than 7 days!
   </div>
 
   <mat-form-field class = " d-inline">
