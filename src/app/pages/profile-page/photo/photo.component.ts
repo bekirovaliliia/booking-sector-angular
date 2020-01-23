@@ -43,7 +43,7 @@ export class PhotoComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     if(this.selectedFile.type!="image/jpeg")
     {
-      this.toastr.error("Choose image");
+      this.toastr.error("Type of file must be jpeg");
     }
     else
       if (this.selectedFile.size>2097152)
@@ -54,7 +54,6 @@ export class PhotoComponent implements OnInit {
       {
         let formData = new FormData();
         formData.append('file', this.selectedFile);
-        console.log(this.selectedFile);
         this.userService.updateUserPhoto(formData, this.authService.getId());
         await sleep(5000);
         this.toastr.success("Your photo changed successfully!");

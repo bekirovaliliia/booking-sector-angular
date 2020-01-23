@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -11,7 +12,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class ChangePasswordNewComponent implements OnInit {
 user: User;
-id = 46;
+id: number;
 passwordStrength: number = 0;
 old: Boolean = false;
 check: boolean = false;
@@ -93,10 +94,11 @@ showPasswordSaved() {
   constructor(private userService: UserService,
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<ChangePasswordNewComponent>,
+    private authService: AuthenticationService,
      ){  }
 
      ngOnInit() 
-    {
+    { this.id = this.authService.getId();
       return this.userService.getUser(this.id).subscribe(data => this.user = data);
     }
 
