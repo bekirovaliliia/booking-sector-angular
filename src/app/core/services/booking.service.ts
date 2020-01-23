@@ -14,12 +14,23 @@ export class BookingService {
   public urlAddress = `${environment.urlAddress}/bookings`;
 
   booking: Observable<Booking>;
+  bookingPromise: Promise<Booking>;
 
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe
     ) { }
 
+    getAllBookings(): Promise<Booking[]> {
+      return this.http.get<Booking[]>(`${this.urlAddress}`).toPromise().then
+        ((data: Booking[]) =>
+            data.map(
+              (item: any) =>
+                new Booking(item.id, item.tournamentId, item.bookingStart, item.bookingEnd, item.sectorId, item.userId, item.isApproved)
+            )
+          )
+        ;
+    }
     getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
       if (!isExpired) {
         return this.http.get<Booking[]>(this.urlAddress).pipe(
