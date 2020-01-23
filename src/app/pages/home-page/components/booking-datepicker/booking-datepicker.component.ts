@@ -1,3 +1,4 @@
+import { SettingsService } from 'src/app/core/services/settings.service';
 import {Component, Input} from '@angular/core';
 import * as moment from 'moment';
 import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
@@ -14,16 +15,18 @@ export class CustomRangesComponent {
     keepCalendarOpeningWithRange: boolean;
     maxDate: moment.Moment;
     minDate: moment.Moment;
+    maxBookingDays: number;
     startDate;
     endDate;
 
-    constructor(private dataService: BookingSectorsDataService) {
+    constructor(private dataService: BookingSectorsDataService, private settingsService: SettingsService) {
       this.selected = moment().format('YYYY-MM-DD');
       this.maxDate = moment().add(1,  'months');
       this.minDate = moment();
       this.alwaysShowCalendars = true;
       this.keepCalendarOpeningWithRange = true;
       this.showRangeLabelOnInput = true;
+      this.getMaxBookingDays();
     }
 
     datesUpdated(range) {
@@ -32,5 +35,12 @@ export class CustomRangesComponent {
         this.endDate = range.endDate.format('YYYY-MM-DD');
         this.dataService.changeDateRange(this.startDate, this.endDate);
       }
+    }
+
+    getMaxBookingDays() {
+      this.settingsService.getSettingById(1).subscribe(res => {
+        this.maxBookingDays = res.value;
+        console.log(this.maxBookingDays);
+      });
     }
 }
