@@ -3,9 +3,9 @@
     <app-filter (groupFilters)="filters = $event"></app-filter>
   </mat-sidenav>
 
-  <mat-sidenav-content class="p-2">
+  <mat-sidenav-content class="p-2 mt-2">
     <div class="d-flex">
-      <h1 >Tournaments</h1>
+
       <button mat-button position=end class = "ml-auto bg-transparent border-0" (click)="sidenav.toggle()">Advanced filter</button>
     </div>
       <app-global-search class="p-1" [(searchText)]="searchText"></app-global-search>

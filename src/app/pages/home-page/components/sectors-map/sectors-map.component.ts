@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../../core/services/data.service';
+import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
@@ -13,7 +13,7 @@ import { SettingsService } from 'src/app/core/services/settings.service';
 export class SectorsMapComponent implements OnInit {
 
   constructor(
-    private dataService: DataService,
+    private dataService: BookingSectorsDataService,
     private bookingService: BookingService,
     private authenticationService: AuthenticationService,
     private settingsService: SettingsService
@@ -24,7 +24,6 @@ export class SectorsMapComponent implements OnInit {
   mapType = 'satellite';
   markers: object [];
 
-  sectorNumber: any;
   startDate: any;
   endDate: any;
   maxBookingSectors: number;
@@ -36,6 +35,7 @@ export class SectorsMapComponent implements OnInit {
     if(this.dataService.selectedSectors.length < this.maxBookingSectors)
     {
       this.dataService.selectSector(marker);
+      console.log(this.dataService.selectedSectors);
       infoWindow.close();
     }
   }
@@ -49,8 +49,6 @@ export class SectorsMapComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
-    this.dataService.currentFromDate.subscribe(date => this.startDate = date);
-    this.dataService.currentToDate.subscribe(date => this.endDate = date);
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
     this.startDate = moment().format('YYYY-MM-DD');
     this.endDate = moment().format('YYYY-MM-DD');

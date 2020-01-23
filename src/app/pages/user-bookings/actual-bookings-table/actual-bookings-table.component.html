@@ -1,24 +1,25 @@
 <app-without-bookings *ngIf=!hasBookings></app-without-bookings>
 <table *ngIf=hasBookings mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100 btn-table " >
- 
+
   <ng-container matColumnDef="delete" >
     <th mat-header-cell *matHeaderCellDef ></th>
-    <td mat-cell *matCellDef="let booking"> <button
-      type="button "
+    <td mat-cell *matCellDef="let booking">
+      <button
+      type="button"
       class="input-group-text btn-icon"
       (click)="saveIdToDelete(booking.id)"
-      data-toggle="modal" 
+      data-toggle="modal"
       data-target="#modalDialog"
     >
      <img src={{imgTrash}}
            alt="delete"
-           class="img-fluid "
+           class="img-fluid"
            width="20px"
       />
     </button></td>
   </ng-container>
   <ng-container matColumnDef="id" >
-    <th mat-header-cell mat-sort-header *matHeaderCellDef arrowPosition="before"> ID </th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef arrowPosition="before"> Booking number </th>
     <td mat-cell *matCellDef="let booking"> {{booking.id}} </td>
   </ng-container>
 
@@ -40,7 +41,7 @@
       alt="delete"
       class="img-fluid "
       width="20px"
- /> 
+ />
  <img *ngIf = "!booking.isApproved"
       src={{imgDeclined}}
       alt="delete"
@@ -51,7 +52,7 @@
   </ng-container>
 
   <ng-container matColumnDef="sectorId">
-    <th mat-header-cell mat-sort-header *matHeaderCellDef arrowPosition="before"> Sector ID</th>
+    <th mat-header-cell mat-sort-header *matHeaderCellDef arrowPosition="before"> Sector number</th>
     <td mat-cell *matCellDef="let booking" > {{booking.sectorId}} </td>
   </ng-container>
 
@@ -70,7 +71,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete your booking with ID {{this.idToDelete}}? 
+        Are you sure you want to delete your booking with ID {{this.idToDelete}}?
         Once it's done, it can't be restored.
       </div>
       <div class="modal-footer justify-content-center">

@@ -6,6 +6,9 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {BookingService} from '../../../../core/services/booking.service';
 import {BookingManagingDataService} from '../../../../core/services/booking-managing-data.service';
 
+
+declare var require: any;
+
 @Component({
   selector: 'app-booking-actions',
   templateUrl: './booking-actions.component.html',
@@ -15,6 +18,12 @@ export class BookingActionsComponent implements OnInit {
 
   @Input() booking: Booking;
   @Output() bookingAction = new EventEmitter();
+
+  imgApprove = require('../../../../shared/images/approved.png');
+  imgDecline = require('../../../../shared/images/declined.png');
+  imgDiscard = require('../../../../shared/images/discard.png');
+  imgDelete = require('../../../../shared/images/trash.png')
+
   updateDialog: MatDialogRef<DeleteDialogComponent>;
   isApproved: boolean;
   isExpired: boolean;
@@ -34,6 +43,9 @@ export class BookingActionsComponent implements OnInit {
     this.updateDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
       width: '35%',
+      data: {
+        dialogTitle: `You're going to proceed an action on this booking`
+      }
     });
     this.updateDialog
       .afterClosed()
@@ -50,6 +62,9 @@ export class BookingActionsComponent implements OnInit {
     this.updateDialog = this.dialog.open(DeleteDialogComponent, {
       hasBackdrop: false,
       width: '35%',
+      data: {
+        dialogTitle: `You're going to remove this booking from database`
+      }
     });
     this.updateDialog
       .afterClosed()
