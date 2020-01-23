@@ -129,7 +129,7 @@ export class SignUpComponent implements OnInit {
 
         this.toastr.success(
           // tslint:disable-next-line:max-line-length
-          `Your registration was successful! <br> Please check your email</a> <br> <a href="http://${emailDomain[1]}">Click here to go to the email domain</a>`,
+          `Your registration was successful! <br> Please check your email</a> <br> <a target="_blank" rel="noopener noreferrer" href="http://${emailDomain[1]}">Click here to go to the email domain</a>`,
         'Congratulations!',  { enableHtml: true}
         );
         this.router.navigate(['sign-in']);
@@ -150,11 +150,10 @@ export class SignUpComponent implements OnInit {
                 'Error!'
               );
               this.errorHandling = true;
-              this.registerForm.controls['number'].setErrors({error: true});
+              this.registerForm.controls.number.setErrors({error: true});
             },
       error => {
               this.errorHandling = false;
-              this.registerForm.controls['number'].setErrors(null);
             }
         );
     }
@@ -170,11 +169,10 @@ export class SignUpComponent implements OnInit {
             'Error!'
           );
           this.errorHandling = true;
-          this.registerForm.controls['email'].setErrors({error: true});
+          this.registerForm.controls.email.setErrors({error: true});
         },
           error => {
             this.errorHandling = false;
-            this.registerForm.controls['email'].setErrors(null);
           }
         );
     }
