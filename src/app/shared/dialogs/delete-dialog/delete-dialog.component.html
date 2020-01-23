@@ -1,9 +1,16 @@
+<div mat-dialog-title >
+  <span> {{this.data.dialogTitle}}</span>
+  <span class="fx-spacer"></span>
+  <button mat-icon-button  mat-dialog-close class="float-right">
+    <mat-icon mat-list-icon>close</mat-icon>
+  </button>
+</div>
 
 <mat-dialog-content align="center">
-  <h5>{{deleteHeader}}</h5>
   Are you sure?
 </mat-dialog-content>
 <mat-dialog-actions align="center">
   <button mat-button tabindex="1" type="submit" (click)="submit()">Yes</button>
   <button mat-button mat-dialog-close tabindex="-1"type="button" >No</button>
 </mat-dialog-actions>
+

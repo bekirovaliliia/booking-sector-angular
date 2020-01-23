@@ -1,8 +1,10 @@
-<div class="container">
-  <br/>
-  <h1>Sectors</h1>
-  <hr/>
-  <div>
-    <app-sector-table></app-sector-table>
-  </div>
-</div>
+<mat-sidenav-container class="bg-transparent">
+  <mat-sidenav #sidenav mode=side position=end [(opened)]="opened"></mat-sidenav>
+
+  <mat-sidenav-content class="p-2">
+    <div class="d-flex">
+      <h1>Sectors</h1>
+    </div>
+    <app-sector-table> </app-sector-table>
+  </mat-sidenav-content>
+</mat-sidenav-container>

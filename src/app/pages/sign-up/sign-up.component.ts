@@ -11,6 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SignUpValidators } from './sign-up.validators';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -24,23 +26,28 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   user: UserEmail;
   errorHandling = false;
+  buttonError = true;
+  show: boolean;
+  showRepeat: boolean;
+  faEyeSlash =  faEyeSlash;
+  faEye = faEye;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthenticationService,
     private toastr: ToastrService,
-    public router: Router
+    public router: Router,
+    private authService: AuthenticationService
   ) {
     this.user = new UserEmail();
   }
 
   ngOnInit() {
 
-    if(this.authService.isLoggedIn())
-    {
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['home']);
-      this.toastr.warning("Щоб зареєструватись, спочатку потрібно вийти");
+      this.toastr.warning('You must first log out to sign up');
     }
 
     // @ts-ignore
@@ -97,7 +104,6 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.submitted = true;
     // stop here if form is invalid
 
@@ -106,7 +112,6 @@ export class SignUpComponent implements OnInit {
     }
     if (this.errorHandling === true) {
       this.toastr.error('Your number or email already exists! !', 'Oops :(');
-
       return;
     }
 
@@ -141,6 +146,7 @@ export class SignUpComponent implements OnInit {
             },
       error => {
               this.errorHandling = false;
+
             }
         );
     }
@@ -155,7 +161,7 @@ export class SignUpComponent implements OnInit {
             'A user with this email already exists!',
             'Error!'
           );
-            this.errorHandling = true;
+          this.errorHandling = true;
         },
           error => {
             this.errorHandling = false;

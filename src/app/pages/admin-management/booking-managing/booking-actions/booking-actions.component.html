@@ -1,0 +1,21 @@
+<ng-container *ngIf="this.isApproved === null && this.isExpired === false">
+  <div class="btn-group btn-group-sm align-items-center" role="group">
+    <button type="button" class="btn btn-light" mat-button (click)="updateBooking( true)">Approve</button>
+    <button type="button" class="btn btn-light" mat-button (click)="updateBooking( false)">Decline</button>
+  </div>
+</ng-container>
+<ng-container *ngIf="this.isApproved === true && this.isExpired === false">
+  <div class="btn-group btn-group-sm align-items-center" role="group">
+    <button type="button" class="btn btn-light" (click)="updateBooking(null)">Discard</button>
+    <button type="button" class="btn btn-light" (click)="deleteBooking()">Delete</button>
+  </div>
+</ng-container>
+<ng-container *ngIf="this.isApproved === false && this.isExpired === false">
+  <div class="btn-group btn-group-sm align-items-center" role="group">
+    <button type="button" class="btn btn-light" mat-button (click)="updateBooking(null)">Discard</button>
+    <button type="button" class="btn btn-light" mat-button (click)="deleteBooking()">Delete</button>
+  </div>
+</ng-container>
+<ng-container *ngIf="this.isExpired === true">
+  <button type="button" class="btn btn-light" mat-button (click)="deleteBooking()">Delete</button>
+</ng-container>

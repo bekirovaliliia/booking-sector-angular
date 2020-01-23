@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details-tournament-dialog',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./details-tournament-dialog.component.sass']
 })
 export class DetailsTournamentDialogComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data,
+  ) {
+  }
 
   ngOnInit() {
   }
-
 }
+

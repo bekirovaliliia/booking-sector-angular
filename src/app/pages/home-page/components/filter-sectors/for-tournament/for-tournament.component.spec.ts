@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectorTableRowComponent } from './sector-table-row.component';
+import { ForTournamentComponent } from './for-tournament.component';
 
-describe('SectorTableRowComponent', () => {
-  let component: SectorTableRowComponent;
-  let fixture: ComponentFixture<SectorTableRowComponent>;
+describe('ForTournamentComponent', () => {
+  let component: ForTournamentComponent;
+  let fixture: ComponentFixture<ForTournamentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectorTableRowComponent ]
+      declarations: [ ForTournamentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectorTableRowComponent);
+    fixture = TestBed.createComponent(ForTournamentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

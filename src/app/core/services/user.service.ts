@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../shared/models/user-model';
 import {UserEmail} from '../../shared/models/user-email-model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {UserEmail} from '../../shared/models/user-email-model';
 
 export class UserService {
 
-  apiURl = 'https://localhost:44393/api/users';
+  apiURl = environment.urlAddress + '/users';
   constructor(private http: HttpClient) { }
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
@@ -58,5 +59,11 @@ export class UserService {
   }
   getUserByEmail(email: string) {
     return this.http.get<User>(`${this.apiURl}/email/${email}`);
+  }
+  confirmEmail(email: string, hash: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.put(`${this.apiURl}/confirm/${email}/${hash}`, httpOptions);
   }
 }

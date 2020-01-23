@@ -1,6 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { find, get, pull } from 'lodash';
+import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
+import { Sector } from 'src/app/shared/models/sector-model';
 
 @Component({
   selector: 'app-sectors-tags-input',
@@ -9,43 +11,28 @@ import { find, get, pull } from 'lodash';
 })
 export class SectorsTagsInputComponent implements OnInit {
 
-  constructor(private formBuider: FormBuilder) { }
-  tags: string[] = ['10', '11', '12', '13', '14'];
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService: BookingSectorsDataService
+  ) { }
+
+  tags: Sector[];
   form: FormGroup;
-
-  onKeyUp(event: KeyboardEvent): void {
-    const inputValue: string = this.form.controls.tag.value;
-    if (event.code === 'Backspace' && !inputValue) {
-      this.removeTag();
-      return;
-    } else {
-      if (event.code === 'Comma' || event.code === 'Space') {
-        this.addTag(inputValue);
-        this.form.controls.tag.setValue('');
-      }
-    }
-  }
-
-  addTag(tag: string): void {
-    if (tag[tag.length - 1] === ',' || tag[tag.length - 1] === ' ') {
-      tag = tag.slice(0, -1);
-    }
-    if (tag.length > 0 && !find(this.tags, tag)) {
-      this.tags.push(tag);
-    }
-  }
+  maxBookingSectors: number;
 
   removeTag(tag?: string): void {
     if (!!tag) {
-      pull(this.tags, tag);
+      pull(this.tags, tag);  
     } else {
       this.tags.splice(-1);
     }
+    console.log(this.dataService.selectedSectors);
   }
 
   ngOnInit() {
-    this.form = this.formBuider.group({
+    this.form = this.formBuilder.group({
       tag: [undefined],
     });
+    this.tags = this.dataService.selectedSectors;
   }
 }

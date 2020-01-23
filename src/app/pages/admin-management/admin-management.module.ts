@@ -15,10 +15,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material';
 
 import { SectorTableComponent } from './sector/sector-table/sector-table.component';
 import { SectorComponent } from './sector/sector.component';
-import { SectorTableRowComponent } from './sector/sector-table-row/sector-table-row.component';
+
 import { AddBtnComponent } from '../../shared/buttons/add-btn/add-btn.component';
 import { DataTablesModule} from 'angular-datatables';
 import { DeleteBtnComponent } from '../../shared/buttons/delete-btn/delete-btn.component';
@@ -30,6 +31,9 @@ import { GlobalSearchComponent } from './tournament/global-search/global-search.
 import {MatSortModule} from '@angular/material/sort';
 import { ClearBtnComponent } from '../../shared/buttons/clear-btn/clear-btn.component';
 import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.component';
+import { BookingTabsComponent } from './booking-managing/booking-tabs/booking-tabs.component';
+import { BookingTableComponent } from './booking-managing/booking-table/booking-table.component';
+import { BookingActionsComponent } from './booking-managing/booking-actions/booking-actions.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,6 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     FilterPipe,
     SectorTableComponent,
     SectorComponent,
-    SectorTableRowComponent,
     AddBtnComponent,
     DeleteBtnComponent,
     UpdateBtnComponent,
@@ -51,6 +54,9 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     GlobalSearchComponent,
     ClearBtnComponent,
     WithoutDatasComponent,
+    BookingTabsComponent,
+    BookingTableComponent,
+    BookingActionsComponent,
 
   ],
   exports: [
@@ -75,7 +81,7 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-
+    MatSelectModule
   ]
 })
 export class AdminManagementModule { }

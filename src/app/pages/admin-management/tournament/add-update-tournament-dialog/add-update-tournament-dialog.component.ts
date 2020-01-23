@@ -17,7 +17,7 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<AddUpdateTournamentDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) private data,
+        @Inject(MAT_DIALOG_DATA) public data,
         private toastr: ToastrService,
     ) {
 
@@ -48,7 +48,6 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
     ngOnInit() {
         this.getForm();
         this.maxDate = moment().add(6,  'months');
-
         if (this.form.value.selected.startDate === undefined) {
             this.minDate = moment();
         } else {
@@ -57,7 +56,7 @@ export class AddUpdateTournamentDialogComponent implements OnInit {
     }
 
     submit(form): void {
-        const tournament = new Tournament(this.data.selectedTournament.id, this.form.value.name, this.form.value.description, this.form.value.preparationTerm, this.form.value.selected.startDate.format('YYYY-MM-DDTHH:mm:ss'), this.form.value.selected.endDate.format('YYYY-MM-DDTHH:mm:ss') );
+        const tournament = new Tournament(this.form.value.id, this.form.value.name, this.form.value.description, this.form.value.preparationTerm, this.form.value.selected.startDate.format('YYYY-MM-DDTHH:mm:ss'), this.form.value.selected.endDate.format('YYYY-MM-DDTHH:mm:ss') );
         this.dialogRef.close(tournament);
     }
 
