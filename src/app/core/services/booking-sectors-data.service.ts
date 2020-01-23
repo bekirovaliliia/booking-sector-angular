@@ -5,6 +5,7 @@ import { BookingService } from './booking.service';
 import { Sector } from 'src/app/shared/models/sector-model';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
+import { Tournament } from 'src/app/shared/models/tournament';
 
 
 @Injectable({
@@ -15,7 +16,6 @@ export class BookingSectorsDataService {
   apiSectorsUrl: string = environment.urlAddress + '/sectors';
 
   private _selectedSectors : Sector[] = [];
-
   get selectedSectors() {
     return this._selectedSectors;
   }
@@ -23,6 +23,15 @@ export class BookingSectorsDataService {
   set selectedSectors(sectors: Sector[]) {
     this._selectedSectors = sectors;
   }
+  private _selectedTournamentId : number;
+  get selectedTournamentId() {
+    return this._selectedTournamentId;
+  }
+  set selectedTournamentId(tournament) {
+    this._selectedTournamentId = tournament;
+  }
+
+ 
 
   private _markers = new BehaviorSubject<object []>(null);
   currentMarkers = this._markers.asObservable();

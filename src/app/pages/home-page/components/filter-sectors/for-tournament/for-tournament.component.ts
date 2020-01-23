@@ -21,7 +21,7 @@ export class ForTournamentComponent implements OnInit {
   addDialog: MatDialogRef<AddUpdateTournamentDialogComponent>;
   constructor(
     private tournamentService: TournamentService,
-    private dateService: BookingSectorsDataService,
+    private dataService: BookingSectorsDataService,
     private datePipe: DatePipe,
     private dialog: MatDialog,
   ) { }
@@ -40,9 +40,12 @@ export class ForTournamentComponent implements OnInit {
       this.selected = `${moment().format('YYYY/MM/DD') } - ${ moment().format('YYYY/MM/DD')  }`;
       return;
     }
-    this.selected = `${this.datePipe.transform(ob.value.tournamentStart, 'yyyy/MM/dd') } - ${  this.datePipe.transform(ob.value.tournamentEnd, 'yyyy/MM/dd') }`;
-    const startWithPrepTerm =  moment(ob.value.tournamentStart).add(-ob.value.preparationTerm, 'days').format('YYYY-MM-DDTHH:mm:ss');
-    this.dateService.changeDateRange(startWithPrepTerm, ob.value.tournamentEnd);
+    const dateStart = this.datePipe.transform(ob.value.tournamentStart, 'yyyy/MM/dd');
+    const dateEnd = this.datePipe.transform(ob.value.tournamentEnd, 'yyyy/MM/dd');
+    
+    this.selected = `${dateStart } - ${ dateEnd }`;
+    this.dataService.changeDateRange(dateStart, dateEnd);
+    this.dataService.selectedTournamentId = ob.value.id;
   }
 
   openAddDialog() {
