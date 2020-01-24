@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 })
 export class BookingService {
 
+  private readonly date = new Date();
+
   public urlAddress = `${environment.urlAddress}/bookings`;
 
   booking: Observable<Booking>;
@@ -21,14 +23,17 @@ export class BookingService {
     ) { }
 
     getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
+
+      this.date.setDate(this.date.getDate() - 1);
+
       if (!isExpired) {
         return this.http.get<Booking[]>(this.urlAddress).pipe(
           map(booking => booking.filter(b => b.isApproved === isApproved)),
-          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > Date.now()))
+          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > this.date.valueOf()))
         );
       } else if (isExpired) {
         return this.http.get<Booking[]>(this.urlAddress).pipe(
-          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < Date.now()))
+          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < this.date.valueOf()))
         );
       }
     }

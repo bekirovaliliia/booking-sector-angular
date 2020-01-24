@@ -8,8 +8,8 @@ import {BookingManagingDataService} from '../../../../core/services/booking-mana
 })
 export class BookingTabsComponent implements OnInit {
 
-  private isApproved = null;
-  private isExpired = false;
+  isApproved = null;
+  isExpired = false;
 
   constructor(private conditionSource: BookingManagingDataService) { }
 
