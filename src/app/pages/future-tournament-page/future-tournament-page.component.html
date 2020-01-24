@@ -1,5 +1,5 @@
 <div class="p-4 container">
-  <h1>Tournament sheduler</h1>
+  <h1>Tournament shedule</h1>
 
 
 <app-without-datas *ngIf="dataSource.data.length === 0" [withoutDatasText]="withoutDataText" ></app-without-datas>
@@ -9,23 +9,23 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let tournament">
-          <app-details-btn (selectedToExpand)="openDetailsDialog(tournament.id)"></app-details-btn>
+          <app-details-btn (selectedToExpand)="openDetailsDialog(tournament)"></app-details-btn>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-sort-header arrowPosition="before" class = "w-50" *matHeaderCellDef> Name </th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" class = "w-50" *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let tournament"> {{tournament.name}} </td>
     </ng-container>
 
 
     <ng-container matColumnDef="tournamentStart">
-      <th mat-sort-header arrowPosition="before" *matHeaderCellDef> Start</th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef> Start</th>
       <td mat-cell  *matCellDef="let tournament"> {{tournament.tournamentStart| date }} </td>
     </ng-container>
 
     <ng-container matColumnDef="tournamentEnd">
-      <th mat-sort-header arrowPosition="before" *matHeaderCellDef> End</th>
+      <th mat-sort-header mat-header-cell arrowPosition="before" *matHeaderCellDef> End</th>
       <td mat-cell *matCellDef="let tournament"> {{tournament.tournamentEnd| date}} </td>
     </ng-container>
 

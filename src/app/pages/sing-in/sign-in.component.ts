@@ -44,6 +44,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['home']);
+      this.toastr.warning('To sign in you first need to sign out');
     }
 
     // Email Confirm

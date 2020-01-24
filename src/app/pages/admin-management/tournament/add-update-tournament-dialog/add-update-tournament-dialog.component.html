@@ -33,12 +33,13 @@
            placeholder="Tournament start & end"
            class =  "border-0 w-100"
            [showRangeLabelOnInput]="true"
-           [dateLimit]="14" />
+           [dateLimit]="7" />
     <mat-icon matSuffix>event</mat-icon>
   </mat-form-field>
 
   <mat-form-field class="d-inline">
     <input matInput  required
+           appNumberOnly
            type="number"
            autocomplete="off"
            formControlName="preparationTerm"
@@ -46,7 +47,7 @@
 
   </mat-form-field>
   <div *ngIf="form.controls['preparationTerm'].hasError('max')" class="text-danger">
-    Preparation term can`t be more than 30 days!
+    Preparation term can`t be more than 7 days!
   </div>
 
   <mat-form-field class = " d-inline">
