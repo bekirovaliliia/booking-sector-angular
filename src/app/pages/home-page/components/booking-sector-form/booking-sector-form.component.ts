@@ -59,7 +59,7 @@ export class BookingSectorFormComponent implements OnInit {
       forkJoin(bookedSectors).subscribe(() => { 
         this.dataService.renderMarkers(fromDate, toDate);
         this.toastr.success('Selected sectors are booked.', 'Success');
-      });       
+      });
       this.dataService.clearAllSelectedSectors();
     }
 
