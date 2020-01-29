@@ -7,6 +7,7 @@ import { User } from 'src/app/shared/models/user-model';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { Tournament } from 'src/app/shared/models/tournament';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -53,7 +54,8 @@ export class BookingSectorsDataService {
   }
 
   constructor(
-    private bookingService: BookingService
+    private bookingService: BookingService, 
+    private toastr: ToastrService
     ) { }
 
   renderMarkers(startDate, endDate) {
@@ -65,7 +67,11 @@ export class BookingSectorsDataService {
   }
 
   selectSector(marker): void {
-    this.selectedSectors.push(marker as Sector);
+    if(!this.selectedSectors.includes(marker, 0)) {
+      this.selectedSectors.push(marker as Sector);
+    } else {
+      this.toastr.error(`Sector ${ marker.number } is already selected.`, 'Error');
+    }
   }
 
   clearAllSelectedSectors() : void {

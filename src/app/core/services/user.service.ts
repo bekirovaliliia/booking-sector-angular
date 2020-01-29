@@ -3,8 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../shared/models/user-model';
 import {UserEmail} from '../../shared/models/user-email-model';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +16,7 @@ export class UserService {
   getUser(id:number) {
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
-  getUserPhoto(id:number) {
-    const httpOptions = {
-      headers: new HttpHeaders({responseType: 'text'})
-    };
-    return this.http.get<string>(`${this.apiURl}/UserPhoto/${id}`, httpOptions);
-  }
+
   checkPass(password: string, id:number){
    return this.http.get<Boolean>(`${this.apiURl}/${id}/${password}`);
   }
@@ -41,12 +34,9 @@ export class UserService {
   }
   updateUserPhoto(file : FormData, id:number) {
      return this.http.put(`${this.apiURl}/photo/${id}`, file).subscribe();
-
   }
-
   deleteUserPhoto(id:number) {
     return this.http.put(`${this.apiURl}/deletePhoto/${id}`, id).subscribe();
-
  }
   updateUser(user: User) {
     const httpOptions = {
