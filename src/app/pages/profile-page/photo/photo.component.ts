@@ -15,7 +15,7 @@ declare  var  require: any;
 export class PhotoComponent implements OnInit {
   defaultPhoto = require('../../../shared/images/defaultPhoto.png');
   selectedFile: File;
-
+  hasPhoto: boolean = false;
   get userId(): number {
     return this.authService.getId();
   }
@@ -28,7 +28,14 @@ export class PhotoComponent implements OnInit {
     this.getPhoto();
   }
   getPhoto(){
-   this.userService.getUser(this.userId).subscribe(data => { this.dataService.user = data;});
+   this.userService.getUser(this.userId).subscribe(data => { this.dataService.user = data;
+    if(this.dataService.user.photo!=null)
+    {
+      this.hasPhoto = false;
+    }
+    else{
+      this.hasPhoto = true;
+    }});
   }
   async deletePhoto(){
     if(this.dataService.user.photo!=null)
