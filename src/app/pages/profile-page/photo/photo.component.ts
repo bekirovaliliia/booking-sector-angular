@@ -15,43 +15,49 @@ declare  var  require: any;
 export class PhotoComponent implements OnInit {
   defaultPhoto = require('../../../shared/images/defaultPhoto.png');
   selectedFile: File;
-
+  hasPhoto: boolean = false;
   get userId(): number {
     return this.authService.getId();
   }
-
   constructor(private userService: UserService,
               private sanitizer: DomSanitizer,
               private toastr: ToastrService,
               private authService: AuthenticationService,
               private dataService: BookingSectorsDataService,) { }
-  getPhoto(){
-   this.userService.getUser(this.userId).subscribe(data => { this.dataService.user = data;});
-  }
- async deletePhoto(){
-   if(this.dataService.user.photo!=null)
-   {
-    this.userService.deleteUserPhoto(this.userId);
-    await sleep(2000);
-    this.toastr.success("Your photo deleted successfully!");
+  ngOnInit() {
     this.getPhoto();
+  }
+  getPhoto(){
+   this.userService.getUser(this.userId).subscribe(data => { this.dataService.user = data;
+    if(this.dataService.user.photo!=null)
+    {
+      this.hasPhoto = false;
+    }
+    else{
+      this.hasPhoto = true;
+    }});
+  }
+  async deletePhoto(){
+    if(this.dataService.user.photo!=null)
+    {
+      this.userService.deleteUserPhoto(this.userId);
+      await sleep(2000);
+      this.toastr.success("Your photo deleted successfully!");
+      this.getPhoto();
     }
     else
     {
       this.toastr.error("Your have not photo!");
     }
   }
-  ngOnInit() {
-    this.getPhoto();
-  }
   transform(): SafeUrl {
-    if(this.dataService.user.photo){
-    return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.dataService.user.photo);
+    if(this.dataService.user.photo)
+    {
+      return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.dataService.user.photo);
     }
-    else return this.defaultPhoto;
+    else 
+      return this.defaultPhoto;
   }
-  
-
   async onFileChanged(event) {
     this.selectedFile = event.target.files[0];
     if(this.selectedFile.type!="image/jpeg")
@@ -73,5 +79,4 @@ export class PhotoComponent implements OnInit {
         this.getPhoto();
       }
   }
-
 }

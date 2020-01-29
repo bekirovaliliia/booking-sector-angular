@@ -103,6 +103,7 @@ export class SignUpComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
@@ -124,7 +125,13 @@ export class SignUpComponent implements OnInit {
 
     this.userService.insertUser(this.user).subscribe(
       res => {
-        this.toastr.success('Your registration was successful! Please check your email.', 'Congratulations!');
+        const emailDomain = this.user.email.split('@', 2);
+
+        this.toastr.success(
+          // tslint:disable-next-line:max-line-length
+          `Your registration was successful! <br> Please check your email</a> <br> <a target="_blank" rel="noopener noreferrer" href="http://${emailDomain[1]}">Click here to go to the email domain</a>`,
+        'Congratulations!',  { enableHtml: true}
+        );
         this.router.navigate(['sign-in']);
       },
       err => {
@@ -143,10 +150,10 @@ export class SignUpComponent implements OnInit {
                 'Error!'
               );
               this.errorHandling = true;
+              this.registerForm.controls.number.setErrors({error: true});
             },
       error => {
               this.errorHandling = false;
-
             }
         );
     }
@@ -162,6 +169,7 @@ export class SignUpComponent implements OnInit {
             'Error!'
           );
           this.errorHandling = true;
+          this.registerForm.controls.email.setErrors({error: true});
         },
           error => {
             this.errorHandling = false;
@@ -169,4 +177,5 @@ export class SignUpComponent implements OnInit {
         );
     }
   }
+
 }

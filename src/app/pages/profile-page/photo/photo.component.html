@@ -1,19 +1,45 @@
 <div class="media d-flex flex-row justify-content-center" >
     <img [src]="transform()"
          class="media-object profile-avatar" 
-         style="width:150px"
-         >  
+         style="width:150px">  
+</div>
+<div class="justify-content-center d-flex" *ngIf="!hasPhoto">
+    <button class="close"
+            style="margin-top: -170px;
+            border-radius: 15px;
+            margin-left: 125px;
+            color: grey;
+            height: 15px;"
+            data-toggle="modal"
+            data-target="#modalDialog">
+            <span style="font-size: 40px;">&times;</span>
+    </button>
 </div>
 <form>
-<div class="d-flex flex-row justify-content-center">
-    <label for="myfile" class="custom-file-upload">Change photo</label>
-    <input type="file" 
+    <div class="d-flex flex-row justify-content-center">
+        <label for="myfile" class="custom-file-upload">Change photo</label>
+        <input type="file" 
            id="myfile" 
            name="myfile"
-          (change)="onFileChanged($event)"/>
-
-</div>
-<div class="justify-content-center d-flex">
-    <button class="delete-photo" (click)="deletePhoto()">Delete photo</button>
-</div>
+           (change)="onFileChanged($event)"/>
+    </div>
 </form>
+<div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Delete photo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete your photo?
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="deletePhoto()" data-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>

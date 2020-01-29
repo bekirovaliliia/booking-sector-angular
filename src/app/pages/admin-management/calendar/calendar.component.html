@@ -7,7 +7,7 @@
           mwlCalendarPreviousView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
+         
         >
           Previous
         </div>
@@ -23,7 +23,7 @@
           mwlCalendarNextView
           [view]="view"
           [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
+         
         >
           Next
         </div>
@@ -36,7 +36,7 @@
       <div class="btn-group">
         <div
           class="btn btn-primary"
-          (click)="setView(CalendarView.Month)"
+          
           [class.active]="view === CalendarView.Month"
         >
           Month
@@ -50,12 +50,9 @@
       *ngSwitchCase="CalendarView.Month"
       [viewDate]="viewDate"
       [events]="events"
-      [refresh]="refresh"
+      
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-      (beforeViewRender)="beforeMonthViewRender($event)"
     >
     </mwl-calendar-month-view>
   </div>

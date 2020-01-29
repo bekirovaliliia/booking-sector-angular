@@ -44,9 +44,7 @@ export class NavigationBarComponent implements OnInit, OnChanges{
     else return this.defaultPhoto;
   }
   logout() {
-   // this.user = null;
     this.authService.logout();
-    
   }
 
   get isLoggedIn(): boolean {

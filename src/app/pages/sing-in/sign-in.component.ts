@@ -35,9 +35,8 @@ export class SignInComponent implements OnInit {
               ) {}
 
   openResetDialog() {
-    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, {
-     hasBackdrop: false,
-   });
+    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, 
+      { hasBackdrop: false,});
     return this.resetDialogRef;
   }
 
@@ -86,31 +85,25 @@ export class SignInComponent implements OnInit {
   }
 
 
-  confirmEmail() {
+  private confirmEmail() {
     this.userService
         .confirmEmail(this.email, this.hash)
         .subscribe(
           result => {
-              console.log(result);
+            this.toastr.success(
+              `${result}, you can successfully login!`,
+              'Your email has been successfully verified'
+            );
             },
       error => {
-        if (error.status === 200) {
-          const resJSON = JSON.parse(error);
-          console.log('???x???');
-          console.log(resJSON._body);
-
-          this.toastr.success(
-            'You can successfully enter!',
-            'Your email is verified!'
-          );
-        } else if (error.status === 404) {
+         if (error.status === 404) {
            this.toastr.error(
              'There is no user with this mail',
              'Error!'
            );
         } else if (error.status === 409) {
           this.toastr.error(
-            'Email is already verified',
+            `Email: ${error.error} is already verified`,
             'Error!'
           );
         } else if (error.status === 400) {
@@ -121,5 +114,9 @@ export class SignInComponent implements OnInit {
         }
       }
         );
+
+
+
+
   }
 }
