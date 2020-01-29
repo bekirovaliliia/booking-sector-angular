@@ -1,23 +1,17 @@
+<div class="justify-content-center d-flex" *ngIf="!hasPhoto">
+  <button class="close"
+          data-toggle="modal"
+          data-target="#modalDialog">
+      <span style="font-size: 40px;">&times;</span>
+  </button>
+</div>
 <div class="media d-flex flex-row justify-content-center" >
     <img [src]="transform()"
-         class="media-object profile-avatar" 
-         style="width:150px">  
-</div>
-<div class="justify-content-center d-flex" *ngIf="!hasPhoto">
-    <button class="close"
-            style="margin-top: -170px;
-            border-radius: 15px;
-            margin-left: 125px;
-            color: grey;
-            height: 15px;"
-            data-toggle="modal"
-            data-target="#modalDialog">
-            <span style="font-size: 40px;">&times;</span>
-    </button>
+         class="media-object profile-avatar">  
 </div>
 <form>
     <div class="d-flex flex-row justify-content-center">
-        <label for="myfile" class="custom-file-upload">Change photo</label>
+        <label for="myfile" class="btn btn-primary">Change photo</label>
         <input type="file" 
            id="myfile" 
            name="myfile"

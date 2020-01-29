@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../shared/models/user-model';
 import {UserService} from '../../../core/services/user.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
@@ -43,6 +42,7 @@ export class PhotoComponent implements OnInit {
       this.userService.deleteUserPhoto(this.userId);
       await sleep(2000);
       this.toastr.success("Your photo deleted successfully!");
+      this.dataService.user.photo = null;
       this.getPhoto();
     }
     else
@@ -76,6 +76,7 @@ export class PhotoComponent implements OnInit {
         this.userService.updateUserPhoto(formData, this.authService.getId());
         await sleep(2000);
         this.toastr.success("Your photo changed successfully!");
+       // this.dataService.user.photo = this.selectedFile;
         this.getPhoto();
       }
   }

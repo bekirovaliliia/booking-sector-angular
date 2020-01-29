@@ -46,7 +46,9 @@ export class UserProfileTextComponent implements OnInit {
     this.is_edit = true;
   }
   saveChanges(){
-    this.userService.updateUser(this.user).subscribe(data=> this.dataService.user =this.user);
+    this.userService.updateUser(this.user).subscribe(data=> {this.dataService.user.firstname =this.user.firstname;
+      this.dataService.user.lastname = this.user.lastname;
+      this.dataService.user.phone = this.user.phone;})
     this.is_edit = false;
     this.showInfoEdited();
   }
