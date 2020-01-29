@@ -1,12 +1,11 @@
-  input[type="file"] {
+input[type="file"] {
     display: none;
 }
 .profile-avatar{
-height: 160px;
-border-radius: 15px;
-margin-bottom: 4px;}
-
-
+    height: 160px;
+    border-radius: 15px;
+    margin-bottom: 4px;
+}
 .custom-file-upload {
     width: 150px;
     height: 40px;
@@ -20,7 +19,6 @@ margin-bottom: 4px;}
     background: white;
     color: #007bff;
 }
-
 .custom-file-upload:hover {
     color: white;
     background: #007bff;

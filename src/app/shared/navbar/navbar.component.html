@@ -28,8 +28,14 @@
                            margin-bottom: 0px;"> 
                 </li>
                 <li *ngIf="isLoggedIn">  
-                   <p style="margin-left: 5px; margin-bottom: 0px;">{{dataService.user.firstname}}</p>
-                   <p style="margin-left: 5px; margin-bottom: 0px;">{{dataService.user.lastname}}</p>
+                   <p style="margin-left: 5px; 
+                             margin-bottom: 0px;">
+                             {{dataService.user.firstname}}
+                    </p>
+                   <p style="margin-left: 5px; 
+                             margin-bottom: 0px;">
+                             {{dataService.user.lastname}}
+                    </p>
                 </li>
             </ul>
         </div>

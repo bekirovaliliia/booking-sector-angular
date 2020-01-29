@@ -8,19 +8,18 @@ import {UserService} from '../../core/services/user.service';
   providers: [UserService]
 })
 export class ProfilePageComponent implements OnInit {
+  isProfile:boolean = true;
+  isBookings:boolean = false;
   constructor(private httpService: HttpClient) { }  
-    isProfile:boolean = true;
-    isBookings:boolean = false;
-  ngOnInit() {
-   
+  ngOnInit() {  }
+  
+  profile(){
+    this.isBookings= false;
+    this.isProfile=true;
   }
-   profile(){
-     this.isBookings= false;
-     this.isProfile=true;
-   }
 
-   bookings(){
-     this.isBookings = true;
-     this.isProfile = false;
-   }
+  bookings(){
+    this.isBookings = true;
+    this.isProfile = false;
+  }
 }

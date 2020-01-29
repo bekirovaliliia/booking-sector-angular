@@ -23,85 +23,74 @@ checked = false;
 color:string = "primary";
 hide: boolean;
 
+constructor(private userService: UserService,
+            private toastr: ToastrService,
+            public dialogRef: MatDialogRef<ChangePasswordNewComponent>,
+            private authService: AuthenticationService,){  }
+ngOnInit() { 
+  this.id = this.authService.getId();
+  return this.userService.getUser(this.id).subscribe(data => this.user = data);
+}
 showNotMeetConditions() {
   this.toastr.error('Your password must meet at least 2 of 5 conditions', 'Try again!');
 }
 showPasswordSaved() {
   this.toastr.success('Password changed successfully');
 }
-   cancelP()
+cancelP(){
+  this.old= false;
+  this.check= false;
+  this.oldPassword = "";
+  this.newPassword = "";
+  this.newPasswordConfirm = "";
+  this.checked = false;
+}
+onStrengthChanged(strength: number){
+  this.passwordStrength = strength;
+}
+saveChanges(){
+  if(this.oldPassword == "")
   {
-    this.old= false;
-    this.check= false;
-    this.oldPassword = "";
-    this.newPassword = "";
-    this.newPasswordConfirm = "";
-    this.checked = false;
+    this.toastr.error('Enter your old password', 'Try again!');
   }
-  onStrengthChanged(strength: number) 
-  {
-    this.passwordStrength = strength;
-  }
-  saveChanges()
-  {
-    if(this.oldPassword == "")
-    {
-      this.toastr.error('Enter your old password', 'Try again!');
-    }
-    else
+  else
     if(this.passwordStrength<40)
     { 
       this.showNotMeetConditions();
     }
     else
-    { this.userService.checkPass(this.oldPassword, this.id).subscribe(data=>
+    { 
+      this.userService.checkPass(this.oldPassword, this.id).subscribe(data=>
         {
-        this.old =data
-        if(this.old)
-        {
-          this.user.password = this.newPassword;
-          this.old = false;
-          this.checked = false;
-          this.userService.updateUserPassword(this.user).subscribe();
-          this.newPassword = "";
-          this.newPasswordConfirm = "";
-          this.showPasswordSaved();
-          this.dialogRef.close();
-        }
-        else
-        {
-          this.toastr.error('It is not your password', 'Try again!');
-        }
-        } ); 
-    }
-  }
-  canSave(): boolean
-  {
-    if(this.passMatch() && this.newPassword != "")
-      {
-       return true;
+          this.old =data
+          if(this.old)
+          {
+            this.user.password = this.newPassword;
+            this.old = false;
+            this.checked = false;
+            this.userService.updateUserPassword(this.user).subscribe();
+            this.newPassword = "";
+            this.newPasswordConfirm = "";
+            this.showPasswordSaved();
+            this.dialogRef.close();
+          }
+          else
+          {
+            this.toastr.error('It is not your password', 'Try again!');
+          }
+        }); 
       }
-    else return false;
-  }
-  passMatch(): boolean
-  {
-     if((this.newPassword == this.newPasswordConfirm) 
-         || this.newPassword == "")
-      {
-       return true;
-      }
-     else return false;
-  }
-  
-  constructor(private userService: UserService,
-    private toastr: ToastrService,
-    public dialogRef: MatDialogRef<ChangePasswordNewComponent>,
-    private authService: AuthenticationService,
-     ){  }
-
-     ngOnInit() 
-    { this.id = this.authService.getId();
-      return this.userService.getUser(this.id).subscribe(data => this.user = data);
-    }
-
+}
+canSave(): boolean {
+  if(this.passMatch() && this.newPassword != "")
+    return true;
+  else 
+    return false;
+}
+passMatch(): boolean {
+  if((this.newPassword == this.newPasswordConfirm) || this.newPassword == "")
+    return true;
+  else 
+    return false;
+}
 }

@@ -16,32 +16,26 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private userService: UserService,
               private toastr: ToastrService,
               private authService: AuthenticationService,
-              public dialogRef: MatDialogRef<ResetPasswordComponent>,
-             ){  }
+              public dialogRef: MatDialogRef<ResetPasswordComponent>,){  }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
   resetPassword()
   {
     if(this.email == "")
     {
-        this.toastr.error("Enter your email");
+      this.toastr.error("Enter your email");
     }
     else
     {
-    this.userService.resetPass(this.email).subscribe();
-    this.toastr.success("Check your email");
-    this.email = "";
-    this.dialogRef.close();
+      this.userService.resetPass(this.email).subscribe();
+      this.toastr.success("Check your email");
+      this.email = "";
+      this.dialogRef.close();
     }
   }
-
-  cancelP()
+  cancel()
   {
     this.email="";
     this.dialogRef.close();
   }
-
-  
-
 }

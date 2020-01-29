@@ -16,13 +16,24 @@ export class UserProfileTextComponent implements OnInit {
   is_edit : boolean = false;
   change_password: boolean = false;
   updateDialogRef: MatDialogRef<ChangePasswordNewComponent>;
+  user: User;  
+  constructor(private userService: UserService,
+              private dialog: MatDialog,
+              private toastr: ToastrService,
+              private authService: AuthenticationService,
+              private dataService: BookingSectorsDataService) { }  
+  ngOnInit() {
+    return this.userService.getUser(this.userId).subscribe(data => this.user = data);
+  }
+  get userId(): number {
+    return this.authService.getId();
+  }
   showInfoEdited() {
     this.toastr.success('Changes saved successfully!');
   }
   openUpdateDialog() {
-     this.updateDialogRef = this.dialog.open(ChangePasswordNewComponent, {
-      hasBackdrop: false,
-    });
+    this.updateDialogRef = this.dialog.open(ChangePasswordNewComponent, 
+      { hasBackdrop: false, });
     return this.updateDialogRef;
   }
   changePassword(){
@@ -31,24 +42,12 @@ export class UserProfileTextComponent implements OnInit {
   isDisabled() : boolean{
     return !this.is_edit;
   }
-   editInfo(){
+  editInfo(){
     this.is_edit = true;
   }
   saveChanges(){
     this.userService.updateUser(this.user).subscribe(data=> this.dataService.user =this.user);
     this.is_edit = false;
     this.showInfoEdited();
-  }
-  get userId(): number {
-    return this.authService.getId();
-  }
-  constructor(private userService: UserService,
-              private dialog: MatDialog,
-              private toastr: ToastrService,
-              private authService: AuthenticationService,
-              private dataService: BookingSectorsDataService) { }  
-  user: User;  
-  ngOnInit() {
-    return this.userService.getUser(this.userId).subscribe(data => this.user = data);
   }
 }
