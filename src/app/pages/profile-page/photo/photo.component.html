@@ -1,7 +1,7 @@
 <div class="justify-content-center d-flex" *ngIf="!hasPhoto">
   <button class="close"
           data-toggle="modal"
-          data-target="#modalDialog">
+          data-target="#modalTest">
       <span style="font-size: 40px;">&times;</span>
   </button>
 </div>
@@ -18,7 +18,7 @@
            (change)="onFileChanged($event)"/>
     </div>
 </form>
-<div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modalTest" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">

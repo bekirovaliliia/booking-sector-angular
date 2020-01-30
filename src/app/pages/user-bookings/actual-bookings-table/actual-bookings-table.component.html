@@ -5,6 +5,7 @@
     <th mat-header-cell *matHeaderCellDef ></th>
     <td mat-cell *matCellDef="let booking">
       <button
+      *ngIf="isActual"
       type="button"
       class="input-group-text btn-icon"
       (click)="saveIdToDelete(booking.id)"
