@@ -11,12 +11,12 @@
       [maxDate]="maxDate"
       [minDate]="minDate"
       [linkedCalendars]="true"
-      [locale]="{applyLabel: 'Change', format: 'YYYY-MM-DD'}"
+      [locale]="{applyLabel: 'Change', format: 'DD/MM/YYYY'}"
       (datesUpdated)="datesUpdated($event)"
       [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
       [showRangeLabelOnInput]="showRangeLabelOnInput"
       class="form-control border border-dark rounded-right"
-      placeholder="YYYY-MM-DD"
+      placeholder="DD/MM/YYYY"
       [dateLimit]="maxBookingDays - 1">
 </div>
 

@@ -19,7 +19,7 @@
                             class="form-control border border-dark"
                             name="" 
                             id="" 
-                            value="{{dataService.fromDate}} - {{dataService.toDate}}"
+                            value="{{dataService.fromDate | date: 'dd/MM/yyyy'}} - {{dataService.toDate | date: 'dd/MM/yyyy'}}"
                             readonly>
                         </div>       
                     </div>
@@ -35,8 +35,7 @@
                         placeholder="First name"
                         [ngClass]="{
                             'is-invalid':
-                            controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)
-                          }">
+                            controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)}">
                         <div *ngIf=" controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)" class="invalid-feedback">
                             <div *ngIf="controls.firstName.errors?.required">
                               <p>First Name is required</p> 
@@ -101,10 +100,7 @@
                                 </div>
                             </div>
                     </div>
-                </div>
-                <p>{{bookingSectorForm.value | json}}</p>
-                {{bookingSectorForm.valid}}
-                
+                </div>                
             </div> 
             <div class="form-row">
                 <div class="col-4 mt-5">
