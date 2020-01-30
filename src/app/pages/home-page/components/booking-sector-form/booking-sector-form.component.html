@@ -1,11 +1,11 @@
 <div class="card border-primary mb-3">
     <div class="card-header text-white bg-primary mb-3">Booking sectors</div>
     <div class="card-body">
-        <form [formGroup]="bookingSectorForm" (ngSubmit)="onSubmit(bookingSectorForm.value)"class="p-3 mb-2 bg-light text-dark border border-primary rounded-lg">
+        <form [formGroup]="bookingSectorForm" (ngSubmit)="onSubmit(bookingSectorForm.value)" class="p-3 mb-2 bg-light text-dark border border-primary rounded-lg">
             <div class="form-group">
-                <label for="tagPlaces">Selected sectors</label>
-                <div class="form-row ">
+                <div class="form-row">
                     <div class="col">
+                        <label for="tagPlaces">Selected sectors</label>
                         <app-sectors-tags-input></app-sectors-tags-input>
                     </div>
                     <div class="col">
@@ -17,8 +17,6 @@
                             </div>
                             <input type="datetime" 
                             class="form-control border border-dark"
-                            name="" 
-                            id="" 
                             value="{{dataService.fromDate | date: 'dd/MM/yyyy'}} - {{dataService.toDate | date: 'dd/MM/yyyy'}}"
                             readonly>
                         </div>       
@@ -33,21 +31,21 @@
                         class="form-control" 
                         id="firstName" 
                         placeholder="First name"
-                        [ngClass]="{
-                            'is-invalid':
-                            controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)}">
+                        [ngClass]="{'is-invalid': controls.firstName.errors && 
+                                    ((controls.firstName.touched || controls.firstName.dirty) || 
+                                    submitted)}">
                         <div *ngIf=" controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)" class="invalid-feedback">
                             <div *ngIf="controls.firstName.errors?.required">
-                              <p>First Name is required</p> 
+                                <p>First Name is required</p> 
                             </div>
                             <div *ngIf="controls.firstName.errors?.minLength">
-                              <p>Minimum name length 3 characters</p> 
+                                <p>Minimum name length 3 characters</p> 
                             </div>
                             <div *ngIf="controls.firstName.errors?.maxLength">
-                              <p>Maximum name length 30 characters</p> 
+                                <p>Maximum name length 30 characters</p> 
                             </div>
                             <div *ngIf="controls.firstName.errors?.pattern || controls.firstName.errors.validateName">
-                              <p>Invalid name entry</p> 
+                                <p>Invalid name entry</p> 
                             </div>
                         </div>
                     </div>
@@ -87,16 +85,10 @@
                                 'is-invalid':
                                 controls.phone.errors && ((controls.phone.touched || controls.phone.dirty) || submitted)}">
                               <div *ngIf="controls.phone.errors && ((controls.phone.touched || controls.phone.dirty) || submitted)"
-                                class="invalid-feedback">
+                                    class="invalid-feedback">
                                 <div *ngIf="controls.phone.errors?.required">Number is required</div>
                                 <div *ngIf="controls.phone.errors?.minlength || controls.phone.errors.maxlength">
-                                    Number must be at least 10 characters
-                                </div>
-                                <div *ngIf="controls.phone.errors?.pattern">
-                                    The number must begin with 0
-                                </div>
-                                <div *ngIf="controls.phone.errors?.validatePhone">
-                                    Incorrect telecom operator code (Ukraine)
+                                    <p>Number must be at least 10 characters</p>
                                 </div>
                             </div>
                     </div>
@@ -104,7 +96,7 @@
             </div> 
             <div class="form-row">
                 <div class="col-4 mt-5">
-                    <button class="btn btn-primary btn-block" type="submit">Book</button>
+                    <button class="btn btn-primary btn-block" [class.disabled]="!bookingSectorForm.valid" type="submit">Book</button>
                 </div>
             </div>
         </form>

@@ -1,12 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
 import { Sector } from 'src/app/shared/models/sector-model';
 import { User } from 'src/app/shared/models/user-model';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
-import { Tournament } from 'src/app/shared/models/tournament';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -15,10 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BookingSectorsDataService {
 
-  apiSectorsUrl: string = environment.urlAddress + '/sectors';
-
   private _selectedSectors : Sector[] = [];
-  public user: User;
+
   get selectedSectors() {
     return this._selectedSectors;
   }
@@ -26,15 +22,15 @@ export class BookingSectorsDataService {
   set selectedSectors(sectors: Sector[]) {
     this._selectedSectors = sectors;
   }
+
   private _selectedTournamentId : number;
-  get selectedTournamentId() {
+
+  get selectedTournamentId() : number {
     return this._selectedTournamentId;
   }
   set selectedTournamentId(tournament) {
     this._selectedTournamentId = tournament;
   }
-
- 
 
   private _markers = new BehaviorSubject<object []>(null);
   currentMarkers = this._markers.asObservable();
@@ -58,7 +54,7 @@ export class BookingSectorsDataService {
     private toastr: ToastrService
     ) { }
 
-  renderMarkers(startDate, endDate) {
+  renderMarkers(startDate, endDate): void {
     this.bookingService.filterByDate(startDate, endDate)
       .subscribe(
         data => {
@@ -74,15 +70,15 @@ export class BookingSectorsDataService {
     }
   }
 
-  clearAllSelectedSectors() : void {
+  clearAllSelectedSectors(): void {
     this.selectedSectors.length = 0;
   }
 
-  changeMarkers(markers) {
+  changeMarkers(markers): void {
     this._markers.next(markers);
   }
 
-  changeDateRange(startDate, endDate) {
+  changeDateRange(startDate, endDate): void {
     if (startDate != null || endDate != null) {
       this._fromDate.next(startDate);
       this._toDate.next(endDate);

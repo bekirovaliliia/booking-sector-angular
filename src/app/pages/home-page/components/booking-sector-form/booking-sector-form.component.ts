@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { UserEmail } from 'src/app/shared/models/user-email-model';
-import { Observable, forkJoin, BehaviorSubject } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import {ToastrService} from "ngx-toastr";
-import { take, first } from 'rxjs/operators';
-
-
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -44,7 +42,7 @@ export class BookingSectorFormComponent implements OnInit {
         userEmail.password = 'guest12345';
         var newUser = await this.userService.insertUser(userEmail).pipe(first()).toPromise();
         userId = (newUser as UserEmail).id;
-       } else {
+        } else {
         userId = this.authentificationService.getId();
       }
       const fromDate = this.dataService.fromDate;
@@ -62,14 +60,22 @@ export class BookingSectorFormComponent implements OnInit {
         this.toastr.success('Selected sectors are booked.', 'Success');
       });
       this.dataService.clearAllSelectedSectors();
+      this.clearFormValues(formValues);
+    }
+
+    //#TODO: This method doesn't work. Fix it!
+    private clearFormValues(form): void { 
+      for(var name in form.controls) {
+        (<FormControl>form.controls[name]).updateValueAndValidity();
+        form.controls[name].setErrors(null);
+      }
     }
 
     get controls() : any {
       return this.bookingSectorForm.controls;
     }
 
-    ngOnInit() {
-      console.log(this.dataService.selectedSectors);
+    ngOnInit(): void {
       this.bookingSectorForm = this.formBuilder.group({
         firstName: ['', [Validators.required, 
                         Validators.minLength(3),
