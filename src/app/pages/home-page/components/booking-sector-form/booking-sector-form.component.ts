@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { Booking } from 'src/app/shared/models/booking.model';
@@ -9,6 +9,7 @@ import { UserEmail } from 'src/app/shared/models/user-email-model';
 import { Observable, forkJoin, BehaviorSubject } from 'rxjs';
 import {ToastrService} from "ngx-toastr";
 import { take, first } from 'rxjs/operators';
+
 
 
 
@@ -63,13 +64,25 @@ export class BookingSectorFormComponent implements OnInit {
       this.dataService.clearAllSelectedSectors();
     }
 
+    get controls() : any {
+      return this.bookingSectorForm.controls;
+    }
+
     ngOnInit() {
       console.log(this.dataService.selectedSectors);
       this.bookingSectorForm = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        phone: ['', Validators.required],
-        password: ['', Validators.required]
+        firstName: ['', [Validators.required, 
+                        Validators.minLength(3),
+                        Validators.maxLength(30),
+                        Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
+        lastName: ['', [Validators.required, 
+                        Validators.minLength(3),
+                        Validators.maxLength(30),
+                        Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
+        phone: ['', [Validators.required,
+                    Validators.minLength(10),
+                    Validators.maxLength(10),
+                    Validators.pattern('[0]{1}[0-9]{9}')]]
       });
       this.isLoggedIn = this.authentificationService.isLoggedIn();
     }
