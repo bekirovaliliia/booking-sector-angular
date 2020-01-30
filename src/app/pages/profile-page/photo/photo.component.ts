@@ -4,7 +4,7 @@ import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import {sleep} from 'sleep-ts';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import {BookingSectorsDataService} from 'src/app/core/services/booking-sectors-data.service';
+import {UserDataService} from 'src/app/core/services/user-data.service';
 declare  var  require: any;
 @Component({
   selector: 'app-photo',
@@ -22,7 +22,7 @@ export class PhotoComponent implements OnInit {
               private sanitizer: DomSanitizer,
               private toastr: ToastrService,
               private authService: AuthenticationService,
-              private dataService: BookingSectorsDataService,) { }
+              private dataService: UserDataService,) { }
   ngOnInit() {
     this.getPhoto();
   }

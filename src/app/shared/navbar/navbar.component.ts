@@ -5,7 +5,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { User } from '../models/user-model';
 import { stringify } from 'querystring';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
-import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 declare  var  require: any;
 @Component({
   selector: 'navbar',
@@ -17,7 +17,7 @@ export class NavigationBarComponent implements OnInit, OnChanges{
   constructor(private authService: AuthenticationService,
               private userService: UserService,
               private sanitizer: DomSanitizer,
-              public dataService: BookingSectorsDataService,
+              public dataService: UserDataService,
               ) {}
   user: User;
  ngOnChanges(){

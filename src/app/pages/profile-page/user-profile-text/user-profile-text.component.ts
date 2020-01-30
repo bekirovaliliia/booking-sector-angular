@@ -5,7 +5,7 @@ import { ChangePasswordNewComponent } from '../change-password-new/change-passwo
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 
 @Component({
   selector: 'app-user-profile-text',
@@ -21,7 +21,7 @@ export class UserProfileTextComponent implements OnInit {
               private dialog: MatDialog,
               private toastr: ToastrService,
               private authService: AuthenticationService,
-              private dataService: BookingSectorsDataService) { }  
+              private dataService: UserDataService) { }  
   ngOnInit() {
     return this.userService.getUser(this.userId).subscribe(data => this.user = data);
   }
