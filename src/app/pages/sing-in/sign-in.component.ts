@@ -35,9 +35,8 @@ export class SignInComponent implements OnInit {
               ) {}
 
   openResetDialog() {
-    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, {
-     hasBackdrop: false,
-   });
+    this.resetDialogRef = this.dialog.open(ResetPasswordComponent, 
+      { hasBackdrop: false,});
     return this.resetDialogRef;
   }
 

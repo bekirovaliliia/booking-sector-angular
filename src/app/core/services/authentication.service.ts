@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from 'src/app/shared/models/role';
-import { BookingSectorsDataService } from './booking-sectors-data.service';
+import { UserDataService } from './user-data.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AuthenticationService {
     private http: HttpClient,
     private toast: ToastrService,
     private tokenStore: TokenStore,
-    private dataService: BookingSectorsDataService,
+    private dataService: UserDataService,
     private userService: UserService,
   ) {}
 

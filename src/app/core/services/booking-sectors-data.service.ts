@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
 import { Sector } from 'src/app/shared/models/sector-model';
-import { User } from 'src/app/shared/models/user-model';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { Tournament } from 'src/app/shared/models/tournament';
@@ -18,7 +17,6 @@ export class BookingSectorsDataService {
   apiSectorsUrl: string = environment.urlAddress + '/sectors';
 
   private _selectedSectors : Sector[] = [];
-  public user: User;
   get selectedSectors() {
     return this._selectedSectors;
   }
