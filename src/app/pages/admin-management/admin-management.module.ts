@@ -34,6 +34,9 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
 import { BookingTabsComponent } from './booking-managing/booking-tabs/booking-tabs.component';
 import { BookingTableComponent } from './booking-managing/booking-table/booking-table.component';
 import { BookingActionsComponent } from './booking-managing/booking-actions/booking-actions.component';
+import { TournamentCheckboxComponent } from './booking-managing/tournament-checkbox/tournament-checkbox.component';
+import {MatRadioModule} from "@angular/material/radio";
+import { BookingTableTournamentComponent } from './booking-managing/booking-table-tournament/booking-table-tournament.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,8 @@ import { BookingActionsComponent } from './booking-managing/booking-actions/book
     BookingTabsComponent,
     BookingTableComponent,
     BookingActionsComponent,
+    TournamentCheckboxComponent,
+    BookingTableTournamentComponent,
 
   ],
   exports: [
@@ -81,7 +86,8 @@ import { BookingActionsComponent } from './booking-managing/booking-actions/book
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule
   ]
 })
 export class AdminManagementModule { }
