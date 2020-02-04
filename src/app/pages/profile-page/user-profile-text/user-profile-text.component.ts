@@ -32,8 +32,7 @@ export class UserProfileTextComponent implements OnInit {
     this.toastr.success('Changes saved successfully!');
   }
   openUpdateDialog() {
-    this.updateDialogRef = this.dialog.open(ChangePasswordNewComponent, 
-      { hasBackdrop: false, });
+    this.updateDialogRef = this.dialog.open(ChangePasswordNewComponent);
     return this.updateDialogRef;
   }
   changePassword(){
