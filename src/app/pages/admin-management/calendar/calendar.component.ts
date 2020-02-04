@@ -1,32 +1,8 @@
-import { delay } from 'rxjs/operators';
-import { sleep } from 'sleep-ts';
 import { Booking } from './../../../shared/models/booking.model';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  TemplateRef,
-  ViewEncapsulation,
-  OnInit
-} from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours
-} from 'date-fns';
-import { Subject } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { startOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarMonthViewBeforeRenderEvent,
-  CalendarView
-} from 'angular-calendar';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { HttpClient } from '@angular/common/http';
 import { BookingService } from 'src/app/core/services/booking.service';
 
@@ -61,8 +37,6 @@ export class CalendarComponent {
   
 
   constructor(
-    private modal: NgbModal,
-    private httpService: HttpClient,
     private bookingService: BookingService) {}
 
   modalData: {

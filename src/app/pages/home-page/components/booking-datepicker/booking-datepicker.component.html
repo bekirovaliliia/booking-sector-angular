@@ -1,23 +1,23 @@
 <div class="input-group">
-  <div class="input-group-prepend">
-      <span class="input-group-text bg-light border border-dark">
-          <i class="material-icons">calendar_today</i>
-      </span>
-  </div>
-      <input type="text"
-      ngxDaterangepickerMd
-      [(ngModel)]="selected"
-      [alwaysShowCalendars]="alwaysShowCalendars"
-      [maxDate]="maxDate"
-      [minDate]="minDate"
-      [linkedCalendars]="true"
-      [locale]="{applyLabel: 'Change', format: 'YYYY-MM-DD'}"
-      (datesUpdated)="datesUpdated($event)"
-      [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
-      [showRangeLabelOnInput]="showRangeLabelOnInput"
-      class="form-control border border-dark rounded-right"
-      placeholder="YYYY-MM-DD"
-      [dateLimit]="maxBookingDays - 1">
+    <div class="input-group-prepend">
+        <span class="input-group-text bg-light border border-dark">
+            <i class="material-icons">calendar_today</i>
+        </span>
+    </div>
+    <input type="text"
+    ngxDaterangepickerMd
+    [(ngModel)]="selected"
+    [alwaysShowCalendars]="alwaysShowCalendars"
+    [maxDate]="maxDate"
+    [minDate]="minDate"
+    [linkedCalendars]="true"
+    [locale]="{applyLabel: 'Change', format: 'DD/MM/YYYY'}"
+    (datesUpdated)="datesUpdated($event)"
+    [keepCalendarOpeningWithRange]="keepCalendarOpeningWithRange"
+    [showRangeLabelOnInput]="showRangeLabelOnInput"
+    class="form-control border border-dark rounded-right"
+    placeholder="DD/MM/YYYY"
+    [dateLimit]="maxBookingDays - 1">
 </div>
 
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-booking-managing',
@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./booking-managing.component.sass']
 })
 export class BookingManagingComponent implements OnInit {
-
+  selected: boolean;
   constructor() {}
 
   ngOnInit() {

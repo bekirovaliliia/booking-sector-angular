@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Setting} from '../../../shared/models/setting.model';
+import { Setting } from '../../../shared/models/setting.model';
 import { SettingsService } from '../../../core/services/settings.service';
 
 @Component({

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../core/services/user.service';
+import { UserService } from '../../../core/services/user.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import {sleep} from 'sleep-ts';
+import { sleep } from 'sleep-ts';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import {UserDataService} from 'src/app/core/services/user-data.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 declare  var  require: any;
 @Component({
   selector: 'app-photo',

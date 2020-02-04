@@ -1,22 +1,20 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TournamentCheckboxComponent } from './tournament-checkbox.component';
 
-import { SignUpComponent } from './sign-up.component';
-
-describe('SignUpComponent', () => {
-  let component: SignUpComponent;
-  let fixture: ComponentFixture<SignUpComponent>;
+describe('TournamentCheckboxComponent', () => {
+  let component: TournamentCheckboxComponent;
+  let fixture: ComponentFixture<TournamentCheckboxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignUpComponent ]
+      declarations: [ TournamentCheckboxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignUpComponent);
+    fixture = TestBed.createComponent(TournamentCheckboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

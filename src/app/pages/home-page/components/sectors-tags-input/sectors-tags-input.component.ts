@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { find, get, pull } from 'lodash';
+import { pull } from 'lodash';
 import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
 import { Sector } from 'src/app/shared/models/sector-model';
 

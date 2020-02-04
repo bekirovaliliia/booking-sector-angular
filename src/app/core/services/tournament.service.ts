@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {Tournament} from '../../shared/models/tournament';
-import {HttpClient,  HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Tournament } from '../../shared/models/tournament';
+import { HttpClient,  HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import {map} from 'rxjs/operators';
-import {DatePipe} from '@angular/common';
+import { map } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'

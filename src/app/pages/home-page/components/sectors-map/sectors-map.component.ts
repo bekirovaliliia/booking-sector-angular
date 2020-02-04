@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingSectorsDataService } from '../../../../core/services/booking-sectors-data.service';
-import { BookingService } from 'src/app/core/services/booking.service';
 import * as moment from 'moment';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SettingsService } from 'src/app/core/services/settings.service';
@@ -14,7 +13,6 @@ export class SectorsMapComponent implements OnInit {
 
   constructor(
     private dataService: BookingSectorsDataService,
-    private bookingService: BookingService,
     private authenticationService: AuthenticationService,
     private settingsService: SettingsService
     ) { }
@@ -24,23 +22,19 @@ export class SectorsMapComponent implements OnInit {
   mapType = 'satellite';
   markers: object [];
 
-  startDate: any;
-  endDate: any;
   maxBookingSectors: number;
 
   previous: any;
   isLoggedIn: boolean;
 
-  reverseMarker(marker, infoWindow) {
-    if(this.dataService.selectedSectors.length < this.maxBookingSectors)
-    {
+  reverseMarker(marker, infoWindow): void {
+    if(this.dataService.selectedSectors.length < this.maxBookingSectors) {
       this.dataService.selectSector(marker);
-      console.log(this.dataService.selectedSectors);
       infoWindow.close();
     }
   }
 
-  clickedMarker(infoWindow) {
+  clickedMarker(infoWindow): void {
     if (this.previous) {
       this.previous.close();
     }
@@ -50,10 +44,9 @@ export class SectorsMapComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn = this.authenticationService.isLoggedIn();
     this.dataService.currentMarkers.subscribe(markers => this.markers = markers);
-    this.startDate = moment().format('YYYY-MM-DD');
-    this.endDate = moment().format('YYYY-MM-DD');
-    this.bookingService.filterByDate(this.startDate, this.endDate)
-          .subscribe(data => this.markers = data as object[]);
+    let startDate = moment().format('YYYY-MM-DD');
+    let endDate = moment().format('YYYY-MM-DD');
+    this.dataService.renderMarkers(startDate, endDate);
     this.settingsService.getSettingById(2).subscribe(s =>{
       this.maxBookingSectors = s.value;
     });

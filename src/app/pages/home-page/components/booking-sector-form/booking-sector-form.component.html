@@ -1,11 +1,11 @@
 <div class="card border-primary mb-3">
     <div class="card-header text-white bg-primary mb-3">Booking sectors</div>
     <div class="card-body">
-        <form [formGroup]="bookingSectorForm" (ngSubmit)="onSubmit(bookingSectorForm.value)"class="p-3 mb-2 bg-light text-dark border border-primary rounded-lg">
+        <form [formGroup]="bookingSectorForm" (ngSubmit)="onSubmit(bookingSectorForm.value)" class="p-3 mb-2 bg-light text-dark border border-primary rounded-lg">
             <div class="form-group">
-                <label for="tagPlaces">Selected sectors</label>
-                <div class="form-row ">
+                <div class="form-row">
                     <div class="col">
+                        <label for="tagPlaces">Selected sectors</label>
                         <app-sectors-tags-input></app-sectors-tags-input>
                     </div>
                     <div class="col">
@@ -17,9 +17,7 @@
                             </div>
                             <input type="datetime" 
                             class="form-control border border-dark"
-                            name="" 
-                            id="" 
-                            value="{{dataService.fromDate}} - {{dataService.toDate}}"
+                            value="{{dataService.fromDate | date: 'dd/MM/yyyy'}} - {{dataService.toDate | date: 'dd/MM/yyyy'}}"
                             readonly>
                         </div>       
                     </div>
@@ -28,27 +26,77 @@
             <div class="form-group" *ngIf="!isLoggedIn">
                 <div class="form-row">
                     <div class="col">
-                        <label for="firstName">First name</label>
-                        <input formControlName="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <input formControlName="firstName" 
+                        type="text" 
+                        class="form-control" 
+                        id="firstName" 
+                        placeholder="First name"
+                        [ngClass]="{'is-invalid': controls.firstName.errors && 
+                                    ((controls.firstName.touched || controls.firstName.dirty) || 
+                                    submitted)}">
+                        <div *ngIf=" controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)" class="invalid-feedback">
+                            <div *ngIf="controls.firstName.errors?.required">
+                                <p>First Name is required</p> 
+                            </div>
+                            <div *ngIf="controls.firstName.errors?.minLength">
+                                <p>Minimum name length 3 characters</p> 
+                            </div>
+                            <div *ngIf="controls.firstName.errors?.maxLength">
+                                <p>Maximum name length 30 characters</p> 
+                            </div>
+                            <div *ngIf="controls.firstName.errors?.pattern || controls.firstName.errors.validateName">
+                                <p>Invalid name entry</p> 
+                            </div>
+                        </div>
                     </div>
                     <div class="col">
-                        <label for="lastName">Last name</label>
-                        <input formControlName="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                        <input formControlName="lastName" 
+                        type="text" 
+                        class="form-control" 
+                        id="lastName" 
+                        placeholder="Last name"
+                        [ngClass]="{
+                            'is-invalid':
+                            controls.lastName.errors && ((controls.lastName.touched || controls.lastName.dirty) || submitted)}">
+                        <div *ngIf=" controls.lastName.errors && ((controls.lastName.touched || controls.lastName.dirty) || submitted)" class="invalid-feedback">
+                            <div *ngIf="controls.lastName.errors?.required">
+                                <p>Last Name is required</p> 
+                            </div>
+                            <div *ngIf="controls.lastName.errors?.minLength">
+                                <p>Minimum name length 3 characters</p> 
+                            </div>
+                            <div *ngIf="controls.lastName.errors?.maxLength">
+                                <p>Maximum name length 30 characters</p> 
+                            </div>
+                            <div *ngIf="controls.lastName.errors?.pattern || controls.lastName.errors.validateName">
+                                <p>Invalid name entry</p> 
+                            </div>
+                        </div>
                     </div>
                     <div class="col">
-                        <label for="phone">Phone</label>
-                        <input  type="tel" formControlName="phone" class="form-control" 
+                        <input type="tel" 
+                            formControlName="phone"
+                            class="form-control" 
                             [showMaskTyped]="true"
                             prefix="+38"
                             mask="(000)000-00-00"
-                            required
-                            id="phone">
+                            id="phone"
+                            [ngClass]="{
+                                'is-invalid':
+                                controls.phone.errors && ((controls.phone.touched || controls.phone.dirty) || submitted)}">
+                              <div *ngIf="controls.phone.errors && ((controls.phone.touched || controls.phone.dirty) || submitted)"
+                                    class="invalid-feedback">
+                                <div *ngIf="controls.phone.errors?.required">Number is required</div>
+                                <div *ngIf="controls.phone.errors?.minlength || controls.phone.errors.maxlength">
+                                    <p>Number must be at least 10 characters</p>
+                                </div>
+                            </div>
                     </div>
-                </div>
+                </div>                
             </div> 
             <div class="form-row">
                 <div class="col-4 mt-5">
-                    <button class="btn btn-primary btn-block" type="submit">Book</button>
+                    <button class="btn btn-primary btn-block" [class.disabled]="!bookingSectorForm.valid" type="submit">Book</button>
                 </div>
             </div>
         </form>

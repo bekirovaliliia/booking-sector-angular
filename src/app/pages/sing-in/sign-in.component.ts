@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
