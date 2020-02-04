@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 declare  var  require: any;
 @Component({
   selector: 'app-without-datas',

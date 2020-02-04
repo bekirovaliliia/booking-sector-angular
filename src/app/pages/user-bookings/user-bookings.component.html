@@ -1,5 +1,5 @@
   <ul class="nav nav-tabs">
-    <li class="nav-item active">
+    <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#actual">Actual</a>
     </li>
     <li class="nav-item">
@@ -7,13 +7,11 @@
     </li>
   </ul>
   <div class="tab-content">
-    
     <div  id="actual" class="tab-pane active in"> 
        <app-actual-bookings-table [isActual]=true></app-actual-bookings-table>
     </div>
-  
-             
-    <app-actual-bookings-table [isActual]=false
-             id="history" 
-            class="tab-pane fade"></app-actual-bookings-table>
+
+    <div  id="history" class="tab-pane fade"> 
+      <app-actual-bookings-table [isActual]=false></app-actual-bookings-table>
+   </div>
   </div>

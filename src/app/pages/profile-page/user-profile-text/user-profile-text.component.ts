@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../shared/models/user-model';
-import {UserService} from '../../../core/services/user.service';
+import { User } from '../../../shared/models/user-model';
+import { UserService } from '../../../core/services/user.service';
 import { ChangePasswordNewComponent } from '../change-password-new/change-password-new.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 
 @Component({
   selector: 'app-user-profile-text',
@@ -21,7 +21,7 @@ export class UserProfileTextComponent implements OnInit {
               private dialog: MatDialog,
               private toastr: ToastrService,
               private authService: AuthenticationService,
-              private dataService: BookingSectorsDataService) { }  
+              private dataService: UserDataService) { }  
   ngOnInit() {
     return this.userService.getUser(this.userId).subscribe(data => this.user = data);
   }
@@ -32,8 +32,7 @@ export class UserProfileTextComponent implements OnInit {
     this.toastr.success('Changes saved successfully!');
   }
   openUpdateDialog() {
-    this.updateDialogRef = this.dialog.open(ChangePasswordNewComponent, 
-      { hasBackdrop: false, });
+    this.updateDialogRef = this.dialog.open(ChangePasswordNewComponent);
     return this.updateDialogRef;
   }
   changePassword(){

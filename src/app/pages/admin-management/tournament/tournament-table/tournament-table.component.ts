@@ -1,14 +1,14 @@
-import {Component,  Input, OnInit, Output, OnChanges, ViewChild} from '@angular/core';
-import {Tournament} from '../../../../shared/models/tournament';
-import {TournamentService} from '../../../../core/services/tournament.service';
-import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
-import {AddUpdateTournamentDialogComponent} from '../add-update-tournament-dialog/add-update-tournament-dialog.component';
-import {filter} from 'rxjs/operators';
-import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
-import {FilterPipe} from '../../../../shared/pipes/filter.pipe';
-import {SearchPipe} from '../../../../shared/pipes/search.pipe';
-import {ToastrService} from 'ngx-toastr';
-import {throwError} from 'rxjs';
+import { Component,  Input, OnInit, OnChanges, ViewChild } from '@angular/core';
+import { Tournament } from '../../../../shared/models/tournament';
+import { TournamentService } from '../../../../core/services/tournament.service';
+import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort } from '@angular/material';
+import { AddUpdateTournamentDialogComponent } from '../add-update-tournament-dialog/add-update-tournament-dialog.component';
+import { filter } from 'rxjs/operators';
+import { DeleteDialogComponent } from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
+import { SearchPipe } from '../../../../shared/pipes/search.pipe';
+import { ToastrService } from 'ngx-toastr';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-tournament-table',
@@ -72,7 +72,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   deleteTournament(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
+
       panelClass: ['no-padding'],
       width: '350px',
       data: {
@@ -100,7 +100,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     selectedTournament.tournamentEnd = new Date().toString();
 
     this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: '650px',
       minWidth: '250px',
@@ -130,7 +129,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   openUpdateDialog(selectedTournament: Tournament) {
     console.log(selectedTournament.tournamentStart);
     this.updateDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: '650px',
       minWidth: '250px',

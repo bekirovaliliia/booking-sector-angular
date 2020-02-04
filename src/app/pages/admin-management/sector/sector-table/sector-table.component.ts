@@ -4,9 +4,9 @@ import { Sector } from '../../../../shared/models/sector-model';
 import { SectorService } from '../../../../core/services/sector.service';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import { filter } from 'rxjs/operators';
-import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
-import {throwError} from 'rxjs';
-import {ToastrService} from "ngx-toastr";
+import { DeleteDialogComponent } from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
+import { throwError } from 'rxjs';
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: 'app-sector-table',
   templateUrl: './sector-table.component.html',
@@ -53,7 +53,6 @@ export class SectorTableComponent implements OnInit, OnChanges {
 
   deleteSector(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: '350px',
       data: {
@@ -78,7 +77,6 @@ export class SectorTableComponent implements OnInit, OnChanges {
   openAddDialog() {
     const selectedSector = new Sector();
     this.addDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: 600 + '%',
       data: {
@@ -105,7 +103,6 @@ export class SectorTableComponent implements OnInit, OnChanges {
 
   openUpdateDialog(selectedSector: Sector) {
     this.updateDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: 600 + '%',
       data: {

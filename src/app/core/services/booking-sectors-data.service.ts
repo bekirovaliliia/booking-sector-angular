@@ -1,12 +1,9 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { BookingService } from './booking.service';
 import { Sector } from 'src/app/shared/models/sector-model';
-import { User } from 'src/app/shared/models/user-model';
 import * as moment from 'moment';
-import { environment } from '../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 export class BookingSectorsDataService {
 
   private _selectedSectors : Sector[] = [];
-
   get selectedSectors() {
     return this._selectedSectors;
   }

@@ -1,9 +1,9 @@
-import {Component, Inject, Input, OnChanges, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
-import {Tournament} from '../../../../shared/models/tournament';
+import { Tournament } from '../../../../shared/models/tournament';
 
 @Component({
     selector: 'app-update-tournament-dialog',

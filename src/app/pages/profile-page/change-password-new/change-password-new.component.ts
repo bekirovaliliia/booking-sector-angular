@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../shared/models/user-model';
-import {UserService} from '../../../core/services/user.service';
+import { UserService } from '../../../core/services/user.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
-import {MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password-new',

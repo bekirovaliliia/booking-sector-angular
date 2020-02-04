@@ -3,9 +3,8 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 import { Role } from '../models/role';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from '../models/user-model';
-import { stringify } from 'querystring';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
-import { BookingSectorsDataService } from 'src/app/core/services/booking-sectors-data.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 declare  var  require: any;
 @Component({
   selector: 'navbar',
@@ -17,7 +16,7 @@ export class NavigationBarComponent implements OnInit, OnChanges{
   constructor(private authService: AuthenticationService,
               private userService: UserService,
               private sanitizer: DomSanitizer,
-              public dataService: BookingSectorsDataService,
+              public dataService: UserDataService,
               ) {}
   user: User;
  ngOnChanges(){
@@ -38,10 +37,10 @@ export class NavigationBarComponent implements OnInit, OnChanges{
   }
    
   transform(): SafeUrl {
-    if(this.dataService.user.photo){
-    return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.dataService.user.photo);
+    if(this.dataService.user.photo) {
+      return this.sanitizer.bypassSecurityTrustUrl(`data:image/jpeg;base64,` + this.dataService.user.photo);
     }
-    else return this.defaultPhoto;
+    return this.defaultPhoto;
   }
   logout() {
     this.authService.logout();
@@ -60,10 +59,10 @@ export class NavigationBarComponent implements OnInit, OnChanges{
   }
 
   get isAdmin(): boolean {
-    return (this.authService.getRole() == "Admin");
+    return (this.authService.getRole() === 'Admin');
   }
 
   get isUser(): boolean {
-    return (this.authService.getRole() == "User");
+    return (this.authService.getRole() === 'User');
   }
 }

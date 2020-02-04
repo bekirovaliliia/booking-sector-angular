@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../../../core/services/authentication.
 import { UserService } from 'src/app/core/services/user.service';
 import { UserEmail } from 'src/app/shared/models/user-email-model';
 import { Observable, forkJoin } from 'rxjs';
-import {ToastrService} from "ngx-toastr";
+import { ToastrService } from "ngx-toastr";
 import { first } from 'rxjs/operators';
 
 

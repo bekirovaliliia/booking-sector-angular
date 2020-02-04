@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild, Input} from '@angular/core';
-import {Booking} from '../../../shared/models/booking.model';
-import {BookingService} from '../../../core/services/booking.service';
-import {Subject, from} from 'rxjs';
-import {filter} from 'rxjs/operators';
-import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Booking } from '../../../shared/models/booking.model';
+import { BookingService } from '../../../core/services/booking.service';
+import { MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { Sector } from 'src/app/shared/models/sector-model';
 import { SectorService } from 'src/app/core/services/sector.service';
+import { UserDataService } from 'src/app/core/services/user-data.service';
 
 
 declare  var  require: any;
@@ -38,7 +36,8 @@ export class ActualBookingsTableComponent implements OnInit {
   bookings: Booking[];
   constructor(private bookingService: BookingService, 
               private authService: AuthenticationService,
-              private sectorService: SectorService,) { }
+              private sectorService: SectorService,
+              private dataService: UserDataService,) { }
 
   ngOnInit() {
     this.dtOptions = {
