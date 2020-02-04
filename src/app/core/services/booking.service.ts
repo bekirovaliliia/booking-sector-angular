@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Booking } from '../../shared/models/booking.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import {PagedBookingList} from '../../shared/models/paged-booking-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,21 +34,44 @@ export class BookingService {
           )
         ;
     }
-    getBookings(isApproved: boolean, isExpired: boolean): Observable<Booking[]> {
 
-      this.date.setDate(this.date.getDate() - 1);
-
-      if (!isExpired) {
-        return this.http.get<Booking[]>(this.urlAddress).pipe(
-          map(booking => booking.filter(b => b.isApproved === isApproved)),
-          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() > this.date.valueOf()))
-        );
-      } else if (isExpired) {
-        return this.http.get<Booking[]>(this.urlAddress).pipe(
-          map(booking => booking.filter(b => new Date(b.bookingStart).getTime() < this.date.valueOf()))
-        );
+    getBookings(pageIndex: number, pageSize: number, isApproved: boolean, isExpired: boolean): Observable<any> {
+    if (isApproved === null) {
+      return this.http.get<PagedBookingList>(`${this.urlAddress}/bookingPagedList`, {
+        params: new HttpParams()
+          .set('pageIndex', `${pageIndex}`)
+          .set('pageSize', `${pageSize}`)
+          .set('isExpired', String(isExpired))
+      });
+    } else {
+      return this.http.get<PagedBookingList>(`${this.urlAddress}/bookingPagedList`, {
+        params: new HttpParams()
+          .set('pageIndex', `${pageIndex}`)
+          .set('pageSize', `${pageSize}`)
+          .set('isExpired', String(isExpired))
+          .set('isApproved', String(isApproved))
+    });
+    }
+    }
+    getTournamentBookings(pageIndex: number, pageSize: number, isApproved: boolean, isExpired: boolean): Observable<any> {
+      if (isApproved === null) {
+        return this.http.get<PagedBookingList>(`${this.urlAddress}/tournamentsPagedList`, {
+          params: new HttpParams()
+            .set('pageIndex', `${pageIndex}`)
+            .set('pageSize', `${pageSize}`)
+            .set('isExpired', String(isExpired))
+        });
+      } else {
+        return this.http.get<PagedBookingList>(`${this.urlAddress}/tournamentsPagedList`, {
+          params: new HttpParams()
+            .set('pageIndex', `${pageIndex}`)
+            .set('pageSize', `${pageSize}`)
+            .set('isExpired', String(isExpired))
+            .set('isApproved', String(isApproved))
+        });
       }
     }
+
   getUserBookings(id: number, isActual: boolean) {
     return this.http.get<Booking[]>(`${this.urlAddress}/byUserId/${id}/${isActual}`).pipe(
       map((data: Booking[]) =>

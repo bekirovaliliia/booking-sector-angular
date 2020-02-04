@@ -39,19 +39,16 @@ export class AuthenticationService {
 
   private handleSuccess(token: Token): void {
     this.tokenStore.setToken(token);
-    if(this.tokenStore.getRole() == Role.User)
-    { 
-      this.userService.getUser(this.getId()).subscribe(data => 
+    if (this.tokenStore.getRole() === Role.User) {
+      this.userService.getUser(this.getId()).subscribe(data =>
       this.toast.success('Nice to see you!', `Hello, ${data.firstname}`));
       this.router.navigate([`profile`]);
-    }
-    else if(this.tokenStore.getRole() == Role.Admin)
-    {
-      this.userService.getUser(this.getId()).subscribe(data => 
+    } else if (this.tokenStore.getRole() === Role.Admin) {
+      this.userService.getUser(this.getId()).subscribe(data =>
         this.toast.success('Nice to see you!', `Hello, ${data.firstname}`));
       this.router.navigate(['admin/bookings']);
     }
-    this.userService.getUser(this.getId()).subscribe(data=>this.dataService.user=data);
+    this.userService.getUser(this.getId()).subscribe(data => this.dataService.user = data);
   }
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {
@@ -104,8 +101,8 @@ export class AuthenticationService {
   getLogin(): string {
     return this.tokenStore.getLogin();
   }
-  
-  getId(): number{
+
+  getId(): number {
     return this.tokenStore.getId();
   }
 }

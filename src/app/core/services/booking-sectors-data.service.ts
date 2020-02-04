@@ -46,7 +46,7 @@ export class BookingSectorsDataService {
   }
 
   constructor(
-    private bookingService: BookingService, 
+    private bookingService: BookingService,
     private toastr: ToastrService
     ) { }
 
