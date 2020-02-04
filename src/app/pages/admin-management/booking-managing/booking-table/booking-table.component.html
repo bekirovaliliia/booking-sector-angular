@@ -1,5 +1,5 @@
 
-<app-without-datas *ngIf="dataSource === undefined" [withoutDatasText]="'No data!'"></app-without-datas>
+<app-without-datas *ngIf="dataSource.data.length === 0" [withoutDatasText]="'No data!'"></app-without-datas>
 
 <div class="mat-elevation-z8" *ngIf="dataSource !== null">
 

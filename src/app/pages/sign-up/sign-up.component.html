@@ -32,7 +32,6 @@
         <div class="form-group">
           <label>Phone Number</label>
           <input
-            matInput
             type="tel"
             formControlName="number"
             class="form-control"
@@ -44,7 +43,7 @@
             prefix="+38"
             mask="(000)000-00-00"
             (ngModelChange)="checkNumber()"
-          />
+          >
           <div
             *ngIf="f.number.errors && ((f.number.touched || f.number.dirty) || submitted)"
             class="invalid-feedback"
@@ -61,6 +60,7 @@
             </div>
           </div>
         </div>
+        
         <div class="form-group">
           <label>First Name</label>
           <input

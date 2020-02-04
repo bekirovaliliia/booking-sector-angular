@@ -1,44 +1,16 @@
-  input[type="file"] {
+input[type="file"] {
     display: none;
 }
 .profile-avatar{
-height: 160px;
-border-radius: 15px;
-margin-bottom: 4px;}
-
-
-.custom-file-upload {
-    width: 150px;
-    height: 40px;
-    border-radius: 6px;
-    text-align: center;
-    cursor: pointer;
-    display: block;
-    padding-top: 2%;
-    transition: all 0.18s ease-in-out;
-    border: 1px solid #007bff;
-    background: white;
-    color: #007bff;
+    border-radius: 15px;
+    margin-bottom: 4px;
+    width:150px;
 }
-
-.custom-file-upload:hover {
-    color: white;
-    background: #007bff;
-    background-position: bottom left;
+.btn{
+  width: 150px;
 }
-.delete-photo {
-    width: 150px;
-    height: 40px;
-    border-radius: 6px;
-    text-align: center;
-    display: block;
-    transition: all 0.18s ease-in-out;
-    border: 1px solid #c91f3b;
-    background: white;
-    color: #c91f3b;
-}
-.delete-photo:hover {
-    color: white;
-    background: #c91f3b;
-    background-position: bottom left;
+.close{
+  color: grey;
+  margin-left: 120px;
+  margin-bottom: -35px;
 }

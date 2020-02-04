@@ -1,12 +1,12 @@
 import { SectorComponent } from './sector/sector.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import {AdminManagementComponent} from './admin-management.component';
-import {SettingComponent} from './setting/setting.component';
-import {TournamentComponent} from './tournament/tournament.component';
-import {BookingManagingComponent} from './booking-managing/booking-managing.component';
-import {CalendarComponent} from './calendar/calendar.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AdminManagementComponent } from './admin-management.component';
+import { SettingComponent } from './setting/setting.component';
+import { TournamentComponent } from './tournament/tournament.component';
+import { BookingManagingComponent } from './booking-managing/booking-managing.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 const routes: Routes = [

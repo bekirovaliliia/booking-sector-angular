@@ -4,13 +4,12 @@ import { AdminManagementComponent } from './pages/admin-management/admin-managem
 import { AdminManagementModule } from './pages/admin-management/admin-management.module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import {SignInComponent} from './pages/sing-in/sign-in.component';
-import {SignUpComponent} from './pages/sign-up/sign-up.component';
+import { SignInComponent } from './pages/sing-in/sign-in.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { AdminGuard } from './core/guards/admin.guard';
-import { UserGuard } from './core/guards/user.guard';
 import { SetNewPasswordComponent } from './pages/sing-in/set-new-password/set-new-password.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
-import {FutureTournamentPageComponent} from './pages/future-tournament-page/future-tournament-page.component';
+import { FutureTournamentPageComponent } from './pages/future-tournament-page/future-tournament-page.component';
 import { UserAndAdminGuard } from './core/guards/user-and-admin.guard';
 
 const routes: Routes = [

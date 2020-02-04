@@ -1,14 +1,14 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Token } from 'src/app/shared/models/token';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { tap, catchError, finalize, first, delay } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from 'src/app/shared/models/role';
-import { BookingSectorsDataService } from './booking-sectors-data.service';
+import { UserDataService } from './user-data.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AuthenticationService {
     private http: HttpClient,
     private toast: ToastrService,
     private tokenStore: TokenStore,
-    private dataService: BookingSectorsDataService,
+    private dataService: UserDataService,
     private userService: UserService,
   ) {}
 

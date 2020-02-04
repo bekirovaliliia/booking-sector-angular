@@ -57,16 +57,27 @@ export class UserService {
     return this.http.post(`${this.apiURl}/`, user, httpOptions);
   }
 
-  getUserByNumber(number: string) {
+  insertUserGuest(user: UserEmail) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+    return this.http.post(`${this.apiURl}/booking`, user, httpOptions);
+  }
+
+  // tslint:disable-next-line:variable-name
+  getUserByNumber( number: string) {
     return this.http.get<User>(`${this.apiURl}/phone/${number}`);
   }
   getUserByEmail(email: string) {
     return this.http.get<User>(`${this.apiURl}/email/${email}`);
   }
+
   confirmEmail(email: string, hash: string) {
     const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
+      headers: new HttpHeaders({'Content-Type': 'application/json'}
+      )
     };
-    return this.http.put(`${this.apiURl}/confirm/${email}/${hash}`, httpOptions);
+
+    return this.http.put(`${this.apiURl}/confirm/${email}/${hash}`, httpOptions, { responseType: 'text' });
   }
 }
