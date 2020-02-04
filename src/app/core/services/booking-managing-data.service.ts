@@ -7,10 +7,10 @@ import {BehaviorSubject} from 'rxjs';
 export class BookingManagingDataService {
 
   private conditionSource = new BehaviorSubject<{isApproved: boolean, isExpired: boolean}>({isApproved: null, isExpired: false});
-  private tournamentsSoure = new BehaviorSubject<boolean>(null);
+  private tournamentsSource = new BehaviorSubject<boolean>(null);
 
   currentConditions = this.conditionSource.asObservable();
-  areTournament = this.tournamentsSoure.asObservable();
+  areTournament = this.tournamentsSource.asObservable();
 
   constructor() { }
 
@@ -18,6 +18,6 @@ export class BookingManagingDataService {
     this.conditionSource.next({isApproved, isExpired});
   }
   setAreTournament(areTournaments: boolean) {
-    this.tournamentsSoure.next(areTournaments);
+    this.tournamentsSource.next(areTournaments);
   }
 }

@@ -22,7 +22,7 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   isApproved: boolean;
   isExpired: boolean;
-  areTournaments: boolean;
+  areTournaments = false;
 
   totalCount: number;
   dataSource: BookingsDataSource;
@@ -55,6 +55,6 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
     this.dataSource.loadBookings(this.paginator.pageIndex, this.paginator.pageSize, this.areTournaments);
     }
     setAreTournaments() {
-    this.conditionSource.setAreTournament(this.areTournaments);
+    this.conditionSource.setAreTournament(this.areTournaments = !this.areTournaments);
     }
 }

@@ -10,7 +10,7 @@ export class BookingsDataSource implements DataSource<Booking> {
 
   private isApproved: boolean;
   private isExpired: boolean;
-  private areTournaments = true;
+  private areTournaments: boolean;
 
   private bookingsSubject = new BehaviorSubject<Booking[]>([]);
   private countSubject = new BehaviorSubject<number>(0);
@@ -61,8 +61,8 @@ export class BookingsDataSource implements DataSource<Booking> {
         this.isApproved = conditions.isApproved,
           this.isExpired = conditions.isExpired;
       });
-  }
-  getUsersBooking(){
 
+    this.conditionsSource.areTournament.subscribe(
+      areTournament => this.areTournaments = areTournament);
   }
 }
