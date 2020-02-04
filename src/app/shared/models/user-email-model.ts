@@ -1,4 +1,6 @@
-export class UserEmail{
+import { Role } from './role';
+
+export class UserEmail {
   id: number;
   email: string;
   lastname: string;
