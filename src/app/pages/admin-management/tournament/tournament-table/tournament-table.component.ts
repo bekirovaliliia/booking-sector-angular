@@ -72,7 +72,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
 
   deleteTournament(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
+
       panelClass: ['no-padding'],
       width: '350px',
       data: {
@@ -100,7 +100,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
     selectedTournament.tournamentEnd = new Date().toString();
 
     this.addDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: '650px',
       minWidth: '250px',
@@ -130,7 +129,6 @@ export class TournamentTableComponent implements OnInit, OnChanges {
   openUpdateDialog(selectedTournament: Tournament) {
     console.log(selectedTournament.tournamentStart);
     this.updateDialog = this.dialog.open(AddUpdateTournamentDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: '650px',
       minWidth: '250px',

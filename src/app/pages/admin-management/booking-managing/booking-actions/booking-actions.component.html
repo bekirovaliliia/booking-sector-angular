@@ -8,6 +8,7 @@
     </button>
   </div>
 </ng-container>
+
 <ng-container *ngIf="this.isApproved === true && this.isExpired === false">
   <div class="align-items-center" role="group">
     <button type="button" class="btn btn-icon" (click)="updateBooking(null)">
@@ -17,6 +18,7 @@
       <img src={{imgDelete}} alt="delete" class="img-fluid" width="20px">
     </button>
   </div>
+
 </ng-container>
 <ng-container *ngIf="this.isApproved === false && this.isExpired === false">
   <div class="align-items-center" role="group">
@@ -28,6 +30,7 @@
     </button>
   </div>
 </ng-container>
+
 <ng-container *ngIf="this.isExpired === true">
   <button type="button" class="btn btn-light" (click)="deleteBooking()">
     <img src={{imgDelete}} alt="delete" class="img-fluid" width="20px">

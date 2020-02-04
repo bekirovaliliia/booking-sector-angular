@@ -41,10 +41,10 @@ export class BookingActionsComponent implements OnInit {
 
   updateBooking(isApproved: boolean) {
     this.updateDialog = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
       width: '35%',
+      panelClass: ['no-padding'],
       data: {
-        dialogTitle: `You're going to proceed an action on this booking`
+        dialogTitle: `Change status of booking`
       }
     });
     this.updateDialog
@@ -60,10 +60,10 @@ export class BookingActionsComponent implements OnInit {
 
   deleteBooking() {
     this.updateDialog = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
       width: '35%',
+      panelClass: ['no-padding'],
       data: {
-        dialogTitle: `You're going to remove this booking from database`
+        dialogTitle: `Delete booking`
       }
     });
     this.updateDialog
