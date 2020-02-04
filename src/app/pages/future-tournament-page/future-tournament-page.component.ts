@@ -84,7 +84,6 @@ export class FutureTournamentPageComponent implements OnInit {
 
   openDetailsDialog(selectedTournament: Tournament) {
     this.detailsDialog = this.dialog.open(DetailsTournamentDialogComponent, {
-      hasBackdrop: false,
       width: '400px',
       minWidth: '250px',
       panelClass: ['no-padding'],

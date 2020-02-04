@@ -53,7 +53,6 @@ export class SectorTableComponent implements OnInit, OnChanges {
 
   deleteSector(id: number) {
     this.deleteDialog = this.dialog.open(DeleteDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: '350px',
       data: {
@@ -78,7 +77,6 @@ export class SectorTableComponent implements OnInit, OnChanges {
   openAddDialog() {
     const selectedSector = new Sector();
     this.addDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: 600 + '%',
       data: {
@@ -105,7 +103,6 @@ export class SectorTableComponent implements OnInit, OnChanges {
 
   openUpdateDialog(selectedSector: Sector) {
     this.updateDialog = this.dialog.open(AddUpdateSectorDialogComponent, {
-      hasBackdrop: false,
       panelClass: ['no-padding'],
       width: 600 + '%',
       data: {
