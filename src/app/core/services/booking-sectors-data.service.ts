@@ -1,12 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { BookingService } from './booking.service';
 import { Sector } from 'src/app/shared/models/sector-model';
 import { User } from 'src/app/shared/models/user-model';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
-import { Tournament } from 'src/app/shared/models/tournament';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -34,7 +32,7 @@ export class BookingSectorsDataService {
     this._selectedTournamentId = tournament;
   }
 
- 
+
 
   private _markers = new BehaviorSubject<object []>(null);
   currentMarkers = this._markers.asObservable();
@@ -54,7 +52,7 @@ export class BookingSectorsDataService {
   }
 
   constructor(
-    private bookingService: BookingService, 
+    private bookingService: BookingService,
     private toastr: ToastrService
     ) { }
 

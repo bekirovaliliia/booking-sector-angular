@@ -34,6 +34,9 @@ import { WithoutDatasComponent } from '../../shared/without-datas/without-datas.
 import { BookingTabsComponent } from './booking-managing/booking-tabs/booking-tabs.component';
 import { BookingTableComponent } from './booking-managing/booking-table/booking-table.component';
 import { BookingActionsComponent } from './booking-managing/booking-actions/booking-actions.component';
+import { BookingUserDetailsComponent } from './booking-managing/booking-user-details/booking-user-details.component';
+import {MatRippleModule} from '@angular/material/core';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -57,6 +60,7 @@ import { BookingActionsComponent } from './booking-managing/booking-actions/book
     BookingTabsComponent,
     BookingTableComponent,
     BookingActionsComponent,
+    BookingUserDetailsComponent,
 
   ],
   exports: [
@@ -66,22 +70,24 @@ import { BookingActionsComponent } from './booking-managing/booking-actions/book
     BookingManagingComponent,
     WithoutDatasComponent
   ],
-  imports: [
-    CommonModule,
-    AdminManagementRoutingModule,
-    FormsModule,
-    MatDialogModule,
-    MatSidenavModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatPaginatorModule,
-    DataTablesModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule
-  ]
+    imports: [
+        CommonModule,
+        AdminManagementRoutingModule,
+        FormsModule,
+        MatDialogModule,
+        MatSidenavModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatTableModule,
+        MatPaginatorModule,
+        DataTablesModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatSelectModule,
+        MatRippleModule,
+        MatProgressSpinnerModule
+    ]
 })
 export class AdminManagementModule { }
