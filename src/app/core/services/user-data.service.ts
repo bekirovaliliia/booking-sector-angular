@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/shared/models/user-model';
-import {Booking} from 'src/app/shared/models/booking.model';
+import { Booking } from 'src/app/shared/models/booking.model';
 
 @Injectable({
   providedIn: 'root'

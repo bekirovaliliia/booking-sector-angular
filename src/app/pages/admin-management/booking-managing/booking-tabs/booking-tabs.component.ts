@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {BookingManagingDataService} from '../../../../core/services/booking-managing-data.service';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { BookingManagingDataService } from '../../../../core/services/booking-managing-data.service';
 
 @Component({
   selector: 'app-booking-tabs',

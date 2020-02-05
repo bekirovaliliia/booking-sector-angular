@@ -4,9 +4,9 @@ import { Sector } from '../../../../shared/models/sector-model';
 import { SectorService } from '../../../../core/services/sector.service';
 import { MatDialog, MatDialogRef, MatTable, MatTableDataSource,  MatPaginator, MatSort} from '@angular/material';
 import { filter } from 'rxjs/operators';
-import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
-import {throwError} from 'rxjs';
-import {ToastrService} from "ngx-toastr";
+import { DeleteDialogComponent } from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
+import { throwError } from 'rxjs';
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: 'app-sector-table',
   templateUrl: './sector-table.component.html',

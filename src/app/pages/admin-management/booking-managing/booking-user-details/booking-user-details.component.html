@@ -1,0 +1,20 @@
+<div class="d-inline-flex h-25" *ngIf="loaded">
+  <div *ngIf="currentUser == undefined">
+     <span class="alert-warning"> No info about user is available </span>
+  </div>
+  <div *ngIf="currentUser != null">
+<ul class="list-group">
+  <li class="list-group-item-info"><span>Booked By:</span></li>
+  <li class="list-group-item"><span>Name:{{currentUser.firstname}}</span></li>
+  <li class="list-group-item"><span>Surname: {{currentUser.lastname}}</span></li>
+</ul>
+
+  <div class="">
+    <ul class="list-group">
+      <li class="list-group-item-info"><span>Contacts:</span></li>
+      <li class="list-group-item"><span>Phone: +380{{currentUser.phone}}</span></li>
+      <li class="list-group-item"><span>E-Mail: {{currentUser.email}}</span></li>
+    </ul>
+  </div>
+  </div>
+</div>

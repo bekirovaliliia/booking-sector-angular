@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../shared/models/user-model';
-import {UserService} from '../../../core/services/user.service';
+import { User } from '../../../shared/models/user-model';
+import { UserService } from '../../../core/services/user.service';
 import { ChangePasswordNewComponent } from '../change-password-new/change-password-new.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ToastrService } from 'ngx-toastr';

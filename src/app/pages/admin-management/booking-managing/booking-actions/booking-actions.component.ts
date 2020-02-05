@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Booking} from '../../../../shared/models/booking.model';
-import {DeleteDialogComponent} from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
-import {filter} from 'rxjs/operators';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {BookingService} from '../../../../core/services/booking.service';
-import {BookingManagingDataService} from '../../../../core/services/booking-managing-data.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Booking } from '../../../../shared/models/booking.model';
+import { DeleteDialogComponent } from '../../../../shared/dialogs/delete-dialog/delete-dialog.component';
+import { filter } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { BookingService } from '../../../../core/services/booking.service';
+import { BookingManagingDataService } from '../../../../core/services/booking-managing-data.service';
 
 
 declare var require: any;

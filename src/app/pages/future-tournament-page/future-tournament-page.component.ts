@@ -1,16 +1,16 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Tournament} from '../../shared/models/tournament';
-import {TournamentService} from '../../core/services/tournament.service';
-import {FilterPipe} from '../../shared/pipes/filter.pipe';
-import {SearchPipe} from '../../shared/pipes/search.pipe';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Tournament } from '../../shared/models/tournament';
+import { TournamentService } from '../../core/services/tournament.service';
+import { FilterPipe } from '../../shared/pipes/filter.pipe';
+import { SearchPipe } from '../../shared/pipes/search.pipe';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
-import {DetailsTournamentDialogComponent} from './details-tournament-dialog/details-tournament-dialog.component';
-import {ToastrService} from 'ngx-toastr';
-import {throwError} from 'rxjs';
+import { DetailsTournamentDialogComponent } from './details-tournament-dialog/details-tournament-dialog.component';
+import { ToastrService } from 'ngx-toastr';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-future-tournament-page',

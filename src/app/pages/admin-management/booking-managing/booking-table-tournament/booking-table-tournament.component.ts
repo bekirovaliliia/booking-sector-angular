@@ -1,10 +1,10 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {Booking} from '../../../../shared/models/booking.model';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {BookingService} from '../../../../core/services/booking.service';
-import {BookingManagingDataService} from '../../../../core/services/booking-managing-data.service';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Booking } from '../../../../shared/models/booking.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { BookingService } from '../../../../core/services/booking.service';
+import { BookingManagingDataService } from '../../../../core/services/booking-managing-data.service';
 
 @Component({
   selector: 'app-booking-table-tournament',
