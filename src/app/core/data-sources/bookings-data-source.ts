@@ -42,7 +42,6 @@ export class BookingsDataSource implements DataSource<Booking> {
           this.bookingsSubject.next(pagedBookingList.dtos);
           this.countSubject.next(pagedBookingList.totalCount);
         });
-      console.log(this.areTournaments);
     } else if (this.areTournaments) {
       this.bookingService.getTournamentBookings(pageIndex, pageSize, this.isApproved, this.isExpired)
         .pipe(

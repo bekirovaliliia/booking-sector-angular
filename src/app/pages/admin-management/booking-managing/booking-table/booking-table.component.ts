@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {BookingService} from '../../../../core/services/booking.service';
 import {BookingManagingDataService} from '../../../../core/services/booking-managing-data.service';
@@ -22,7 +22,7 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   isApproved: boolean;
   isExpired: boolean;
-  areTournaments = false;
+  areTournaments: boolean;
 
   totalCount: number;
   dataSource: BookingsDataSource;
@@ -36,6 +36,7 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
               private conditionSource: BookingManagingDataService) { }
 
   ngOnInit() {
+    this.conditionSource.areTournament.subscribe(data => this.areTournaments = data);
     this.dataSource = new BookingsDataSource(this.bookingService, this.conditionSource);
     this.dataSource.loadBookings(0, 5, true);
     this.dataSource.totalCount$.subscribe(count => this.totalCount = count);
@@ -49,12 +50,13 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
       this.paginator.pageIndex = 0;
       this.loadBookings();
     });
+    this.conditionSource.areTournament.subscribe(areTournaments => {
+      this.paginator.pageIndex = 0;
+      this.loadBookings();
+    });
   }
 
   loadBookings() {
     this.dataSource.loadBookings(this.paginator.pageIndex, this.paginator.pageSize, this.areTournaments);
-    }
-    setAreTournaments() {
-    this.conditionSource.setAreTournament(this.areTournaments = !this.areTournaments);
     }
 }
