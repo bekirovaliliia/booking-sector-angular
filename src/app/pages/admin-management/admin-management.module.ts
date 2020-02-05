@@ -35,11 +35,8 @@ import { BookingTabsComponent } from './booking-managing/booking-tabs/booking-ta
 import { BookingTableComponent } from './booking-managing/booking-table/booking-table.component';
 import { BookingActionsComponent } from './booking-managing/booking-actions/booking-actions.component';
 import { BookingUserDetailsComponent } from './booking-managing/booking-user-details/booking-user-details.component';
-import {MatRippleModule} from '@angular/material/core';
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { TournamentCheckboxComponent } from './booking-managing/tournament-checkbox/tournament-checkbox.component';
-import { MatRadioModule } from "@angular/material/radio";
-import { BookingTableTournamentComponent } from './booking-managing/booking-table-tournament/booking-table-tournament.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -65,8 +62,6 @@ import { BookingTableTournamentComponent } from './booking-managing/booking-tabl
     BookingActionsComponent,
     BookingUserDetailsComponent,
     TournamentCheckboxComponent,
-    BookingTableTournamentComponent,
-
   ],
   exports: [
     AdminSidebarComponent,
