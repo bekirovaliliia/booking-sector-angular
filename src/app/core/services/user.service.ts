@@ -12,15 +12,15 @@ export class UserService {
 
   apiURl = environment.urlAddress + '/users';
   constructor(private http: HttpClient) { }
-  
-  getUser(id:number) {
+
+  getUser( id: number )  {
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
 
-  checkPass(password: string, id:number){
+  checkPass(password: string, id: number) {
    return this.http.get<Boolean>(`${this.apiURl}/${id}/${password}`);
   }
-  resetPass(email: string){
+  resetPass(email: string) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -30,19 +30,19 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-   return this.http.put(`${this.apiURl}/password/${user.id}`, user, httpOptions);
+    return this.http.put(`${this.apiURl}/password/${user.id}`, user, httpOptions);
   }
-  updateUserPhoto(file : FormData, id:number) {
+  updateUserPhoto(file: FormData, id: number) {
      return this.http.put(`${this.apiURl}/photo/${id}`, file).subscribe();
   }
-  deleteUserPhoto(id:number) {
+  deleteUserPhoto(id: number) {
     return this.http.put(`${this.apiURl}/deletePhoto/${id}`, id).subscribe();
  }
   updateUser(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-   return this.http.put(`${this.apiURl}/${user.id}`, user, httpOptions);
+    return this.http.put(`${this.apiURl}/${user.id}`, user, httpOptions);
   }
 
   insertUser(user: UserEmail) {
