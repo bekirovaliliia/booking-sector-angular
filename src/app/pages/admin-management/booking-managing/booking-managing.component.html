@@ -1,5 +1,4 @@
-<app-tournament-checkbox (selectedCheckbox)="selected = $event"></app-tournament-checkbox>
+<app-tournament-checkbox></app-tournament-checkbox>
 <app-booking-tabs [selectedCheckbox]="selected"></app-booking-tabs>
 <app-booking-table *ngIf="!selected"></app-booking-table>
-<app-booking-table-tournament *ngIf="selected"></app-booking-table-tournament>
 

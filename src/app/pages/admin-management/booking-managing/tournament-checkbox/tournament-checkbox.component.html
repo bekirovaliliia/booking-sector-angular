@@ -3,7 +3,7 @@
     <div class="card border-info mb-3">
       <div class="card-header text-white bg-info">Filter bookings</div>
       <div class="card-body">
-        <mat-checkbox  [(ngModel)]="selected" (change)="onChange(selected)">Bookings for tournaments</mat-checkbox>
+        <mat-checkbox [(ngModel)]="areTournaments" (change)="onChange()">Bookings for tournaments</mat-checkbox>
       </div>
     </div>
   </div>
