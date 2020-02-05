@@ -42,19 +42,19 @@ export class BookingTableTournamentComponent implements OnInit {
   }
 
   updateDataSource() {
-    this.bookingService.getBookings(this.isApproved, this.isExpired).subscribe(
-      bookings => {
-        this.dataSource.data =  bookings.filter(x => x.tournamentId !== null);
-        this.dataSource.sortingDataAccessor = (item, property): string | number => {
-          switch (property) {
-            case 'startDate':
-              return new Date(item.bookingStart).getTime();
-            case 'endDate':
-              return new Date(item.bookingEnd).getTime();
-            default:
-              return item[property];
-          }
-        };
-      });
+    // this.bookingService.getBookings(this.isApproved, this.isExpired).subscribe(
+    //   bookings => {
+    //     this.dataSource.data =  bookings.filter(x => x.tournamentId !== null);
+    //     this.dataSource.sortingDataAccessor = (item, property): string | number => {
+    //       switch (property) {
+    //         case 'startDate':
+    //           return new Date(item.bookingStart).getTime();
+    //         case 'endDate':
+    //           return new Date(item.bookingEnd).getTime();
+    //         default:
+    //           return item[property];
+    //       }
+    //     };
+    //   });
   }
 }

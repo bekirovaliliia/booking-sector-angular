@@ -14,11 +14,7 @@ export class UserService {
   apiURl = environment.urlAddress + '/users';
   constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
   getUser( id: number )  {
-=======
-  getUser(id: number) {
->>>>>>> 9e7adf14a79f88120f18319a31fbe5528b557d7b
     return this.http.get<User>(`${this.apiURl}/${id}`);
   }
   getUserDetails(id: number) {
