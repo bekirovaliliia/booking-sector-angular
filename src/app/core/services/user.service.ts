@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../../shared/models/user-model';
-import { UserEmail } from '../../shared/models/user-email-model';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {User} from '../../shared/models/user-model';
+import {UserEmail} from '../../shared/models/user-email-model';
 import { environment } from '../../../environments/environment';
+import {UserDetails} from '../../shared/models/user-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,16 @@ export class UserService {
   apiURl = environment.urlAddress + '/users';
   constructor(private http: HttpClient) { }
 
+<<<<<<< HEAD
   getUser( id: number )  {
+=======
+  getUser(id: number) {
+>>>>>>> 9e7adf14a79f88120f18319a31fbe5528b557d7b
     return this.http.get<User>(`${this.apiURl}/${id}`);
+  }
+  getUserDetails(id: number) {
+    return this.http.get<UserDetails>(`${this.apiURl}/details`, {params: new HttpParams()
+        .set('id', String(id))});
   }
 
   checkPass(password: string, id: number) {
