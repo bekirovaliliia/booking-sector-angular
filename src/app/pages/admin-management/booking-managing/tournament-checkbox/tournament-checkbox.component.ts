@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {BookingManagingDataService} from '../../../../core/services/booking-managing-data.service';
 
 @Component({
   selector: 'app-tournament-checkbox',
@@ -6,15 +7,16 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./tournament-checkbox.component.sass']
 })
 export class TournamentCheckboxComponent implements OnInit {
- @Output()  selectedCheckbox: EventEmitter<boolean> = new EventEmitter<boolean>();
-  selected: any;
-  constructor() { }
+
+  areTournaments: boolean;
+
+  constructor(private conditionSource: BookingManagingDataService) { }
 
   ngOnInit() {
-    this.selectedCheckbox.emit(false);
+    this.conditionSource.setAreTournament(false);
   }
 
-  onChange(selected) {
-    this.selectedCheckbox.emit(selected);
+  onChange() {
+    this.conditionSource.setAreTournament(this.areTournaments);
   }
 }
