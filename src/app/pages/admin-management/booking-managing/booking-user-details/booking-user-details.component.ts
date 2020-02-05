@@ -23,7 +23,7 @@ export class BookingUserDetailsComponent implements OnInit {
     this.getUserDetails();
   }
   getUserDetails() {
-    return this.userService.getUserDetails(this.expandedElement.id).pipe(
+    return this.userService.getUserDetails(this.expandedElement.userId).pipe(
       finalize(() => this.loaded = true)
     ).subscribe(data => {
       this.currentUser = data;
