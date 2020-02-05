@@ -8,8 +8,6 @@ import { UserService } from 'src/app/core/services/user.service';
 import { UserEmail } from 'src/app/shared/models/user-email-model';
 import { Observable, forkJoin } from 'rxjs';
 import { ToastrService } from "ngx-toastr";
-import { first } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -31,20 +29,7 @@ export class BookingSectorFormComponent implements OnInit {
     private userService: UserService
     ) { }
 
-    async onSubmit(formValues) {
-      var userId;
-      if (!this.isLoggedIn) {
-        var userEmail: UserEmail = new UserEmail();
-        userEmail.firstname = formValues.firstName;
-        userEmail.lastname = formValues.lastName;
-        userEmail.phone = formValues.phone;
-        userEmail.email = `guest${Math.floor(Math.random() * 901)}@guest.com`;
-        userEmail.password = 'guest12345';
-        var newUser = await this.userService.insertUser(userEmail).pipe(first()).toPromise();
-        userId = (newUser as UserEmail).id;
-        } else {
-        userId = this.authentificationService.getId();
-      }
+    private bookSectors(dataService: BookingSectorsDataService, userId): void {
       const fromDate = this.dataService.fromDate;
       const toDate = this.dataService.toDate;
       const selectedSectors = this.dataService.selectedSectors;
@@ -52,15 +37,44 @@ export class BookingSectorFormComponent implements OnInit {
       let booking: Booking;
       let bookedSectors : Observable<Booking>[] = [];
       for (const sector of selectedSectors) {
-        booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, userId);
-        bookedSectors.push(this.bookingSectorService.bookSector(booking));
+            booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, userId);
+            bookedSectors.push(this.bookingSectorService.bookSector(booking));
       }  
       forkJoin(bookedSectors).subscribe(() => { 
         this.dataService.renderMarkers(fromDate, toDate);
         this.toastr.success('Selected sectors are booked.', 'Success');
       });
-      this.dataService.clearAllSelectedSectors();
-      this.clearFormValues(formValues);
+    }
+
+    onSubmit(formValues): void { 
+      if (!this.isLoggedIn) {
+        this.userService.getUserByNumber(formValues.phone).subscribe(user => {
+          console.log(`User with ${user.phone} number exists and has id: ${user.id}`);
+
+          console.log('Booking sector(s) for existing user');
+          this.bookSectors(this.dataService, (user as UserEmail).id);
+        }, error => {
+          console.log(`User with ${formValues.phone} number doesn't exist`);
+          
+          console.log('Create a new guest user');
+          let newUser: UserEmail = new UserEmail();
+          newUser.firstname = formValues.firstName;
+          newUser.lastname = formValues.lastName;
+          newUser.phone = formValues.phone;
+          
+
+          //#TODO: Fix insertUserGuest method! Pay attention that it can be a problem with UserEmail model!
+          this.userService.insertUserGuest(newUser).subscribe(user => { // <--- Fix this method.
+            console.log('Booking sector(s) for new user');
+            this.bookSectors(this.dataService, (user as UserEmail).id);
+          }, error => {
+            console.log("Something happend!!! A new user wasn't inserted!!!");
+          });
+        });
+      } else {
+        console.log('Booking sector(s) for logged user');
+        this.bookSectors(this.dataService, this.authentificationService.getId());
+      }
     }
 
     //#TODO: This method doesn't work. Fix it!
@@ -85,10 +99,10 @@ export class BookingSectorFormComponent implements OnInit {
                         Validators.minLength(3),
                         Validators.maxLength(30),
                         Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
-        phone: ['', [Validators.required,
-                    Validators.minLength(10),
-                    Validators.maxLength(10),
-                    Validators.pattern('[0]{1}[0-9]{9}')]]
+        phone:    ['', [Validators.required,
+                        Validators.minLength(10),
+                        Validators.maxLength(10),
+                        Validators.pattern('[0]{1}[0-9]{9}')]]
       });
       this.isLoggedIn = this.authentificationService.isLoggedIn();
     }
