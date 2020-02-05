@@ -1,9 +1,8 @@
 
 <app-without-datas *ngIf="dataSource === null" [withoutDatasText]="'No data!'"></app-without-datas>
 
-<div class="mat-elevation-z8" *ngIf="dataSource !== null">
-
-  <table mat-table [dataSource]="dataSource" style="width: 100%" multiTemplateDataRows>
+<div  *ngIf="dataSource !== null">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 w-100 btn-table">
 
     <ng-container matColumnDef='id'>
       <th mat-header-cell  *matHeaderCellDef> ID </th>
@@ -12,6 +11,10 @@
     <ng-container matColumnDef="sectorId">
       <th mat-header-cell  *matHeaderCellDef> Sectors </th>
       <td class="sectors-cell" mat-cell *matCellDef="let booking"> {{booking.sectorId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tournamentId">
+      <th mat-header-cell [hidden]="!areTournaments" *matHeaderCellDef> Tournaments </th>
+      <td class="sectors-cell" [hidden]="!areTournaments" mat-cell *matCellDef="let booking"> {{booking.tournamentId}} </td>
     </ng-container>
     <ng-container matColumnDef="startDate">
       <th mat-header-cell  *matHeaderCellDef> Start Date </th>
@@ -45,5 +48,5 @@
 
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" style="height: 0"></tr>
   </table>
-  <mat-paginator showFirstLastButtons [length]="totalCount" [pageSize]="5" [pageSizeOptions]="[5, 10]"></mat-paginator>
+  <mat-paginator [length]="totalCount" [pageSize]="5" [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
 </div>

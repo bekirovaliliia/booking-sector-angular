@@ -22,7 +22,7 @@ export class UserService {
         .set('id', String(id))});
   }
 
-  checkPass(password: string, id:number){
+  checkPass(password: string, id: number) {
    return this.http.get<Boolean>(`${this.apiURl}/${id}/${password}`);
   }
   resetPass(email: string){

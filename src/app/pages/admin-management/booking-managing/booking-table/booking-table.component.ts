@@ -26,7 +26,7 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   totalCount: number;
   dataSource: BookingsDataSource;
-  displayedColumns = ['id', 'sectorId', 'startDate', 'endDate', 'actions'];
+  displayedColumns = ['id', 'sectorId', 'tournamentId', 'startDate', 'endDate', 'actions'];
 
   expandedElement: any;
 
@@ -41,6 +41,7 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
     this.dataSource.loadBookings(0, 5, true);
     this.dataSource.totalCount$.subscribe(count => this.totalCount = count);
   }
+
   ngAfterViewInit() {
     this.paginator.page.pipe(
       tap(() => this.loadBookings())
