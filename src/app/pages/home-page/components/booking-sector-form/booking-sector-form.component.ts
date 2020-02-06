@@ -63,8 +63,6 @@ export class BookingSectorFormComponent implements OnInit {
           this.newUser.firstname = formValues.firstName;
           this.newUser.lastname = formValues.lastName;
           this.newUser.phone = formValues.phone;
-          this.newUser.email = '';
-          this.newUser.password = '';
 
           // #TODO: Fix insertUserGuest method! Pay attention that it can be a problem with UserEmail model!
           this.userService.insertUserGuest(this.newUser).subscribe(
