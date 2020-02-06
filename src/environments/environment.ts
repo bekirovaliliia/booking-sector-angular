@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlAddress: 'https://bookingsectorapi.azurewebsites.net/api'
+  urlAddress: 'https://localhost:44393/api'
 };
 
 /*
