@@ -35,7 +35,7 @@
                         [ngClass]="{'is-invalid': controls.firstName.errors && 
                                     ((controls.firstName.touched || controls.firstName.dirty) || 
                                     submitted)}">
-                        <div *ngIf=" controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty) || submitted)" class="invalid-feedback">
+                        <div *ngIf=" controls.firstName.errors && ((controls.firstName.touched || controls.firstName.dirty))" class="invalid-feedback">
                             <div *ngIf="controls.firstName.errors?.required">
                                 <p>First Name is required</p> 
                             </div>
@@ -59,7 +59,7 @@
                         [ngClass]="{
                             'is-invalid':
                             controls.lastName.errors && ((controls.lastName.touched || controls.lastName.dirty) || submitted)}">
-                        <div *ngIf=" controls.lastName.errors && ((controls.lastName.touched || controls.lastName.dirty) || submitted)" class="invalid-feedback">
+                        <div *ngIf=" controls.lastName.errors && ((controls.lastName.touched || controls.lastName.dirty))" class="invalid-feedback">
                             <div *ngIf="controls.lastName.errors?.required">
                                 <p>Last Name is required</p> 
                             </div>
@@ -85,7 +85,7 @@
                             [ngClass]="{
                                 'is-invalid':
                                 controls.phone.errors && ((controls.phone.touched || controls.phone.dirty) || submitted)}">
-                              <div *ngIf="controls.phone.errors && ((controls.phone.touched || controls.phone.dirty) || submitted)"
+                              <div *ngIf="controls.phone.errors && ((controls.phone.touched || controls.phone.dirty))"
                                     class="invalid-feedback">
                                 <div *ngIf="controls.phone.errors?.required">Number is required</div>
                                 <div *ngIf="controls.phone.errors?.minlength || controls.phone.errors.maxlength">
@@ -95,7 +95,6 @@
                     </div>
                 </div>                
             </div> 
-            <div> <a onclick="">CLICK ME PLS</a> </div>
             <div class="form-row">
                 <div class="col-4 mt-5">
                     <button class="btn btn-primary btn-block" [class.disabled]="!bookingSectorForm.valid" type="submit">Book</button>

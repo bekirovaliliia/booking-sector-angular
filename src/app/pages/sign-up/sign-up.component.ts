@@ -45,7 +45,6 @@ export class SignUpComponent implements OnInit {
       this.router.navigate(['home']);
       this.toastr.warning('To sign up you first need to sign out');
     }
-
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
