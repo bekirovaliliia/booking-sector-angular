@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../../../core/services/authentication.
 import { UserService } from 'src/app/core/services/user.service';
 import { UserEmail } from 'src/app/shared/models/user-email-model';
 import { Observable, forkJoin } from 'rxjs';
-import { ToastrService } from "ngx-toastr";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-booking-sector-form',
@@ -19,6 +19,7 @@ export class BookingSectorFormComponent implements OnInit {
   bookingSectorForm: FormGroup;
   isLoggedIn: boolean;
   count: number;
+  newUser: UserEmail;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +28,10 @@ export class BookingSectorFormComponent implements OnInit {
     private authentificationService: AuthenticationService,
     private toastr: ToastrService,
     private userService: UserService
-    ) { }
+    ) {
+
+      this.newUser = new UserEmail();
+    }
 
     private bookSectors(dataService: BookingSectorsDataService, userId): void {
       const fromDate = this.dataService.fromDate;
@@ -35,18 +39,18 @@ export class BookingSectorFormComponent implements OnInit {
       const selectedSectors = this.dataService.selectedSectors;
       const selectedTournamentId = this.dataService.selectedTournamentId;
       let booking: Booking;
-      let bookedSectors : Observable<Booking>[] = [];
+      const bookedSectors: Observable<Booking>[] = [];
       for (const sector of selectedSectors) {
             booking = new Booking(0, selectedTournamentId, `${fromDate}`, `${toDate}`, sector.id, userId);
             bookedSectors.push(this.bookingSectorService.bookSector(booking));
-      }  
-      forkJoin(bookedSectors).subscribe(() => { 
+      }
+      forkJoin(bookedSectors).subscribe(() => {
         this.dataService.renderMarkers(fromDate, toDate);
         this.toastr.success('Selected sectors are booked.', 'Success');
       });
     }
 
-    onSubmit(formValues): void { 
+    onSubmit(formValues): void {
       if (!this.isLoggedIn) {
         this.userService.getUserByNumber(formValues.phone).subscribe(user => {
           console.log(`User with ${user.phone} number exists and has id: ${user.id}`);
@@ -55,21 +59,22 @@ export class BookingSectorFormComponent implements OnInit {
           this.bookSectors(this.dataService, (user as UserEmail).id);
         }, error => {
           console.log(`User with ${formValues.phone} number doesn't exist`);
-          
           console.log('Create a new guest user');
-          let newUser: UserEmail = new UserEmail();
-          newUser.firstname = formValues.firstName;
-          newUser.lastname = formValues.lastName;
-          newUser.phone = formValues.phone;
-          
+          this.newUser.firstname = formValues.firstName;
+          this.newUser.lastname = formValues.lastName;
+          this.newUser.phone = formValues.phone;
+          this.newUser.email = '';
+          this.newUser.password = '';
 
-          //#TODO: Fix insertUserGuest method! Pay attention that it can be a problem with UserEmail model!
-          this.userService.insertUserGuest(newUser).subscribe(user => { // <--- Fix this method.
+          // #TODO: Fix insertUserGuest method! Pay attention that it can be a problem with UserEmail model!
+          this.userService.insertUserGuest(this.newUser).subscribe(
+            res => { // <--- Fix this method.
             console.log('Booking sector(s) for new user');
-            this.bookSectors(this.dataService, (user as UserEmail).id);
-          }, error => {
-            console.log("Something happend!!! A new user wasn't inserted!!!");
+            this.bookSectors(this.dataService, (res as UserEmail).id);
+          }, () => {
+            console.log('Something happend!!! A new user wasn\'t inserted!!!');
           });
+
         });
       } else {
         console.log('Booking sector(s) for logged user');
@@ -77,25 +82,26 @@ export class BookingSectorFormComponent implements OnInit {
       }
     }
 
-    //#TODO: This method doesn't work. Fix it!
-    private clearFormValues(form): void { 
+    // #TODO: This method doesn't work. Fix it!
+    private clearFormValues(form): void {
+      // tslint:disable-next-line:forin
       for(var name in form.controls) {
-        (<FormControl>form.controls[name]).updateValueAndValidity();
+        ( <FormControl> form.controls[name]).updateValueAndValidity();
         form.controls[name].setErrors(null);
       }
     }
 
-    get controls() : any {
+    get controls(): any {
       return this.bookingSectorForm.controls;
     }
 
     ngOnInit(): void {
       this.bookingSectorForm = this.formBuilder.group({
-        firstName: ['', [Validators.required, 
+        firstName: ['', [Validators.required,
                         Validators.minLength(3),
                         Validators.maxLength(30),
                         Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
-        lastName: ['', [Validators.required, 
+        lastName: ['', [Validators.required,
                         Validators.minLength(3),
                         Validators.maxLength(30),
                         Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],

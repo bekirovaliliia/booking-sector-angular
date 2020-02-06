@@ -8,6 +8,7 @@ import { SignUpValidators } from './sign-up.validators';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { Role } from '../../shared/models/role';
 
 
 @Component({
@@ -44,7 +45,6 @@ export class SignUpComponent implements OnInit {
       this.router.navigate(['home']);
       this.toastr.warning('To sign up you first need to sign out');
     }
-
     // @ts-ignore
     this.registerForm = this.formBuilder.group(
       {
@@ -140,12 +140,25 @@ export class SignUpComponent implements OnInit {
         .getUserByNumber(this.registerForm.get(['number']).value)
         .subscribe(
           res => {
+            if (!res.password && !res.email) {
+              this.registerForm.controls.firstName.setValue(res.firstname);
+              this.registerForm.controls.lastName.setValue(res.lastname);
+              this.registerForm.controls.firstName.disable();
+              this.registerForm.controls.lastName.disable();
+
+              this.toastr.info(
+                'User already found on site, complete registration',
+                'Info!!'
+              );
+
+            } else {
               this.toastr.error(
                 'A user with this number already exists!',
                 'Error!'
               );
               this.errorHandling = true;
               this.registerForm.controls.number.setErrors({error: true});
+              }
             },
       error => {
               this.errorHandling = false;

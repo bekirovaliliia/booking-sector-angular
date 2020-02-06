@@ -48,8 +48,8 @@
             *ngIf="f.number.errors && ((f.number.touched || f.number.dirty) || submitted)"
             class="invalid-feedback"
           >
-            <div *ngIf="f.number.errors?.required">Number is required</div>
-            <div *ngIf="f.number.errors?.minlength || f.number.errors.maxlength">
+            <div *ngIf="f.number.errors.required">Number is required</div>
+            <div *ngIf="f.number.errors.minlength || f.number.errors.maxlength">
               Number must be at least 10 characters
             </div>
             <div *ngIf="f.number.errors?.pattern">
@@ -73,13 +73,13 @@
             }"
           />
           <div *ngIf=" f.firstName.errors && ((f.firstName.touched || f.firstName.dirty) || submitted)" class="invalid-feedback">
-            <div *ngIf="f.firstName.errors?.required">
+            <div *ngIf="f.firstName.errors.required">
               First Name is required
             </div>
-            <div *ngIf="f.firstName.errors?.minLength">
+            <div *ngIf="f.firstName.errors.minLength">
               Minimum name length 3 characters
             </div>
-            <div *ngIf="f.firstName.errors?.maxLength">
+            <div *ngIf="f.firstName.errors.maxLength">
               Maximum name length 30 characters
             </div>
             <div *ngIf="f.firstName.errors?.pattern || f.firstName.errors.validateName">
@@ -101,12 +101,12 @@
           />
           <div *ngIf="
               f.lastName.errors && ((f.lastName.touched || f.lastName.dirty) || submitted)"  class="invalid-feedback">
-            <div *ngIf="f.lastName.errors?.required">Last Name is required</div>
-            <div *ngIf="f.lastName.errors?.minLength">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            <div *ngIf="f.lastName.errors.minLength">
               Minimum surname length 3 characters
             </div>
-            <div *ngIf="f.lastName.errors?.maxLength">
-              Maximum surname length 3 characters
+            <div *ngIf="f.lastName.errors.maxLength">
+              Maximum surname length 30 characters
             </div>
             <div *ngIf="f.lastName.errors?.pattern || f.lastName.errors?.validateName">
               Invalid surname entry

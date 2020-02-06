@@ -2,9 +2,9 @@ import { Role } from './role';
 
 export class UserEmail {
   id: number;
-  email: string;
+  email?: string;
   lastname: string;
   firstname: string;
   phone: string;
-  password: string;
+  password?: string;
 }

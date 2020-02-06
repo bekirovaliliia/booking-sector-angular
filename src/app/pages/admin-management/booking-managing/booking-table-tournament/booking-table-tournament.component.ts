@@ -7,9 +7,9 @@ import { BookingService } from '../../../../core/services/booking.service';
 import { BookingManagingDataService } from '../../../../core/services/booking-managing-data.service';
 
 @Component({
-  selector: 'app-booking-table-tournament',
-  templateUrl: './booking-table-tournament.component.html',
-  styleUrls: ['./booking-table-tournament.component.sass']
+  selector: 'app-booking-table-tournament'
+//  ,templateUrl: './booking-table-tournament.component.html'
+//  ,styleUrls: ['./booking-table-tournament.component.sass']
 })
 export class BookingTableTournamentComponent implements OnInit {
   @Input() selectedCheckbox: boolean;
