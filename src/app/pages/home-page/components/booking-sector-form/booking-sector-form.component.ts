@@ -48,43 +48,34 @@ export class BookingSectorFormComponent implements OnInit {
         this.dataService.renderMarkers(fromDate, toDate);
         this.toastr.success('Selected sectors are booked.', 'Success');
       });
+      dataService.clearAllSelectedSectors();   
     }
 
     onSubmit(formValues): void {
       if (!this.isLoggedIn) {
         this.userService.getUserByNumber(formValues.phone).subscribe(user => {
-          console.log(`User with ${user.phone} number exists and has id: ${user.id}`);
-
-          console.log('Booking sector(s) for existing user');
           this.bookSectors(this.dataService, (user as UserEmail).id);
         }, error => {
-          console.log(`User with ${formValues.phone} number doesn't exist`);
-          console.log('Create a new guest user');
           this.newUser.firstname = formValues.firstName;
           this.newUser.lastname = formValues.lastName;
           this.newUser.phone = formValues.phone;
 
-          // #TODO: Fix insertUserGuest method! Pay attention that it can be a problem with UserEmail model!
           this.userService.insertUserGuest(this.newUser).subscribe(
-            res => { // <--- Fix this method.
-            console.log('Booking sector(s) for new user');
+            res => {
             this.bookSectors(this.dataService, (res as UserEmail).id);
-          }, () => {
-            console.log('Something happend!!! A new user wasn\'t inserted!!!');
           });
-
         });
       } else {
-        console.log('Booking sector(s) for logged user');
         this.bookSectors(this.dataService, this.authentificationService.getId());
       }
+      this.bookingSectorForm.reset();
     }
 
     // #TODO: This method doesn't work. Fix it!
     private clearFormValues(form): void {
       // tslint:disable-next-line:forin
       for(var name in form.controls) {
-        ( <FormControl> form.controls[name]).updateValueAndValidity();
+        (<FormControl> form.controls[name]).updateValueAndValidity();
         form.controls[name].setErrors(null);
       }
     }
