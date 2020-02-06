@@ -33,6 +33,7 @@ export class SectorsTagsInputComponent implements OnInit {
     this.form = this.formBuilder.group({
       tag: [undefined],
     });
+    this.dataService.clearAllSelectedSectors();
     this.tags = this.dataService.selectedSectors;
   }
 }
