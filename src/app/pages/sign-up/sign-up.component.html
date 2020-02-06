@@ -73,7 +73,7 @@
             }"
           />
           <div *ngIf=" f.firstName.errors && ((f.firstName.touched || f.firstName.dirty) || submitted)" class="invalid-feedback">
-            <div *ngIf="f.firstName.errors?.required">
+            <div *ngIf="f.firstName.errors.required">
               First Name is required
             </div>
             <div *ngIf="f.firstName.errors.minLength">

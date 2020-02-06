@@ -147,6 +147,11 @@ export class SignUpComponent implements OnInit {
               this.registerForm.controls.firstName.disable();
               this.registerForm.controls.lastName.disable();
 
+              this.toastr.info(
+                'User already found on site, complete registration',
+                'Info!!'
+              );
+
             } else {
               this.toastr.error(
                 'A user with this number already exists!',
