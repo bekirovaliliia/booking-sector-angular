@@ -58,6 +58,7 @@ export class SignUpValidators {
     }
     return null;
   }
+  
   static validateName(c: FormControl) {
     const name = c.value;
     const dublicate = Array(name.length + 1).join(name[0]);
