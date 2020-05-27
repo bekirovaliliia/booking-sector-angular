@@ -6,6 +6,7 @@ import {BookingsDataSource} from '../../../../core/data-sources/bookings-data-so
 import {tap} from 'rxjs/operators';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
+declare  var  require: any;
 @Component({
   selector: 'app-booking-table',
   templateUrl: './booking-table.component.html',
@@ -19,6 +20,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class BookingTableComponent implements OnInit, AfterViewInit {
+  imgDown = require('../../../../shared/images/down-arrow.png');
+  imgUp = require('../../../../shared/images/up-arrow.png');
 
   isApproved: boolean;
   isExpired: boolean;
@@ -26,7 +29,7 @@ export class BookingTableComponent implements OnInit, AfterViewInit {
 
   totalCount: number;
   dataSource: BookingsDataSource;
-  displayedColumns = ['id', 'sectorId', 'tournamentId', 'startDate', 'endDate', 'actions'];
+  displayedColumns = ['details', 'id', 'sectorId', 'tournamentId', 'startDate', 'endDate', 'actions'];
 
   expandedElement: any;
 

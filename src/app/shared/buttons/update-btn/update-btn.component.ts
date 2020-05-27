@@ -6,7 +6,7 @@ declare  var  require: any;
   styleUrls: ['./update-btn.component.sass']
 })
 export class UpdateBtnComponent implements OnInit {
-  imgEdit = require('../../images/edit.png');
+  imgEdit = require('../../images/pencil.png');
   @Output() selectedToUpdate: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 

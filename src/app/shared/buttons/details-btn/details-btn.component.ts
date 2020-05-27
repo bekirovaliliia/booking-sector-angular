@@ -6,7 +6,7 @@ declare  var  require: any;
   styleUrls: ['./details-btn.component.sass']
 })
 export class DetailsBtnComponent implements OnInit {
-  imgDetails = require('../../images/details.png');
+  imgDetails = require('../../images/more.png');
   @Output() selectedToExpand: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 

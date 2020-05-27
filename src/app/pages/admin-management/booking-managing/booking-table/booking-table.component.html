@@ -3,7 +3,16 @@
 
 <div  *ngIf="dataSource !== null">
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 w-100 btn-table">
-
+    <ng-container matColumnDef="details">
+      <th mat-header-cell  *matHeaderCellDef> 
+          </th>
+      <td class="sectors-cell" mat-cell *matCellDef="let booking">   
+        <img src={{imgDown}}
+        alt="delete"
+        class="img-fluid"
+        width="20px" /> 
+      </td>
+    </ng-container>
     <ng-container matColumnDef='id'>
       <th mat-header-cell  *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let booking"> {{booking.id}} </td>

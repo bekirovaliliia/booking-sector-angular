@@ -6,7 +6,7 @@ declare  var  require: any;
   styleUrls: ['./delete-btn.component.sass']
 })
 export class DeleteBtnComponent implements OnInit {
-  imgDelete = require('../../images/cancel.png');
+  imgDelete = require('../../../shared/images/trash.png');
 
   @Output() selectedToDelete: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }

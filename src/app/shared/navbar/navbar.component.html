@@ -6,11 +6,8 @@
               <li *ngIf = "!isAdmin"class="nav-item" role="presentation">
                 <a class="nav-link active" routerLink="/future-tournaments">Tournaments</a>
               </li>
-                <li *ngIf="isLoggedIn" class="nav-item" role="presentation">
-                    <a class="nav-link active" routerLink="/profile">Profile</a>
-                </li>
                 <li *ngIf="isLoggedIn && isAdmin" class="nav-item" role="presentation">
-                    <a class="nav-link active" routerLink="/admin/bookings">Admin Management</a>
+                    <a class="nav-link active" routerLink="/admin/bookings">Management page</a>
                 </li>
 
                 <li *ngIf="isLoggedOut" class="nav-item" role="presentation">
@@ -19,9 +16,10 @@
                 <li *ngIf="isLoggedIn" class="nav-item" role="presentation">
                     <a class="nav-link active" routerLink="/sign-in" (click)="logout()">Sign Out</a>
                 </li>
-                <li *ngIf="isLoggedIn">
+                <li *ngIf="isLoggedIn" class="nav-item" role="presentation">
                     <img [src]="transform()"
                     class="media-object profile-avatar" 
+                    routerLink="/profile"
                     style="width:50px;
                            height: 50px;
                            border-radius:5px; 

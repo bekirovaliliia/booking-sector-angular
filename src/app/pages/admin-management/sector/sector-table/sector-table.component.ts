@@ -46,7 +46,8 @@ export class SectorTableComponent implements OnInit, OnChanges {
   getSectors() {
     this.sectorService.getSectors().subscribe(res => {
       this.sectors = res;
-      this.sectorHeader = (this.sectors && this.sectors.length > 0) ? Object.keys(this.sectors[0]) : [];
+      this.sectorHeader = ['buttons', 'number', 'description', 'gpsLat', 'gpsLng', 'isActive'];
+     // this.sectorHeader = (this.sectors && this.sectors.length > 0) ? Object.keys(this.sectors[0]) : [];
       this.dataSource.data = this.sectors;
     });
   }
