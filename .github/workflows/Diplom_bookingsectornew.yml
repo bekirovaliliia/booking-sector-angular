@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'bookingsectornew'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7f5e5e0763bc4f6782725fee36c2a34e }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_75a4665f14bb4f44b7361181378b00b2 }}
         package: .
