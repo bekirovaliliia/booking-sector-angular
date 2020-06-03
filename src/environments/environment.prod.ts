@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlAddress: 'https://bookingsectorapi.azurewebsites.net/api'
+  urlAddress: 'https://bookingsector.azurewebsites.net/api'
 };
