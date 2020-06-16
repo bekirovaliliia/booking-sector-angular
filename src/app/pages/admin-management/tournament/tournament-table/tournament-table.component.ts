@@ -55,6 +55,7 @@ export class TournamentTableComponent implements OnInit, OnChanges {
         this.tournaments = res;
         this.tournamentHeader = (this.tournaments && this.tournaments.length > 0) ? Object.keys(this.tournaments[0]) : [];
         this.tournamentHeader.push('action');
+        this.tournamentHeader = ['action', 'id', 'name', 'description', 'preparationTerm', 'tournamentStart', 'tournamentEnd']
         if (this.groupFilters) {
           this.dataSource.data = this.filterPipe.transform(this.tournaments, this.groupFilters, Object.keys(this.groupFilters));
         } else  {

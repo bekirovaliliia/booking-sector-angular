@@ -85,20 +85,38 @@ export class BookingSectorFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+      this.isLoggedIn = this.authentificationService.isLoggedIn();
+      if (this.isLoggedIn){
       this.bookingSectorForm = this.formBuilder.group({
-        firstName: ['', [Validators.required,
-                        Validators.minLength(3),
+        firstName: ['', [//Validators.required,
+                        Validators.minLength(1),
                         Validators.maxLength(30),
                         Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
-        lastName: ['', [Validators.required,
-                        Validators.minLength(3),
+        lastName: ['', [//Validators.required,
+                        Validators.minLength(1),
                         Validators.maxLength(30),
                         Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
-        phone:    ['', [Validators.required,
+        phone:    ['', [//Validators.required,
                         Validators.minLength(10),
                         Validators.maxLength(10),
                         Validators.pattern('[0]{1}[0-9]{9}')]]
       });
-      this.isLoggedIn = this.authentificationService.isLoggedIn();
+    }
+    else 
+{
+    this.bookingSectorForm = this.formBuilder.group({
+      firstName: ['', [Validators.required,
+                      Validators.minLength(1),
+                      Validators.maxLength(30),
+                      Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
+      lastName: ['', [Validators.required,
+                      Validators.minLength(1),
+                      Validators.maxLength(30),
+                      Validators.pattern('[A-Za-zА-Яа-яЁёІіЇїЄє]{3,50}')]],
+      phone:    ['', [Validators.required,
+                      Validators.minLength(10),
+                      Validators.maxLength(10),
+                      Validators.pattern('[0]{1}[0-9]{9}')]]
+    });}
     }
 }
